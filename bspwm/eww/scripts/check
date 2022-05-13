@@ -1,0 +1,83 @@
+#!/bin/bash
+check_mem () {
+    while IFS=":" read -r a b; do
+        	case $a in
+        		"MemTotal") ((mem_used+=${b/kB})); mem_total="${b/kB}" ;;
+        		"Shmem") ((mem_used+=${b/kB}))  ;;
+        		"MemFree" | "Buffers" | "Cached" | "SReclaimable")
+        		mem_used="$((mem_used-=${b/kB}))"
+    			;;
+        	esac
+		done < /proc/meminfo
+
+        echo "$((mem_used / 1024))kb / $((mem_total / 1024))kb"
+}
+
+check_disk () {
+    df -h / | tail -n -1 | awk '{ print $3" / "$4 }'
+}
+
+check_temp () {
+  IFS=')' read -ra core_temp_arr <<< $(sensors | grep '^Core\s[[:digit:]]\+:') #echo "${core_temp_arr[0]}"
+
+  total_cpu_temp=0
+  index=0
+  for i in "${core_temp_arr[@]}"; do :
+    temp=$(echo $i | sed -n 's/°C.*//; s/.*[+-]//; p; q')
+    let index++
+    total_cpu_temp=$(echo "$total_cpu_temp + $temp" | bc)
+  done
+  avg_cpu_temp=$(echo "scale=2; $total_cpu_temp / $index" | bc)
+
+  temp_status="$avg_cpu_temp°C"
+  echo $temp_status
+
+  exit 0
+}
+
+check_network_tooltip(){
+  SLP=1
+  INTERFACE="$(iw dev | awk '$1=="Interface"{print $2}')"
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED1=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED1=`echo $LINE | awk '{print $9}'`
+  TOTAL=$(($RECEIVED1+$TRANSMITTED1))
+  sleep $SLP
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED2=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED2=`echo $LINE | awk '{print $9}'`
+  SPEED=$((($RECEIVED2+$TRANSMITTED2-$TOTAL)/$SLP))
+  INSPEED=$((($RECEIVED2-$RECEIVED1)/$SLP))
+  OUTSPEED=$((($TRANSMITTED2-$TRANSMITTED1)/$SLP))
+  printf "%1i KB/s | %1i KB/s\n" $(($INSPEED/1024)) $(($OUTSPEED/1024)) ; # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+check_network(){
+  SLP=1
+  INTERFACE="$(iw dev | awk '$1=="Interface"{print $2}')"
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED1=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED1=`echo $LINE | awk '{print $9}'`
+  TOTAL=$(($RECEIVED1+$TRANSMITTED1))
+  sleep $SLP
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED2=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED2=`echo $LINE | awk '{print $9}'`
+  SPEED=$((($RECEIVED2+$TRANSMITTED2-$TOTAL)/$SLP))
+  INSPEED=$((($RECEIVED2-$RECEIVED1)/$SLP))
+  OUTSPEED=$((($TRANSMITTED2-$TRANSMITTED1)/$SLP))
+  printf "%1i KB/s\n" $(($INSPEED/1024)) ; # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+
+if [[ "$1" == "--mem" ]]; then
+  check_mem
+elif [[ "$1" == "--disk" ]]; then
+  check_disk
+elif [[ "$1" == "--temp" ]]; then
+  check_temp
+elif [[ "$1" == "--net" ]]; then
+  check_network
+elif [[ "$1" == "--nettip" ]]; then
+  check_network_tooltip
+fi

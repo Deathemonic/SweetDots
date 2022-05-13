@@ -1,0 +1,69 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/lock.eww"
+EWW="$HOME/.config/bspwm/bin/eww/eww"
+CONFIG="$HOME/.config/bspwm/eww"
+
+# Edit this accoding to your resolution (Recommend Edit: Line 45 Collum 32)
+lock() {
+    sleep 0.5
+
+    i3lock -n -c 00000000 -t -e --pass-media-keys --pass-power-keys --pass-volume-keys --indicator \
+        --radius 64 --modif-size=9 --modif-pos="w/2:h/2-20" \
+        \
+        --time-str="%I:%M %p" \
+        --time-pos="w/2+0:h/2+0" \
+        --time-color=E4FFDE \
+        --time-size=14 \
+        --time-font="Jetbrains Mono" \
+        \
+        --verif-text="Verifying" \
+        --verif-color=E4FFDE \
+        --verif-size=10 \
+        --verif-font="Jetbrains Mono" \
+        \
+        --wrong-text="Incorrect, Try Again" \
+        --wrong-color=FF8E8E \
+        --wrong-size=8 \
+        --wrong-font="Jetbrains Mono" \
+        \
+        --greeter-text="" \
+        --greeter-color=212529 \
+        --greeter-size=60 \
+        --greeter-font="feather" \
+        --greeter-pos="w/2-0:h/2+285" \
+        \
+        --ring-color=212529 \
+        --ringver-color=E4FFDE \
+        --ringwrong-color=FF8E8E \
+        --ring-width=5 \
+        \
+        --insidever-color=079A8C02 \
+        --insidewrong-color=079A8C02 \
+        --inside-color=079A8C02 \
+        --ind-pos="w/2-0:h/2-38" \
+        \
+        --noinput-text="No Input" \
+        \
+        --line-uses-inside --keyhl-color=E4FFDE --bshl-color=E4FFDE --separator-color=E4FFDE \
+        --pointer=default
+}
+
+# Open Widgets
+run() {
+    ${EWW} -c ${CONFIG} open-many lockscreen
+    lock
+}
+
+# Close Rofi and Run Widgets
+if [[ ! -f "$FILE" ]]; then
+    if pgrep -x rofi; then
+        killall rofi
+    fi
+
+    touch "$FILE"
+    run
+fi
+
+rm "$FILE"
+${EWW} -c ${CONFIG} close lockscreen

@@ -1,0 +1,22 @@
+.time{
+	background-color: $background;
+	color: $foreground;
+	margin: 1rem;
+	padding: 0 3rem 0 3rem;
+	border-radius: 20px;
+	border: 2px solid $foreground;
+}
+.hour, .min, .meridiem, .separator-clock{
+	padding: 1rem 0 0 0;
+	font-family: Jetbrains Mono;
+	font-weight: bold;
+	font-size: 20px;
+}
+.separator-clock{
+	margin-top: -5px;
+}
+.day{
+	padding: .5rem;
+	font-family: Jetbrains Mono;
+	font-size: 15px;
+}

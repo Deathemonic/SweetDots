@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rofi -dmenu\
+     -password\
+     -i\
+     -no-fixed-num-lines\
+     -p "User Password: "\
+     -theme $HOME/.config/bspwm/rofi/askpass.rasi &

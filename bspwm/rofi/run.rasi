@@ -1,0 +1,201 @@
+configuration {
+    location: 						8;
+    fixed-num-lines: 				true;
+    show-icons: 					false;
+    scroll-method: 					1;
+    click-to-exit: 					true;
+    drun-display-format:            "{icon} {name}";
+}
+
+@import "colors.rasi"
+
+* {
+    font:                           "JetBrains Mono Medium 10";
+    background-color:               @background;
+}
+
+window {
+    border:                         1px;
+    border-color:                   @pink;
+    border-radius: 					25px;
+    width: 							420px;
+    height: 						90%;
+    x-offset:                       20;
+    y-offset:                       28;
+}
+
+prompt {
+    enabled: 						true;
+	margin: 						0px 0px 0px 8px;
+    padding:    					9px 0px 6px 0px;
+	background-color: 				@pink;
+	text-color: 					@background;
+    border:                  		0px 0px 0px 0px;
+    border-color:                  	@pink;
+    border-radius:                  0px;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"";
+    border-radius: 					100%;
+    background-color:             	@shade;
+    text-color: 					@foreground;
+    padding:    					10px 10px 6px 10px;
+	font:							"icomoon\-feather 10";
+}
+
+entry {
+    spacing:    					0;
+    expand:                         true;
+    horizontal-align:               0;
+    background-color:             	@pink;
+    text-color: 					@background;
+    placeholder-color:              @background;
+    placeholder:                    "Run...";
+    padding:    					9px 2px 6px 5px;
+    border: 						0px 0px 0px 0px;
+    border-color: 					@pink;
+    border-radius: 					0px;
+}
+
+case-indicator {
+    spacing:    					0;
+    text-color: 					@foreground;
+}
+
+inputbar {
+    background-color:             	@pink;
+    spacing:    					0px;
+    padding: 						2px;
+    text-color: 					@background;
+    border: 						1px;
+    border-color: 					@pink;
+    border-radius: 					100%;
+    children: 						[ textbox-prompt-colon,entry ];
+}
+
+mainbox {
+    border: 						0px;
+    border-color: 					@pink;
+    spacing: 						10px;
+    padding: 						25px;
+}
+
+listview {
+    lines:							7;
+    columns:						1;
+    fixed-height: 					0;
+    border: 						0px;
+    border-color: 					@foreground;
+    spacing: 						5px;
+    scrollbar: 						false;
+    padding: 						5px 0px 0px;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           24px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         2px 0px 2px 10px;
+}
+
+
+element {
+    border: 						0px;
+    padding: 						6px;
+}
+element normal.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element normal.urgent {
+    background-color: 				@background;
+    text-color:       				@red;
+}
+element normal.active {
+    background-color: 				@background;
+    text-color:       				@green;
+}
+element selected.normal {
+    background-color: 				@pink;
+    text-color:       				@background;
+    border: 						0px;
+    border-radius: 					100%;
+    border-color: 					@pink;
+}
+element selected.urgent {
+    background-color: 				@background;
+    text-color:       				@red;
+}
+element selected.active {
+    background-color: 				@background;
+    text-color:       				@pink;
+}
+element alternate.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.urgent {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.active {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+
+sidebar {
+    border:       					0px;
+    border-color: 					@pink;
+    border-radius: 					0px;
+}
+
+button {
+    margin: 						5px 10px 0px 10px;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    padding: 						10px;
+    background-color:             	@shade;
+    text-color: 					@foreground;
+    border: 						0px;
+    border-radius: 					100%;
+    border-color: 					@pink;
+}
+
+button selected {
+    background-color:             	@pink;
+    text-color: 					@background;
+    border: 						0px;
+    border-radius: 					100%;
+    border-color: 					@pink;
+}
+
+scrollbar {
+    width:        					4px;
+    border:       					0px;
+    handle-color: 					@foreground;
+    handle-width: 					8px;
+    padding:      					0;
+}
+
+message {
+    border: 						0px;
+    border-color: 					@pink;
+    padding: 						1px;
+}
+
+textbox {
+    text-color: 					@foreground;
+}

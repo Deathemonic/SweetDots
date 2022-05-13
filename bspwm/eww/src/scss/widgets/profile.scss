@@ -1,0 +1,30 @@
+.profile {
+  background-color: $background;
+	border: 2px solid $foreground;
+  border-radius: 20px;
+  margin: 1rem;
+  padding: 3rem;
+}
+.pfp {
+  background-image: url("assets/profile.png");
+  background-repeat: no-repeat;
+  background-size: 10rem;
+  background-position: center;
+  min-height: 100px;
+  min-width: 100px;
+  border-radius: 100%;
+}
+.pfptxt {
+  margin-top: 30px;
+  color: $foreground;
+  font-family: Jetbrains Mono;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 10px;
+}
+.subpfptxt {
+  color: $foreground;
+  font-family: Jetbrains Mono;
+  margin-top: 10px;
+  font-size: 15px;
+}

@@ -1,0 +1,10 @@
+* {
+	background:			#212529;
+	foreground:			#FFDEDE;
+	shade:				#343A40;
+	pink:				#FFDEDE;
+	red:				#FF8E8E;
+	green:				#E4FFDE;
+	cyan:				#DEFBFF;
+	gray:				#DEE2E6;
+}

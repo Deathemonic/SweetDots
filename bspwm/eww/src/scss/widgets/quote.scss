@@ -1,0 +1,21 @@
+.quote{
+	background-color: $background;
+	border: 2px solid $foreground;
+	border-radius: 12px;
+	padding: 2rem;
+	margin: 1rem;
+}
+.quote-text{
+	font-family: Jetbrains Mono;
+	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+	font-size: 10px;
+	color: $foreground;
+}
+.quote-author{
+	font-family: Jetbrains Mono;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 11px;
+	color: $foreground;
+	margin-top: 1rem;
+}

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/dashboard.eww"
+EWW="$HOME/.config/bspwm/bin/eww/eww"
+CONFIG="$HOME/.config/bspwm/eww"
+
+if [[ ! `pidof eww` ]]; then
+	${EWW} daemon
+	sleep 1
+fi
+
+run_eww() {
+	${EWW} -c ${CONFIG} open dashboard
+}
+
+if [[ ! -f "$FILE" ]]; then
+	touch "$FILE"
+	sh ${CONFIG}/scripts/quotes update
+	sh ${CONFIG}/scripts/weather --getdata
+	run_eww
+else
+	${EWW} -c ${CONFIG} close dashboard
+	rm "$FILE"
+fi

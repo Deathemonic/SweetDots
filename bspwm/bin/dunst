@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ `pidof dunst` ]]; then
+	pkill dunst
+fi
+
+dunst -config $HOME/.config/bspwm/dunst/dunstrc &

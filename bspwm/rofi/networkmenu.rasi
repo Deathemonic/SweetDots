@@ -1,0 +1,140 @@
+configuration {
+    font:                           "JetBrains Mono Medium 10";
+    show-icons:                     false;
+    display-drun: 					"";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+	click-to-exit: 					true;
+    location:                       2;
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @foreground;
+    border:                  		1px;
+    border-color:                  	@pink;
+    border-radius:                  20px;
+    width:                          400px;
+    height:                         420px;
+    anchor:                         center;
+    x-offset:                       330;
+    y-offset:                       280;
+}
+
+prompt {
+    enabled: 						true;
+	margin: 						0px 0px 0px 8px;
+    padding:    					9px 0px 6px 0px;
+	background-color: 				@pink;
+	text-color: 					@background;
+    border:                  		0px 0px 0px 0px;
+    border-color:                  	@pink;
+    border-radius:                  0px;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"";
+    border-radius: 					100%;
+    background-color:             	@shade;
+    text-color: 					@foreground;
+    padding:    					10px 10px 6px 10px;
+	font:							"icomoon\-feather 10";
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, prompt ];
+    background-color:             	@pink;
+    spacing:    					0px;
+    text-color:                     @foreground;
+    border:                  		0px;
+    border-radius:                  100%;
+    border-color:                  	@pink;
+    expand:                         false;
+    margin:                         0px 0px 0px 0px;
+    padding:                        2px;
+    position:                       center;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
+}
+
+
+listview {
+    background-color:               @background;
+    columns:                        1;
+    lines:							8;
+    spacing:                        4px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ inputbar, listview ];
+    spacing:                       	15px;
+    padding:                        20px;
+}
+
+element {
+    background-color:               @background;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  0px;
+    padding:                        6px;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           0px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         2px 0px 2px 2px;
+}
+
+element selected {
+    background-color:               @pink;
+    text-color:                     @background;
+    border:                  		0px;
+    border-radius:                  100%;
+    border-color:                  	@pink;
+}
+
+element.active,
+element.selected.urgent {
+  background-color: @green;
+  text-color: @background;
+  border-color: @green;
+}
+
+element.selected.urgent {
+  border-color: @pink;
+}
+
+element.urgent,
+element.selected.active {
+  background-color: @red;
+  text-color: @background;
+  border-color: @red;
+}
+
+element.selected.active {
+  border-color: @pink;
+}
