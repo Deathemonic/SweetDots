@@ -30,7 +30,7 @@ lock() {
         --greeter-text="" \
         --greeter-color=212529 \
         --greeter-size=60 \
-        --greeter-font="feather" \
+        --greeter-font="icomoon\-feather" \
         --greeter-pos="w/2-0:h/2+285" \
         \
         --ring-color=212529 \
