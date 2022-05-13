@@ -1,0 +1,63 @@
+.music-player{
+	background-color: $background;
+	padding: 0 3rem 1rem 3rem;
+	border: 2px solid $foreground;
+	border-radius: 20px;
+	margin: 1rem;
+}
+.album_art {
+	background-size: cover;
+	background-position: center;
+	border-radius: 100px;
+	margin: 2rem 1rem 1.5rem 1rem;
+	padding: 7rem;
+}
+
+.artist {
+	font-family: Jetbrains Mono;
+	font-style: italic;
+	font-weight: bold;
+	color: $foreground;
+	font-size : 1.2em;
+}
+.song{
+	font-family: Jetbrains Mono;
+	font-style: italic;
+	font-size: 1.1em;
+	color: $foreground;
+	margin-top: -5px;
+}
+.btn_prev, .btn_play, .btn_next {
+	font-family: 'icomoon\-feather';
+}
+.btn_prev {
+	color: $cyan;
+	font-size : 25px;
+}
+.btn_play {
+	color: $foreground;
+	font-size : 25px;
+	font-weight : bold;
+}
+.btn_next {
+	color: $cyan;
+	font-size : 25px;
+}
+.metric-player  scale trough highlight {
+	all: unset;
+	border-radius: 10px;
+	background-color: $foreground;
+}
+  
+.metric-player scale trough  {
+	all: unset;
+	background-color: $background;
+	border:2px solid $foreground;
+	border-radius: 50px;
+  }
+  
+.metric-player scale trough  {
+	min-width: 200px;
+	min-height: 10px;
+	// margin: .5rem 1rem 0 1rem;
+}

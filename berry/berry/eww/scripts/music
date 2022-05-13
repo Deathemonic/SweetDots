@@ -1,0 +1,106 @@
+#!/bin/sh
+
+# Original author:	Niraj		Github:		niraj998
+# Modified by:		Deathemon	Github:		Deathemonic
+
+# Note removed the mpd support due to "it's so fucking hard to add" so I've it simpler, If one of you nerds can add it feel free to make a pull request
+
+Cover=/tmp/cover.png
+bkpCover=~/.config/berry/eww/assets/fallback.png
+mpddir=~/Music
+
+title() {
+title=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{title}})
+[ -z "$title" ] && title="Nothing Playing"
+echo "$title"
+}
+
+artist() {
+artist=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{artist}})
+[ -z "$artist" ] && artist="Offline"
+echo "$artist"
+}
+
+album() {
+album=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{album}})
+[ -z "$album" ] && album="Album"
+echo "$album"
+}
+
+status() {
+status=$(playerctl --player=spotify,%any,firefox,chromium status)
+[ -z "$status" ] && status="Stopped"
+echo "$status"
+}
+
+ctime() {
+time=$(playerctl --player=spotify,%any,firefox,chromium position --format "{{ duration(position) }}")
+[ -z "$time" ] && time="0:00"
+echo "$time"
+}
+
+length() {
+length=$(playerctl --player=spotify,%any,firefox,chromium metadata --format "{{ duration(mpris:length) }}")
+[ -z "$length" ] && length="0:00"
+echo "$length"
+}
+
+playlist() {
+playlist=$(playerctl --player=spotify,%any,firefox,chromium metadata xesam:trackNumber)
+[ -z "$playlist" ] && playlist="0"
+echo "$playlist"
+}
+
+cover() {
+albumart="$(playerctl --player=spotify,%any,firefox,chromium metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+[ $(playerctl --player=spotify,%any,firefox,chromium metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover 
+echo "$Cover"
+}
+
+statusicon() {
+icon=""
+[ $(playerctl --player=spotify,%any,firefox,chromium status) = "Playing" ] && icon=""
+[ $(playerctl --player=spotify,%any,firefox,chromium status) = "Paused" ] && icon=""
+echo "$icon"
+}
+
+
+# Usage
+doc() {
+echo "Usage:
+  music [Options]
+
+Options:
+  previous			previous song
+  next				next song
+  toggle			toggle between play-pause song
+  title				shows title of current song
+  album				shows album of current song
+  artist			shows artist of current song
+  status			music status (playing/paused/stopped)
+  statusicon		music status icons (playing/paused/stopped)
+  coverloc			saves cover and shows location to cover of current song
+  showcover			opens cover using feh
+  time				shows current time of song
+  length			shows length of song
+  percent			shows percent song
+  playlist			shows playlist position of current song
+  lyrics			shows lyrics"
+}
+
+case $1 in 
+	next)			playerctl --player=spotify,%any,firefox,chromium next			;;
+	previous)		playerctl --player=spotify,%any,firefox,chromium previous		;;
+	toggle)			playerctl --player=spotify,%any,firefox,chromium play-pause		;;
+	title)			title															;;
+	artist)			artist															;;
+	album)			album															;;
+	status)			status															;;
+	statusicon)		statusicon														;;
+	coverloc)		cover															;;
+	showcover)		cover | xargs feh 												;;
+	time)			ctime 															;;
+	length)			length 															;;
+	playlist)		playlist														;;
+	*)				doc																;;
+esac

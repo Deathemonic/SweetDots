@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/calendar.eww"
+EWW="$HOME/.config/bspwm/bin/eww/eww"
+CONFIG="$HOME/.config/bspwm/eww"
+
+if [[ ! `pidof eww` ]]; then
+	${EWW} daemon
+	sleep 1
+fi
+
+run_eww() {
+	${EWW} -c ${CONFIG} open calendar
+}
+
+if [[ ! -f "$FILE" ]]; then
+	touch "$FILE"
+	run_eww
+else
+	${EWW} -c ${CONFIG} close calendar
+	rm "$FILE"
+fi

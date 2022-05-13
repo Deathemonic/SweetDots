@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/resources.eww"
+EWW="$HOME/.config/bspwm/bin/eww/eww"
+CONFIG="$HOME/.config/bspwm/eww"
+
+if [[ ! `pidof eww` ]]; then
+	${EWW} daemon
+	sleep 1
+fi
+
+run_eww() {
+	${EWW} -c ${CONFIG} open sysbox
+}
+
+if [[ ! -f "$FILE" ]]; then
+	touch "$FILE"
+	run_eww
+else
+	${EWW} -c ${CONFIG} close sysbox
+	rm "$FILE"
+fi

@@ -1,0 +1,152 @@
+configuration {
+    location:                       4;
+    font:                           "JetBrains Mono Medium 10";
+    show-icons:                     false;
+    display-drun: 					"";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+	click-to-exit: 					true;
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @foreground;
+    border:                  		1px;
+    border-color:                  	@pink;
+    border-radius:                  30px;
+    width:                          100px;
+    x-offset:                       -20;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 						true;
+	margin: 						0px 0px 0px 8px;
+    padding:    					6px 0px 6px 0px;
+	background-color: 				@background;
+	text-color: 					@foreground;
+    border:                  		0px 0px 0px 0px;
+    border-color:                  	@pink;
+    border-radius:                  0px;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"";
+    border-radius:                  8px;
+    background-color:               @highlight;
+    text-color:                     @background;
+    padding:    					6px 10px 6px 10px;
+	font:							"Jetbrains Mono Nerd Font 10";
+}
+
+entry {
+    background-color:               @background;
+    text-color:                     @background;
+    placeholder-color:              @background;
+    placeholder:                    "";
+    expand:                         true;
+    horizontal-align:               0;
+    blink:                          false;
+    padding:                        6px;
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, prompt ];
+    spacing:                        0;
+    background-color:               @background;
+    text-color:                     @foreground;
+    border:                  		0px;
+    border-radius:                  0px;
+    border-color:                  	@pink;
+    expand:                         false;
+    margin:                         0px 0px 0px 0px;
+    padding:                        0px;
+    position:                       center;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
+}
+
+
+listview {
+    background-color:               @background;
+    columns:                        1;
+    lines:							5;
+    spacing:                        10px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ listview ];
+    spacing:                       	10px;
+    padding:                        20px;
+}
+
+element {
+    background-color:               @shade;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  100%;
+    padding:                        14px;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           0px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+	font:							"icomoon\-feather 16";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         0px;
+}
+
+element selected {
+    background-color:               @pink;
+    text-color:                     @background;
+    border:                  		0px;
+    border-radius:                  100%;
+    border-color:                  	@pink;
+}
+
+element.active,
+element.selected.urgent {
+  background-color: @on;
+  text-color: @background;
+  border-color: @on;
+  border-radius: 100%;
+}
+
+element.selected.urgent {
+  border-color: @pink;
+}
+
+element.urgent,
+element.selected.active {
+  background-color: @off;
+  text-color: @background;
+  border-color: @off;
+  border-radius: 100%;
+}
+
+element.selected.active {
+  border-color: @pink;
+}

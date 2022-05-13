@@ -1,0 +1,47 @@
+#!/bin/bash
+
+DIR="$HOME/.config/bspwm/dunst/icons"
+
+function get_volume {
+      amixer -D pulse get Master | grep '%' | head -n 1 | awk -F'[' '{print $2}' | awk -F'%' '{print $1}'
+}
+
+function is_mute {
+      amixer -D pulse get Master | grep '%' | grep -oE '[^ ]+$' | grep off
+}
+
+function send_notification {
+  volume=`get_volume`
+
+  if [ "$volume" -lt "35" ]; then
+    icon="$DIR/volume.svg"
+  elif [ "$volume" -lt "70" ]; then
+    icon="$DIR/volume-1.svg"
+  else
+    icon="$DIR/volume-2.svg"
+  fi
+
+  dunstify "Volume : $volume" -i "$icon" -t 2000 --replace=555
+}
+
+case $1 in
+  up)
+	  amixer -D pulse set Master on > /dev/null
+	  amixer -D pulse set Master 5%+ > /dev/null
+    send_notification
+    ;;
+  down)
+	  amixer -D pulse set Master on > /dev/null
+	  amixer -D pulse set Master 5%- > /dev/null
+    send_notification
+    ;;
+  mute)
+	  amixer -D pulse set Master 1+ toggle > /dev/null
+    if is_mute ; then
+      icon="$DIR/volume-off.svg"
+      dunstify "Mute" -i $icon -t 5555 --replace=555
+    else
+      send_notification
+    fi
+    ;;
+esac

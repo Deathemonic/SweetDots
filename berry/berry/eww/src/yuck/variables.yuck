@@ -1,0 +1,89 @@
+;; Profile
+
+(defpoll host :interval "5m"  
+    "hostname")
+(defpoll name :interval "5m"
+    "whoami")
+
+;; Resources
+
+(defpoll cpu-usage :interval "1s"
+    "scripts/system --cpu")
+(defpoll mem-usage :interval "1s"
+    "scripts/system --mem")
+(defpoll disk-usage :interval "1s"
+    "scripts/system --disk")
+(defpoll temp-usage :interval "1s"
+    "scripts/system --temp")
+(defpoll net-usage :interval "1s"
+    "scripts/system --net")
+(defpoll battery-capacity :interval "1s"
+    "scripts/system --bat")
+
+;; Resources Check
+
+(defpoll disk-text :interval "1s"
+    "scripts/check --disk")
+(defpoll mem-text :interval "1s"
+    "scripts/check --mem")
+(defpoll temp-text :interval "1s"
+    "scripts/check --temp")
+(defpoll net-text :interval "1s"
+    "scripts/check --net")
+(defpoll net-text-tooltip :interval "1s"
+    "scripts/check --nettip")
+(defpoll disk-text-tooltip :interval "1s"
+    "df -h /")
+
+;; Calendar
+
+(defpoll calendar_day :interval "10h"
+    "date '+%d'")
+(defpoll calendar_month :interval "10h"
+    "scripts/calendar")
+(defpoll calendar_year :interval "10h"
+    "date '+%Y'")
+
+;; Time (12H)
+
+(defpoll hour :interval "1s" 
+    "date +%I")
+(defpoll minute :interval "1s" 
+    "date +%M")
+(defpoll meridiem :interval "1s"
+    "date +%p")
+(defpoll day :interval "1s" 
+    "date +%A")
+(defpoll date :interval "1s" 
+    "date +%D")
+	
+;; Music
+
+(defpoll art :interval "5s"
+    "scripts/music coverloc")
+(defpoll title :interval "5s"
+    "scripts/music title")
+(defpoll artist :interval "5s"
+    "scripts/music artist")
+(defpoll playpause :interval "5s"
+    "scripts/music statusicon")
+
+;; Quotes
+(defpoll quote_text :interval "10m" 
+    "scripts/quotes quote")
+(defpoll quote_author :interval "10m" 
+    "scripts/quotes author")
+
+;; Weather
+(defpoll weather-icon :interval "10m" 
+    "scripts/weather --icon")
+(defpoll weather-city :interval "10m"
+    "scripts/weather --city")
+(defpoll weather-country :interval "10m"
+    "scripts/weather --country")
+(defpoll weather-hex :interval "10m" 
+    "scripts/weather --hex")
+(defpoll temperature :interval "10m" 
+    "scripts/weather --temp")
+(defpoll weather-stat :interval "10m" 
+    "scripts/weather --stat")

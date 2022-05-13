@@ -1,0 +1,58 @@
+;; Change this according to your resolution
+;; Refer to this eww documentation (https://elkowar.github.io/eww/configuration.html#creating-your-first-window)
+
+
+;; Dashboard
+
+(defwindow dashboard
+  :monitor 0
+  :geometry (geometry 
+                      :x "20"
+                      :y "0"
+                      :anchor "center left")
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore false
+(dashboard)
+)
+
+;; Resources
+
+(defwindow sysbox
+  :monitor 0
+  :geometry (geometry 
+                      :x "-20"
+                      :y "80"
+                      :anchor "top right")
+  :stacking "fg"
+  :wm-ignore false
+(sysbox)
+)
+
+;; Calendar
+
+(defwindow calendar
+  :monitor 0
+  :geometry (geometry 
+                      :x "-30px" 
+                      :y "8%" 
+                      :width "270px" 
+                      :height "60px"
+                      :anchor "top right")
+  :stacking "fg"
+  :wm-ignore false
+(cal)
+)
+
+;; Lockscreen
+
+(defwindow lockscreen
+  :geometry (geometry 
+                      :x "0"
+                      :y "0" 
+                      :width "100%" 
+                      :height "100%"
+                      :anchor "center")
+  :stacking "fg"
+(lockscreen)
+)

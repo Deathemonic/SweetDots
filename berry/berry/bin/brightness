@@ -1,0 +1,33 @@
+#!/ubin/bash
+
+DIR="$HOME/.config/berry/dunst/icons"
+BRIGHTNESS_STEPS=5
+
+function get_brightness {
+  brightnessctl i | grep -oP '\(\K[^%\)]+'
+}
+
+function send_notification {
+  brightness=$(get_brightness)
+
+  if [ "$brightness" -lt "40" ]; then
+    icon="$DIR/moon.svg"
+  elif [ "$brightness" -lt "60" ]; then
+    icon="$DIR/loader.svg"
+  else
+    icon="$DIR/sun.svg"
+  fi
+
+  dunstify "Brightness $brightness%" -i $icon -t 2000 --replace=500
+}
+
+case $1 in
+  up)
+    brightnessctl set "${BRIGHTNESS_STEPS:-5}%+" -q
+    send_notification
+    ;;
+  down)
+    brightnessctl set "${BRIGHTNESS_STEPS:-5}%-" -q
+    send_notification
+    ;;
+esac
