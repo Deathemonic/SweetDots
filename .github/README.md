@@ -7,7 +7,7 @@
     SweetBerry
 </h1>
 
-<p align="center">A colorful pastel dotfiles</p>
+<p align="center">A pastel themed rice 🍚</p>
 
 <h6 align="center">
   <a href="https://ko-fi.com/Deathemonic">Buy me a Coffee</a>
@@ -37,7 +37,7 @@ This started out a continuation of ***"Cat-Dots"*** but instead using bspwm as t
 Rather than using popular color scheme I decided to create my own, I'm not great at making a proper color scheme but this color scheme purpose is to match with the rice theme.
 
 ### 📚 Wiki
-Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), it provides information on setting up, some documentation, and a troubleshoot page
+Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), iit provides extra information, some documentation on how setting it up, and a troubleshoot page
 
 ### 🖥️ Install
 It's really easy, all you have to do is copy and paste this command below in your Terminal
