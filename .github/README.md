@@ -1,6 +1,6 @@
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/dev/.github/assets/logo-small.png" alt="logo">
+    <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/sweetberry-logo-small.png" alt="logo">
 </div>
 
 <h1 align="center">
@@ -16,7 +16,7 @@
   ·
   <a href="https://github.com/Deathemonic/Pastel">Pastel</a>
   ·
-  <a href="">Projects</a>
+  <a href="https://github.com/Deathemonic/SweetDots/projects">Projects</a>
 </h6>
 
 <p align="center">
@@ -42,7 +42,7 @@ Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki),
 ### Install
 It's really easy, all you have to do is copy and paste this command below in your Terminal
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/dev/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/install | sh
 ```
 _Install curl first in order to run this command_
 
@@ -65,7 +65,29 @@ _**Click to expand**_
 
 <details>
 <summary><b>Credits</b></summary>
-	WIP
+	<img src="https://avatars.githubusercontent.com/u/26059688?v=4" width="50"/>
+
+  [**adi1090x**](https://github.com/adi1090x) - For his configs and archcraft
+
+  <img src="https://avatars.githubusercontent.com/u/44412790?v=4" width="50"/>
+
+  [**PrayagS**](https://github.com/PrayagS) - For the spotify with scroll module
+
+  <img src="https://avatars.githubusercontent.com/u/73063680?v=4" width="50"/>
+
+  [**niraj998**](https://github.com/niraj998) - For the music scripts
+
+  <img src="https://avatars.githubusercontent.com/u/93292023?v=4" width="50"/>
+
+  [**rxyhn**](https://github.com/rxyhn) - For the EWW config and scripts
+
+  <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
+
+  [**catppuccin**](https://github.com/catppuccin) - For the ports
+
+  <img src="https://coolors.co/assets/img/favicon.png" width="50"/>
+
+  [**coolors.co**](https://coolors.co/) - The tool that helps me make Pastel color scheme posible and the creator of coolors also [**Fabrizio Bianchi**](https://fabrizio.io/)
 </details>
 
 <p align="center">
