@@ -95,7 +95,7 @@ case $install in
     chmod +x $bspwm/bin/polybar/*
     chmod +x $bspwm/bin/rofi/*
     chmod +x $bspwm/eww/scripts/*
-    chmod +x $bspwm/autostart
+    chmod +x $bspwm/bspwmrc
     printf "${blue}[*] Scripts are now excutables\n" && sleep 1 
     clear
     printf "${blue}[!] Do you want to install extra stuff like gtk themes, cursors, and etc\n"
