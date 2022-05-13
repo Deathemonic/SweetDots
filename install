@@ -108,7 +108,7 @@ case $install in
         clear
         printf "${red}[!] This will require inputs from the user so just be aware for that\n" && sleep 3
         printf "${yellow}[*] Setting up GTK theme\n" && sleep 1
-        sudo cp $rice/misc/gtk/* /usr/share/themes/ && sudo /usr/share/themes/Pastel.tar.xz
+        sudo cp $rice/misc/gtk/* /usr/share/themes/ && sudo tar -xf /usr/share/themes/Pastel.tar.xz
         printf "${blue}[*] Gtk theme set\n" && sleep 1
         printf "${yellow}[*] Setting up cursor theme\n" && sleep 1
         sudo cp $rice/misc/cursors/* /usr/share/icons/ && sudo tar -xf /usr/share/icons/Pastel.tar.xz
