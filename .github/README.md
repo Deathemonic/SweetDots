@@ -42,7 +42,7 @@ Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki),
 ### 🖥️ Install
 It's really easy, all you have to do is copy and paste this command below in your Terminal
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/install | sh
+bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/install)
 ```
 _Install curl first in order to run this command_
 
