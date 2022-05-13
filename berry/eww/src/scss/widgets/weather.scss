@@ -1,0 +1,34 @@
+.weather{
+	font-family: JetBrainsMono Nerd Font;
+	background-color: $background;
+	border: 2px solid $foreground;
+	border-radius: 20px;
+	padding: 3rem;
+	margin: 1rem;
+}
+.weather-day{
+	font-family: Jetbrains Mono;
+	font-weight: bold;
+	font-size: 1.6em;
+	color: $foreground;
+}
+.temp-region{
+	font-family: Jetbrains Mono;
+	font-size: 1em;
+	color: $foreground;
+}
+.weather-icon{
+	font-family: 'icomoon\-feather';
+	font-size: 4.2em;
+}
+.temperature{
+	font-family: Jetbrains Mono;
+	font-size: 1em;
+	color: $foreground
+}
+.weather-stat{
+	font-family: Jetbrains Mono;
+	font-style: italic;
+	font-size: 1.1em;
+	color: $foreground
+}

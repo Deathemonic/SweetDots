@@ -1,0 +1,34 @@
+*background: #212529
+*foreground: #FFDEDE
+
+! Gray
+*color0: #ADB5BD
+*color8: #CED4DA
+
+! Red
+*color1: #FF8E8E
+*color9: #FF8E8E
+
+! Green
+*color2: #E4FFDE
+*color10: #E4FFDE
+
+! Yellow
+*color3: #FFFBDE
+*color11:  #FFFBDE
+
+! Blue
+*color4: #DEFBFF
+*color12: #DEFBFF
+
+! Maguve
+*color5: #E7DEFF
+*color13: #E7DEFF
+
+! Pink
+*color6: #FFDEDE
+*color14: #FFDEDE
+
+! Whites
+*color7: #F8F9FA
+*color15: #F8F9FA
