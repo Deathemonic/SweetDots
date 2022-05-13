@@ -37,7 +37,7 @@ LOOP = GLib.MainLoop()
 CONNS = CLIENT.get_connections()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("$HOME/.config/bspwm/rofi/networkmenu.ini"))
+CONF.read(expanduser("~/.config/bspwm/rofi/networkmenu.ini"))
 
 
 def cli_args():
