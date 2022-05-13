@@ -37,7 +37,7 @@ LOOP = GLib.MainLoop()
 CONNS = CLIENT.get_connections()
 
 CONF = configparser.ConfigParser()
-CONF.read(expanduser("$HOME/.config/berry/rofi/networkmenu.ini"))
+CONF.read(expanduser("~/.config/berry/rofi/networkmenu.ini"))
 
 
 def cli_args():
