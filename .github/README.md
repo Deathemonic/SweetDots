@@ -39,7 +39,7 @@ Rather than using popular color scheme I decided to create my own, I'm not great
 ### 📚 Wiki
 Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), iit provides extra information, some documentation on how setting it up, and a troubleshoot page
 
-### 🖥️ Install
+### 📦 Install
 It's really easy, all you have to do is copy and paste this command below in your Terminal
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/install)
