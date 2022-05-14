@@ -43,3 +43,4 @@ sh $HOME/.config/berry/bin/compositor
 
 # Start mpd
 exec mpd &
+exec mpDris2 &
