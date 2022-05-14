@@ -89,6 +89,7 @@ case $install in
     printf "${yellow}[*] Copying dotfiles\n" && sleep 3
     cp -rf $rice/berry/* $config/berry
     cp -rf $rice/misc/.zshrc $HOME/
+    cp -rf $rice/misc/mpDris2 $config/
     sudo cp $rice/misc/berry.desktop /usr/share/xsessions/
     systemctl --user enable mpd
     printf "${blue}[*] Dotfiles copied\n" && sleep 2
