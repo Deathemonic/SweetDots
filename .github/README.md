@@ -143,6 +143,10 @@ _**Click to expand**_
   <img src="https://avatars.githubusercontent.com/u/73063680?v=4" width="50"/>
 
   [**niraj998**](https://github.com/niraj998) - For the music scripts
+  
+  <img src="https://avatars.githubusercontent.com/u/59060246?v=4" width="50"/>
+
+  [**siduck**](https://github.com/siduck) - For making NvChad a awesome lua written config
 
   <img src="https://avatars.githubusercontent.com/u/93292023?v=4" width="50"/>
 
