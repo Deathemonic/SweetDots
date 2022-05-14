@@ -28,6 +28,8 @@
 
 #### Welcome! Thanks for Dropping by 🥰,
 
+<img alt="Rice Preview" align="right" width="400px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/unixporn2.png"/>
+
 ### ❓ About
 It's a rice that themed using my own pastel colors.
 
