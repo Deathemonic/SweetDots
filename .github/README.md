@@ -26,9 +26,9 @@
 		<img alt="Issues" src="https://img.shields.io/github/issues/deathemonic/cat-dots?style=for-the-badge&logo=gitbook&color=DEFBFF&logoColor=FFDEDE&labelColor=212529"></a>
 </p>
 
-#### Welcome! Thanks for Dropping by 🥰,
+<img alt="Rice Preview" align="right" width="335px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/unixporn2.png"/>
 
-<img alt="Rice Preview" align="right" width="400px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/unixporn2.png"/>
+#### Welcome! Thanks for Dropping by 🥰,
 
 ### ❓ About
 It's a rice that themed using my own pastel colors.
