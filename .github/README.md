@@ -63,9 +63,70 @@ I also post updates on my rices in there too
 ### 👇 Extra
 _**Click to expand**_
 <details>
-<summary><b>📸 Screenshots<b></summary>
-	WIP
-</details>
+<summary><b>📸 Screenshots</b></summary>
+
+**`Desktop`**
+
+| Desktop      | Screenshot                                                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Main         | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/berry/desktop.png" width="400"/>      |
+| Tiled        | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/berry/tilled.png" width="400"/>       |
+| Titlebar     | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/berry/titlebar.png" width="400"/>     |
+| Titlebar-Less| <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/berry/titlebar-less.png" width="400"/> |
+| Windowed     | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/berry/windowed.png" width="400"/>   |
+
+**`EWW`**
+| EWW        | Screenshot                                                                                                                      |
+| -----------| ------------------------------------------------------------------------------------------------------------------------------- |
+| Dashboard  | ![Dashboard](https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/eww/eww-dashboard.png?raw=true)|
+| Calendar   | ![Calendar](https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/eww/eww-calendar.png?raw=true)  |
+| Resources  | ![Resources](https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/eww/eww-resources.png?raw=true)|
+| Lockscreen | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/eww/eww-lock.png?raw=true" width="500"/>     |
+
+**`Polybar`**
+
+| Polybar      | Screenshot                                                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| English      | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/showcase/polybar/polybar-en.png" width="900"/>      |
+| Japanese        | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/showcase/polybar/polybar-jp.png" width="900"/>       |
+| Scroll     | <img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/showcase/polybar/polybar-scroll.gif" width="900"/>     |
+
+**`Dunst`**
+
+![Dunst-Notification](https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/dunst/dunst-notfication.png?raw=true)
+
+![Dunst-System](https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/dunst/dusnt-system.png?raw=true)
+
+**`Firefox`**
+
+<img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/firefox.png?raw=true" width="600"/>
+	
+**`GTK`**
+
+<img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/gtk.png?raw=true" width="600"/>
+
+**`Kitty`**
+
+<img src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/gallery/showcase/kitty.png" width="600"/>
+
+**`Spotify`**
+	
+<img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/spotfiy.png?raw=true" width="600"/>
+
+**`Rofi`**
+
+| Rofi         | Screenshot                                                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Bluetooth    | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-bluetooth.png?raw=true" width="400"/>   |
+| Confirm     | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-confirm.png?raw=true" width="400"/>    |
+| Launcher        | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-launcher.png?raw=true" width="400"/>         |
+| Network      | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-netwrok.png?raw=true" width="400"/>     |
+| Power | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-power.png?raw=true" width="400"/> |
+| Run    | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-run.png?raw=true" width="400"/> |
+| Screenshot    | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-screenshot.png?raw=true" width="400"/> |
+| Window    | <img src="https://github.com/Deathemonic/SweetDots/blob/berry/.github/assets/gallery/showcase/rofi/rofi-window.png?raw=true" width="400"/> |
+
+ </details>
 
 <details>
 <summary><b>💕 Credits</b></summary>
