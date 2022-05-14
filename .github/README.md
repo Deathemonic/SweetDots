@@ -44,7 +44,7 @@ bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/bspwm/ins
 _Install curl first in order to run this command_
 
 ### 🪟 BerryWM
-Go to the [**berry branch**](https://github.com/Deathemonic/SweetDots/tree/bspwm), if you want the berrywm version of this dotfiles
+Go to the [**berry branch**](https://github.com/Deathemonic/SweetDots), if you want the berrywm version of this dotfiles
 
 ### ☕ Buy Me a Coffee
 If you like my rice feel free to buy me a coffee it will help me a lot.
