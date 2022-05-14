@@ -24,7 +24,7 @@ super + {e,w,g}
 	{nautilus,firefox,gedit}
 
 # Terminal Apps
-ctrl + alt + {v,r,h}
+ctrl + alt + {v,e,h}
 	kitty -c $HOME/.config/berry/kitty/kitty.conf -e {nvim,ranger,htop}
 
 # Eww ------------------
