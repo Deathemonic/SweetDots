@@ -43,3 +43,4 @@ sh $HOME/.config/bspwm/bin/compositor &
 
 # Start mpd
 exec mpd &
+exec mpDris2 &
