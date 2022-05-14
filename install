@@ -90,6 +90,7 @@ case $install in
     cp -rf $rice/berry/* $config/berry
     cp -rf $rice/misc/.zshrc $HOME/
     sudo cp $rice/misc/berry.desktop /usr/share/xsessions/
+    systemctl --user enable mpd
     printf "${blue}[*] Dotfiles copied\n" && sleep 2
     printf "${yellow}[*] Making scripts excutables\n" && sleep 2
     chmod +x $berry/bin/*
