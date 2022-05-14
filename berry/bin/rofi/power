@@ -43,8 +43,8 @@ case $chosen in
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
 			mpc -q pause
 			amixer set Master mute
-			$HOME/.config/berry/bin/eww/lock
 			systemctl suspend
+			$HOME/.config/berry/bin/eww/lock
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
 			exit
         else
