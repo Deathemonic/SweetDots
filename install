@@ -88,6 +88,7 @@ case $install in
     printf "${yellow}[*] Copying dotfiles\n" && sleep 3
     cp -rf $rice/bspwm/* $config/bspwm
     cp -rf $rice/misc/.zshrc $HOME/
+    systemctl --user enable mpd
     printf "${blue}[*] Dotfiles copied\n" && sleep 2
     printf "${yellow}[*] Making scripts excutables\n" && sleep 2
     chmod +x $bspwm/bin/*
