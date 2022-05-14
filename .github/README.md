@@ -46,6 +46,8 @@ bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/ins
 ```
 _Install curl first in order to run this command_
 
+Also check the [wiki](https://github.com/Deathemonic/SweetDots/wiki/Documentation) for a complete list Dependencies if you are not in arch linux
+
 ### 🪟 BSPWM
 Go to the [bspwm branch](https://github.com/Deathemonic/SweetDots/tree/bspwm), if you want the bspwm version of this dotfiles
 
