@@ -48,6 +48,8 @@ bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/ins
 ```
 _Install curl first in order to run this command_
 
+**Warning: This dotfiles is configured at ``1280x800 96dpi``, Don't worry you can still install it check this [page](https://github.com/Deathemonic/SweetDots/wiki/Documentation#resolution) on how configure your resolution**
+
 Also check the [wiki](https://github.com/Deathemonic/SweetDots/wiki/Documentation) for a complete list Dependencies if you are not in arch linux
 
 ### 🪟 BSPWM
