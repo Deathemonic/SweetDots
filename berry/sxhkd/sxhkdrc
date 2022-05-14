@@ -127,9 +127,6 @@ super + c
 super + x
     berryc window_close
 
-super + shift + c
-    berryc window_close
-
 super + shift + q
     berryc quit
 
