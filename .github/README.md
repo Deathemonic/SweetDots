@@ -153,6 +153,9 @@ _**Click to expand**_
   [**rxyhn**](https://github.com/rxyhn) - For the EWW config and scripts
 
   <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
+	
+  [**NYRI4**](https://github.com/NYRI4) - For making comfy spicetify theme
+  <img src="https://avatars.githubusercontent.com/u/65369563?v=4" width"50"/>
 
   [**catppuccin**](https://github.com/catppuccin) - For the ports
 
