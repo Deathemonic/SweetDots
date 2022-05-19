@@ -356,30 +356,50 @@
   )
 )
 
-;; Space
-
-(defwidget space []
-  (box :orientation "v"
-    :space-evenly "false"
-    :class "space"
-    (box :orientation "h"
-      :space-evenly "false"
-    )
-  )
-)
-
 ;; Lock
 
 (defwidget lockscreen[]
-  (box :orientation "h"
-    :class "lockbox"
-    :space-evenly "false"
-    (space)
-    (box :orientation "v"
-      :space-evenly "false"
-      :valign "center"
-      :halign "center"
-      (profile)
+  (box :class "lock_background"
+    (centerbox :orientation "h"
+      (box :class "lock_space"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (clock)
+        )
+      )
+      (box :class "lock_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (profile)
+        )
+      )
+      (box :class "lock_space"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (weather)
+        )
+      )
     )
   )
 )

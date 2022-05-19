@@ -3,64 +3,62 @@
 # Original author:	Niraj		Github:		niraj998
 # Modified by:		Deathemon	Github:		Deathemonic
 
-# Note removed the mpd support due to "it's so fucking hard to add" so I've it simpler, If one of you nerds can add it feel free to make a pull request
-
 Cover=/tmp/cover.png
 bkpCover=~/.config/berry/eww/assets/fallback.png
 mpddir=~/Music
 
 title() {
-title=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{title}})
+title=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format {{title}})
 [ -z "$title" ] && title="Nothing Playing"
 echo "$title"
 }
 
 artist() {
-artist=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{artist}})
+artist=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format {{artist}})
 [ -z "$artist" ] && artist="Offline"
 echo "$artist"
 }
 
 album() {
-album=$(playerctl --player=spotify,%any,firefox,chromium metadata --format {{album}})
+album=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format {{album}})
 [ -z "$album" ] && album="Album"
 echo "$album"
 }
 
 status() {
-status=$(playerctl --player=spotify,%any,firefox,chromium status)
+status=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd status)
 [ -z "$status" ] && status="Stopped"
 echo "$status"
 }
 
 ctime() {
-time=$(playerctl --player=spotify,%any,firefox,chromium position --format "{{ duration(position) }}")
+time=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd position --format "{{ duration(position) }}")
 [ -z "$time" ] && time="0:00"
 echo "$time"
 }
 
 length() {
-length=$(playerctl --player=spotify,%any,firefox,chromium metadata --format "{{ duration(mpris:length) }}")
+length=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "{{ duration(mpris:length) }}")
 [ -z "$length" ] && length="0:00"
 echo "$length"
 }
 
 playlist() {
-playlist=$(playerctl --player=spotify,%any,firefox,chromium metadata xesam:trackNumber)
+playlist=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata xesam:trackNumber)
 [ -z "$playlist" ] && playlist="0"
 echo "$playlist"
 }
 
 cover() {
-albumart="$(playerctl --player=spotify,%any,firefox,chromium metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
-[ $(playerctl --player=spotify,%any,firefox,chromium metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover 
+albumart="$(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+[ $(playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata mpris:artUrl) ] && curl -s "$albumart" --output $Cover || cp $bkpCover $Cover 
 echo "$Cover"
 }
 
 statusicon() {
 icon=""
-[ $(playerctl --player=spotify,%any,firefox,chromium status) = "Playing" ] && icon=""
-[ $(playerctl --player=spotify,%any,firefox,chromium status) = "Paused" ] && icon=""
+[ $(playerctl -p spotify,%any,firefox,chromium,brave,mpd status) = "Playing" ] && icon=""
+[ $(playerctl -p spotify,%any,firefox,chromium,brave,mpd status) = "Paused" ] && icon=""
 echo "$icon"
 }
 
@@ -89,9 +87,9 @@ Options:
 }
 
 case $1 in 
-	next)			playerctl --player=spotify,%any,firefox,chromium next			;;
-	previous)		playerctl --player=spotify,%any,firefox,chromium previous		;;
-	toggle)			playerctl --player=spotify,%any,firefox,chromium play-pause		;;
+	next)			playerctl -p spotify,%any,firefox,chromium,brave,mpd next			;;
+	previous)		playerctl -p spotify,%any,firefox,chromium,brave,mpd previous		;;
+	toggle)			playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause		;;
 	title)			title															;;
 	artist)			artist															;;
 	album)			album															;;
