@@ -123,7 +123,11 @@ _**Click to expand**_
 
 <details>
 <summary><b>💕 Credits</b></summary>
-	<img src="https://avatars.githubusercontent.com/u/26059688?v=4" width="50"/>
+  <img src="https://avatars.githubusercontent.com/u/159419?v=4" width="50"/>
+	
+  [**baskerville**](https://github.com/baskerville) - For BSPWM and SXHKD
+	
+  <img src="https://avatars.githubusercontent.com/u/26059688?v=4" width="50"/>
 
   [**adi1090x**](https://github.com/adi1090x) - For his configs and archcraft
 
@@ -147,6 +151,10 @@ _**Click to expand**_
 	
   [**NYRI4**](https://github.com/NYRI4) - For making comfy spicetify theme
 
+  <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
+
+  [**andreasgrafen**](https://github.com/andreasgrafen) - Cascade
+	
   <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
 
   [**catppuccin**](https://github.com/catppuccin) - For the ports
