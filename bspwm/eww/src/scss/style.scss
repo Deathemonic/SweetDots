@@ -11,20 +11,6 @@
 	margin: 1rem;
 }
 
-// Edit "background-image: url" if you want to change the lockscren background
-.lockbox{
-	background-image: url("assets/lockscreen.png");
-}
-
-// Edit the "padding" to align the lockscreen profile in the center
-.space{
-	background-color: transparent;
-	margin: 1rem;
-	padding: 21.5rem;
-//  padding: 258px;
-}
-
-
 .dashboard{
 	background-color: $background;
 	border: 2px solid $foreground;
