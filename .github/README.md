@@ -132,7 +132,11 @@ _**Click to expand**_
 
 <details>
 <summary><b>💕 Credits</b></summary>
-	<img src="https://avatars.githubusercontent.com/u/26059688?v=4" width="50"/>
+  <img src="https://avatars.githubusercontent.com/u/20917538?v=4" width="50"/>
+
+  [**JLErvin**](https://github.com/JLErvin) - For BerryWM
+	
+  <img src="https://avatars.githubusercontent.com/u/26059688?v=4" width="50"/>
 
   [**adi1090x**](https://github.com/adi1090x) - For his configs and archcraft
 
@@ -155,7 +159,11 @@ _**Click to expand**_
   <img src="https://avatars.githubusercontent.com/u/65369563?v=4" width="50"/>
 	
   [**NYRI4**](https://github.com/NYRI4) - For making comfy spicetify theme
+	
+  <img src="https://avatars.githubusercontent.com/u/35840154?v=4" width="50"/>
 
+  [**andreasgrafen**](https://github.com/andreasgrafen) - Cascade
+	
   <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
 	
   [**catppuccin**](https://github.com/catppuccin) - For the ports
