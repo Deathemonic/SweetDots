@@ -119,7 +119,7 @@ case $install in
         sudo cp $rice/misc/folders/* /usr/share/icons/ && sudo tar -xf /usr/share/icons/Pastel-Folders.tar.xz
         printf "${blue}[*] Folders set\n" && sleep 1
         printf "${red}[!] Use lxappearance to set your themes and icons, Select with the name Pastel on them\n" && sleep 3
-        printf "${red}[!] If the you can see the themes please go to this page https://github.com/Deathemonic/SweetDots/wiki for a fix\n" && sleep 5
+        printf "${red}[!] If the you can't see the themes please go to this page https://github.com/Deathemonic/SweetDots/wiki for a fix\n" && sleep 5
         printf "${yellow}[*] Setting up Spicetify theme\n" && sleep 2
         printf "${red}[!] If spotify opens just wait for it to close or manually close it your self\n" && sleep 3
         if [[ -d $config/spicetify ]] && [[ -d $HOME/.spicetify ]]; then
