@@ -76,7 +76,7 @@ case $install in
     clear
 
     printf "${yellow}[*] Getting dotfiles\n" && sleep 2
-    cd $dotfiles && git clone https://github.com/Deathemonic/SweetDots -b bspwm
+    cd $dotfiles && git clone https://github.com/Deathemonic/SweetDots -b bspwm $dotfiles/SweetBSP
     cd $rice
     printf "${yellow}[*] Making backups\n" && sleep 2
     if [[ -d $bspwm ]]; then
