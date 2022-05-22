@@ -27,18 +27,18 @@ esac
 if [ $EXIT_CODE -eq 0 ]; then
     STATUS=$PLAYERCTL_STATUS
 else
-    STATUS="オフライン"
+    STATUS="Offline"
 fi
 
 if [ "$1" == "--status" ]; then
     echo "$STATUS"
 else
     if [ "$STATUS" = "Stopped" ]; then
-        echo "ランニング"
+        echo "Running"
     elif [ "$STATUS" = "Paused"  ]; then
         update_hooks "$PARENT_BAR_PID" 2
         playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$FORMAT"
-    elif [ "$STATUS" = "オフライン"  ]; then
+    elif [ "$STATUS" = "Offline"  ]; then
         echo "$STATUS"
     else
         update_hooks "$PARENT_BAR_PID" 1
