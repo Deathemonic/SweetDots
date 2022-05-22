@@ -79,8 +79,17 @@ XF86AudioMute
 	sh $HOME/.config/berry/bin/volume mute
 	
 # Music control
-XF86Audio{Next,Prev,Play,Stop}
-	mpc {next,prev,toggle,stop}
+XF86AudioNext
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd next
+
+XF86AudioPrev
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd previous
+
+XF86AudioPlay
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause
+
+XF86AudioStop
+    playerctl -a stop
 
 # Reload sxhkd configuration file
 super + Escape

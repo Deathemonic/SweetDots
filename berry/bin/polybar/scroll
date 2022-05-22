@@ -1,6 +1,6 @@
 #!/bin/bash
 zscroll -l 20 \
-        --delay 0.1 \
+        --delay 5 \
         --scroll-padding " | " \
         --match-command "$HOME/.config/berry/bin/polybar/status --status" \
         --match-text "Playing" "--scroll 1" \
