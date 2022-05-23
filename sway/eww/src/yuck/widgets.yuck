@@ -1,0 +1,405 @@
+;;  Profile
+
+(defwidget profile []
+  (box :orientation "v"
+    :space-evenly "false"
+    :class "profile"
+    (box :orientation "h"
+      :space-evenly "false"
+      (box :class "pfp")
+    )
+    (box :orientation "v" :space-evenly "false"
+      (box :class "pfptxt" :valign "center" "@${host}")
+      (box :class "subpfptxt" :halign "center" {name})
+    )
+  )
+)
+
+;;  Clock
+
+(defwidget clock []
+  (box	:class "time"
+    :orientation "v"
+    :space-evenly "false"
+    :valign "center"
+    :halign "center"
+    (box 	:orientation "h"
+      :class "date"
+      :space-evenly "false"
+      (label	:class "hour"
+      :text "${hour}")
+      (label	:class "separator-clock"
+      :text ":")
+      (label	:class "min"
+      :text "${minute}")
+      (label	:class "separator-clock"
+      :text " ")
+      (label	:class "meridiem"
+      :text "${meridiem}")
+    )
+    (box	:orientation "h"
+      :space-evenly "false"
+      :halign "center"
+      (label	:class "day"
+      :text "${date}")
+    )
+  )
+)
+
+
+;;  Music
+
+(defwidget music []
+  (box 	:class "music-player"
+    :orientation "v"
+    :space-evenly "false"
+    :halign "center"
+    (box 	:class "album_art"
+      :style "background-image: url('${art}');")
+    (box 	:orientation "v"
+      :space-evenly "false"
+      :halign "center"
+      :spacing 10
+      (label  :class "artist"
+        :limit-width 15
+      :text title)
+      (label  :class "song"
+        :limit-width 20
+      :text artist)
+      (box 	:orientation "h"
+        :space-evenly "false"
+        :halign "center"
+        :spacing 35
+        (button :class "btn_prev" :onclick "scripts/music previous" "")
+        (button :class "btn_play" :onclick "scripts/music toggle" playpause)
+        (button :class "btn_next" :onclick "scripts/music next" "")
+      )
+    )
+  )
+)
+
+
+;; Quotes
+
+(defwidget quotes []
+  (box 	:class "quote"
+    :orientation "h"
+    :halign "center"
+    :spacing 0
+    :space-evenly "false"
+    :height 200
+    (box 	:orientation "v"
+      :spacing 0
+      :space-evenly "false"
+      (label 	:class "quote-text"
+        :halign "center"
+        :wrap "true"
+      :text "\"${quote_text}\"")
+      (label 	:class "quote-author"
+        :halign "center"
+        :wrap "true"
+      :text quote_author)
+    )
+  )
+)
+
+;; Weather
+
+(defwidget weather []
+  (box 	:class "weather"
+    :orientation "v"
+    :space-evenly "false"
+    :halign "center"
+    (box 	:orientation "v"
+      :space-evenly "false"
+      (label 	:class "weather-day"
+      :text "${day}")
+      (box 	:class "weather-icon"
+      :style "color: ${weather-hex}" {weather-icon})
+    )
+    (box 	:orientation "v"
+      :space-evenly "false"
+      (box 	:orientation "h"
+        :class "weather-stat"
+        :halign "center"
+        (label 	:wrap "true"
+          :limit-width 15
+        :text "${weather-stat}")
+      )
+      (box 	:orientation "h"
+        :halign "center"
+        (label 	:class "temp-region"
+        :text "${temperature} in ${weather-city}, ${weather-country}")
+      )
+    )
+  )
+)
+
+;; Dashboard
+
+(defwidget dashboard[]
+  (box :orientation "h"
+    :class "dashboard"
+    :space-evenly "false"
+    (box :orientation "v"
+      :space-evenly "false"
+      (profile)
+      (quotes)
+      (clock)
+    )
+    (box :orientation "v" :space-evenly "false"
+      (box :orientation "h" :space-evenly "false"
+        (box :orientation "v"
+          :space-evenly "false"
+          (music)
+        )
+      )
+      (weather)
+    )
+  )
+)
+
+;; Resources
+
+
+(defwidget sysbox []
+  (box :orientation "h"
+    :class "dashboard"
+    :space-evenly "false"
+    (box :orientation "v"
+      :space-evenly "false"
+      (resources)
+      (system)
+    )
+  )
+)
+
+(defwidget resources[]
+  (box :class "winbox"
+    (centerbox :orientation "h"
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_cpu"
+            :value cpu-usage
+            :thickness 5
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${cpu-usage}%"
+        )
+      )
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_mem"
+            :value mem-usage
+            :thickness 5
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${mem-text}"
+        )
+      )
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box
+          :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_disk"
+            :value disk-usage
+            :thickness 5
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${disk-text}"
+        )
+      )
+    )
+  )
+)
+
+(defwidget system[]
+  (box :class "winbox"
+    (centerbox :orientation "h"
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_temp"
+            :value temp-usage
+            :thickness 5
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${temp-text}"
+        )
+      )
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_net"
+            :value net-usage
+            :thickness 5
+            :tooltip net-text-tooltip
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${net-text}"
+        )
+      )
+      (box :class "res_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 15
+        :space-evenly "false"
+        (box
+          :class "res_circle"
+          :orientation "v"
+          :valign "center"
+          :halign "center"
+          (circular-progress
+            :class "res_bat"
+            :value battery-capacity
+            :thickness 5
+            (label :class "res_circle_small"
+              :text ""
+            )
+          )
+        )
+        (label :class "res_text"
+          :valign "end"
+          :halign "center"
+          :text "${battery-capacity}"
+        )
+      )
+    )
+  )
+)
+
+;; Calendar
+
+(defwidget cal []
+  (box :class "cal-box"
+    :orientation "v"
+    (box :class "cal-inner-box"
+      (calendar :class "cal"
+        :day calendar_day
+        :month calendar_month
+        :year calendar_year
+      )
+    )
+  )
+)
+
+;; Lock
+
+(defwidget lockscreen[]
+  (box :class "lock_background"
+    (centerbox :orientation "h"
+      (box :class "lock_space"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (clock)
+        )
+      )
+      (box :class "lock_box"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (profile)
+        )
+      )
+      (box :class "lock_space"
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+        :spacing 10
+        :space-evenly "false"
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+          (weather)
+        )
+      )
+    )
+  )
+)

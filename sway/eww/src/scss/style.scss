@@ -1,0 +1,27 @@
+*{
+	all: unset;
+	font-family: 'Jetbrains Mono', 'Sarasa Gothic J', 'icomoon\-feather';
+}
+// At Line 3 Collumn 52 change it at your corresponding language "J = Japanse, K = Korean, CL = Classical orthography, SC = Simplified Chinese, TC = Traditional Chinese Taiwan, HC = Traditional Chinese Hong Kong"
+
+.winbox {
+	background-color: $background;
+	border: 2px solid $foreground;
+	border-radius: 20px;
+	margin: 1rem;
+}
+
+.dashboard{
+	background-color: $background;
+	border: 2px solid $foreground;
+	border-radius: 20px;
+	padding: 1rem;
+}
+
+button:hover{
+	color: $blue;
+}
+
+.line {
+    margin-left: -1px;
+}

@@ -1,0 +1,12 @@
+.lock_box {
+	background-color: transparent;
+	border-radius: 20px;
+	padding: 3rem;
+	margin: 1rem;
+	padding: 5px 10px 5px 10px;
+}
+
+// Edit "background-image: url" if you want to change the lockscren background
+.lock_background{
+	background-image: url("assets/lockscreen.png");
+}

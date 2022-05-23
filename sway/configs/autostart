@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Bar
+exec    waybar -c $HOME/.config/sway/waybar/config
+
+# Autotiling
+exec autotiling -w 1 3 5 7 9
+
+# Mpd
+exec 	mpDris2 &
+exec    mpd &

@@ -1,0 +1,137 @@
+# Keybinds
+
+# Super Key
+set 	$mod 	Mod4
+
+# Direction Keys
+set 	$left 	h
+set 	$down 	j
+set 	$up 	k
+set 	$right 	l
+
+# Terminal
+set 	$term 	kittynogl
+
+# Wofi
+set 	$menu 	wofi --conf $HOME/.config/sway/wofi/config | xargs swaymsg exec --
+
+# Open Terminal
+bindsym 	$mod+Return 	exec 	$term
+
+# Kill focused Window
+bindsym 	$mod+x 		    kill
+
+# Open launcher
+bindsym 	$mod+space	    exec 	$menu
+
+# dismiss notifications
+bindsym 	Control+space 	exec 	makoctl dismiss
+
+# screenshot with grim and swappy
+bindsym 	print               exec $HOME/bin/screenshot.sh
+bindsym 	Shift+print         exec $HOME/bin/partial-screenshot.sh
+
+# launch calculator
+bindsym		$mod+c			exec $HOME/bin/calculator.sh
+
+# launch emoji picker
+bindsym     $mod+e          exec cat $HOME/.config/wofi/emoji-test.txt | wofi -c $HOME/.config/wofi/emoji | sed 's/ .*//' | wl-copy -n
+
+# floating window controls (also works for non-floating windows)
+floating_modifier 		$mod 	normal
+
+# reload the configuration file
+bindsym 	$mod+r 		reload
+
+# restart sway
+bindsym 	$mod+Shift+r 	exec 	swaynag -c $HOME/.config/sway/swaynag -t custom -m 'Do you wish to fully reload your Sway session?' -b 'Yes' 'swaymsg exit'
+
+# turn the system off
+bindsym 	$mod+p 	        exec 	swaynag -c $HOME/.config/sway/swaynag -t custom -m 'What action would you like to perform?' -b 'Shutdown' 'poweroff' -b 'Restart' 'poweroff --reboot'
+
+# Move Focus
+bindsym 	$mod+$left 	focus 	left
+bindsym 	$mod+$down 	focus 	down
+bindsym 	$mod+$up 	focus 	up
+bindsym 	$mod+$right focus 	right
+
+# Move Window to another Position
+bindsym 	$mod+Shift+$left 	move 	left
+bindsym 	$mod+Shift+$down 	move 	down
+bindsym 	$mod+Shift+$up 		move 	up
+bindsym 	$mod+Shift+$right 	move 	right
+
+# Switch to Workspace
+bindsym 	$mod+1 		workspace 	number 	1
+bindsym 	$mod+2 		workspace 	number 	2
+bindsym 	$mod+3 		workspace 	number 	3
+bindsym 	$mod+4 		workspace 	number 	4
+bindsym 	$mod+5 		workspace 	number 	5
+bindsym 	$mod+6 		workspace 	number 	6
+bindsym 	$mod+7 		workspace 	number 	7
+bindsym 	$mod+8 		workspace 	number 	8
+bindsym 	$mod+9 		workspace 	number 	9
+bindsym 	$mod+0 		workspace 	number 	10
+
+# Switch to previous Workspace
+bindsym 	$mod+Tab 	workspace 	back_and_forth
+
+# Move to Workspace
+bindsym 	$mod+Shift+1 	move 	container to 	workspace number 1
+bindsym 	$mod+Shift+2	move 	container to 	workspace number 2
+bindsym 	$mod+Shift+3 	move 	container to 	workspace number 3
+bindsym 	$mod+Shift+4 	move 	container to 	workspace number 4
+bindsym 	$mod+Shift+5 	move 	container to 	workspace number 5
+bindsym 	$mod+Shift+6 	move 	container to 	workspace number 6
+bindsym 	$mod+Shift+7 	move 	container to 	workspace number 7
+bindsym 	$mod+Shift+8 	move 	container to 	workspace number 8
+bindsym 	$mod+Shift+9 	move 	container to 	workspace number 9
+bindsym 	$mod+Shift+0 	move 	container to 	workspace number 10
+
+# Toggle Layouts
+bindsym 	$mod+Alt+Shift+h 	splith
+bindsym 	$mod+Alt+Shift+v 	splitv
+bindsym 	$mod+Alt+m 	layout 		tabbed
+bindsym 	$mod+Alt+t 	layout 		toggle split
+bindsym 	$mod+Alt+f 	fullscreen
+bindsym 	$mod+Alt+s 	floating 	toggle
+bindsym		$mod+Alt+Shift+s	focus 		mode_toggle
+
+# Move Floating Windows
+bindsym 	$mod+Up 	move 	up 	    10
+bindsym 	$mod+Left   move 	left 	10
+bindsym 	$mod+Right  move 	right 	10
+bindsym 	$mod+Down 	move 	down 	10
+
+# Move focus to the parent container
+bindsym 	$mod+a 		focus 	parent
+
+# Move focus to the child container
+bindsym 	$mod+Shift+a 		focus 	child
+
+# Scratchpad:
+# Move the currently focused window to the scratchpad
+bindsym 	$mod+Shift+minus 	move 	scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+bindsym 	$mod+minus 		scratchpad 	show
+
+# Resizing containers:
+bindsym 	$mod+alt+$left 		resize shrink 	width 	20px
+bindsym 	$mod+alt+$up 		resize grow 	height 	20px
+bindsym 	$mod+alt+$down 		resize shrink 	height 	20px
+bindsym 	$mod+alt+$right 	resize grow 	width 	20px
+
+# Function Keys
+bindsym --locked XF86AudioRaiseVolume   exec sh -c "pactl set-sink-mute $(pactl list | rg 'Sink #' | sed 's/Sink #//') false ; pactl set-sink-volume $(pactl list | rg 'Sink #' | sed 's/Sink #//') +5%"
+bindsym --locked XF86AudioLowerVolume   exec sh -c "pactl set-sink-mute $(pactl list | rg 'Sink #' | sed 's/Sink #//') false ; pactl set-sink-volume $(pactl list | rg 'Sink #' | sed 's/Sink #//') -5%"
+bindsym --locked XF86AudioMute          exec pactl set-sink-mute $(pactl list | rg 'Sink #' | sed 's/Sink #//') toggle
+bindsym --locked XF86AudioPlay          exec mpc toggle
+bindsym --locked XF86AudioNext          exec mpc next
+bindsym --locked XF86AudioPrev          exec mpc prev
+
+bindsym --locked XF86MonBrightnessUp    exec light -A 10 && notify-send " Light" "Brightness: $(light)%" --hint="int:value:$(light)"
+bindsym --locked XF86MonBrightnessDown  exec light -U 10 && notify-send " Light" "Brightness: $(light)%" --hint="int:value:$(light)"
+
+bindsym --locked $mod+d                 exec sh -c "notify-send '  Do Not Disturb' 'Turning on Do Not Disturb Mode' && sleep 2 && makoctl set-mode do-not-disturb"
+bindsym --locked $mod+Shift+d           exec sh -c "makoctl set-mode default && notify-send '  Do Not Disturb' 'Do Not Disturb Mode disabled'"

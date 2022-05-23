@@ -1,0 +1,59 @@
+.res_box {
+	background-color: $background;
+	border-radius: 20px;
+	padding: 3rem;
+	margin: 1rem;
+	padding: 5px 10px 5px 10px;
+}
+
+.res_circle {
+	background-color: $background-alt;
+	border: 0px solid $foreground;
+	border-radius: 100%;
+	padding: 0px;
+}
+
+.res_circle_small {
+	background-color: $background;
+	border: 0px solid $foreground;
+	border-radius: 100%;
+	padding: 40px;
+	color: $foreground;
+	font-size: 30px;
+	font-family: 'icomoon\-feather';
+}
+
+.res_text {
+	background-color: $background;
+	border: 1px solid $background-alt;
+	border-radius: 20px;
+	font-size : 14px;
+	padding: 0px 8px 0px 8px;
+	margin: 0px 0px 0px 0px;
+	font-weight : bold;
+	color: $foreground;
+}
+
+.res_cpu {
+	color: $red;
+}
+
+.res_mem {
+	color: $foreground;
+}
+
+.res_disk {
+	color: $cyan;
+}
+
+.res_temp {
+	color: $green;
+}
+
+.res_net {
+	color: $yellow;
+}
+
+.res_bat {
+	color: $magenta;
+}

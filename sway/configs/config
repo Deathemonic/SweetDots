@@ -1,0 +1,49 @@
+# Settings
+
+# Style
+font 			            Jetbrains Mono 10px 
+default_border 		        pixel 	1
+titlebar_border_thickness 	1
+gaps 			            top	10
+gaps 			            bottom	0
+gaps 			            left	5
+gaps 			            right	5
+gaps 			            inner 	10
+
+# Decorations
+# class			            border	    background	text        indicator   child_border
+client.focused              #FFDEDE     #303030     #c6c6c6     #FFDEDE     #FFDEDE
+client.focused_inactive     #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
+client.unfocused            #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
+client.urgent               #80a0ff     #80a0ff     #080808     #80a0ff     #80a0ff
+
+# Rules
+for_window 	[app_id="ncmpcpp"] 	    floating 	    enable, resize set height 450 px, resize set width 850 px, move position 1020 	0
+for_window 	[app_id="cava"] 	    floating 	    enable, resize set height 450 px, resize set width 850 px, move position 0 	    525
+for_window 	[app_id="libera"] 	    floating 	    enable, resize set height 500 px, resize set width 900 px, move position 970 	0
+for_window 	[app_id="tilde"] 	    floating 	    enable, resize set height 500 px, resize set width 900 px, move position 0 	    475
+for_window 	[app_id="low-key"] 	    floating 	    enable, resize set height 400 px, resize set width 800 px, move position 220 	150
+for_window 	[app_id="veracrypt"] 	floating 	    enable
+for_window 	[app_id="python3"] 	    floating 	    enable
+for_window 	[app_id="mpv"]		    inhibit_idle	fullscreen
+for_window	[app_id="imv"]	        border		    pixel 1
+
+# Touchpad settings
+input "AlpsPS/2_ALPS_DualPoint_TouchPad" {
+	dwt enabled
+	tap enabled
+	natural_scroll enabled
+	middle_emulation enabled
+}
+
+# Wallpaper
+output  *   bg  $HOME/.config/sway/wallpapers/garden-house.png fill
+
+# Mouse Behavior
+focus_follows_mouse     yes
+
+# Idle
+exec swayidle -w \
+	timeout 600 'swaylock -f' \
+	timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -f'
