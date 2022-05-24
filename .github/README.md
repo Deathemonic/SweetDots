@@ -164,6 +164,10 @@ _**Click to expand**_
 
   [**andreasgrafen**](https://github.com/andreasgrafen) - Cascade
 	
+  <img src="https://styles.redditmedia.com/t5_66cn66/styles/profileIcon_gmw88qiucwr81.jpg?width=256&height=256&crop=256:256,smart&s=64760dab548d0051d7ef0b3ea159d6ea9f0dee4d" width="50"/>
+	
+  [**kmakise_**](https://www.reddit.com/user/kmakise_/) - For finding a performance bug
+	
   <img src="https://avatars.githubusercontent.com/u/93489351?s=200&v=4" width="50"/>
 	
   [**catppuccin**](https://github.com/catppuccin) - For the ports
