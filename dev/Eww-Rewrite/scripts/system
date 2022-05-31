@@ -1,0 +1,162 @@
+#!/bin/bash
+
+PREV_TOTAL=0
+PREV_IDLE=0
+cpuFile="/tmp/.cpu_usage"
+
+## Get CPU usage
+get_cpu() {
+	if [[ -f "${cpuFile}" ]]; then
+		fileCont=$(cat "${cpuFile}")
+		PREV_TOTAL=$(echo "${fileCont}" | head -n 1)
+		PREV_IDLE=$(echo "${fileCont}" | tail -n 1)
+	fi
+
+	CPU=(`cat /proc/stat | grep '^cpu '`) # Get the total CPU statistics.
+	unset CPU[0]                          # Discard the "cpu" prefix.
+	IDLE=${CPU[4]}                        # Get the idle CPU time.
+
+	# Calculate the total CPU time.
+	TOTAL=0
+
+	for VALUE in "${CPU[@]:0:4}"; do
+		let "TOTAL=$TOTAL+$VALUE"
+	done
+
+	if [[ "${PREV_TOTAL}" != "" ]] && [[ "${PREV_IDLE}" != "" ]]; then
+		# Calculate the CPU usage since we last checked.
+		let "DIFF_IDLE=$IDLE-$PREV_IDLE"
+		let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
+		let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
+		echo "${DIFF_USAGE}"
+	else
+		echo "?"
+	fi
+
+	# Remember the total and idle CPU times for the next check.
+	echo "${TOTAL}" > "${cpuFile}"
+	echo "${IDLE}" >> "${cpuFile}"
+}
+
+get_mem () {
+	printf "%.0f\n" $(free -m | grep Mem | awk '{print ($3/$2)*100}')
+}
+
+get_bat () {
+	bat="$(ls /sys/class/power_supply | grep BAT | head -n 1)"
+	cat /sys/class/power_supply/$bat/capacity
+}
+
+get_disk () {
+	df -h / | awk '{print $5}' | tail -n1 | sed 's/%//g'
+}
+
+get_temp() {
+    echo "$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))"
+}
+
+get_network () {
+    sleep=1
+
+    interface="$(iw dev | awk '$1=="Interface"{print $2}')"
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_first="$(echo $line | awk '{print $1}')"
+    transmitted_first="$(echo $line | awk '{print $9}')"
+
+    total=$(($receive_first+$transmitted_first))
+
+    sleep $sleep
+
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_second="$(echo $line | awk '{print $1}')"
+    transmitted_second="$(echo $line | awk '{print $9}')"
+
+    speed=$((($receive_second+$transmitted_second-$total)/$sleep))
+    down=$((($receive_second-$receive_first)/$sleep))
+    up=$((($transmitted_second-$transmitted_first)/$sleep))
+
+    printf "%1i\n" $(($down/1024)) ; # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+
+# Check
+check_mem () {
+    while IFS=":" read -r a b; do
+        case $a in
+        	"MemTotal") ((mem_used+=${b/kB})); mem_total="${b/kB}" ;;
+        	"Shmem") ((mem_used+=${b/kB}))  ;;
+        	"MemFree" | "Buffers" | "Cached" | "SReclaimable") mem_used="$((mem_used-=${b/kB}))"   ;;
+        esac
+	done < /proc/meminfo
+
+    echo "$((mem_used / 1024))kb / $((mem_total / 1024))kb"
+}
+
+check_disk () {
+    df -h / | tail -n -1 | awk '{ print $4 }'
+}
+
+check_temp () {
+    echo "$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
+}
+
+check_network_tooltip () {
+    sleep=1
+
+    interface="$(iw dev | awk '$1=="Interface"{print $2}')"
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_first="$(echo $line | awk '{print $1}')"
+    transmitted_first="$(echo $line | awk '{print $9}')"
+
+    total=$(($receive_first+$transmitted_first))
+
+    sleep $sleep
+
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_second="$(echo $line | awk '{print $1}')"
+    transmitted_second="$(echo $line | awk '{print $9}')"
+
+    speed=$((($receive_second+$transmitted_second-$total)/$sleep))
+    down=$((($receive_second-$receive_first)/$sleep))
+    up=$((($transmitted_second-$transmitted_first)/$sleep))
+
+    printf "%1i KB/s | %1i KB/s\n" $(($down/1024)) $(($up/1024)) ;  # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+check_network () {
+    sleep=1
+
+    interface="$(iw dev | awk '$1=="Interface"{print $2}')"
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_first="$(echo $line | awk '{print $1}')"
+    transmitted_first="$(echo $line | awk '{print $9}')"
+
+    total=$(($receive_first+$transmitted_first))
+
+    sleep $sleep
+
+    line="$(grep $interface /proc/net/dev | sed s/.*://)"
+    receive_second="$(echo $line | awk '{print $1}')"
+    transmitted_second="$(echo $line | awk '{print $9}')"
+
+    speed=$((($receive_second+$transmitted_second-$total)/$sleep))
+    down=$((($receive_second-$receive_first)/$sleep))
+    up=$((($transmitted_second-$transmitted_first)/$sleep))
+
+    printf "%1i KB/s\n" $(($down/1024)) ; # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+# Execute
+case $1 in
+    cpu)        get_cpu                 ;;
+    mem)        get_mem                 ;;
+    disk) 	    get_disk                ;;
+    temp)       get_temp                ;;
+    net) 	    get_network             ;;
+    bat) 	    get_bat                 ;;
+    checkmem) 	check_mem               ;;
+    checkdisk)  check_disk              ;;
+    checktemp)  check_temp              ;;
+    checknet) 	check_network           ;;
+    nettip) 	check_network_tooltip   ;;
+esac

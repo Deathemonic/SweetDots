@@ -1,0 +1,34 @@
+#!/bin/bash
+
+FORMAT="{{ title }} - {{ artist }}"
+PLAYERCTL_STATUS=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd status 2>/dev/null)
+EXIT_CODE=$?
+
+case $PLAYER in
+  *)
+  case $1 in 
+		next)			playerctl -p spotify,%any,firefox,chromium,brave,mpd next			    ;;
+		previous)		playerctl -p spotify,%any,firefox,chromium,brave,mpd previous		    ;;
+		toggle)			playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause		    ;;
+  esac
+esac
+
+if [ $EXIT_CODE -eq 0 ]; then
+    STATUS=$PLAYERCTL_STATUS
+else
+    STATUS="オフライン"
+fi
+
+if [ "$1" == "--status" ]; then
+    echo "$STATUS"
+else
+    if [ "$STATUS" = "Stopped" ]; then
+        echo "ランニング"
+    elif [ "$STATUS" = "Paused"  ]; then
+        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$FORMAT"
+    elif [ "$STATUS" = "オフライン"  ]; then
+        echo "$STATUS"
+    else
+        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$FORMAT"
+    fi
+fi

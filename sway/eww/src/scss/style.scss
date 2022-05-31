@@ -19,7 +19,9 @@
 }
 
 button:hover{
-	color: $blue;
+	background-color: $blue;
+	color: $background;
+	border-radius: 2px;
 }
 
 .line {

@@ -1,0 +1,36 @@
+.todo_box {
+	background-color: $background;
+	border-radius: 20px;
+	padding: 3rem;
+	margin: 1rem;
+	padding: 5px 10px 5px 10px;
+}
+
+.todo_circle {
+	background-color: $background-alt;
+	border: 0px solid $foreground;
+	border-radius: 100%;
+	padding: 0px;
+}
+
+.todo_circle_text {
+	background-color: $background;
+	border: 0px solid $foreground;
+	border-radius: 100%;
+	padding: 40px;
+	color: $foreground;
+	font-size: 20px;
+	font-family: 'Jetbrains Mono';
+	font-weight: bold;
+}
+
+.todo_text {
+	background-color: $background;
+	font-size : 10px;
+	font-weight : bold;
+	color: $foreground;
+}
+
+.todo_color {
+	color: $red;
+}

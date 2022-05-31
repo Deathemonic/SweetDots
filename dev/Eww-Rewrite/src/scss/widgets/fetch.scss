@@ -1,0 +1,19 @@
+.wm, .distro, .shell, .uptime {
+    font-weight: bold;
+}
+
+.wm {
+    color: $red;
+}
+
+.distro {
+    color: $green;
+}
+
+.shell {
+    color: $yellow;
+}
+
+.uptime {
+    color: $blue;
+}

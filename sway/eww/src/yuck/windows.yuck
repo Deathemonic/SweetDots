@@ -7,26 +7,13 @@
 (defwindow dashboard
   :monitor 0
   :geometry (geometry 
-                      :x "20"
+                      :x "0"
                       :y "0"
-                      :anchor "center left")
+                      :anchor "center center")
   :stacking "fg"
   :windowtype "dock"
   :wm-ignore false
-(dashboard)
-)
-
-;; Resources
-
-(defwindow sysbox
-  :monitor 0
-  :geometry (geometry 
-                      :x "-20"
-                      :y "80"
-                      :anchor "top right")
-  :stacking "fg"
-  :wm-ignore false
-(sysbox)
+  (dashboard)
 )
 
 ;; Calendar
@@ -41,7 +28,7 @@
                       :anchor "top right")
   :stacking "fg"
   :wm-ignore false
-(cal)
+  (cal)
 )
 
 ;; Lockscreen
@@ -54,5 +41,18 @@
                       :height "100%"
                       :anchor "center")
   :stacking "fg"
-(lockscreen)
+  (lockscreen)
+)
+
+(defwindow todo
+  :monitor 0
+  :geometry (geometry 
+                      :x "0px" 
+                      :y "0%" 
+                      :width "270px" 
+                      :height "60px"
+                      :anchor "top right")
+  :stacking "fg"
+  :wm-ignore false
+  (todo)
 )

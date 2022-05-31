@@ -1,0 +1,544 @@
+;; Profile
+
+(defwidget profile []
+  (box 
+    :orientation "v"
+    :space-evenly "false"
+    :class "window"
+
+    (box 
+      :orientation "h"
+      :space-evenly "false"
+
+      (box 
+        :class "profile-picture"
+      )
+    )
+
+    (box 
+      :orientation "v" 
+      :space-evenly "false"
+
+      (box 
+        :class "hostname" 
+        :valign "center" "@${host}"
+      )
+
+      (box 
+        :class "username" 
+        :halign "center" {name}
+      )
+    )
+  )
+)
+
+;; Clock
+
+(defwidget clock []
+  (box
+    :class "window"
+    :orientation "v"
+    :space-evenly "false"
+    :valign "center"
+    :halign "center"
+  
+    (box
+      :orientation "h"
+      :class "date"
+      :space-evenly "false"
+
+      (label
+        :class "hour"
+        :text "${hour}"
+      )
+
+      (label
+        :class "separator-clock"
+        :text ":"
+      )
+
+      (label
+        :class "min"
+        :text "${minute}"
+      )
+
+      (label
+        :class "meridiem"
+        :text "${meridiem}"
+      )
+    )
+
+    (box
+      :orientation "h"
+      :space-evenly "false"
+      :halign "center"
+
+      (label
+        :class "day"
+        :text "${date}"
+      )
+    )
+  )
+)
+
+;; Music
+
+(defwidget music []
+  (box
+    :orientation "h" 
+    :space-evenly "false" 
+    :class "window"
+
+    (box 
+      :class "album" 
+      :style "background-image: url('${art}');"
+    )
+
+    (box 
+      :orientation "v" 
+      :space-evenly "false" 
+      :valign "center" 
+      :halign "center" 
+      :spacing 30 
+      :class "music-box"
+
+      (box
+        :orientation "v" 
+        :space-evenly "false" 
+        :spacing 10
+
+        (label
+          :limit-width 20
+          :class "title"
+          :text "${title}"
+        )
+
+        (label
+          :class "artist"
+          :text "${artist}"
+        )
+      )
+
+      (box 
+        :class "buttons" 
+        :orientation "h" 
+        :halign "center" 
+        :space-evenly "false" 
+        :spacing 20
+
+        (button 
+          :onclick "scripts/music previous" ""
+        )
+
+        (button 
+          :onclick "scripts/music toggle" 
+          :class "status" "${icon}"
+        )
+
+        (button 
+          :onclick "scripts/music next" ""
+        )
+      )
+    )
+  )
+)
+
+;; Quotes
+
+(defwidget quotes []
+  (box 	
+    :class "window"
+    :orientation "h"
+    :halign "center"
+    :spacing 0
+    :space-evenly "false"
+    :height 150
+
+    (box 	
+      :orientation "v"
+      :spacing 0
+      :space-evenly "false"
+
+      (label 	
+        :class "quote-text"
+        :halign "center"
+        :wrap "true"
+        :text "\"${quotetext}\""
+      )
+
+      (label 	
+        :class "quote-author"
+        :halign "center"
+        :wrap "true"
+        :text quoteauthor
+      )
+    )
+  )
+)
+
+;; Weather
+
+(defwidget weather []
+  (box 	
+    :class "window"
+    :orientation "h"
+    :space-evenly "false"
+    :spacing 30 
+
+    (box 	
+      :orientation "v"
+      :space-evenly "false"
+      :valign "center" 
+      :halign "center"
+
+      (label
+        :class "weather-day"
+        :text "${day}"
+      )
+
+      (box 	
+        :class "weather-icon"
+        :style "color: ${weatherhex}" {weathericon}
+      )
+    )
+
+    (box 	
+      :orientation "v"
+      :space-evenly "false"
+      :valign "center" 
+      :halign "center"
+
+      (box 	
+        :orientation "h"
+        :class "weather-status"
+        :halign "center"
+
+        (label 	
+          :wrap "true"
+          :limit-width 15
+          :text "${weatherstat}"
+        )
+      )
+      (box
+        :orientation "h"
+        :halign "center"
+        :halign "center" 
+
+        (label 	
+          :class "temperature-region"
+          :text "${temperature} in ${weathercity}, ${weathercountry}"
+        )
+      )
+    )
+  )
+)
+
+;; Todo
+
+(defwidget todo[]
+  (box
+    :class "window"
+
+    (box
+      :orientation "v"
+      :valign "center"
+      :halign "center"
+      :space-evenly "false"
+
+      (box
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+
+        (box
+          :orientation "h"
+          :valign "center"
+          :halign "center"
+
+          (label
+            :class "todo-raw"
+            :text "${tododone} / ${todoundone}"
+          )
+        )
+      )
+    )
+
+    (box
+      :orientation "h"
+      :halign "center"
+      :space-evenly "false"
+
+      (box
+        :orientation "v"
+        :valign "center"
+        :halign "center"
+
+        (label
+          :class "todo-text"
+          :halign "center"
+          :wrap "true"
+          :text "${todocheck}"
+        )
+      )
+    )
+  )
+)
+
+;; Resources
+
+(defwidget resources []
+  (box 
+    :class "window" 
+    :vexpand "false" 
+    :hexpand "false"
+    
+    (box 
+      :orientation "v" 
+      :spacing 25 
+      :halign "center" 
+      :valign "center" 
+      :space-evenly "false" 
+      :vexpand "false" 
+      :hexpand "false"
+
+      (box 
+        :class "cpu-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-cpu" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max 100 
+          :value cpuusage 
+          :text 
+          :active "false"
+        )
+
+        (label
+          :class "text-cpu" 
+          :text "${cpuusage}%"
+        )
+      )
+
+      (box 
+        :class "memory-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-memory" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max 100 
+          :value memusage 
+          :active "false"
+        )
+
+        (label 
+          :class "text-memory" 
+          :text "${memusage}%"
+        )
+      )
+
+      (box 
+        :class "disk-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-disk" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max 100 
+          :value diskusage 
+          :active "false"
+        )
+
+        (label 
+          :class "text-disk" 
+          :text "${disktext}"
+        )
+      )
+
+      (box 
+        :class "battery-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-battery" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max 100 
+          :value batterycapacity 
+          :active "false"
+        )
+
+        (label 
+          :class "text-battery" 
+          :text "${batterycapacity}%"
+        )
+      )
+
+      (box 
+        :class "temperature-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-temperature" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max 150 
+          :value tempusage 
+          :active "false"
+        )
+
+        (label 
+          :class "text-temperature" 
+          :text "${temptext}"
+        )
+      )
+
+      (box 
+        :class "packages-bar" 
+        :orientation "h" 
+        :spacing 20 
+        :space-evenly "false" 
+        :vexpand "false" 
+        :hexpand "false"
+
+        (label 
+          :class "icon-packages" 
+          :text ""
+        )
+
+        (scale 
+          :min 0 
+          :max "${pacmantotal}"
+          :value pacmanupdates
+          :active "false"
+        )
+
+        (label
+          :class "text-packages" 
+          :text "${pacmanupdates}"
+        )
+      )
+    )
+  )
+)
+
+;; Fetch
+
+(defwidget fetch []
+  (box 
+    :orientation "v" 
+    :class "window" 
+    :halign "center" 
+    :valign "center" 
+    :width 200
+    
+    (box  
+      :orientation "v" 
+      :spacing 10 
+      :halign " center"
+
+      (label 
+        :class "distro" 
+        :orientation "v" 
+        :halign "start"
+        :text " : ${distro}")
+
+      (label 
+        :class "wm" 
+        :orientation "v" 
+        :halign "start"
+        :text " : ${windowmanager}"
+      )
+
+      (label 
+        :class "shell" 
+        :orientation "v" 
+        :halign "start"
+        :text " : ${shell}"
+      )
+
+      (label 
+        :class "uptime" 
+        :orientation "v" 
+        :halign "start"
+        :text " : ${uptime}"
+      )
+    )
+  )
+)
+
+;; Dashboard
+
+(defwidget dashboard []
+  (box 
+    :orientation "h"
+    :class "dashboard"
+    :space-evenly "false"
+
+    (box 
+      :orientation "v"
+      :space-evenly "false"
+      (profile)
+      (quotes)
+    )
+
+    (box :orientation "v" 
+      :space-evenly "false"
+      (todo)
+      (weather)
+
+      (box
+        :orientation "h"
+        :space-evenly "false"
+        (clock)
+        (fetch)
+      )
+    )
+
+    (box 
+      :orientation "v" 
+      :space-evenly "false"
+      (music)
+      (resources)
+    )
+  )
+)

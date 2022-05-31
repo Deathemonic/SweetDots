@@ -1,0 +1,25 @@
+.weather-day {
+	font-weight: bold;
+	font-size: 1.6em;
+	color: $foreground;
+}
+
+.temperature-region {
+	font-size: 1em;
+	color: $foreground;
+}
+
+.weather-icon {
+	font-size: 4.2em;
+}
+
+.temperature {
+	font-size: 1em;
+	color: $foreground
+}
+
+.weather-status {
+	font-style: italic;
+	font-size: 1em;
+	color: $blue
+}

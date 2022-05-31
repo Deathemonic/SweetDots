@@ -1,0 +1,75 @@
+#!/bin/bash
+
+wofi_command="wofi -c $HOME/.config/sway/wofi/screenshot -s $HOME/.config/sway/wofi/style.css"
+
+time=`date +%Y-%m-%d-%I-%M-%S`
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+dir="`xdg-user-dir PICTURES`/Screenshots"
+file="Screenshot_${time}_${geometry}.png"
+icon1="$HOME/.config/berry/dunst/icons/image.svg"
+icon2="$HOME/.config/berry/dunst/icons/clock.svg"
+
+screen=""
+area=""
+window=""
+infive="5"
+inten="10"
+
+notify_view () {
+	dunstify -u low --replace=699 -i $icon1 "Copied to clipboard."
+	viewnior ${dir}/"$file"
+	if [[ -e "$dir/$file" ]]; then
+		dunstify -u low --replace=699 -i $icon1 "Screenshot Saved."
+	else
+		dunstify -u low --replace=699 -i $icon1 "Screenshot Deleted."
+	fi
+}
+
+countdown () {
+	for sec in `seq $1 -1 1`; do
+		dunstify -t 1000 --replace=699 -i $icon2 "Taking shot in : $sec"
+		sleep 1
+	done
+}
+
+shotnow () {
+	cd ${dir} && grim $dir/$file | wl-copy
+	notify_view
+}
+
+shot5 () {
+	countdown '3'
+	sleep 1 && cd ${dir} && grim $dir/$file | wl-copy
+	notify_view
+}
+
+shot10 () {
+	countdown '10'
+	sleep 1 && cd ${dir} && grim $dir/$file | wl-copy
+	notify_view
+}
+
+shotwin () {
+  cd ${dir} && grim $dir/$file | wl-copy
+	notify_view
+}
+
+shotarea () {
+  cd ${dir} && grim -g "$(slurp)" $dir/$file | wl-copy
+	notify_view
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+options="$screen\n$area\n$window\n$infive\n$inten"
+
+chosen="$(echo -e "$options" | $wofi_command -p 'Take Screenshot' --dmenu -l 3)"
+case $chosen in
+    $screen)	shotnow		;;
+    $area)		shotarea	;;
+    $window)	shotwin		;;
+    $infive)	shot5		;;
+    $inten)		shot10		;;
+esac

@@ -1,9 +1,17 @@
 ;; Profile
 
-(defpoll host :interval "5m"  
+(defpoll host :interval "1h"  
     "hostname")
-(defpoll name :interval "5m"
+(defpoll name :interval "1h"
     "whoami")
+
+;; Todo
+(defpoll todocheck :interval "1s"
+    "todo")
+(defpoll tododone :interval "1s"
+    "todo raw done | wc -l")
+(defpoll todoundone :interval "1s"
+    "todo raw todo | wc -l")
 
 ;; Resources
 

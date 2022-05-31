@@ -1,16 +1,16 @@
 [custom]
 font=Jetbrains Mono 12
 dismiss-button=No
-background=080808
-border=303030
-border-bottom=303030
-button-background=303030
-text=c6c6c6
+background=212529
+border=212529
+border-bottom=212529
+button-background=212529
+text=FFDEDE
 border-bottom-size=2
 message-padding=5
 details-border-size=2
 button-border-size=0
-button-gap=5
-button-dismiss-gap=5
+button-gap=10
+button-dismiss-gap=0
 button-margin-right=5
 button-padding=5

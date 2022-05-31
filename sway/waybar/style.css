@@ -21,7 +21,7 @@ tooltip {
 }
 
 #workspaces button {
-  padding: 0px 10px;
+  padding: 0px 0px;
   color: #FFDEDE;
 }
 
@@ -56,15 +56,25 @@ tooltip {
 #disk,
 #temperature,
 #backlight,
+#bluetooth,
 #network,
 #pulseaudio,
-#custom-media,
+#custom-status,
+#custom-playpause,
 #tray,
 #mode,
 #idle_inhibitor,
 #mpd {
   background-color: #212529;
   color: #FFBEBE;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#custom-prev,
+#custom-next {
+  background-color: #212529;
+  color: #DEFBFF;
   padding: 10px 10px;
   margin: 10px 0px;
 }

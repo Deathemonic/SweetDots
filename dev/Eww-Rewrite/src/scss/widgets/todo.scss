@@ -1,0 +1,21 @@
+.todo {
+	margin: 1rem;
+}
+
+.todo-raw {
+	padding: 40px;
+	color: $foreground;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.todo-text {
+	background-color: $background;
+	font-size : 10px;
+	font-weight : bold;
+	color: $foreground;
+}
+
+.todo-color {
+	color: $red;
+}

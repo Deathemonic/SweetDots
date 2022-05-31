@@ -1,22 +1,22 @@
 window {
 margin: 0px;
-border: 2px solid #303030;
-border-radius: 25px;
-background-color: #080808;
-font-family: monospace;
-font-size: 16px;
+border: 2px solid #FFDEDE;
+border-radius: 20px;
+background-color: #212529;
+font-family: 'icomoon\-feather' ,'Jetbrains Mono';
+font-size: 12px;
 }
 
 #input {
 margin: 15px;
-border: 1px solid #303030;
-border-radius: 25px;
-color: #c6c6c6;
-background-color: #303030;
+border: 1px solid #212529;
+border-radius: 20px;
+color: #FFDEDE;
+background-color: #212529;
 }
 
 #input image {
-    color: #303030;
+    color: #212529;
 }
 
 #inner-box {
@@ -24,15 +24,15 @@ margin: 5px;
 border: none;
 padding-left: 10px;
 padding-right: 10px;
-border-radius: 25px;
-background-color: #080808;
+border-radius: 20px;
+background-color: #212529;
 }
 
 #outer-box {
 margin: 5px;
 border: none;
-background-color: #080808;
-border-radius: 25px;
+background-color: #212529;
+border-radius: 20px;
 }
 
 #scroll {
@@ -43,17 +43,17 @@ border: none;
 #text {
 margin: 5px;
 border: none;
-color: #c6c6c6;
+color: #FFDEDE;
 } 
 
 #entry:selected {
-    background-color: #80a0ff;
+    background-color: #FFDEDE;
     font-weight: normal;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
 #text:selected {
-    background-color: #80a0ff;
-    color: #080808;
+    background-color: #FFDEDE;
+    color: #212529;
     font-weight: normal;
 }

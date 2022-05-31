@@ -1,0 +1,131 @@
+.icon-cpu, 
+.icon-memory, 
+.icon-disk,
+.icon-battery,
+.icon-temperature,
+.icon-packages {
+  font-size: 20px;
+}
+
+.icon-cpu {
+  color: $red;
+}
+
+.icon-memory {
+  color: $blue;
+}
+
+.icon-disk {
+  color: $magenta;
+}
+
+.icon-battery {
+  color: $green;
+}
+
+.icon-temperature {
+  color: $yellow;
+}
+
+.icon-packages {
+  color: $foreground;
+}
+
+.text-cpu {
+  color: $red;
+  font-weight: bold;
+}
+
+.text-memory {
+  color: $blue;
+  font-weight: bold;
+}
+
+.text-disk {
+  color: $magenta;
+  font-weight: bold;
+}
+
+.text-battery {
+  color: $green;
+  font-weight: bold;
+}
+
+.text-temperature {
+  color: $yellow;
+  font-weight: bold;
+}
+
+.text-packages {
+  color: $foreground;
+  font-weight: bold;
+}
+
+.cpu-bar, 
+.mem-bar, 
+.disk-bar,
+.battery-bar,
+.temperature-bar,
+.packages-bar,
+scale trough {
+    all: unset;
+    background-color: $background-alt;
+    border-radius: 16px;
+    min-height: 5px;
+    min-width: 100px;
+}
+
+.cpu-bar, 
+.mem-bar, 
+.disk-bar,
+.battery-bar,
+.temperature-bar,
+.packages-bar,
+scale trough highlight {
+    all: unset;
+    border-radius: 16px;
+}
+
+.cpu-bar scale trough highlight {
+    background-color: $red;
+}
+
+.memory-bar scale trough highlight {
+    background-color: $blue
+}
+
+.disk-bar scale trough highlight {
+    background-color: $magenta;
+}
+
+.battery-bar scale trough highlight {
+	background-color: $green;
+}
+
+.temperature-bar scale trough highlight {
+	background-color: $yellow;
+}
+
+.packages-bar scale trough highlight {
+	background-color: $foreground;
+}
+
+.memory {
+	color: $foreground;
+}
+
+.disk {
+	color: $cyan;
+}
+
+.temperature {
+	color: $green;
+}
+
+.network {
+	color: $yellow;
+}
+
+.battery {
+	color: $cyan
+}
