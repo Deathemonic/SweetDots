@@ -1,0 +1,10 @@
+show=drun
+width=1000
+height=660
+always_parse_args=true
+show_all=true
+print_command=true
+layer=overlay
+insensitive=true
+prompt=Search...
+content_halign=center

@@ -1,0 +1,32 @@
+font=Jetbrains Mono Medium Nerd Font 10
+
+anchor=top-right
+layer=top
+markup=1
+
+background-color=#212529
+text-color=#FFBEBE
+
+width=300
+height=80
+
+margin=0,30,25
+padding=15,10,15
+
+max-icon-size=48
+icon-location=left
+
+border-size=2
+border-color=#FFBEBE
+border-radius=20
+
+progress-color=over #FFBEBE
+
+default-timeout=10000
+group-by=summary
+max-visible=1
+
+text-alignment=center
+
+[mode=do-not-disturb]
+invisible=1
