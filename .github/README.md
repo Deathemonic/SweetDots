@@ -39,7 +39,7 @@ This started out a continuation of ***"Cat-Dots"*** but instead using bspwm as t
 Rather than using popular color scheme I decided to create my own, I'm not great at making a proper color scheme but this color scheme purpose is to match with the rice theme.
 
 ### 📚 Wiki
-Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), iit provides extra information, some documentation on how setting it up, and a troubleshoot page
+Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), it provides extra information, some documentation on how setting it up, and a troubleshoot page
 
 ### 📦 Install
 It's really easy, all you have to do is copy and paste this command below in your Terminal
@@ -163,6 +163,10 @@ _**Click to expand**_
   <img src="https://avatars.githubusercontent.com/u/35840154?v=4" width="50"/>
 
   [**andreasgrafen**](https://github.com/andreasgrafen) - Cascade
+	
+  <img src="https://avatars.githubusercontent.com/u/104138291?v=4" width="50"/>	
+	
+  [**Jxhan11**](https://github.com/Jxhan11) - Ocean Startpage
 	
   <img src="https://styles.redditmedia.com/t5_66cn66/styles/profileIcon_gmw88qiucwr81.jpg?width=256&height=256&crop=256:256,smart&s=64760dab548d0051d7ef0b3ea159d6ea9f0dee4d" width="50"/>
 	
