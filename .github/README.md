@@ -9,6 +9,8 @@
 
 <p align="center">A pastel themed rice 🍚</p>
 
+<p align="left">Note: A rewrite of this repo will be coming soon</p>
+
 <h6 align="center">
   <a href="https://ko-fi.com/Deathemonic">Buy me a Coffee</a>
   ·
