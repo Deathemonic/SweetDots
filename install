@@ -61,7 +61,7 @@ case $install in
             git clone https://aur.archlinux.org/paru.git
             cd paru
             makepkg -si
-            paru -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git
+            paru -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer
         esac
 
         case $helper in
@@ -70,7 +70,7 @@ case $install in
             git clone https://aur.archlinux.org/yay.git
             cd yay
             makepkg -si
-            yay -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git
+            yay -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer
         esac
 
     esac
