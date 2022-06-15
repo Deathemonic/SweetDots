@@ -14,6 +14,7 @@ berry="$HOME/.config/berry"
 rice="$HOME/.dotfiles/SweetDots"
 dotfiles="$HOME/.dotfiles"
 config="$HOME/.config"
+packages="berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer"
 
 clear
 printf "${blue}01010011 01110111 01100101 01100101 01110100\n"
@@ -56,21 +57,28 @@ case $install in
         read -p "[-] (P)paru | (Y)yay : " helper
 
         case $helper in
-            P*|p*)
-            cd $dots
-            git clone https://aur.archlinux.org/paru.git
-            cd paru
-            makepkg -si
-            paru -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer
-        esac
-
-        case $helper in
-            Y*|y*) 
-            cd $dots
-            git clone https://aur.archlinux.org/yay.git
-            cd yay
-            makepkg -si
-            yay -S berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer
+            P|p|Paru|paru)
+                if [[ -f /usr/bin/yay ]]; then
+                    paru -S $packages
+                else
+                    cd $dots
+                    git clone https://aur.archlinux.org/paru.git
+                    cd paru
+                    makepkg -si
+                    paru -S $packages
+                fi
+            ;;
+            Y|y|Yay|yay)
+                if [[ -f /usr/bin/yay ]]; then
+                    yay -S $packages
+                else
+                    cd $dots
+                    git clone https://aur.archlinux.org/yay.git
+                    cd yay
+                    makepkg -si
+                    yay -S $packages
+                fi
+            ;;
         esac
 
     esac
