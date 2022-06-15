@@ -58,7 +58,7 @@ case $install in
 
         case $helper in
             P|p|Paru|paru)
-                if [[ -f /usr/bin/yay ]]; then
+                if [[ -f /usr/bin/paru ]]; then
                     paru -S $packages
                 else
                     cd $dots
