@@ -1,0 +1,109 @@
+#!/bin/bash
+
+PREV_TOTAL=0
+PREV_IDLE=0
+cpuFile="/tmp/.cpu_usage"
+
+get_cpu() {
+	if [[ -f "${cpuFile}" ]]; then
+		fileCont=$(cat "${cpuFile}")
+		PREV_TOTAL=$(echo "${fileCont}" | head -n 1)
+		PREV_IDLE=$(echo "${fileCont}" | tail -n 1)
+	fi
+
+	CPU=(`cat /proc/stat | grep '^cpu '`)
+	unset CPU[0]
+	IDLE=${CPU[4]}
+
+	TOTAL=0
+
+	for VALUE in "${CPU[@]:0:4}"; do
+		let "TOTAL=$TOTAL+$VALUE"
+	done
+
+	if [[ "${PREV_TOTAL}" != "" ]] && [[ "${PREV_IDLE}" != "" ]]; then
+		let "DIFF_IDLE=$IDLE-$PREV_IDLE"
+		let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
+		let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
+		echo "${DIFF_USAGE}"
+	else
+		echo "?"
+	fi
+
+	echo "${TOTAL}" > "${cpuFile}"
+	echo "${IDLE}" >> "${cpuFile}"
+}
+
+get_mem() {
+	printf "%.0f\n" $(free -m | grep Mem | awk '{print ($3/$2)*100}')
+}
+
+get_bat(){
+	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
+	cat /sys/class/power_supply/${BAT}/capacity
+}
+
+get_bright(){
+	CARD=`ls /sys/class/backlight | head -n 1`
+	brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'
+}
+
+get_vol(){
+	amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'
+}
+
+get_disk() {
+	df -h / | awk '{print $5}' | tail -n1 | sed 's/%//g'
+}
+
+get_temp() {
+  IFS=')' read -ra core_temp_arr <<< $(sensors | grep '^Core\s[[:digit:]]\+:') #echo "${core_temp_arr[0]}"
+
+  total_cpu_temp=0
+  index=0
+  for i in "${core_temp_arr[@]}"; do :
+    temp=$(echo $i | sed -n 's/°C.*//; s/.*[+-]//; p; q')
+    let index++
+    total_cpu_temp=$(echo "$total_cpu_temp + $temp" | bc)
+  done
+  avg_cpu_temp=$(echo "scale=2; $total_cpu_temp / $index" | bc)
+
+  temp_status="$avg_cpu_temp"
+  echo $temp_status
+
+  exit 0
+}
+
+get_network(){
+  SLP=1
+  INTERFACE="$(iw dev | awk '$1=="Interface"{print $2}')"
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED1=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED1=`echo $LINE | awk '{print $9}'`
+  TOTAL=$(($RECEIVED1+$TRANSMITTED1))
+  LINE=`grep $INTERFACE /proc/net/dev | sed s/.*://`;
+  RECEIVED2=`echo $LINE | awk '{print $1}'`
+  TRANSMITTED2=`echo $LINE | awk '{print $9}'`
+  SPEED=$((($RECEIVED2+$TRANSMITTED2-$TOTAL)/$SLP))
+  INSPEED=$((($RECEIVED2-$RECEIVED1)/$SLP))
+  OUTSPEED=$((($TRANSMITTED2-$TRANSMITTED1)/$SLP))
+  printf "%1i\n" $(($INSPEED/1024)) ; # Remove one "/1024" to change it to kilobyte and Add one "/1024" to change it to megabyte
+}
+
+if [[ "$1" == "--cpu" ]]; then
+  get_cpu
+elif [[ "$1" == "--mem" ]]; then
+  get_mem
+elif [[ "$1" == "--disk" ]]; then
+  get_disk
+elif [[ "$1" == "--temp" ]]; then
+  get_temp
+elif [[ "$1" == "--net" ]]; then
+  get_network
+elif [[ "$1" == "--bat" ]]; then
+  get_bat
+elif [[ "$1" == "--bri" ]]; then
+  get_bright
+elif [[ "$1" == "--vol" ]]; then
+  get_vol
+fi

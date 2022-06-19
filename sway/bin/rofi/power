@@ -1,0 +1,64 @@
+#!/bin/bash
+
+rofi_command="rofi -theme $HOME/.config/berry/rofi/power.rasi"
+
+uptime=$(uptime -p | sed -e 's/up //g')
+
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+_msg="Options  -  yes / y / no / n"
+
+chosen="$(echo -e "$options" | $rofi_command -p "UP - $uptime" -dmenu -selected-row 2)"
+case $chosen in
+    $shutdown)
+		ans=$($HOME/.config/berry/bin/rofi/confirm &)
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+			systemctl poweroff
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+			exit
+        else
+			rofi -theme $HOME/.config/berry/rofi/askpass.rasi -e "$_msg"
+        fi
+        ;;
+    $reboot)
+		ans=$($HOME/.config/berry/bin/rofi/confirm &)
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+			systemctl reboot
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+			exit
+        else
+			rofi -theme $HOME/.config/berry/rofi/askpass.rasi -e "$_msg"
+        fi
+        ;;
+    $lock)
+        $HOME/.config/berry/bin/eww/lock
+        ;;
+    $suspend)
+		ans=$($HOME/.config/berry/bin/rofi/confirm &)
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+			mpc -q pause
+			amixer set Master mute
+			systemctl suspend
+			$HOME/.config/berry/bin/eww/lock
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+			exit
+        else
+			rofi -theme $HOME/.config/berry/rofi/askpass.rasi -e "$_msg"
+        fi
+        ;;
+    $logout)
+		ans=$($HOME/.config/berry/bin/rofi/confirm &)
+		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
+			berryc quit
+		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
+			exit
+        else
+			rofi -theme $HOME/.config/berry/rofi/askpass.rasi -e "$_msg"
+        fi
+        ;;
+esac

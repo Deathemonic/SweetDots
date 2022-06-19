@@ -1,0 +1,142 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "icomoon\-feather", "Jetbrains Mono", "Sarasa Gothic J";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: #FFDEDE;
+}
+
+tooltip {
+  background: #212529;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFDEDE;
+}
+
+#workspaces button {
+  padding: 5px 10px 5px 10px;
+  color: #FFDEDE;
+}
+
+#workspaces button.focused {
+  color: #212529;
+  background-color: #FFDEDE;
+  border-radius: 15px;
+}
+
+#workspaces button.visible {
+  color: #212529;
+  background-color: #DEFBFF;
+  border-radius: 15px;
+}
+
+#workspaces button.urgent {
+  color: #212529;
+  background-color: #DEFBFF;
+  border-radius: 15px;
+}
+
+#workspaces button:hover {
+  background-color: #FFDEDE;
+  color: #212529;
+  border-radius: 15px;
+}
+
+#window,
+#workspaces {
+  background-color: #212529;
+  border-radius: 50px 0px 0px 50px;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#clock{
+  background-color: #212529;
+  color: #E4FFDE;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#network{ 
+  background-color: #212529;
+  color: #E7DEFF;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#bluetooth{
+  background-color: #212529;
+  color: #DEFBFF;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#backlight{
+  background-color: #212529;
+  color: #FFFBDE;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#pulseaudio,
+#custom-status,
+#custom-playpause {
+  background-color: #212529;
+  color: #FFBEBE;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#tray {
+  background-color: #212529;
+  border: solid 2px #FFBEBE;
+  border-radius: 10%;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#tray menu {
+  background-color: #212529;
+  border: solid 2px #FFBEBE;
+  border-radius: 20px;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#tray > .needs-attention {
+  background-color: #FF8E8E;
+  border-radius: 10%;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#custom-prev,
+#custom-next {
+  background-color: #212529;
+  color: #DEFBFF;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#custom-power {
+  color: #FF8E8E;
+  background-color: #212529;
+  border-radius: 0px 50px 50px 0px;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}
+
+#pulseaudio.muted,
+#pulseaudio.bluetooth {
+  background-color: #212529;
+  color: #DEFBFF;
+  padding: 10px 10px;
+  margin: 10px 0px;
+}

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+files="$HOME/.config/sway/waybar/config $HOME/.config/sway/waybar/tray $HOME/.config/sway/waybar/style.css"
+config="$HOME/.config/sway/waybar/config"
+tray="$HOME/.config/sway/waybar/tray"
+style="$HOME/.config/sway/waybar/style.css"
+
+trap "killall waybar" EXIT
+
+while true; do
+    waybar -c $config -s $style &
+    waybar -c $tray -s $style &
+    inotifywait -e create,modify $files
+    killall waybar
+done

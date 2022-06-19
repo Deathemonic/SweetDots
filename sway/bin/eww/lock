@@ -1,0 +1,47 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/lock.eww"
+EWW="$HOME/.config/sway/bin/eww/eww"
+CONFIG="$HOME/.config/sway/eww"
+
+# Edit this accoding to your resolution (Recommend Edit: Line 45 Collum 32)
+lock() {
+    sleep 0.5
+    swaylock --clock \ 
+	--time-str="%I:%M %p" \
+	--time-pos="w/2+0:h/2+0" \
+    --time-color=E4FFDE \
+    --time-size=14 \
+	--time-font="Jetbrains Mono" \
+	--indicator-radius 100 \
+	--indicator-thickness 7 \
+	--ring-color 455a64 \
+	--key-hl-color be5046 \
+	--text-color ffc107 \
+	--line-color 00000000 \
+	--inside-color 00000088 \
+	--separator-color 00000000 \
+	--fade-in 0.1 \
+	--effect-vignette 0.5:0.5 \
+	--effect-compose "0,1.5%;-1x10%;$HOME/.config/sway/lock.svg" \
+	"$@"
+}
+
+# Open Widgets
+run() {
+    ${EWW} -c ${CONFIG} open-many lockscreen
+    lock
+}
+
+# Close Rofi and Run Widgets
+if [[ ! -f "$FILE" ]]; then
+    if pgrep -x rofi; then
+        killall rofi
+    fi
+
+    touch "$FILE"
+    run
+fi
+
+rm "$FILE"
+${EWW} -c ${CONFIG} close lockscreen
