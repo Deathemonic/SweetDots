@@ -108,6 +108,11 @@
     :interval "24h"
     "lsb_release -si"
 )
+(defpoll
+    kernel
+    :interval "24h"
+    "uname -r"
+)
 (defpoll 
     windowmanager
     :interval "12h" 
@@ -118,28 +123,15 @@
     :interval "10m" 
     "echo $SHELL | awk -F'/' '{print $NF}'"
 )
+(defpoll
+    resolution
+    :interval "1m"
+    "xdpyinfo | awk '/dimensions/ {print $2}'"
+)
 (defpoll 
     uptime 
     :interval "1m" 
     "uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'"
-)
-
-;; Calendar
-
-(defpoll
-    calendarday
-    :interval "10h"
-    "date '+%d'"
-)
-(defpoll
-    calendarmonth
-    :interval "10h"
-    "scripts/calendar"
-)
-(defpoll
-    calendaryear
-    :interval "10h"
-    "date '+%Y'"
 )
 
 ;; Time (12H)
@@ -167,7 +159,7 @@
 (defpoll
     date
     :interval "1s" 
-    "date +%D"
+    "date '+%A, %b %y'"
 )
 	
 ;; Music

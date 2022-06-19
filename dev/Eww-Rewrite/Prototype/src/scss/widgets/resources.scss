@@ -31,34 +31,37 @@
   color: $foreground;
 }
 
+.text-cpu,
+.text-battery,
+.text-memory,
+.text-disk,
+.text-packages,
+.text-temperature {
+  font-weight: bold;
+}
+
 .text-cpu {
   color: $red;
-  font-weight: bold;
 }
 
 .text-memory {
   color: $blue;
-  font-weight: bold;
 }
 
 .text-disk {
   color: $magenta;
-  font-weight: bold;
 }
 
 .text-battery {
   color: $green;
-  font-weight: bold;
 }
 
 .text-temperature {
   color: $yellow;
-  font-weight: bold;
 }
 
 .text-packages {
   color: $foreground;
-  font-weight: bold;
 }
 
 .cpu-bar, 
@@ -68,11 +71,11 @@
 .temperature-bar,
 .packages-bar,
 scale trough {
-    all: unset;
-    background-color: $background-alt;
-    border-radius: 16px;
-    min-height: 5px;
-    min-width: 100px;
+  all: unset;
+  background-color: $background-alt;
+  border-radius: 16px;
+  min-height: 5px;
+  min-width: 100px;
 }
 
 .cpu-bar, 
@@ -82,20 +85,20 @@ scale trough {
 .temperature-bar,
 .packages-bar,
 scale trough highlight {
-    all: unset;
-    border-radius: 16px;
+  all: unset;
+  border-radius: 16px;
 }
 
 .cpu-bar scale trough highlight {
-    background-color: $red;
+  background-color: $red;
 }
 
 .memory-bar scale trough highlight {
-    background-color: $blue
+  background-color: $blue
 }
 
 .disk-bar scale trough highlight {
-    background-color: $magenta;
+  background-color: $magenta;
 }
 
 .battery-bar scale trough highlight {
@@ -108,24 +111,4 @@ scale trough highlight {
 
 .packages-bar scale trough highlight {
 	background-color: $foreground;
-}
-
-.memory {
-	color: $foreground;
-}
-
-.disk {
-	color: $cyan;
-}
-
-.temperature {
-	color: $green;
-}
-
-.network {
-	color: $yellow;
-}
-
-.battery {
-	color: $cyan
 }

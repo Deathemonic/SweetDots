@@ -1,0 +1,6 @@
+;; Cards
+
+(deflisten 
+    sideboardcards 
+    "scripts/logger.zsh subscribe"
+)

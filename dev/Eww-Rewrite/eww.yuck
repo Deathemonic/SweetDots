@@ -1,3 +1,17 @@
-(include "./src/yuck/window.yuck")
-(include "./src/yuck/widgets.yuck")
-(include "./src/yuck/variables.yuck")
+;; Dashboard
+
+(include "./src/yuck/widgets/dashboard.yuck")
+(include "./src/yuck/variables/dashboard.yuck")
+(include "./src/yuck/windows/dashboard.yuck")
+
+;; Lockscreen
+
+(include "./src/yuck/widgets/lockscreen.yuck")
+(include "./src/yuck/variables/lockscreen.yuck")
+(include "./src/yuck/windows/lockscreen.yuck")
+
+;; Sideboard
+
+(include "./src/yuck/widgets/sideboard.yuck")
+(include "./src/yuck/variables/sideboard.yuck")
+(include "./src/yuck/windows/sideboard.yuck")

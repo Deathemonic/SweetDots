@@ -1,4 +1,9 @@
-.wm, .distro, .shell, .uptime {
+.wm, 
+.distro, 
+.shell, 
+.uptime, 
+.kernel,
+.resolution {
     font-weight: bold;
 }
 
@@ -10,10 +15,18 @@
     color: $green;
 }
 
+.kernel {
+    color: $magenta;
+}
+
 .shell {
     color: $yellow;
 }
 
 .uptime {
     color: $blue;
+}
+
+.resolution {
+    color: $foreground;
 }

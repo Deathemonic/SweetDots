@@ -1,12 +1,13 @@
 .weather-day {
 	font-weight: bold;
 	font-size: 1.6em;
-	color: $foreground;
+	color: $green;
 }
 
 .temperature-region {
 	font-size: 1em;
-	color: $foreground;
+	font-weight: bold;
+	color: $red;
 }
 
 .weather-icon {
@@ -15,11 +16,13 @@
 
 .temperature {
 	font-size: 1em;
+	font-weight: bold;
 	color: $foreground
 }
 
 .weather-status {
 	font-style: italic;
+	font-weight: bold;
 	font-size: 1em;
 	color: $blue
 }

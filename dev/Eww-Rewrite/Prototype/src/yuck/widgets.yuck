@@ -2,32 +2,29 @@
 
 (defwidget profile []
   (box 
-    :orientation "v"
+    :class "window" 
+    :orientation "v" 
+    :spacing 10
     :space-evenly "false"
-    :class "window"
+    :height 250
+    :halign "center"
+    :valign "center"
 
-    (box 
-      :orientation "h"
-      :space-evenly "false"
-
-      (box 
-        :class "profile-picture"
-      )
+    (box
+      :class "face" 
+      :halign "center"
     )
-
-    (box 
-      :orientation "v" 
-      :space-evenly "false"
-
-      (box 
-        :class "hostname" 
-        :valign "center" "@${host}"
-      )
-
-      (box 
-        :class "username" 
-        :halign "center" {name}
-      )
+    (label 
+      :class "username" 
+      :halign "center" 
+      :wrap "true" 
+      :limit-width 25 
+      :text name
+    )
+    (label 
+      :class "hostname" 
+      :halign "center" 
+      :text "@${host}"
     )
   )
 )
@@ -39,13 +36,15 @@
     :class "window"
     :orientation "v"
     :space-evenly "false"
-    :valign "center"
-    :halign "center"
+    :width 345
+    :height 115
   
     (box
       :orientation "h"
       :class "date"
       :space-evenly "false"
+      :halign "center"
+      :valign "center"
 
       (label
         :class "hour"
@@ -72,6 +71,7 @@
       :orientation "h"
       :space-evenly "false"
       :halign "center"
+      :valign "center"
 
       (label
         :class "day"
@@ -98,7 +98,8 @@
       :orientation "v" 
       :space-evenly "false" 
       :valign "center" 
-      :halign "center" 
+      :halign "center"
+      :width 260
       :spacing 30 
       :class "music-box"
 
@@ -114,6 +115,7 @@
         )
 
         (label
+          :limit-width 20
           :class "artist"
           :text "${artist}"
         )
@@ -121,7 +123,7 @@
 
       (box 
         :class "buttons" 
-        :orientation "h" 
+        :orientation "h"
         :halign "center" 
         :space-evenly "false" 
         :spacing 20
@@ -150,13 +152,17 @@
     :class "window"
     :orientation "h"
     :halign "center"
+    :valign "center"
     :spacing 0
     :space-evenly "false"
-    :height 150
+    :height 250
+    :width 300
 
     (box 	
       :orientation "v"
       :spacing 0
+      :halign "center"
+      :valign "center"
       :space-evenly "false"
 
       (label 	
@@ -183,7 +189,10 @@
     :class "window"
     :orientation "h"
     :space-evenly "false"
-    :spacing 30 
+    :spacing 30
+    :valign "center" 
+    :halign "center"
+    :height 150
 
     (box 	
       :orientation "v"
@@ -238,47 +247,28 @@
 (defwidget todo[]
   (box
     :class "window"
-
-    (box
-      :orientation "v"
-      :valign "center"
-      :halign "center"
-      :space-evenly "false"
-
-      (box
-        :orientation "v"
-        :valign "center"
-        :halign "center"
-
-        (box
-          :orientation "h"
-          :valign "center"
-          :halign "center"
-
-          (label
-            :class "todo-raw"
-            :text "${tododone} / ${todoundone}"
-          )
-        )
-      )
-    )
+    :height 215
+    :width 490
 
     (box
       :orientation "h"
       :halign "center"
+  
+      (label
+        :class "todo-raw"
+        :text "${tododone} / ${todoundone}"
+      )
+    )
+  
+    (box
+      :orientation "h"
+      :halign "center"
       :space-evenly "false"
-
-      (box
-        :orientation "v"
-        :valign "center"
-        :halign "center"
-
-        (label
-          :class "todo-text"
-          :halign "center"
-          :wrap "true"
-          :text "${todocheck}"
-        )
+  
+      (label
+        :class "todo-text"
+        :wrap "true"
+        :text "${todocheck}"
       )
     )
   )
@@ -288,26 +278,24 @@
 
 (defwidget resources []
   (box 
-    :class "window" 
-    :vexpand "false" 
-    :hexpand "false"
+    :class "window"
+    :halign "center" 
+    :valign "center"
+    :width 345
+    :height 410
     
     (box 
       :orientation "v" 
-      :spacing 25 
-      :halign "center" 
-      :valign "center" 
-      :space-evenly "false" 
-      :vexpand "false" 
-      :hexpand "false"
+      :spacing 25  
+      :space-evenly "false"  
+      :valign "center"
+      :halign "center"
 
       (box 
         :class "cpu-bar" 
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
 
         (label 
           :class "icon-cpu" 
@@ -333,8 +321,7 @@
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
+        :valign "center"
 
         (label 
           :class "icon-memory" 
@@ -359,8 +346,7 @@
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
+        :valign "center"
 
         (label 
           :class "icon-disk" 
@@ -385,8 +371,7 @@
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
+        :valign "center"
 
         (label 
           :class "icon-battery" 
@@ -411,8 +396,7 @@
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
+        :valign "center"
 
         (label 
           :class "icon-temperature" 
@@ -437,8 +421,7 @@
         :orientation "h" 
         :spacing 20 
         :space-evenly "false" 
-        :vexpand "false" 
-        :hexpand "false"
+        :valign "center"
 
         (label 
           :class "icon-packages" 
@@ -469,38 +452,54 @@
     :class "window" 
     :halign "center" 
     :valign "center" 
-    :width 200
+    :height 220
     
     (box  
       :orientation "v" 
-      :spacing 10 
-      :halign " center"
+      :spacing 10
+      :valign "center"
+      :halign "center"
 
       (label 
         :class "distro" 
         :orientation "v" 
         :halign "start"
-        :text " : ${distro}")
+        :text " • ${distro}"
+      )
+
+      (label 
+        :class "kernel" 
+        :orientation "v" 
+        :halign "start"
+        :text " • ${kernel}"
+      )
 
       (label 
         :class "wm" 
         :orientation "v" 
         :halign "start"
-        :text " : ${windowmanager}"
+        :text " • ${windowmanager}"
       )
 
       (label 
         :class "shell" 
         :orientation "v" 
         :halign "start"
-        :text " : ${shell}"
+        :text " • ${shell}"
+      )
+
+      (label 
+        :class "resolution" 
+        :orientation "v" 
+        :halign "start"
+        :text " • ${resolution}"
       )
 
       (label 
         :class "uptime" 
         :orientation "v" 
         :halign "start"
-        :text " : ${uptime}"
+        :text " • ${uptime}"
       )
     )
   )

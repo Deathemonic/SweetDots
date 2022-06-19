@@ -1,0 +1,120 @@
+#!/bin/bash
+
+cache_dir="$HOME/.cache/eww/weather"
+cache_weather_stat=${cache_dir}/weather-stat
+cache_weather_degree=${cache_dir}/weather-degree
+cache_weather_hex=${cache_dir}/weather-hex
+cache_weather_icon=${cache_dir}/weather-icon
+cache_weather_city=${cache_dir}/weather-city
+cache_weather_country=${cache_dir}/weather-country
+
+# Weather data
+KEY="529aa7e2d39c0b825acd633bfa6cdf74" # Login to https://openweather.org and get your api key
+ID="1850147" # Search your city in https://openweather.org and copy the ID in the address bar
+UNIT="metric"	# Available options : 'metric' or 'imperial'
+
+if [[ ! -d "$cache_dir" ]]; then
+	mkdir -p ${cache_dir}
+fi
+
+
+get_weather_data () {
+	weather=$(curl -sf "http://api.openweathermap.org/data/2.5/weather?APPID=$KEY&id=$ID&units=$UNIT")
+	echo ${weather}
+
+	if [ ! -z "$weather" ]; then
+		weather_temp=`echo "$weather" | jq ".main.temp" | cut -d "." -f 1`
+		weather_city=`echo "$weather" | jq -r ".name" | head -1`
+		weather_country=`echo "$weather" | jq -r ".sys.country" | head -1`
+		weather_icon_code=`echo "$weather" | jq -r ".weather[].icon" | head -1`
+		weather_description=`echo "$weather" | jq -r ".weather[].description" | head -1 | sed -e "s/\b\(.\)/\u\1/g"`
+
+		# Set color base on day and night
+		if [ "$weather_icon_code" == "50d"  ]; then
+			weather_icon=""
+			weather_hex="#E4FFDE"
+		elif [ "$weather_icon_code" == "50n"  ]; then
+			weather_icon=""
+			weather_hex="#E4FFDE"
+		elif [ "$weather_icon_code" == "01d"  ]; then
+			weather_icon=""
+			weather_hex="#E4FFDE"
+		elif [ "$weather_icon_code" == "01n"  ]; then
+			weather_icon=""
+			weather_hex="#E4FFDE"
+		elif [ "$weather_icon_code" == "02d"  ]; then
+			weather_icon=""
+			weather_hex="#FFFBDE"
+		elif [ "$weather_icon_code" == "02n"  ]; then
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		elif [ "$weather_icon_code" == "03d"  ]; then
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		elif [ "$weather_icon_code" == "03n"  ]; then
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		elif [ "$weather_icon_code" == "04d"  ]; then
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		elif [ "$weather_icon_code" == "04n"  ]; then
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		elif [ "$weather_icon_code" == "09d"  ]; then
+			weather_icon=""
+			weather_hex="#E7DEFF"
+		elif [ "$weather_icon_code" == "09n"  ]; then
+			weather_icon=""
+			weather_hex="#E7DEFF"
+		elif [ "$weather_icon_code" == "10d"  ]; then
+			weather_icon=""
+			weather_hex="#E7DEFF"
+		elif [ "$weather_icon_code" == "10n"  ]; then
+			weather_icon=""
+			weather_hex="#E7DEFF"
+		elif [ "$weather_icon_code" == "11d"  ]; then
+			weather_icon=""
+			weather_hex="#FFFBDE"
+		elif [ "$weather_icon_code" == "11n"  ]; then
+			weather_icon=""
+			weather_hex="#FFFBDE"
+		elif [ "$weather_icon_code" == "13d"  ]; then
+			weather_icon=""
+			weather_hex="#DEF2FF"
+		elif [ "$weather_icon_code" == "13n"  ]; then
+			weather_icon=""
+			weather_hex="#DEF2FF"
+		elif [ "$weather_icon_code" == "40d"  ]; then
+			weather_icon=""
+			weather_hex="#DFFFDE"
+		elif [ "$weather_icon_code" == "40n"  ]; then
+			weather_icon=""
+			weather_hex="#DFFFDE"
+		else 
+			weather_icon=""
+			weather_hex="#DEFBFF"
+		fi
+		echo "$weather_icon" >  ${cache_weather_icon}
+		echo "$weather_city" >  ${cache_weather_city}
+		echo "$weather_country" >  ${cache_weather_country}
+		echo "$weather_description" > ${cache_weather_stat}
+		echo "$weather_temp""°C" > ${cache_weather_degree}
+		echo "$weather_hex" > ${cache_weather_hex}
+	else
+		echo "Weather Unavailable" > ${cache_weather_stat}
+		echo "" > ${cache_weather_icon}
+		echo "-" > ${cache_weather_degree}
+		echo "#DEFBFF" > ${tcache_weather_hex}
+	fi
+}
+
+# Execute
+case $1 in
+    getdata)    		get_weather_data                ;;
+    icon)       		cat ${cache_weather_icon}       ;;
+    city) 	    		cat ${cache_weather_city}       ;;
+    country)    		cat ${cache_weather_country}    ;;
+    temperature) 	    cat ${cache_weather_degree}     ;;
+    hex) 	    		cat ${cache_weather_hex}        ;;
+    status) 	    	cat ${cache_weather_stat}       ;;
+esac

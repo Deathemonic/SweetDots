@@ -1,0 +1,43 @@
+.music-box {
+	padding: 0px 10px 0px 30px;
+}
+
+.album {
+	background-repeat: no-repeat;
+	background-size: 130px;
+	min-height: 130px;
+	min-width: 130px;
+	margin: 20px 0px 25px 0px;
+	border-radius: 100px;
+}
+
+.title{
+	font-size: 15px;
+	font-weight: bolder;
+	min-width: 30px;
+	min-height: 35px;
+	color: $blue;
+}
+
+.artist {
+	font-size: 10px;
+	font-weight: bold;
+	color: $foreground
+}
+
+.buttons button {
+	font-size: 20px;
+	color: $blue;
+}
+
+.buttons button:hover {
+	color: $foreground;
+}
+
+.status	button {
+	color: $foreground;
+}
+
+.status:hover {
+	color: $blue;
+}

@@ -1,0 +1,32 @@
+.wm, 
+.distro, 
+.shell, 
+.uptime, 
+.kernel,
+.resolution {
+    font-weight: bold;
+}
+
+.wm {
+    color: $red;
+}
+
+.distro {
+    color: $green;
+}
+
+.kernel {
+    color: $magenta;
+}
+
+.shell {
+    color: $yellow;
+}
+
+.uptime {
+    color: $blue;
+}
+
+.resolution {
+    color: $foreground;
+}

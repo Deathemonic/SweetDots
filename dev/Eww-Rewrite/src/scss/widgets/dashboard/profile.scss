@@ -1,0 +1,25 @@
+.face {
+    background-image: url("assets/profile.png");
+    background-size: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100px;
+    min-width: 100px;
+    margin: 20px 0px 0px 0px;
+    border-radius: 100%;
+}
+
+.username {
+    color: $green;
+    font-size: 14px;
+    font-weight: bolder;
+    padding-top: 20px;
+}
+
+.hostname {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: italic;
+    color: $blue;
+    padding-bottom: 20px;
+}

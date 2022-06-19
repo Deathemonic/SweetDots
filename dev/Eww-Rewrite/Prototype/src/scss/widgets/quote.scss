@@ -1,18 +1,14 @@
-.window {
-	padding: 2rem;
-	margin: 1rem;
-}
-
 .quote-text {
 	padding: 1px;
 	font-size: 10px;
+	font-weight: bold;
 	color: $foreground;
 }
 
 .quote-author {
 	font-style: italic;
-	font-weight: bold;
+	font-weight: bolder;
 	font-size: 11px;
-	color: $foreground;
+	color: $blue;
 	margin-top: 1rem;
 }

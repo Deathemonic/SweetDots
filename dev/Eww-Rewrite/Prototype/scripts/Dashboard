@@ -1,0 +1,24 @@
+#!/bin/bash
+
+file="$HOME/.cache/dashboard.eww"
+eww="$HOME/.config/berry/bin/eww/eww"
+config="$HOME/Documents/Eww"
+
+if [[ ! "pidof eww" ]]; then
+	eww daemon
+	sleep 1
+fi
+
+run_eww() {
+	$eww -c $config open-many profile clock fetch quotes weather music resources todo
+}
+
+if [[ ! -f "$file" ]]; then
+	touch "$file"
+	sh $config/scripts/quotes update
+	sh $config/scripts/weather getdata
+	run_eww
+else
+	$eww -c $config close-all
+	rm "$FILE"
+fi

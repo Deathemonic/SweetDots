@@ -1,7 +1,28 @@
 #!/bin/bash
 
+cache="$HOME/.cache/ewwsideboard"
+logs="$cache/notifications.txt"
+empty_quote_cache="$cache/quotes.txt"
+empty_quote="No notifications"
+
+mkdir $cache 2>/dev/null
+touch $empty_quote_cache 2>/dev/null
+
+notify_add () { 
+  [[ "$1" != "" ]] && echo "$1" >> "$empty_quote_cache" 
+}
+
+rm () {
+    sed -i "$1d" "$empty_quote_cache"
+}
+
+rand () {
+  local quote="$(cat $empty_quote_cache | shuf | head -n1)"
+  [[ "$quote" == "" ]] && echo "$empty_quote_cache" || echo "$quote"
+}
+
 updatequotes () {
-    uri=$(curl -s "https://api.quotable.io/random?maxLength=20|funny")
+    uri=$(curl -s "https://api.quotable.io/random")
 
     echo $uri | jq '.content' |  cut -d "\"" -f 2 > "$HOME/.cache/eww.quote"
     echo $uri | jq '.author' |  cut -d "\"" -f 2 > "$HOME/.cache/eww.author"
@@ -28,8 +49,31 @@ doc () {
 
 # Execute
 case $1 in
-    quote)    echo $quote           ;;
-    author)   echo "~ $author ~"    ;;
-    update)   updatequotes          ;;
-    *)        doc
+    quote)
+        echo $quote
+    ;;
+    author)
+        echo "~ $author ~"
+    ;;
+    update)
+        updatequotes
+    ;;
+    notify_empty_add) 
+        add "$2"
+    ;;
+    notify_empty_remove)
+        rm "$2"
+    ;;
+    notify_empty_rand) 
+        rand
+    ;;
+    notify_empty_all) 
+        cat "$empty_quote_cache"
+    ;;
+    notify_empty)
+        echo "$empty_quote"
+    ;;
+    *)
+        doc
+    ;;
 esac

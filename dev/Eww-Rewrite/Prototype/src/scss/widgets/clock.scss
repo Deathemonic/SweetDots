@@ -1,0 +1,14 @@
+.hour, .min, .meridiem, .separator-clock {
+	color: $blue;
+	padding-top: 15px;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+.day {
+	color: $yellow;
+	padding: .5rem;
+	font-size: 15px;
+	font-style: italic;
+	font-weight: bold;
+}

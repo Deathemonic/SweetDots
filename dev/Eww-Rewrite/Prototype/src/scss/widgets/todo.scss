@@ -1,19 +1,16 @@
-.todo {
-	margin: 1rem;
-}
-
 .todo-raw {
-	padding: 40px;
-	color: $foreground;
-	font-size: 20px;
+	padding: 0px 30px 0px 0px;
+	color: $blue;
+	font-size: 35px;
 	font-weight: bold;
 }
 
 .todo-text {
+	padding: 10px 0px 10px 0px;
 	background-color: $background;
 	font-size : 10px;
 	font-weight : bold;
-	color: $foreground;
+	color: $green;
 }
 
 .todo-color {
