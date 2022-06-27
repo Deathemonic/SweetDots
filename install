@@ -98,6 +98,7 @@ case $install in
     cp -rf $rice/berry/* $config/berry
     cp -rf $rice/misc/.zshrc $HOME/
     cp -rf $rice/misc/mpDris2 $config/
+    sudo mkdir -p /usr/share/xsessions/
     sudo cp $rice/misc/berry.desktop /usr/share/xsessions/
     systemctl --user enable mpd
     printf "${blue}[*] Dotfiles copied\n" && sleep 2
@@ -118,9 +119,11 @@ case $install in
         clear
         printf "${red}[!] This will require inputs from the user so just be aware for that\n" && sleep 3
         printf "${yellow}[*] Setting up GTK theme\n" && sleep 1
+	sudo mkdir -p /usr/share/themes/
         sudo cp $rice/misc/gtk/* /usr/share/themes/ && sudo tar -xf /usr/share/themes/Pastel.tar.xz
         printf "${blue}[*] Gtk theme set\n" && sleep 1
         printf "${yellow}[*] Setting up cursor theme\n" && sleep 1
+	sudo mkdir -p /usr/share/icons/
         sudo cp $rice/misc/cursors/* /usr/share/icons/ && sudo tar -xf /usr/share/icons/Pastel.tar.xz
         printf "${blue}[*] Cursor theme set\n" && sleep 1
         printf "${yellow}[*] Setting up folder icons\n" && sleep 1
