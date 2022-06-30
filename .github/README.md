@@ -133,7 +133,7 @@ _**Click to expand**_
  </details>
 
 <details>
-<summary><b>💕 Credits</b></summary>
+<summary><b>💕 Acknowledgements</b></summary>
   <img src="https://avatars.githubusercontent.com/u/20917538?v=4" width="50"/>
 
   [**JLErvin**](https://github.com/JLErvin) - For BerryWM
@@ -182,6 +182,12 @@ _**Click to expand**_
 
   [**coolors.co**](https://coolors.co/) - The tool that helps me make Pastel color scheme posible and the creator of coolors also [**Fabrizio Bianchi**](https://fabrizio.io/)
 </details>
+
+## Contributors
+
+<a href="https://github.com/Deathemonic/SweetDots/graphs/contributors">
+	<img src="https://contrib.rocks/image?repo=Deathemonic/SweetDots"/>
+</a>
 
 <p align="center">
 	<a href="https://github.com/Deathemonic/SweetDots/blob/berry/LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=ffbebe&colorA=212529&colorB=e7deff"/></a>
