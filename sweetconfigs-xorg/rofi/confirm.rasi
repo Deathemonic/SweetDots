@@ -1,0 +1,18 @@
+@import "colors.rasi"
+
+* {
+    background-color:       @background;
+    text-color:             @foreground;
+	font:				 	"JetBrains Mono Medium 10";
+}
+
+window {
+    width:      			230px;
+    padding:    			25px;
+    border:					2px;
+    border-radius:          20px;
+    border-color:           @pink;
+    location:               center;
+    x-offset:               0;
+    y-offset:               0%;
+}

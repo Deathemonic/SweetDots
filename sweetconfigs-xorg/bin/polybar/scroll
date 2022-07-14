@@ -1,0 +1,10 @@
+#!/bin/bash
+
+zscroll -l 20 \
+        --delay 1 \
+        --scroll-padding " | " \
+        --match-command "$HOME/.config/sweetconfigs-xorg/bin/polybar/status --status" \
+        --match-text "Playing" "--scroll 1" \
+        --match-text "Paused" "--scroll 0" \
+        --update-check true "$HOME/.config/sweetconfigs-xorg/bin/polybar/status" &
+wait

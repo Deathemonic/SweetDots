@@ -1,0 +1,94 @@
+#!/bin/bash
+
+rofi_command="rofi -theme $HOME/.config/sweetconfigs-xorg/rofi/screenshot.rasi"
+
+time=$(date +%Y-%m-%d-%I-%M-%S)
+geometry=$(xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current')
+dir="$(xdg-user-dir PICTURES)/Screenshots"
+file="Screenshot_${time}_${geometry}.png"
+
+icon="$HOME/.config/sweetconfigs-xorg/dunst/icons/clock.svg"
+
+screen=""
+area=""
+window=""
+infive="5"
+inten="10"
+
+notify_user () {
+	notify-send -u low -r 699 -i "Copied to clipboard."
+	viewnior $dir/"$file"
+	if [[ -e "$dir/$file" ]]; then
+		notify-send -u low -r 699 -i $dir/$file "Screenshot Saved"
+	else
+		notify-send -u low -r 699 "Screenshot Deleted."
+	fi
+}
+
+countdown () {
+	for sec in `seq $1 -1 1`; do
+		notify-send -t 1000 -r 699 -i $icon "Taking shot in : $sec"
+		sleep 1
+	done
+}
+
+shotnow () {
+	cd ${dir} && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	notify_user
+}
+
+shot5 () {
+	countdown '5'
+	sleep 1 && cd ${dir} && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	notify_user
+}
+
+shot10 () {
+	countdown '10'
+	sleep 1 && cd ${dir} && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	notify_user
+}
+
+shotwin () {
+	cd ${dir} && scrot -q 100 -f -u "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	notify_user
+}
+
+shotarea () {
+	cd ${dir} && scrot -q100 -b -s "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	notify_user
+}
+
+message () {
+	echo "
+	Done!
+	"
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+options="$screen\n$area\n$window\n$infive\n$inten"
+chosen="$(echo -e "$options" | $rofi_command -p 'Take Screenshot' -dmenu -selected-row 0)"
+
+case $chosen in
+    $screen)
+		shotnow
+	;;
+    $area)
+		shotarea
+	;;
+    $window)
+		shotwin
+	;;
+    $infive)
+		shot5
+	;;
+    $inten)
+		shot10
+	;;
+	*)
+		message
+	;;
+esac

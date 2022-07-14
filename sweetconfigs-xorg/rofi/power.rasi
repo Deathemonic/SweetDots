@@ -1,0 +1,74 @@
+configuration {
+    location:                       0;
+    font:                           "JetBrains Mono Medium 10";
+    show-icons:                     false;
+    display-drun: 					"";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+	click-to-exit: 					true;
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @pink;
+    height:                         100%;
+    width:                          100%;
+    padding:                        30% 20% 5% 20%;
+    x-offset:                       0;
+    y-offset:                       0;
+    children:                       [ inputbar, mainbox ];
+}
+
+inputbar {
+    children:                       [ prompt ];
+    padding:                        10% 0px 5% 0px;
+    background-color:               transparent;
+}
+
+prompt {
+    text-color:                     @foreground;
+    background-color:               transparent;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+    spacing:                        0;
+}
+
+
+listview {
+    background-color:               @background;
+    lines:							5;
+    spacing:                        5%;
+    layout:                         horizontal;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ listview ];
+}
+
+element {
+    background-color:               @darker;
+    text-color:                     @foreground;
+    border-radius:                  100%;
+    padding:                        30px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+	font:							"icomoon\-feather 25";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+}
+
+element selected {
+    background-color:               @pink;
+    text-color:                     @background;
+}

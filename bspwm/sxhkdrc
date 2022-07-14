@@ -1,0 +1,194 @@
+# Applications
+
+# Terminal
+super + Return
+    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf
+
+# File Manager
+super + e
+    nautilus
+
+# Standard Apps
+super + shift {t,w}
+    {gedit,firefox}
+
+# CLI Apps
+super + shift + {v,e,h}
+    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf -e {nvim,ranger,htop}
+
+# Menus
+
+# App Launcher
+alt + F1
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/launcher
+
+# Network Menu
+super + n
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/network
+
+# Power Menu
+super + p
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/power
+
+# Screenshot, Bluetooth, Windows, Run Menu
+super + {s,b,w,r}
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/{screenshot,bluetooth,window,run}
+
+# Widgets
+
+# Dashboard
+super + alt + d
+    $HOME/.config/sweetconfigs-xorg/bin/eww/dashboard
+
+# Sidepanel
+super + alt + s
+    $HOME/.config/sweetconfigs-xorg/bin/eww/sidepanel
+
+# Calendar
+super + alt + c
+    $HOME/.config/sweetconfigs-xorg/bin/eww/calendar
+
+# Lockscreen
+super + alt + l
+    $HOME/.config/sweetconfigs-xorg/bin/eww/lock
+
+# System
+
+# Color Picker
+super + g
+    $HOME/.config/sweetconfigs-xorg/bin/notify/color
+
+# Take a screenshot
+Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot now
+
+# Take a screenshot in 5 seconds
+alt + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in5
+
+# Take a screenshot in 10 seconds
+shift + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in10
+
+# Take a screenshot of a active window
+ctrl + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot window
+
+# Take a screenshot of a selected area
+ctrl + alt + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot area
+
+# Brightness Controls
+XF86MonBrightness{Up,Down}
+    $HOME/.config/sweetconfigs-xorg/bin/notify/brightness{ up, down}
+
+# Volume Controls
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    $HOME/.config/sweetconfigs-xorg/bin/notify/volume{ up, down, mute}
+
+# Music Controls
+XF86Audio{Next,Prev,Play}
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd{ next, previous, play-pause}
+
+XF86AudioStop
+    playerctl -a stop
+
+# Reload Keybinds
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Hotkeys
+
+# Close App
+super + {_,shift + }x
+	bspc node -{c,k}
+
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# kill window
+ctrl + alt + Escape
+       xkill
+
+# Quit/Restart sweetconfigs-xorg
+ctrl + shift + {q,r}
+	bspc {quit,wm -r}
+	
+# Split horizontal, vertical or cancel
+super + {h,v,q}
+	bspc node -p {east,south,cancel}
+
+# Fullscreen or Monocle
+F11
+    bspc node -t "~"fullscreen
+
+super + shift + f
+    bspc node -t "~"fullscreen
+
+# Toggle beetwen floating & tiled
+super + space
+    bspc node -t "~"{floating,tiled}
+
+# Pseudo Tiled & tiled mode
+super + alt + {p,t}
+    bspc node -t "~"{pseudo_tiled,tiled}
+
+# Set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# Send the window to another edge of the screen
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Change focus to next window, including floating window
+alt + {_,shift + }Tab
+	bspc node -f {next.local,prev.local}
+
+# Switch workspace
+ctrl + alt + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+# Switch to last opened workspace
+super + {Tab,grave}
+	bspc {node,desktop} -f last
+
+# Send focused window to another workspace
+super + {_,shift + }{1-8}
+	bspc {desktop -f,node -d} '^{1-8}'
+
+# Expanding windows
+super + control + {Left,Right,Up,Down}
+	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+	
+# Shrinking windows
+super + alt + {Left,Right,Up,Down}
+	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+	
+# Move floating windows
+alt + shift + {Left,Down,Up,Right}
+	bspc node -v {20 0,0 20,0 -20,-20 0}
+
+# Hide/Unhide Window
+super + shift + i
+	winmask		
+
+# Preselect the direction
+super + ctrl + alt +{Left,Right,Up,Down}
+	bspc node -p {west,east,north,south}
+
+# Preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# Cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+~button3
+    xqp 0 $(xdo -id N Bspwm -n root) && jqmenu

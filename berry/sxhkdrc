@@ -1,0 +1,149 @@
+# Applications
+
+# Terminal
+super + Return
+    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf
+
+# File Manager
+super + e
+    nautilus
+
+# Standard Apps
+super + shift {t,w}
+    {gedit,firefox}
+
+# CLI Apps
+super + shift + {v,e,h}
+    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf -e {nvim,ranger,htop}
+
+# Menus
+
+# App Launcher
+alt + F1
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/launcher
+
+# Network Menu
+super + n
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/network
+
+# Power Menu
+super + p
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/power
+
+# Screenshot, Bluetooth, Windows, Run Menu
+super + {s,b,w,r}
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/{screenshot,bluetooth,window,run}
+
+# Widgets
+
+# Dashboard
+super + alt + d
+    $HOME/.config/sweetconfigs-xorg/bin/eww/dashboard
+
+# Sidepanel
+super + alt + s
+    $HOME/.config/sweetconfigs-xorg/bin/eww/sidepanel
+
+# Calendar
+super + alt + c
+    $HOME/.config/sweetconfigs-xorg/bin/eww/calendar
+
+# Lockscreen
+super + alt + l
+    $HOME/.config/sweetconfigs-xorg/bin/eww/lock
+
+# System
+
+# Color Picker
+super + g
+    $HOME/.config/sweetconfigs-xorg/bin/notify/color
+
+# Take a screenshot
+Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot now
+
+# Take a screenshot in 5 seconds
+alt + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in5
+
+# Take a screenshot in 10 seconds
+shift + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in10
+
+# Take a screenshot of a active window
+ctrl + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot window
+
+# Take a screenshot of a selected area
+ctrl + alt + Print
+    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot area
+
+# Brightness Controls
+XF86MonBrightness{Up,Down}
+    $HOME/.config/sweetconfigs-xorg/bin/brightness{ up, down}
+
+# Volume Controls
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    $HOME/.config/sweetconfigs-xorg/bin/notify/volume{ up, down, mute}
+
+# Music Controls
+XF86Audio{Next,Prev,Play}
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd{ next, previous, play-pause}
+
+XF86AudioStop
+    playerctl -a stop
+
+# Reload Keybinds
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Hotkeys
+
+super + shift +  {Left, Down, Up, Right}
+    berryc window_resize {-50 0, 0 50, 0 -50, 50 0}
+
+super + ctrl + {Left, Down, Up, Right}
+    berryc window_move {-50 0, 0 50, 0 -50, 50 0}
+
+super + Left
+    berryc snap_left
+
+super + Right
+    berryc snap_right
+
+super + Up
+    berryc window_monocle
+
+super + Down
+    berryc window_resize_absolute 1000 650 && berryc window_center
+
+super + {1-9}
+    berryc switch_workspace {0-9}
+
+super + shift + {1-9}
+    berryc send_to_workspace {0-9}
+
+super + space
+    berryc fullscreen
+
+super + d
+    berryc toggle_decorations
+
+alt + Tab
+    berryc cycle_focus
+
+super + c
+    berryc window_center
+
+super + x
+    berryc window_close
+
+super + shift + q
+    berryc quit
+
+# Mouse Buttons
+~button1
+    berryc pointer_focus
+
+~button3
+    xqp 0 $(xdo -id N Berry -n root) && jqmenu

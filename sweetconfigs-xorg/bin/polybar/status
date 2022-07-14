@@ -1,0 +1,70 @@
+#!/bin/bash
+
+bar="main"
+bar_pid=$(pgrep -a "polybar" | grep "$bar" | cut -d" " -f1)
+
+format="{{ title }} - {{ artist }}"
+
+update_hooks() {
+    while IFS= read -r id
+    do
+      polybar-msg -p "$id" hook music-play-pause $2 1>/dev/null 2>&1
+    done < <(echo "$1")
+}
+
+player=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd status 2>/dev/null)
+exit=$?
+
+case $control in
+  *)
+  case $1 in
+		next)
+            playerctl -p spotify,%any,firefox,chromium,brave,mpd next
+        ;;
+		previous)
+            playerctl -p spotify,%any,firefox,chromium,brave,mpd previous
+        ;;
+		toggle)
+            playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause
+        ;;
+  esac
+esac
+
+if [ $exit -eq 0 ]; then
+    status=$player
+else
+    status="Offline"
+fi
+
+if [ "$1" == "--status" ]; then
+    echo "$status"
+else
+    if [ "$status" = "Stopped" ]; then
+        echo "Offline"
+    elif [ "$status" = "Paused"  ]; then
+        update_hooks "$bar_pid" 2
+        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$format"
+    elif [ "$status" = "Offline"  ]; then
+        echo "$status"
+    else
+        update_hooks "$bar_pid" 1
+        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$format"
+    fi
+fi
+
+docs () {
+    echo "
+    Usage:    status [Options]
+                        
+    Options:    
+    --status    -   Display what status of the player is on
+    next        -   Skip to the next music
+    previous    -   Skip back to the previous music
+    "
+}
+
+case $1 in
+    -h|-H|--h|--H|-help|-Help|--help|--Help|help|Help|h|H)
+        docs
+    ;;
+esac
