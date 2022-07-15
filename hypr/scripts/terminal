@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+## launch terminal with alt config
+
+CONFIG="$HOME/.config/hypr/foot/foot.ini"
+
+if [ "$1" == "-f" ]; then
+	foot --app-id='foot-float' --config="$CONFIG"
+elif [ "$1" == "-F" ]; then
+	foot --fullscreen --app-id='foot-full' --font="Iosevka Nerd Font:size=14" --config="$CONFIG"
+elif [ "$1" == "-s" ]; then
+	foot --app-id='foot-float' --config="$CONFIG" \
+	--window-size-pixels=$(slurp -b 1B1F28CC -c E06B74ff -s C778DD0D -w 2 -f "%wx%h")
+else
+	foot --config="$CONFIG"
+fi
