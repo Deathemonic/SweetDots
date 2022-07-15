@@ -9,8 +9,6 @@
 
 <p align="center">A pastel themed rice 🍚</p>
 
-<p align="left">Note: A rewrite of this repo will be coming soon</p>
-
 <h6 align="center">
   <a href="https://ko-fi.com/Deathemonic">Buy me a Coffee</a>
   ·
@@ -27,6 +25,11 @@
 	<a href="https://github.com/Deathemonic/SweetDots/issues">
 		<img alt="Issues" src="https://img.shields.io/github/issues/deathemonic/cat-dots?style=for-the-badge&logo=gitbook&color=DEFBFF&logoColor=FFDEDE&labelColor=212529"></a>
 </p>
+
+
+Note: A rewrite of this repo will be coming soon
+
+Check it's status [here](https://github.com/Deathemonic/SweetDots/tree/xorg)
 
 #### Welcome! Thanks for Dropping by 🥰,
 
@@ -191,5 +194,4 @@ _**Click to expand**_
 
 <p align="center">
 	<a href="https://github.com/Deathemonic/SweetDots/blob/berry/LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=ffbebe&colorA=212529&colorB=e7deff"/></a>
-	<img src="https://badges.pufler.dev/visits/deathemonic/SweetDots?style=for-the-badge&color=E4FFDE&logoColor=ffbebe&labelColor=212529"/>
 </p>
