@@ -12,7 +12,7 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/45)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/52)
 
 Window Manager Configs (Wayland)
 
