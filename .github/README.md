@@ -31,11 +31,11 @@ Note: A rewrite of this repo will be coming soon
 
 Check it's status [here](https://github.com/Deathemonic/SweetDots/tree/xorg)
 
-#### Welcome! Thanks for Dropping by 🥰,
+# Welcome! Thanks for Dropping by :smiling_face_with_three_hearts:,
 
 <img alt="Rice Preview" align="right" width="400px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/.github/assets/unixporn.png"/>
 
-### ❓ About
+## :question: <samp>ABOUT</samp>
 
 It's a rice that themed using my own pastel colors.
 
@@ -43,10 +43,10 @@ This started out a continuation of ***"Cat-Dots"*** but instead using bspwm as t
 
 Rather than using popular color scheme I decided to create my own, I'm not great at making a proper color scheme but this color scheme purpose is to match with the rice theme.
 
-### 📚 Wiki
+## :books: <samp>WIKI</samp>
 Yes, This also has a [wiki page](https://github.com/Deathemonic/SweetDots/wiki), it provides extra information, some documentation on how setting it up, and a troubleshoot page
 
-### 📦 Install
+## :package: <samp>INSTALL</samp>
 It's really easy, all you have to do is copy and paste this command below in your Terminal
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/Deathemonic/SweetDots/berry/install)
@@ -57,20 +57,20 @@ _Install curl first in order to run this command_
 
 Also check the [wiki](https://github.com/Deathemonic/SweetDots/wiki/Documentation) for a complete list Dependencies if you are not in arch linux
 
-### 🪟 BSPWM
+## :window: <samp>BSPWM</samp>
 Go to the [bspwm branch](https://github.com/Deathemonic/SweetDots/tree/bspwm), if you want the bspwm version of this dotfiles
 
-### ☕ Buy Me a Coffee
+## :coffee: <samp>TIPS</samp>
 If you like my rice feel free to buy me a coffee it will help me a lot.
 
 <a href='https://ko-fi.com/K3K8C2M9Y' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 I also post updates on my rices in there too
 
-### 👇 Extra
+## :point_down: <samp>EXTRA</samp>
 _**Click to expand**_
 <details>
-<summary><b>📸 Screenshots</b></summary>
+<summary><b>:camera_flash: <samp>SCREENSHOTS</samp></b></summary>
 
 **`Desktop`**
 
@@ -136,7 +136,7 @@ _**Click to expand**_
  </details>
 
 <details>
-<summary><b>💕 Acknowledgements</b></summary>
+<summary><b>:two_hearts: <samp>ACKNOWLEDGEMENTS</samp></b></summary>
   <img src="https://avatars.githubusercontent.com/u/20917538?v=4" width="50"/>
 
   [**JLErvin**](https://github.com/JLErvin) - For BerryWM
@@ -186,7 +186,7 @@ _**Click to expand**_
   [**coolors.co**](https://coolors.co/) - The tool that helps me make Pastel color scheme posible and the creator of coolors also [**Fabrizio Bianchi**](https://fabrizio.io/)
 </details>
 
-## Contributors
+## :tada: <samp>CONTRIBUTORS</samp>
 
 <a href="https://github.com/Deathemonic/SweetDots/graphs/contributors">
 	<img src="https://contrib.rocks/image?repo=Deathemonic/SweetDots"/>
