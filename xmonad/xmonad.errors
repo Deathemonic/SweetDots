@@ -1,0 +1,7 @@
+
+xmonad.hs:23:1: warning: [-Wtabs]
+    Tab character found here, and in 254 further locations.
+    Please use spaces instead.
+   |
+23 |         spawn "$HOME/.config/sweetconfigs-xorg/bin/system/autostart"
+   | ^^^^^^^^
