@@ -12,11 +12,11 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/52)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/63)
 
 Window Manager Configs (Wayland)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/25)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/37)
 
 EWW (Xorg)
 
@@ -36,7 +36,7 @@ README
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/50)
 
 ## Doing Now
 
