@@ -19,8 +19,8 @@ packages="berry-git bspwm-git sxhkd-git i3-gaps-next-git polybar-git rofi alacri
 if [[ -d $dotfiles ]] && [[ -d $sweetcache ]]; then
    printf "Dotfiles cache already exist, skipping\n"
 else
-   mkdir $cache>/dev/null
-   mkdir $sweetcache>/dev/null
+   mkdir "$cache" 2>/dev/null
+   mkdir "$sweetcache" 2>/dev/null
 fi
 sleep 2
 
