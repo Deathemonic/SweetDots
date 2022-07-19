@@ -75,9 +75,26 @@ printf "Cloning Repository\n"
 git clone https://github.com/Deathemonic/SweetDots -b xorg $dotfiles
 sleep 2
 
-printf "Copying Dotfiles"
-cp -rf $dotfiles/sweetconfigs-xorg $configs
-cp -rf $dotfiles/windowmanagers/* $configs
+printf "Creating Backups\n"
+mkdir $HOME/.backups 2>/dev/null
+
+if [[ -d $configs/bspwm ]]; then
+   mv $configs/bspwm $HOME/.backups
+elif [[ -d $configs/berry ]]; then
+   mv $configs/berry $HOME/.backups
+elif [[ -d $configs/i3 ]]; then
+   mv $configs/i3 $HOME/.backups
+else
+   echo "Nothing was installed before, skipping"
+fi
+
+printf "Copying Dotfiles\n"
+if [[ -d $configs/sweetconfigs-xorg ]]; then
+   echo "Dotfiles already installed, skipping"
+else
+   cp -rf $dotfiles/sweetconfigs-xorg $configs
+   cp -rf $dotfiles/windowmanagers/* $configs
+fi
 
 clear
 printf "Done!\n"
