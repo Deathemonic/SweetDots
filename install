@@ -95,6 +95,7 @@ fi
 if [[ -d $configs/i3 ]]; then
    mv $configs/i3 $tempdir
 fi
+sleep 2
 
 printf "Copying Dotfiles\n"
 if [[ -d $configs/sweetconfigs-xorg ]]; then
@@ -104,6 +105,7 @@ else
 fi
 
 cp -rf $dotfiles/windowmanagers/* $configs
+sleep 2
 
 clear
 printf "Done!\n"
