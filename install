@@ -76,25 +76,34 @@ git clone https://github.com/Deathemonic/SweetDots -b xorg $dotfiles
 sleep 2
 
 printf "Creating Backups\n"
-mkdir $HOME/.backups 2>/dev/null
+tempdir=$(mktemp -d -p $HOME/.backups)
+
+if [[ -d $HOME/.backups ]]; then
+   echo "Backup folder already exist, skipping"
+else
+   mkdir $HOME/.backups 2>/dev/null
+fi
 
 if [[ -d $configs/bspwm ]]; then
-   mv $configs/bspwm $HOME/.backups
-elif [[ -d $configs/berry ]]; then
-   mv $configs/berry $HOME/.backups
-elif [[ -d $configs/i3 ]]; then
-   mv $configs/i3 $HOME/.backups
-else
-   echo "Nothing was installed before, skipping"
+   mv $configs/bspwm $tempdir
+fi
+
+if [[ -d $configs/berry ]]; then
+   mv $configs/berry $tempdir
+fi
+
+if [[ -d $configs/i3 ]]; then
+   mv $configs/i3 $tempdir
 fi
 
 printf "Copying Dotfiles\n"
 if [[ -d $configs/sweetconfigs-xorg ]]; then
-   echo "Dotfiles already installed, skipping"
+   echo "Configs already installed, skipping"
 else
    cp -rf $dotfiles/sweetconfigs-xorg $configs
-   cp -rf $dotfiles/windowmanagers/* $configs
 fi
+
+cp -rf $dotfiles/windowmanagers/* $configs
 
 clear
 printf "Done!\n"
