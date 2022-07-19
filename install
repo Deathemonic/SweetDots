@@ -46,9 +46,9 @@ case $aur in
    1)
       clear
       if [[ -f /usr/bin/yay ]]; then
-         echo yay -S $packages
+         yay -S $packages
       else
-         echo cd $sweetcache
+         cd $sweetcache
          git clone https://aur.archlinux.org/yay-bin.git
          cd yay-bin
          makepkg -si
@@ -58,9 +58,9 @@ case $aur in
    2)
       clear
       if [[ -f /usr/bin/paru ]]; then
-         echo paru -S $packages
+         paru -S $packages
       else
-         echo cd $sweetcache
+         cd $sweetcache
          git clone https://aur.archlinux.org/paru-bin.git
          cd paru-bin
          makepkg -si
