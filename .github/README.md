@@ -36,7 +36,7 @@ README
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/50)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
 
 ## Doing Now
 
