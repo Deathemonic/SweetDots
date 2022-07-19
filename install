@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+clear
+printf "DEV INSTALL\n"
+sleep 2
+
+configs="$HOME/.config/"
+dotfiles="$HOME/.cache/SweetDots-Xorg/"
+sweetcache="$HOME/.cache/sweetcache/"
+packages="berry-git bspwm-git sxhkd-git i3-gaps-next-git polybar-git rofi alacritty picom-arian8j2-git dunst eww-git \
+   pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
+   bluez bluez-utils \
+   mpd mpdris2-git \
+   brightnessctl playerctl light lm_sensors \
+   feh i3lock-color ksuperkey sddm yad cava xclip scrot gpick xfce4-power-manager zscroll neovim viewnior\
+   ttf-sarasa-gothic ttf-jetbrains-mono ttf-icomoon-feather nerd-fonts-jetbrains-mono \
+   gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
+
+if [[ -d $dotfiles ]] && [[ -d $sweetcache ]]; then
+   printf "Dotfiles cache already exist, skipping\n"
+else
+   mkdir $cache>/dev/null
+   mkdir $sweetcache>/dev/null
+fi
+sleep 2
+
+printf "Updating Packages\n"
+sudo pacman -Syu git curl bash zsh python
+sleep 2
+
+clear
+printf "Installing AUR Helper\n"
+sleep 2
+
+echo " "
+
+printf "Pick a AUR Helper\n"
+
+echo " "
+
+printf "Yay (1)\n"
+printf "Paru (2)\n"
+read -p ": " aur
+
+case $aur in
+   1)
+      clear
+      if [[ -f /usr/bin/yay ]]; then
+         echo yay -S $packages
+      else
+         echo cd $sweetcache
+         git clone https://aur.archlinux.org/yay-bin.git
+         cd yay-bin
+         makepkg -si
+         yay -S $packages
+      fi
+   ;;
+   2)
+      clear
+      if [[ -f /usr/bin/paru ]]; then
+         echo paru -S $packages
+      else
+         echo cd $sweetcache
+         git clone https://aur.archlinux.org/paru-bin.git
+         cd paru-bin
+         makepkg -si
+         paru -S $packages
+      fi
+   ;;
+esac
+
+printf "Installing Packages\n"
+
+printf "Cloning Repository\n"
+git clone https://github.com/Deathemonic/SweetDots -b xorg $dotfiles
+sleep 2
+
+printf "Copying Dotfiles"
+cp -rf $dotfiles/sweetconfigs-xorg $configs
+cp -rf $dotfiles/windowmanagers/* $configs
+
+clear
+printf "Done!\n"
