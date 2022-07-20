@@ -4,7 +4,7 @@
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/78)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/81)
 
 Configs (Wayland)
 
@@ -20,7 +20,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/60)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
 
 EWW (Wayland)
 
@@ -40,4 +40,4 @@ Installer
 
 ## Doing Now
 
-Making **<kbd>Window Manager Configs</kbd>**, next **<kbd>SweetPastel Ports and Improvements</kbd>**
+Making **<kbd>EWW Bar</kbd>**
