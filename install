@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 4.5
+# Version: 4.6.2
 # A fork of my own install script from Cat-Dots https://github.com/Deathemonic/Cat-Dots/install.sh
 # The next installer will be written on python with a tui
 
@@ -14,7 +14,13 @@ berry="$HOME/.config/berry"
 rice="$HOME/.dotfiles/SweetDots"
 dotfiles="$HOME/.dotfiles"
 config="$HOME/.config"
-packages="berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh volumectl brightnessctl bluez bluez-utils playerctl i3lock-color ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer"
+packages="berry-git sxhkd-git polybar-git rofi kitty picom-arian8j2-git dunst \
+	gtk3 gtk-engine-murrine gnome-themes-extra alsa alsa-utils feh \
+	volumectl brightnessctl bluez bluez-utils playerctl i3lock-color \
+	ksuperkey sddm yad cava xclip pulseaudio pulseaudio-alsa pulseaudio-bluetooth \
+	xbrightness xcolor mpd mpc polkit-gnome xfce4-power-manager viewnior maim \
+	ttf-sarasa-gothic ttf-jetbrains-mono lm_sensors neovim zscroll nerd-fonts-jetbrains-mono \
+	eww-git ttf-icomoon-feather papirus-icon-theme mpdris2-git pamixer"
 
 clear
 printf "${blue}01010011 01110111 01100101 01100101 01110100\n"
@@ -29,59 +35,63 @@ printf "${green}"
 read -p "[-] DO YOU WANT TO CONTINUE [Y/N] : " install
 
 case $install in
-    N*|n*)
-    clear
-    printf "${red}[!] Aborting!\n"
+    	N|n)
+    		clear
+		
+    		printf "${red}[!] Aborting!\n"
+    	;;
+    	Y|y) 
+    		mkdir -p $dir 2>/dev/null
+		
+    		clear
+		
+    		printf "${red}[!] If you are in archlinux or any archbased distro it will automatically install the needed dependencies if not it will just copy the files\n"
+    		printf "${green}"
+		
+    		read -p "[-] ARE YOU USING ARCHLINUX [Y/N] : " arch
+
+    		case $arch in
+        		Y|y)
+        			clear
+
+        			printf "${yellow}[*] Updating System\n" && sleep 2
+        			sudo pacman --noconfirm -Syu
+
+        			printf "${yellow}[*] Installing Dependencies\n" && sleep 2
+        			sudo pacman --noconfirm --needed -S bash zsh git curl xorg
+
+        			printf "${blue}[!] Select a AUR helper\n"
+        			printf "${green}"
+				
+        			read -p "[-] (P)paru | (Y)yay : " helper
+
+        	
+				case $helper in
+            				P|p|Paru|paru)
+                				if [[ -f /usr/bin/paru ]]; then
+                    					paru -S $packages
+                				else
+                    					cd $dots
+                    					git clone https://aur.archlinux.org/paru-bin.git
+                    					cd paru-bin
+                    					makepkg -si
+                    					paru -S $packages
+                				fi
+            				;;
+            				Y|y|Yay|yay)
+                				if [[ -f /usr/bin/yay ]]; then
+                    					yay -S $packages
+                				else
+                    					cd $dots
+                    					git clone https://aur.archlinux.org/yay-bin.git
+                    					cd yay-bin
+                    					makepkg -si
+                    					yay -S $packages
+                				fi
+            				;;
+        			esac
+		esac
 esac
-
-case $install in
-    Y*|y*) 
-    mkdir -p $dir
-    clear
-    printf "${red}[!] If you are in archlinux or any archbased distro it will automatically install the needed dependencies if not it will just copy the files\n"
-    printf "${green}"
-    read -p "[-] ARE YOU USING ARCHLINUX [Y/N] : " arch
-
-    case $arch in
-        Y*|y*)
-        clear
-
-        printf "${yellow}[*] Updating System\n" && sleep 2
-        sudo pacman --noconfirm -Syu
-
-        printf "${yellow}[*] Installing Dependencies\n" && sleep 2
-        sudo pacman --noconfirm --needed -S bash zsh git curl xorg
-
-        printf "${blue}[!] Select a AUR helper\n"
-        printf "${green}"
-        read -p "[-] (P)paru | (Y)yay : " helper
-
-        case $helper in
-            P|p|Paru|paru)
-                if [[ -f /usr/bin/paru ]]; then
-                    paru -S $packages
-                else
-                    cd $dots
-                    git clone https://aur.archlinux.org/paru.git
-                    cd paru
-                    makepkg -si
-                    paru -S $packages
-                fi
-            ;;
-            Y|y|Yay|yay)
-                if [[ -f /usr/bin/yay ]]; then
-                    yay -S $packages
-                else
-                    cd $dots
-                    git clone https://aur.archlinux.org/yay.git
-                    cd yay
-                    makepkg -si
-                    yay -S $packages
-                fi
-            ;;
-        esac
-
-    esac
     clear
 
     printf "${yellow}[*] Getting dotfiles\n" && sleep 2
@@ -148,7 +158,7 @@ case $install in
         fi
         printf "${yellow}[*] Installing NvChad\n" && sleep 1
         printf "${red}[!] It will put you in neovim just wait if the syncing is finished after just quit out in neovim\n" && sleep 4 
-        git clone https://github.com/Deathemonic/Pastel.git $HOME/.config/nvim -b NvChad --depth 1
+        git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
         nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
         printf "${blue}[*] NvChad done\n" && sleep 1
         printf "${yellow}[*] Setting up VSCode theme\n" && sleep 1
