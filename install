@@ -18,9 +18,8 @@ packages="berry-git bspwm-git sxhkd-git i3-gaps-next-git polybar-git rofi alacri
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-icomoon-feather nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
-if [[ -d $dotfiles ]] && [[ -d $sweetcache ]]; then
-   printf "Dotfiles cache already exist, skipping\n"
-else
+printf "Making cache Folders"
+if [[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]]; then
    mkdir "$cache" 2>/dev/null
    mkdir "$sweetcache" 2>/dev/null
 fi
@@ -80,23 +79,13 @@ sleep 2
 printf "Creating Backups\n"
 tempdir=$(mktemp -d -p $HOME/.backups)
 
-if [[ -d $HOME/.backups ]]; then
-   echo "Backup folder already exist, skipping"
-else
-   mkdir $HOME/.backups 2>/dev/null
-fi
+[[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
 
-if [[ -d $configs/bspwm ]]; then
-   mv $configs/bspwm $tempdir
-fi
+[[ -d $configs/bspwm ]] && mv $configs/bspwm $tempdir
 
-if [[ -d $configs/berry ]]; then
-   mv $configs/berry $tempdir
-fi
+[[ -d $configs/berry ]] && mv $configs/berry $tempdir
 
-if [[ -d $configs/i3 ]]; then
-   mv $configs/i3 $tempdir
-fi
+[[ -d $configs/i3 ]] && mv $configs/i3 $tempdir
 sleep 2
 
 printf "Copying Dotfiles\n"
@@ -105,6 +94,8 @@ if [[ -d $configs/sweetconfigs-xorg ]]; then
 else
    cp -rf $dotfiles/sweetconfigs-xorg $configs
 fi
+
+[[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
 
 cp -rf $dotfiles/windowmanagers/* $configs
 sleep 2
