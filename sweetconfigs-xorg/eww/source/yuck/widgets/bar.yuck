@@ -1,0 +1,247 @@
+(defwidget workspaces []
+	(literal 
+		:content workspace
+	)
+)
+
+(defwidget music [] 
+	(eventbox 
+		:onhover "${eww} update music=true"
+		:onhoverlost "${eww} update music=false"
+
+		(box 
+			:class "music" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+
+			(box 
+				:class "song-cover" 
+				:vexpand "false" 
+				:hexpand "false" 
+				:style "background-image: url('${music-cover}');"
+			)
+
+			(button 
+				:class "song" 
+				:wrap "true" 
+				:onclick "~/.config/eww/bar/scripts/pop music" scroll
+			)
+
+		  	(revealer 
+				:transition "slideright"
+				:reveal music
+				:duration "350ms"
+
+				(box 
+					:vexpand "false" 
+					:hexpand "false" 
+					:oreintation "h" 
+
+					(button 
+						:class "music-previous" 
+						:onclick "scripts/music previous" ""
+					)
+
+					(button 
+						:class "music-play" 
+						:onclick "scripts/music toggle" music-status
+					)
+					
+					(button 
+						:class "music-next" 
+						:onclick "scripts/music next" ""
+					)
+				)
+			)
+		)
+	)
+)
+
+(defwidget brightness []
+	(eventbox 
+		:onhover "${eww} update brightness=true"
+  		:onhoverlost "${eww} update brightness=false"
+  			
+		(box
+			:orientation "h"  
+			:space-evenly "false"  
+			:spacing 2
+
+			(label 
+				:class "brightness-icon" 
+			  	:text {brightness-icon}			
+			)
+
+  			(revealer 
+				:transition "slideleft" 
+			  	:reveal brightness   
+				:duration "550ms"
+
+				(scale 
+					:class "brightness-bar"
+			  		:value brightness-value
+				   	:tooltip "Brightness: ${brightness-value}%" 
+				   	:onchange "brightnessctl set {}%" 
+				   	:orientation "h" 
+				   	:flipped false 
+				   	:max 101 
+				   	:min 0
+				)
+			)
+		)
+	)
+)
+
+(defwidget volume []
+	(eventbox 
+		:onhover "${eww} update volume=true"
+		:onhoverlost "${eww} update volume=false"
+
+		(box
+			:orientation "h" 	  
+			:space-evenly "false" 
+			:spacing "2"
+
+			(button
+				:onclick "pamixer -t"   
+				:class "volume-icon" {volume-icon}
+			)
+
+			(revealer 
+				:transition "slideleft" 
+			  	:reveal volume       
+			  	:duration "550ms"
+
+				(scale    
+					:class "volume-bar" 	  
+			  		:value volume-value 
+			  		:orientation "h"      
+			  		:flipped false 
+			  		:tooltip "Volume: ${volume-value}%" 
+			  		:max 101 
+			  		:min 0 
+			  		:onchange "amixer -D pulse sset Master {}%" 
+				)
+			)
+		)
+	)
+)
+
+(defwidget actions []
+	(box
+		:class "actions"
+		:orientation "h"
+		:space-evenly "false"
+
+		(volume)
+		(brightness)
+	)
+)
+
+(defwidget battery []
+	(box 
+		:class "battery"
+		:orientation "h"
+		:space-evenly "false"
+		:tooltip "Battery: ${battery-capacity}%"
+		
+		(overlay
+
+			(scale 
+				:class "battery-scale"
+				:min 0
+				:max 100
+				:orientation "h"
+				:value battery-capacity
+			)
+
+			(label 
+				:class "battery-label"
+				:text ""
+			)
+		)
+	)
+)
+
+(defwidget time []
+	(box 
+		:orientation "h"
+		:class "time"
+		:space-evenly "false"
+		:halign "end"
+
+		(label
+			:class "time-icon"
+			:text ""
+		)
+
+		(button
+			:class "time-text"
+			:onclick "scripts/calendar"
+			{time}
+		)
+	)
+)
+
+(defwidget power []
+	(box 
+		:class "power"
+		:orientation "h"
+		:space-evenly "false"
+		:halign "center"
+
+		(button 
+			:class "power-btn"
+			:onclick "$HOME/.config/sweetconfigs-xorg/bin/rofi/power"
+			""
+		)
+	)
+)
+
+(defwidget left []
+	(box 
+		:orientation "h" 
+		:space-evenly "false" 
+		:halign "start"
+
+		(workspaces)
+	)
+)
+
+(defwidget center []
+	(box 
+		:orientation "h" 
+		:space-evenly "false" 
+		:halign "center"
+
+		(music)
+	)
+)
+
+(defwidget right []
+	(box 
+		:orientation "h" 
+		:space-evenly "false" 
+		:halign "end"
+
+		(actions)
+		(battery)
+		(time)
+		(power)
+	)
+)
+
+(defwidget bar []
+	(box 
+		:class "eww-bar" 
+		:orientation "h" 
+		:valign "false" 
+		:halign "false"
+
+		(left)
+		(center)
+        (right)
+	)
+)

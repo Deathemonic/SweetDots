@@ -35,7 +35,6 @@ CONNS = CLIENT.get_connections()
 CONF = configparser.ConfigParser()
 CONF.read(expanduser("~/.config/sweetconfigs-xorg/rofi/network.ini"))
 
-
 def cli_args():
     """ Don't override dmenu_cmd function arguments with CLI args. Removes -l
     and -p if those are passed on the command line.
@@ -100,7 +99,7 @@ def dmenu_cmd(num_lines, prompt="Networks", active_lines=None):
     if prompt == "Passphrase" and obscure is True:
         obscure_color = CONF.get('dmenu_passphrase', 'obscure_color', fallback='#222222')
         pass_prompts = {"dmenu": dmenu_pass(command[0], obscure_color),
-                        "rofi": ['-dmenu', '-password'],
+                        "rofi": ['-password'],
                         "bemenu": ['-x'],
                         "wofi": ['-P']}
         command.extend(pass_prompts.get(command[0], []))
@@ -117,7 +116,7 @@ def choose_adapter(client):
     if len(devices) == 1:
         return devices[0]
     device_names = "\n".join([d.get_iface() for d in devices])
-    sel = subprocess.run(dmenu_cmd(len(devices), "CHOOSE ADAPTER:"),
+    sel = subprocess.run(dmenu_cmd(len(devices), "Choose Adapter:"),
                          capture_output=True,
                          check=False,
                          env=ENV,
@@ -637,7 +636,7 @@ def delete_connection():
     """
     conn_acts = [Action(i.get_id(), i.delete_async, args=[None, delete_cb, None]) for i in CONNS]
     conn_names = "\n".join([str(i) for i in conn_acts])
-    sel = subprocess.run(dmenu_cmd(len(conn_acts), "CHOOSE CONNECTION TO DELETE:"),
+    sel = subprocess.run(dmenu_cmd(len(conn_acts), "Choose a connection to Delete:"),
                          capture_output=True,
                          check=False,
                          input=conn_names,

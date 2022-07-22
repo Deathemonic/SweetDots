@@ -1,0 +1,10 @@
+#!/bin/bash
+
+zscroll -l 20 \
+        --delay 1 \
+        --scroll-padding " | " \
+        --match-command "/home/deathemonic/Documents/Test/eww/Bar/scripts/music-scroll scroll-status" \
+        --match-text "Playing" "--scroll 1" \
+        --match-text "Paused" "--scroll 0" \
+        --update-check true "/home/deathemonic/Documents/Test/eww/Bar/scripts/music-scroll" &
+wait

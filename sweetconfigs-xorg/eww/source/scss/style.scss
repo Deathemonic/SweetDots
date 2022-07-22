@@ -1,0 +1,13 @@
+* {
+	all: unset;
+}
+
+window {
+	color: $pink;
+	font-family: 'JetBrains Mono', 'Sarasa Mono CL', 'icomoon\-feather';
+}
+
+tooltip {
+	background-color: $black-lighter;
+	font-size: 14px;
+}

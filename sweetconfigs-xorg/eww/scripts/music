@@ -1,0 +1,87 @@
+#!/bin/bash
+
+players=$(echo "playerctl -p spotify,%any,firefox,chromium,brave,mpd")
+
+player_status=$($players status)
+artist=$(playerctl metadata --format '{{ artist }}')
+title=$(playerctl metadata --format '{{ title }}')
+albumart="$($players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+
+status_icon () {
+    if [ "$player_status" = "Playing" ]; then
+	    icon=""
+    elif [ "$player_status" = "Paused" ]; then
+	    icon=""
+    else
+	    icon=""
+    fi
+
+    echo $icon
+}
+
+status_value () {
+	player_name=$(echo $(playerctl -l) | cut -d '.' -f 1)
+
+	if [ "$player_status" = "Playing" ]; then
+		player_message="true"
+	else
+		echo "Music"
+	fi
+
+	[ "$player_message" = "true" ] && echo "Now Playing - via ${player_name^}"
+}
+
+title () {
+    if [ -z "$title" ]; then
+		echo "Nothing Playing";
+	else
+		echo $title
+	fi
+}
+
+artist () {
+    if [ "$title" = "Advertisement" ]; then
+		echo "Spotify Free"
+	else
+		if [ -z "$artist" ]; then
+			echo "Unknown Artist";
+		else
+			echo "by $artist"
+		fi
+	fi
+}
+
+cover () {
+    cover="/tmp/cover.png"
+    fallback="$HOME/Documents/Test/eww/Bar/assets/fallback.png"
+
+    [ $($players metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover 
+    echo "$cover"
+}
+
+case $1 in
+    next)
+        $players next
+    ;;
+	previous)
+        $players previous
+    ;;
+	toggle)
+        $players play-pause
+    ;;
+    status)
+        status_value
+    ;;
+    status-icon)
+        status_icon
+    ;;
+    title)
+        title
+    ;;
+    artist)
+        artist
+    ;;
+    cover)
+        cover
+    ;;
+esac

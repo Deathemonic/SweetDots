@@ -4,8 +4,8 @@ follow = mouse
 
 width = 300
 height = 80
-origin = top-right
-offset = 20x82
+origin = bottom-right
+offset = 2x8
 scale = 0
 
 indicate_hidden = yes
@@ -53,22 +53,18 @@ class = Dunst
 
 [urgency_low]
 timeout = 2
-background = "#212529"
-foreground = "#DEFBFF"
-frame_color = "#DEFBFF"
+background = "#1b1f23"
+foreground = "#b0ceef"
+frame_color = "#b0ceef"
 
 [urgency_normal]
 timeout = 5
-background = "#212529"
-foreground = "#FFDEDE"
-frame_color = "#FFDEDE"
+background = "#1b1f23"
+foreground = "#ffdede"
+frame_color = "#ffdede"
 
 [urgency_critical]
 timeout = 0
-background = "#212529"
-foreground = "#FF8E8E"
-frame_color = "#FF8E8E"
-
-[logger]
-summary = "*"
-script = "~/Documents/eww/scripts/logger"
+background = "#1b1f23"
+foreground = "#e5a3a1"
+frame_color = "#e5a3a1"

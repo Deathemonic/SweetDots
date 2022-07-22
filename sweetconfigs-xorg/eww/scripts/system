@@ -1,0 +1,87 @@
+#!/bin/bash
+
+brightness=$(brightnessctl i | grep -oP '\(\K[^%\)]+')
+volume=$(pamixer --get-volume)
+empty_battery="0"
+
+volume_icon () {
+    if [[ "$volume" -lt "35" ]]; then
+        icon=""
+    elif [[ "$volume" -lt "70" ]]; then
+        icon=""
+    else
+        icon=""
+    fi
+
+    [[ $(pamixer --get-mute) = "true" ]] && icon=""
+
+    echo $icon
+}
+
+brightness_icon () {
+    if [[ "$brightness" -lt "40" ]]; then
+        icon=""
+    elif [[ "$brightness" -lt "60" ]]; then
+        icon=""
+    else
+        icon=""
+    fi
+
+    echo $icon
+}
+
+battery_empty () {
+    if [ "$empty_battery" -gt 0 ]; then
+	    if [ ! -f "$HOME/.cache/empty_battery_capacity" ]; then 
+            echo $(($RANDOM % 100)) > "$HOME/.cache/empty_battery_capacity"
+        fi
+    fi
+}
+
+battery_icon () {
+    if [[ -d /sys/class/power_supply/ACAD ]]; then
+		echo ""
+	elif [[ -d /sys/class/power_supply/BAT ]]; then
+		if [[ $(cat /sys/class/power_supply/BAT/status) == "Discharging" ]]; then
+			echo ""
+		else
+			echo ""
+		fi
+	else
+		echo ""
+	fi
+}
+
+battery_capacity () {
+    if [ "$empty_battery" -gt 0 ]; then
+		if [ -f "$HOME/.cache/empty_battery_capacity" ]; then
+			echo $(cat "$HOME/.cache/empty_battery_capacity")
+		fi
+	elif [ -f /sys/class/power_supply/BAT0/capacity ]; then
+		echo $(cat /sys/class/power_supply/BAT0/capacity)
+	fi
+}
+
+case $1 in
+    volume-icon)
+        volume_icon
+    ;;
+    brightness-icon)
+        brightness_icon
+    ;;
+    volume-value)
+        echo $volume
+    ;;
+    brightness-value)
+        echo $brightness
+    ;;
+    empty-battery)
+        battery_empty
+    ;;
+    battery-icon)
+        battery_icon
+    ;;
+    battery-capacity)
+        battery_capacity
+    ;;
+esac

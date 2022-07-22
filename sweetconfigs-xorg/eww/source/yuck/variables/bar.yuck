@@ -1,0 +1,65 @@
+(defvar eww 
+    "eww -c $HOME/Documents/Test/eww/Bar"
+)
+
+(defvar brightness
+    false
+)
+
+(defvar volume
+    false
+)
+
+(defvar music
+	false
+)
+
+
+(deflisten workspace 
+	"scripts/workspaces"
+)
+
+(deflisten scroll
+	"scripts/scroll"
+)
+
+(defpoll music-status
+	:interval "2s"
+	"scripts/music status-icon"
+)
+
+(defpoll music-cover
+	:interval "2s"
+	"scripts/music cover"
+)
+
+
+(defpoll volume-icon
+	:interval "1s"
+	"scripts/system volume-icon"
+)
+
+(defpoll volume-value
+	:interval "1s"
+	"scripts/system volume-value"
+)
+
+(defpoll brightness-icon
+	:interval "1s"
+	"scripts/system brightness-icon"
+)
+
+(defpoll brightness-value
+	:interval "1s"
+	"scripts/system brightness-value"
+)
+
+(defpoll battery-capacity
+    :interval "1s"
+    "scripts/system battery-capacity"
+)
+
+(defpoll time
+    :interval "1s"
+	"date '+%I:%M %p'"
+)

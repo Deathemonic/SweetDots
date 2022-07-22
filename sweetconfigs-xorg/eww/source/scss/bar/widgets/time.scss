@@ -1,0 +1,20 @@
+.time {
+	
+	font-weight: bold;
+    color: $blue;
+
+	.time-text {
+		font-size: 1.1em;
+		margin: .5em 1em .5em 0em;
+    }
+
+    .time-icon {
+		font-size: 1.3em;
+		margin: .5em .5em .5em 0em;
+	}
+
+	.time-text:hover {
+		color: $pink;
+	}
+	
+}

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+player_status=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd status)
+exit=$?
+
+if [ $exit -eq 0 ]; then
+    status=$player_status
+else
+    status="Offline"
+fi
+
+if [ "$1" == "scroll-status" ]; then
+    echo "$status"
+else
+    if [ "$status" = "Stopped" ]; then
+        echo "Offline"
+    elif [ "$status" = "Paused"  ]; then
+        playerctl metadata --format '{{ artist }} - {{ title }}'
+    elif [ "$status" = "Offline"  ]; then
+        echo "$status"
+    else
+        playerctl metadata --format '{{ artist }} - {{ title }}'
+    fi
+fi

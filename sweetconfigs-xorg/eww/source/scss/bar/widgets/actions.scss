@@ -1,0 +1,36 @@
+.actions {
+	font-size: 1.3em;
+  font-weight: bold;
+
+	border-radius: 20px;
+	background-color: $black-darker;
+
+	margin: .5em .5em .5em 0em;
+  padding: .50em;
+}
+
+.brightness-icon{
+	margin: 0em 0em 0em .5em;
+  color: $yellow;
+}
+.volume-icon{
+	margin: 0em .5em 0em 0em;
+  color: $green;
+}
+
+scale trough {
+  all: unset;
+  background-color: $black-lighter;
+  border-radius: 5px;
+  min-height: 10px;
+  min-width: 80px;
+}
+
+.brightness-bar trough highlight {
+  background-color: $yellow;
+  border-radius: 5px;
+}
+.volume-bar trough highlight {
+  background-color: $green;
+  border-radius: 5px;
+}
