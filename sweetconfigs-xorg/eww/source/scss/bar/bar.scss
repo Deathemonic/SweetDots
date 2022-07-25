@@ -1,16 +1,15 @@
 .bar {
+  button:hover {
+    color: $blue;
+  }
 
-	button:hover {
-		color: $blue;
-	}
+  .eww-bar {
+    background-color: $black;
+    font-weight: normal;
+  }
 
-	.eww-bar {
-		background-color: $black;
-		font-weight: normal;
-	}
-	
-	.separator {
-		color: $black-darker;
-		font-size: 1em;
-	}
+  .separator {
+    color: $black-darker;
+    font-size: 1em;
+  }
 }

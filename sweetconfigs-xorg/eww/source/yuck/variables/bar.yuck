@@ -1,5 +1,5 @@
 (defvar eww 
-    "eww -c $HOME/Documents/Test/eww/Bar"
+    "eww -c $HOME/Documents/Test/eww/Sweet"
 )
 
 (defvar brightness
@@ -10,10 +10,17 @@
     false
 )
 
+(defvar network
+	false
+)
+
 (defvar music
 	false
 )
 
+(defvar calendar
+	false
+)
 
 (deflisten workspace 
 	"scripts/workspaces"
@@ -21,6 +28,11 @@
 
 (deflisten scroll
 	"scripts/scroll"
+)
+
+(defpoll title-artist
+	:interval "1s"
+	"scripts/music title-artist"
 )
 
 (defpoll music-status
@@ -32,7 +44,6 @@
 	:interval "2s"
 	"scripts/music cover"
 )
-
 
 (defpoll volume-icon
 	:interval "1s"
@@ -54,6 +65,21 @@
 	"scripts/system brightness-value"
 )
 
+(defpoll network-icon
+	:interval "3s"
+	"scripts/system network-icon"
+)
+
+(defpoll network-speed
+	:interval "1s"
+	"scripts/system network-speed"
+)
+
+(defpoll network-name
+	:interval "3s"
+	"scripts/system network-name"
+)
+
 (defpoll battery-capacity
     :interval "1s"
     "scripts/system battery-capacity"
@@ -62,4 +88,29 @@
 (defpoll time
     :interval "1s"
 	"date '+%I:%M %p'"
+)
+
+(defpoll calendar-day 
+	:interval "24h"
+    "date '+%d'"
+)
+
+(defpoll calendar-month 
+	:interval "24h"
+    "month=$(date +%m) && month=$((month - 1)) && echo $month"
+)
+
+(defpoll calendar-year 
+	:interval "24h"
+    "date '+%Y'"
+)
+
+(defpoll month-year
+	:interval "24h"
+	"date '+%B, %Y'"
+)
+
+(defpoll date
+	:interval "24h"
+	"date +%x"
 )

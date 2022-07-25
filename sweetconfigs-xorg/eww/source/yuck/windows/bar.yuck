@@ -15,3 +15,21 @@
 
 	(bar)
 )
+
+(defwindow calendar
+	:geometry 
+
+		(geometry 
+			:x "-1%"
+			:y "7%"
+			:width "230px"
+			:height "230px"
+			:anchor "top right"
+		)
+
+	:windowtype "dock"
+	:stacking "fg"
+	:wm-ignore false
+	
+	(calendar-widget)
+)

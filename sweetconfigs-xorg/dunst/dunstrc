@@ -68,3 +68,7 @@ timeout = 0
 background = "#1b1f23"
 foreground = "#e5a3a1"
 frame_color = "#e5a3a1"
+
+[logger]
+summary="*"
+script="~/.config/eww/src/shell/logger.py"

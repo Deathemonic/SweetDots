@@ -5,30 +5,72 @@ volume=$(pamixer --get-volume)
 empty_battery="0"
 
 volume_icon () {
-    if [[ "$volume" -lt "35" ]]; then
+    if [ $volume -lt "35" ]; then
         icon=""
-    elif [[ "$volume" -lt "70" ]]; then
+    elif [ $volume -lt "70" ]; then
         icon=""
     else
         icon=""
     fi
 
-    [[ $(pamixer --get-mute) = "true" ]] && icon=""
+    [ $(pamixer --get-mute) = "true" ] && icon=""
 
     echo $icon
 }
 
 brightness_icon () {
-    if [[ "$brightness" -lt "40" ]]; then
-        icon=""
-    elif [[ "$brightness" -lt "60" ]]; then
-        icon=""
+    if [ $brightness -lt "40" ]; then
+        echo ""
+    elif [ $brightness -lt "60" ]; then
+        echo ""
     else
-        icon=""
+        echo ""
     fi
-
-    echo $icon
 }
+
+network_icon () {
+    wifi_check=$(cat /sys/class/net/w*/operstate)
+    ethernet_check=$(cat /sys/class/net/e*/operstate)
+
+    
+	if [ $wifi_check = up ]; then
+        echo ""
+    else
+        if [ $ethernet_check = up ]; then
+            echo ""
+        else
+            echo ""
+        fi
+    fi
+}
+
+network_speed () {
+    interface="$(ip link | awk '/state UP/ {print $2}' | tr -d :)"
+
+    received_1=$(cat /sys/class/net/$interface/statistics/rx_bytes)
+    transmitted_1=$(cat /sys/class/net/$interface/statistics/tx_bytes)
+
+    received_2=$(cat /sys/class/net/$interface/statistics/rx_bytes)
+    transmitted_2=$(cat /sys/class/net/$interface/statistics/tx_bytes)
+
+    bandwidth_up=`expr $transmitted_2 - $transmitted_1`
+    bandwidth_down=`expr $received_2 - $received_1`
+
+    upspeed=$(expr $bandwidth_up / 1024)
+    downspeed=$(expr $bandwidth_down / 1024)
+
+    echo "$downspeed kB/s $upspeed kB/s"
+}
+
+network_name () {
+    ssid=$(iwgetid -r)
+    if [ -z $ssid ]; then 
+        echo "Not Connected"
+    else 
+        "Connected to $ssid"
+    fi
+}
+
 
 battery_empty () {
     if [ "$empty_battery" -gt 0 ]; then
@@ -75,6 +117,18 @@ case $1 in
     brightness-value)
         echo $brightness
     ;;
+    network-icon)
+        network_icon
+    ;;
+    network-speed)
+        network_speed
+    ;;
+    network-name)
+        network_name
+    ;;
+    network-menu)
+        ~/.config/sweetconfigs-xorg/bin/rofi/network
+    ;;
     empty-battery)
         battery_empty
     ;;
@@ -83,5 +137,8 @@ case $1 in
     ;;
     battery-capacity)
         battery_capacity
+    ;;
+    power-menu)
+        ~/.config/sweetconfigs-xorg/bin/rofi/power
     ;;
 esac

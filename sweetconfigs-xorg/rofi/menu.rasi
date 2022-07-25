@@ -71,7 +71,7 @@ mainbox {
 }
 
 listview {
-    columns:						1;
+    columns:						2;
     lines:						7;
     cycle:                                              false;
     dynamic:                                            true;
@@ -97,9 +97,9 @@ element-text {
 }
 
 element {
-   padding:                                             10px 5px 10px 5px;
-   margin:                                              5px 5px 5px 5px;
-   border-radius:                                       20px;
+   padding:                                             10px;
+   margin:                                              5px;
+   border-radius:                                       100%;
 }
 
 element normal.normal {

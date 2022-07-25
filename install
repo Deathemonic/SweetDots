@@ -97,7 +97,7 @@ fi
 
 [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
 
-cp -rf $dotfiles/windowmanagers/* $configs
+cp -rf $dotfiles/window-managers/* $configs
 sleep 2
 
 clear

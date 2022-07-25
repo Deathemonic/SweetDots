@@ -1,22 +1,22 @@
 .battery {
+  margin: 0em 1em 0em 0em;
+  border-radius: 20px;
 
-    margin: .5em 1em .5em 0em;
+  scale trough {
+    background-color: $green;
+    border-radius: 20px;
+    min-height: 2.4em;
+    min-width: 5em;
+  }
 
-	scale trough {
-		background-color: $green;
-		border-radius: 20px;
-		min-height: 2.4em;
-		min-width: 5em;
-	}
+  trough highlight {
+    background-color: $green;
+    border-radius: 20px;
+  }
 
-	trough highlight {
-		background-color: $green;
-		border-radius: 20px;
-	}
-
-	.battery-label {
-		color: $black;
-		font-size: 15px;
-		margin: .1em 0em 0em;
-	}
+  .battery-label {
+    color: $black;
+    font-size: 15px;
+    margin: 0.1em 0em 0em;
+  }
 }

@@ -1,37 +1,37 @@
 .music {
+  font-weight: bold;
 
-    font-weight : bold;
+  .song-cover {
+    background-size: cover;
+    background-position: center;
+    min-height: 25px;
+    min-width: 25px;
+    margin: 10px;
+    border-radius: 100%;
+  }
 
-    .song-cover {
-        background-size: cover;	
-        background-position: center;
-        min-height: 25px;
-        min-width: 30px;
-        margin: 10px;
-        border-radius: 100%;
-    }
+  .song {
+    color: $blue;
+    font-size: 1.1em;
+    margin: 0em 1em 0em 0em;
+  }
 
-    .song {
-	    color: $blue;
-	    font-size : 1.1em;
-        margin : .5em 1em .5em 0em;
-    }
+  .music-play {
+    color: $pink;
+    font-size: 1.3em;
+    margin: 0em 0em 0em 0em;
+  }
 
-    .music-play {
-	    color: $pink;
-	    font-size : 1.3em;
-        margin : .5em 0em .5em 0em;
-    }
+  .music-previous,
+  .music-next {
+    color: $blue;
+    font-size: 1.3em;
+    margin: 0em 0.5em 0em 0.5em;
+  }
 
-    .music-previous, .music-next {
-	    color: $blue;
-	    font-size : 1.3em;
-        margin : .5em .5em .5em .5em;
-    }
-
-    .music-previous:hover,
-    .music-next:hover,
-    .song:hover {
-        color: $pink;
-    }
+  .music-previous:hover,
+  .music-next:hover,
+  .song:hover {
+    color: $pink;
+  }
 }

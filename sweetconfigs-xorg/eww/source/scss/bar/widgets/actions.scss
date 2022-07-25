@@ -1,21 +1,25 @@
 .actions {
-	font-size: 1.3em;
+  font-size: 1.3em;
   font-weight: bold;
 
-	border-radius: 20px;
-	background-color: $black-darker;
+  border-radius: 20px;
+  background-color: $black-darker;
 
-	margin: .5em .5em .5em 0em;
-  padding: .50em;
+  margin: 0em 0.5em 0em 0em;
+  padding: 0.5em;
 }
 
-.brightness-icon{
-	margin: 0em 0em 0em .5em;
+.brightness-icon {
+  margin: 0em 0em 0em 1em;
   color: $yellow;
 }
-.volume-icon{
-	margin: 0em .5em 0em 0em;
+.volume-icon {
+  margin: 0em 0em 0em 0em;
   color: $green;
+}
+.network-icon {
+  margin: 0em 0em 0em 1em;
+  color: $purple;
 }
 
 scale trough {
@@ -33,4 +37,8 @@ scale trough {
 .volume-bar trough highlight {
   background-color: $green;
   border-radius: 5px;
+}
+.network-speed {
+  font-size: 0.8em;
+  color: $purple;
 }

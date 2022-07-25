@@ -81,6 +81,9 @@ case $1 in
     artist)
         artist
     ;;
+    title-artist)
+        echo $(title) - $(artist)
+    ;;
     cover)
         cover
     ;;

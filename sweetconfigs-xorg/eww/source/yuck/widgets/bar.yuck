@@ -26,10 +26,11 @@
 			(button 
 				:class "song" 
 				:wrap "true" 
-				:onclick "~/.config/eww/bar/scripts/pop music" scroll
+				:onclick "music box" title-artist
+				;; Replace 'scroll' with 'title-artist' if your facing performance drop
 			)
 
-		  	(revealer 
+		  	(revealer
 				:transition "slideright"
 				:reveal music
 				:duration "350ms"
@@ -129,6 +130,36 @@
 	)
 )
 
+(defwidget network []
+	(eventbox 
+		:onhover "${eww} update network=true"
+		:onhoverlost "${eww} update network=false"
+
+		(box
+			:orientation "h" 	  
+			:space-evenly "false" 
+			:spacing "2"
+
+			(button
+				:onclick "scripts/system network-menu"
+				:class "network-icon" {network-icon}
+			)
+
+			(revealer 
+				:transition "slideleft" 
+			  	:reveal network       
+			  	:duration "550ms"
+
+				(label
+					:class "network-speed" 
+					:text {network-speed}
+					:tooltip "${network-name}"
+				)
+			)
+		)
+	)
+)
+
 (defwidget actions []
 	(box
 		:class "actions"
@@ -137,6 +168,7 @@
 
 		(volume)
 		(brightness)
+		(network)
 	)
 )
 
@@ -179,8 +211,57 @@
 
 		(button
 			:class "time-text"
+			:tooltip "${date}"
 			:onclick "scripts/calendar"
 			{time}
+		)
+	)
+)
+
+(defwidget calendar-widget []
+	(revealer 
+		:transition "crossfade" 
+		:reveal calendar
+		:duration "250ms" 
+		
+		(box 
+			:class "cal-window"
+			:orientation "v"
+
+			(box 
+				:class "cal-box"
+				:orientation "v"
+				:space-evenly "false"
+
+				(label 
+					:class "month-year" 
+					:text month-year
+				)
+
+				(box 
+					:class "day-names" 
+					:orientation "h" 
+					:space-evenly "true"
+
+					(label :text "Sun")
+					(label :text "Mon")
+					(label :text "Tue")
+					(label :text "Wed")
+					(label :text "Thu")
+					(label :text "Fri")
+					(label :text "Sat")
+				)
+
+				(calendar 
+					:class "cal" 
+					:show-details false 
+					:show-heading false 
+					:show-day-names false
+					:day calendar-day 
+					:month calendar-month 
+					:year calendar-year
+				)
+			)
 		)
 	)
 )
@@ -194,7 +275,7 @@
 
 		(button 
 			:class "power-btn"
-			:onclick "$HOME/.config/sweetconfigs-xorg/bin/rofi/power"
+			:onclick "scripts/system power-menu"
 			""
 		)
 	)
@@ -204,6 +285,7 @@
 	(box 
 		:orientation "h" 
 		:space-evenly "false" 
+		:valign "center"
 		:halign "start"
 
 		(workspaces)
@@ -213,7 +295,8 @@
 (defwidget center []
 	(box 
 		:orientation "h" 
-		:space-evenly "false" 
+		:space-evenly "false"
+		:valign "center"
 		:halign "center"
 
 		(music)
@@ -223,11 +306,12 @@
 (defwidget right []
 	(box 
 		:orientation "h" 
-		:space-evenly "false" 
+		:space-evenly "false"
+		:valign "center"
 		:halign "end"
 
 		(actions)
-		(battery)
+		;; (battery) ;; Uncomment to enable the battery widget
 		(time)
 		(power)
 	)
@@ -236,7 +320,7 @@
 (defwidget bar []
 	(box 
 		:class "eww-bar" 
-		:orientation "h" 
+		:orientation "h"
 		:valign "false" 
 		:halign "false"
 
