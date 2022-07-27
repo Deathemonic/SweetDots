@@ -1,7 +1,7 @@
-.music {
+.music-bar {
   font-weight: bold;
 
-  .song-cover {
+  .song-cover-bar {
     background-size: cover;
     background-position: center;
     min-height: 25px;
@@ -10,28 +10,28 @@
     border-radius: 100%;
   }
 
-  .song {
+  .song-bar {
     color: $blue;
     font-size: 1.1em;
     margin: 0em 1em 0em 0em;
   }
 
-  .music-play {
+  .music-play-bar {
     color: $pink;
     font-size: 1.3em;
     margin: 0em 0em 0em 0em;
   }
 
-  .music-previous,
-  .music-next {
+  .music-previous-bar,
+  .music-next-bar {
     color: $blue;
     font-size: 1.3em;
     margin: 0em 0.5em 0em 0.5em;
   }
 
-  .music-previous:hover,
-  .music-next:hover,
-  .song:hover {
+  .music-previous-bar:hover,
+  .music-next-bar:hover,
+  .song-bar:hover {
     color: $pink;
   }
 }

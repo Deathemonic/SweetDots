@@ -10,7 +10,14 @@
 
 	:monitor 0
 	:stacking "bg"
-	:windowtype "dock"
+	:reserve 
+
+		(struts 
+			:distance "40px" 
+			:side "top"
+		)
+
+	:windowtype "desktop"
 	:wm-ignore false
 
 	(bar)

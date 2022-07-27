@@ -1,0 +1,26 @@
+.controls-title {
+  color: $pink;
+}
+
+.controls {
+
+  button {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.5em;
+    padding: 1.5em;
+    background-color: $black-lighter;
+    border-radius: 100%;
+    transition: 0.5s;
+
+    &:hover {
+      color: $blue;
+      background-color: $black-darker;
+    }
+  }
+
+  .bluetooth {
+    font-family: 'Jetbrains Mono Nerd Font';
+    font-weight: bold;
+  }
+}

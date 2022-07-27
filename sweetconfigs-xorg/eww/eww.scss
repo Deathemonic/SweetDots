@@ -1,6 +1,11 @@
 @import "source/scss/colors.scss";
 @import "source/scss/style.scss";
 
+@import "source/scss/bar/bar.scss";
+@import "source/scss/dashboard/dashboard.scss";
+@import "source/scss/dashboard/desktop.scss";
+@import "source/scss/dashboard/notifications.scss";;
+
 @import "source/scss/bar/widgets/actions.scss";
 @import "source/scss/bar/widgets/battery.scss";
 @import "source/scss/bar/widgets/calendar.scss";
@@ -9,4 +14,9 @@
 @import "source/scss/bar/widgets/time.scss";
 @import "source/scss/bar/widgets/workspaces.scss";
 
-@import "source/scss/bar/bar.scss"
+@import "source/scss/dashboard/widgets/clock.scss";
+@import "source/scss/dashboard/widgets/controls.scss";
+@import "source/scss/dashboard/widgets/music.scss";
+@import "source/scss/dashboard/widgets/profile.scss";
+@import "source/scss/dashboard/widgets/stats.scss";
+@import "source/scss/dashboard/widgets/weather.scss";

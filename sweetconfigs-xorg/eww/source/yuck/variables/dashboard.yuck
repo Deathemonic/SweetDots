@@ -1,0 +1,172 @@
+(defvar notification-center
+    false
+)
+
+(defvar notification
+    false
+)
+
+(defpoll system-name
+    :interval "1m"
+    "echo $(hostname)@$(whoami)"
+)
+
+(defpoll uptime
+    :interval "1m"
+    "uptime -p"
+)
+
+(defpoll cpu-value
+    :interval "1s"
+    "scripts/system cpu-value"
+)
+
+(defpoll memory-value
+    :interval "1s"
+    "scripts/system memory-value"
+)
+
+(defpoll temperature-value
+    :interval "1s"
+    "scripts/system temperature-value"
+)
+
+(defpoll disk-value
+    :interval "5s"
+    "scripts/system disk-value"
+)
+
+(defpoll seconds
+    :interval "1s"
+    "seconds=$(date +%S) && seconds=$(($seconds * 100 / 60)) && echo $seconds"
+)
+
+(defpoll hour
+    :interval "1s"
+    "date +%I"
+)
+
+(defpoll minute
+    :interval "1s"
+    "date +%M"
+)
+
+(defpoll status
+    :interval "1s"
+    "scripts/music status"
+)
+
+(defpoll song-artist
+    :interval "1s"
+    "scripts/music artist"
+)
+
+(defpoll song-title
+    :interval "1s"
+    "scripts/music title"
+)
+
+(defpoll song-position
+    :interval "1s"
+    "scripts/music position"
+)
+
+(defpoll weather-icon
+    :interval "5s"
+    "scripts/weather icon"
+)
+
+(defpoll weather-color
+    :interval "5s"
+    "scripts/weather color"
+)
+
+(defpoll weather-temperature
+    :interval "5s"
+    "scripts/weather temperature"
+)
+
+(defpoll weather-status
+    :interval "5s"
+    "scripts/weather status"
+)
+
+(defpoll city
+    :interval "5s"
+    "scripts/weather city"
+)
+
+(defpoll country
+    :interval "5s"
+    "scripts/weather country"
+)
+
+(defpoll nl-pressed-bg
+    :interval "0.1s"
+    "scripts/controls night-light-pressed-background"
+)
+
+(defpoll nl-pressed-fg
+    :interval "0.1s"
+    "scripts/controls night-light-pressed-foreground"
+)
+
+(defpoll nl-icon
+    :interval "0.5s"
+    "scripts/controls night-light-icon"
+)
+
+(defpoll dnd-pressed-bg
+    :interval "0.1s"
+    "scripts/controls do-not-disturb-pressed-background"
+)
+
+(defpoll dnd-pressed-fg
+    :interval "0.1s"
+    "scripts/controls do-not-disturb-pressed-foreground"
+)
+
+(defpoll dnd-icon
+    :interval "0.5s"
+    "scripts/controls do-not-disturb-icon"
+)
+
+(defpoll airplane-pressed-bg
+    :interval "0.1s"
+    "scripts/controls airplane-mode-pressed-background"
+)
+
+(defpoll airplane-pressed-fg
+    :interval "0.1s"
+    "scripts/controls airplane-mode-pressed-foreground"
+)
+
+(defpoll airplane-icon
+    :interval "0.5s"
+    "scripts/controls airplane-mode-icon"
+)
+
+(defpoll bluetooth-pressed-bg
+    :interval "0.1s"
+    "scripts/controls bluetooth-pressed-background"
+)
+
+(defpoll bluetooth-pressed-fg
+    :interval "0.1s"
+    "scripts/controls bluetooth-pressed-foreground"
+)
+
+(defpoll bluetooth-icon
+    :interval "0.5s"
+    "scripts/controls bluetooth-icon"
+)
+
+(defpoll dunst_history 
+    :interval "250ms"
+	"dunstctl history"
+)
+
+(defpoll empty-notification-check
+    :interval "0.1s"
+	"scripts/system notification-count"
+)

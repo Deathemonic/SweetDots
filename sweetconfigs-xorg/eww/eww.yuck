@@ -1,14 +1,12 @@
 (include "source/yuck/variables/bar.yuck")
 (include "source/yuck/variables/dashboard.yuck")
 (include "source/yuck/variables/lockscreen.yuck")
-(include "source/yuck/variables/sidepanel.yuck")
 
 (include "source/yuck/widgets/bar.yuck")
 (include "source/yuck/widgets/dashboard.yuck")
 (include "source/yuck/widgets/lockscreen.yuck")
-(include "source/yuck/widgets/sidepanel.yuck")
+(include "source/yuck/widgets/notifications.yuck")
 
 (include "source/yuck/windows/bar.yuck")
 (include "source/yuck/windows/dashboard.yuck")
 (include "source/yuck/windows/lockscreen.yuck")
-(include "source/yuck/windows/sidepanel.yuck")

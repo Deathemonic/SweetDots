@@ -1,11 +1,13 @@
 #!/bin/bash
 
 players=$(echo "playerctl -p spotify,%any,firefox,chromium,brave,mpd")
-
 player_status=$($players status)
 artist=$(playerctl metadata --format '{{ artist }}')
 title=$(playerctl metadata --format '{{ title }}')
 albumart="$($players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+cache="$HOME/.cache/eww/music"
+
+[ ! -d $cache ] && mkdir $cache
 
 status_icon () {
     if [ "$player_status" = "Playing" ]; then
@@ -23,12 +25,10 @@ status_value () {
 	player_name=$(echo $(playerctl -l) | cut -d '.' -f 1)
 
 	if [ "$player_status" = "Playing" ]; then
-		player_message="true"
+		echo "Now Playing - via ${player_name^}"
 	else
 		echo "Music"
 	fi
-
-	[ "$player_message" = "true" ] && echo "Now Playing - via ${player_name^}"
 }
 
 title () {
@@ -52,11 +52,37 @@ artist () {
 }
 
 cover () {
-    cover="/tmp/cover.png"
+    cover="$cache/cover.png"
     fallback="$HOME/Documents/Test/eww/Bar/assets/fallback.png"
 
     [ $($players metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover 
-    echo "$cover"
+    echo $cover
+}
+
+cover_notification () {
+    cover="$cache/$DUNST_SUMMARY.png"
+    cache_file="$cache/temp.png"
+
+    cover_url="$($players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+
+    if [[ $($players metadata mpris:artUrl) ]]; then
+	    curl -s "$cover_url" --output "$cache_file"
+    fi
+
+    cp "$cache_file" "$cover"
+}
+
+position () {
+    position=$(playerctl position | sed 's/..\{6\}$//')
+	duration=$(playerctl metadata mpris:length | sed 's/.\{6\}$//')
+	
+    if [[ $position -gt 0 ]]; then
+	    printf "%0d:%02d" $((position%3600/60)) $((position%60))
+	    printf " / "
+	    printf "%0d:%02d" $((duration%3600/60)) $((duration%60))
+    else
+        echo " "
+    fi
 }
 
 case $1 in
@@ -86,5 +112,11 @@ case $1 in
     ;;
     cover)
         cover
+    ;;
+    cover-notification)
+        cover_notification
+    ;;
+    position)
+        position || echo "--:-- / --:-- "
     ;;
 esac

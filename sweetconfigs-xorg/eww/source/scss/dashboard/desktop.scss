@@ -1,0 +1,18 @@
+.desktop {
+  button:hover {
+    color: $blue;
+  }
+
+  .eww-desktop {
+    background-color: transparent;
+    border-radius: 20px;
+    font-weight: normal;
+    padding: 0em;
+  }
+
+  .desktop-windows {
+    border-radius: 20px;
+    padding: 1em;
+    margin: 0.5em;
+  }
+}

@@ -1,0 +1,84 @@
+(defwindow dashboard
+	:geometry 
+	
+		(geometry 
+			:x "0"
+			:y "0" 
+			:width "0%"
+			:height "0%"
+            :anchor "center left"
+		)
+
+	:monitor 0
+	:stacking "fg"
+	:windowtype "desktop"
+	:wm-ignore false
+
+	(dashboard)
+)
+
+(defwindow desktop
+	:geometry 
+	
+		(geometry 
+			:x "3%"
+			:y "10%" 
+			:width "0%"
+			:height "0%"
+            :anchor "top left"
+		)
+
+	:monitor 0
+	:stacking "fg"
+	:windowtype "desktop"
+	:wm-ignore false
+
+	(desktop)
+)
+
+(defwindow notification-center
+    :geometry 
+
+		(geometry 
+			:x "0%"
+            :y "0%" 
+            :width "26%" 
+            :height "83%"
+            :anchor "center"
+		)
+
+    :windowtype "dock"
+    :stacking "fg"
+    :wm-ignore false
+
+    (notification-center)
+)
+
+(defwindow notification-popup
+	:geometry 
+	
+		(geometry 
+			:x "-1%"
+			:y "-1%" 
+			:width "24%" 
+			:height "20%"
+			:anchor "bottom right"
+		)
+
+	:windowtype "dock"
+	:stacking "fg"
+	:wm-ignore false
+
+	(notification-popup)
+)
+
+(defwindow control-center
+	:geometry (geometry :x "0%"
+						:y "0%" 
+						:width "0%" 
+						:height "0%"
+						:anchor "center")
+	:windowtype "dock"
+	:stacking "fg"
+	:wm-ignore false
+	(control-center))

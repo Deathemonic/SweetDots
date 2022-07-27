@@ -67,7 +67,7 @@ network_name () {
     if [ -z $ssid ]; then 
         echo "Not Connected"
     else 
-        "Connected to $ssid"
+        echo "Connected to $ssid"
     fi
 }
 
@@ -82,15 +82,15 @@ battery_empty () {
 
 battery_icon () {
     if [[ -d /sys/class/power_supply/ACAD ]]; then
-		echo ""
+		echo ""
 	elif [[ -d /sys/class/power_supply/BAT ]]; then
 		if [[ $(cat /sys/class/power_supply/BAT/status) == "Discharging" ]]; then
-			echo ""
+			echo ""
 		else
-			echo ""
+			echo ""
 		fi
 	else
-		echo ""
+		echo ""
 	fi
 }
 
@@ -104,7 +104,63 @@ battery_capacity () {
 	fi
 }
 
+cpu_value () {
+    preview_total=0
+    preview_idle=0
+    cache="/tmp/cpu_value.cache.eww"
+
+
+    if [[ -f "${cache}" ]]; then
+		file=$(cat "${cache}")
+		preview_total=$(echo "${file}" | head -n 1)
+		preview_idle=$(echo "${file}" | tail -n 1)
+	fi
+
+	cpu=(`cat /proc/stat | grep '^cpu '`)
+	unset cpu[0]
+	idle=${cpu[4]}
+
+	total=0
+
+	for value in "${cpu[@]:0:4}"; do
+		let "total=$total+$value"
+	done
+
+	if [[ "${preview_total}" != "" ]] && [[ "${preview_idle}" != "" ]]; then
+		let "diff_idle=$idle-$preview_idle"
+		let "diff_total=$total-$preview_total"
+		let "diff_usage=(1000*($diff_total-$diff_idle)/$diff_total+5)/10"
+		echo "${diff_usage}"
+	else
+		echo "0"
+	fi
+
+	echo "${total}" > "${cache}"
+	echo "${idle}" >> "${cache}"
+}
+
+temperature_value () {
+    IFS=')' read -ra core_temp_arr <<< $(sensors | grep '^Core\s[[:digit:]]\+:')
+
+    total_cpu_temp=0
+    index=0
+    
+    for i in "${core_temp_arr[@]}"; do :
+        temp=$(echo $i | sed -n 's/°C.*//; s/.*[+-]//; p; q')
+        let index++
+        total_cpu_temp=$(echo "$total_cpu_temp + $temp" | bc)
+    done
+    
+    avg_cpu_temp=$(echo "scale=2; $total_cpu_temp / $index" | bc)
+
+    temp_status="$avg_cpu_temp"
+    echo $temp_status
+}
+
 case $1 in
+    eww-calendar)
+       $HOME/Documents/Test/eww/Sweet/scripts/calendar
+    ;;
     volume-icon)
         volume_icon
     ;;
@@ -140,5 +196,20 @@ case $1 in
     ;;
     power-menu)
         ~/.config/sweetconfigs-xorg/bin/rofi/power
+    ;;
+    cpu-value)
+        cpu_value
+    ;;
+    memory-value)
+        printf "%.0f\n" $(free -m | grep Mem | awk '{print ($3/$2)*100}')
+    ;;
+    temperature-value)
+        temperature_value
+    ;;
+    disk-value)
+        df -h / | awk '{print $5}' | tail -n1 | sed 's/%//g'
+    ;;
+    notification-count)
+        [[ "$(dunstctl history | jq -r '.data[0]')" = "[]" ]] && echo "true" || echo "false"
     ;;
 esac

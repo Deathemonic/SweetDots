@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cache="$HOME/.cache/calendar-widget.eww"
+cache="$HOME/.cache/eww/calendar-widget.eww"
 config="$HOME/Documents/Test/eww/Sweet"
 
 run () {

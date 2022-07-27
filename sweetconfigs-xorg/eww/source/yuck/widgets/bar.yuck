@@ -4,29 +4,29 @@
 	)
 )
 
-(defwidget music [] 
+(defwidget music-bar [] 
 	(eventbox 
 		:onhover "${eww} update music=true"
 		:onhoverlost "${eww} update music=false"
 
 		(box 
-			:class "music" 
+			:class "music-bar" 
 			:orientation "h" 
 			:space-evenly "false" 
 			:vexpand "false" 
 			:hexpand "false"
 
 			(box 
-				:class "song-cover" 
+				:class "song-cover-bar" 
 				:vexpand "false" 
-				:hexpand "false" 
+				:hexpand "false"
 				:style "background-image: url('${music-cover}');"
 			)
 
 			(button 
-				:class "song" 
+				:class "song-bar" 
 				:wrap "true" 
-				:onclick "music box" title-artist
+				title-artist
 				;; Replace 'scroll' with 'title-artist' if your facing performance drop
 			)
 
@@ -41,17 +41,17 @@
 					:oreintation "h" 
 
 					(button 
-						:class "music-previous" 
+						:class "music-previous-bar" 
 						:onclick "scripts/music previous" ""
 					)
 
 					(button 
-						:class "music-play" 
+						:class "music-play-bar" 
 						:onclick "scripts/music toggle" music-status
 					)
 					
 					(button 
-						:class "music-next" 
+						:class "music-next-bar" 
 						:onclick "scripts/music next" ""
 					)
 				)
@@ -212,7 +212,7 @@
 		(button
 			:class "time-text"
 			:tooltip "${date}"
-			:onclick "scripts/calendar"
+			:onclick "scripts/system eww-calendar"
 			{time}
 		)
 	)
@@ -299,7 +299,7 @@
 		:valign "center"
 		:halign "center"
 
-		(music)
+		(music-bar)
 	)
 )
 

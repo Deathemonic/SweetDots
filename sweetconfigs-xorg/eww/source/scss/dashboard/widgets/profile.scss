@@ -1,0 +1,57 @@
+.profile-title {
+  color: $pink;
+  margin-bottom: 0.5em;
+}
+
+
+.profile-picture {
+  background-image: url("assets/avatar.png");
+  background-repeat: no-repeat;
+  background-size: 10rem;
+  background-position: center;
+  min-height: 100px;
+  min-width: 100px;
+  border: 2px solid $pink;
+  border-radius: 100%;
+}
+
+.name {
+  color: $pink;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 1em;
+}
+
+.uptime {
+  color: $blue;
+  font-size: 0.8em;
+  font-weight: bold;
+  font-style: italic;
+  margin: 1em;
+}
+
+.exit {
+  background-color: $black-lighter;
+  color: $red;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 1em;
+  margin: 0.5em 0em 0.5em 0.5em;
+  border-radius: 10px;
+}
+
+.lock {
+  background-color: $black-lighter;
+  color: $green;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 1em;
+  margin: 0.5em 0em 0.5em 0em;
+  border-radius: 10px;
+}
+
+.lock:hover,
+.exit:hover {
+  background-color: $black-darker;
+  transition: 0.5s;
+}

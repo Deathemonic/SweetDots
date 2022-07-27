@@ -36,12 +36,12 @@
 )
 
 (defpoll music-status
-	:interval "2s"
+	:interval "1s"
 	"scripts/music status-icon"
 )
 
 (defpoll music-cover
-	:interval "2s"
+	:interval "1s"
 	"scripts/music cover"
 )
 

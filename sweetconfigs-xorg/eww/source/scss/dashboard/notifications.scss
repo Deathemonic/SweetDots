@@ -1,0 +1,118 @@
+.notification-center-window {
+	.notification-center-box {
+		border-radius: 10px;
+		padding: 2em ;
+
+		min-width: 310px;
+
+		.notification-text {
+			margin: .5em 0em;
+			font-size: 15px;
+			color: $pink;
+		}
+	
+		.notification-scroller {
+			margin: .75em 0em 0em;
+			min-height: 46em;
+			background-color: $black;
+			border-radius: 6px;
+	
+			.notification-history {
+				.eon {
+					font-size: 15px;
+					font-weight: bold;
+				}
+
+				.notification {
+					margin: .25em 1em .75em;
+					box-shadow: none;
+				}
+			}
+		}
+
+		.clear-all-btn {
+			background-color: $black-lighter;
+			border-radius: 20px;
+			padding: 1em;
+			margin-bottom: 1px;
+			font-size: 10px;
+			font-weight: bold;
+			transition: 0.5s;
+		}
+
+		.clear-all-btn:hover {
+			background-color: $black-darker;
+		}
+	}
+}
+
+.notification {
+	background-color: $black-darker;
+	border-radius: 10px;
+	margin-bottom: 1.5em;
+
+	box-shadow: 4px 3px 8px 1px rgba(0, 0, 0, 0.55);
+
+	.notification-title {
+		background-color: inherit;
+		padding: .95em 0em .75em;
+		font-size: 14px;
+
+		border-radius: 10px 10px 0px 0px;
+
+		.notification-title-text {
+			margin: 0em 0em 0em 1em;
+			font-weight: bold;
+		}
+
+		.notification-close {
+			margin: 0em 1em 0em 0em;
+			color: $red;
+            font-weight: bold;
+		}
+	}
+
+	.notification-body {
+		padding: .5em 0em 1em;
+		font-size: 14px;
+		border-radius: 0px 0px 10px 10px;
+
+		.notification-image {
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			border-radius: 8px;
+			min-height: 64px;
+			min-width: 64px;
+			margin-left: 1.5em;
+		}
+
+		.notification-content {
+			margin: 1em;
+
+			.notification-summary {
+				font-size: 16px;
+				font-weight: bold;
+				margin: .25em 0em .5em 0em;				
+			}
+
+			.notification-message {
+				// margin-left: -1em;
+				font-size: 12px;
+				color: $pink;
+			}
+		}
+	}
+
+	.notification-screenshot-opt, .notification-opt {
+		margin: 1em 1em 0em;
+		border-radius: inherit;
+
+		button {
+			background-color: $black-lighter;
+			border-radius: 6px;
+			padding: .5em;
+			margin: 0em .5em;
+		}
+	}
+}

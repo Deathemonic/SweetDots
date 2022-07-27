@@ -1,0 +1,48 @@
+.stat-title {
+  color: $pink;
+}
+
+.stat-box {
+  background-color: $black-lighter;
+  border-radius: 20px;
+  margin: 1em;
+  padding: 1em;
+}
+
+.cpu-circle {
+  background-color: $black-darker;
+  color: $red;
+}
+.memory-circle {
+  background-color: $black-darker;
+  color: $green;
+}
+.temperature-circle {
+  background-color: $black-darker;
+  color: $yellow;
+}
+.disk-circle {
+  background-color: $black-darker;
+  color: $purple;
+}
+
+.cpu-circle-text {
+  padding: 1.5em;
+  color: $red;
+  font-size: 1.5em;
+}
+.memory-circle-text {
+  padding: 1.5em;
+  color: $green;
+  font-size: 1.5em;
+}
+.temperature-circle-text {
+  padding: 1.5em;
+  color: $yellow;
+  font-size: 1.5em;
+}
+.disk-circle-text {
+  padding: 1.5em;
+  color: $purple;
+  font-size: 1.5em;
+}
