@@ -4,7 +4,7 @@
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/81)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/82)
 
 Configs (Wayland)
 
@@ -20,7 +20,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/72)
 
 EWW (Wayland)
 
