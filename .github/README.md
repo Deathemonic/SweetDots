@@ -4,7 +4,7 @@
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/82)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
 
 Configs (Wayland)
 
@@ -12,7 +12,7 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/63)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
 
 Window Manager Configs (Wayland)
 
@@ -20,7 +20,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/72)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/73)
 
 EWW (Wayland)
 
@@ -28,7 +28,7 @@ EWW (Wayland)
 
 Sweetpastel Ports
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/50)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
 
 README
 
@@ -40,4 +40,8 @@ Installer
 
 ## Doing Now
 
-Making **<kbd>EWW Bar</kbd>**
+Making **<kbd>EWW Dashboard</kbd>**
+
+## Highlights
+
+**``Roboto`` will be the UI font instead of ``Jetbrains``**
