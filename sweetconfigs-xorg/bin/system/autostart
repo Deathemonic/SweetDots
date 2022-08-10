@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Autostart Programs
+# Warning: This file is important don't delete or modify anything unless know what your doing
 
 # Kill already running processs
-process=(sxhkd polybar picom dunst ksuperkey mpd xfce-polkit xfce4-power-manager)
+process=(sxhkd polybar picom dunst mpd mpDris2 xfce4-power-manager)
 for processed in "${process[@]}"; do
 	if [[ `pidof ${processed}` ]]; then
 		killall -9 ${processed}
@@ -22,14 +23,10 @@ xsetroot -cursor_name left_ptr &
 # Power Management
 xfce4-power-manager &
 
-# Super Keys
-ksuperkey -e 'Super_L=Alt_L|F1' &
-ksuperkey -e 'Super_R=Alt_L|F1' &
-
 # Set/Restore wallpaper
-feh --bg-fill -r -z $HOME/.config/sweetconfigs-xorg/wallpapers &
+feh --bg-fill -r -z $HOME/.config/sweetconfigs-xorg/wallpapers/stairs.png &
 
-# Polybar
+# Bar
 $HOME/.config/sweetconfigs-xorg/bin/system/bar &
 
 # Notification

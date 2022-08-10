@@ -1,0 +1,220 @@
+(defwidget left []
+    (literal
+        :halign "start"
+        :valign "center"
+        :content workspaces
+    )
+)
+
+(defwidget center []
+    (box 
+		:orientation "h" 
+		:space-evenly false
+		:valign "center"
+		:halign "center"
+
+        (eventbox
+            :onhover "${EWW_CMD} update top-panel-music=true"
+            :onhoverlost "${EWW_CMD} update top-panel-music=false"
+
+            (box 
+                :class "music-bar" 
+                :orientation "h" 
+                :space-evenly false
+
+                (box 
+                    :class "song-cover-bar" 
+                    :style "background-image: url('${music-cover}');"
+                )
+
+                (button 
+                    :class "song-bar" 
+                    {title-artist}
+                    ;; Replace 'scroll' with 'title-artist' if your facing performance drop (Replacing with title-artist will not wrap the text)
+                )
+
+                (revealer
+                    :transition "slideright"
+                    :reveal top-panel-music
+                    :duration "350ms"
+
+                    (box 
+                        :valign "center"
+                        :oreintation "h" 
+
+                        (button
+                            :class "music-previous-bar"
+                            :onclick "playerctl -p ${players} previous" ""
+                        )
+                
+                        (button
+                            :class "music-play-bar"
+                            :onclick "playerctl -p ${players} play-pause" play-pause
+                        )
+
+                        (button
+                            :class "music-next-bar"
+                            :onclick "playerctl -p ${players} next" ""
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+(defwidget right []
+    (box
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
+
+        (box
+	    	:class "actions"
+	    	:orientation "h"
+	    	:space-evenly false
+
+            (eventbox 
+                :onhover "${EWW_CMD} update top-panel-brightness=true"
+                :onhoverlost "${EWW_CMD} update top-panel-brightness=false"
+
+                (box
+                    :orientation "h"  
+                    :space-evenly false
+                    :spacing 2
+                
+                    (label 
+                        :class "brightness-icon" 
+                        :text {brightness-icon}			
+                    )
+                
+                    (revealer 
+                        :transition "slideleft" 
+                        :reveal top-panel-brightness   
+                        :duration "550ms"
+                    
+                        (scale 
+                            :class "brightness-bar"
+                            :value brightness-value
+                            :tooltip "Brightness: ${brightness-value}%" 
+                            :onchange "brightnessctl set {}%" 
+                            :orientation "h" 
+                            :flipped false 
+                            :max 101 
+                            :min 0
+                        )
+                    )
+                )
+            )
+
+            (eventbox 
+                :onhover "${EWW_CMD} update top-panel-volume=true"
+                :onhoverlost "${EWW_CMD} update top-panel-volume=false"
+            
+                (box
+                    :orientation "h" 	  
+                    :space-evenly "false" 
+                    :spacing 2
+                
+                    (button
+                        :onclick "pamixer -t"   
+                        :class "volume-icon" {volume-icon}
+                    )
+                
+                    (revealer 
+                        :transition "slideleft" 
+                        :reveal top-panel-volume       
+                        :duration "550ms"
+                    
+                        (scale    
+                            :class "volume-bar" 	  
+                            :value volume-value 
+                            :orientation "h"      
+                            :flipped false 
+                            :tooltip "Volume: ${volume-value}%" 
+                            :max 101 
+                            :min 0 
+                            :onchange "amixer -D pulse sset Master {}%" 
+                        )
+                    )
+                )
+            )
+
+            (eventbox 
+                :onhover "${EWW_CMD} update top-panel-network=true"
+                :onhoverlost "${EWW_CMD} update top-panel-network=false"
+            
+                (box
+                    :orientation "h" 	  
+                    :space-evenly false
+                    :spacing 2
+                
+                    (button
+                        :onclick "scripts/system network-menu"
+                        :class "network-icon" 
+                        {network-icon}
+                    )
+                
+                    (revealer 
+                        :transition "slideleft" 
+                        :reveal top-panel-network       
+                        :duration "550ms"
+                    
+                        (label
+                            :class "network-speed" 
+                            :text {network-speed}
+                            :tooltip "${network-name}"
+                        )
+                    )
+                )
+            )
+        )
+
+        (box 
+	    	:orientation "h"
+	    	:class "time"
+	    	:space-evenly "false"
+	    	:halign "end"
+            :valign "center"
+
+	    	(label
+	    		:class "time-icon"
+	    		:text ""
+	    	)
+
+	    	(button
+	    		:class "time-text"
+	    		:tooltip "${date}"
+	    		:onclick "bash scripts/open/info-panel &"
+                :onrightclick "bash scripts/open/control-panel &"
+	    		{time}
+	    	)
+	    )
+
+        (box 
+            :class "sysmenu"
+            :orientation "h"
+            :space-evenly "false"
+            :halign "center"
+            :valign "center"
+    
+            (button 
+                :class "sysmenu-btn"
+                :onclick "bash $HOME/.config/sweetconfigs-xorg/bin/rofi/power &"
+                ""
+            )
+        )
+    )
+)
+
+
+(defwidget top-panel []
+    (box
+        :orientation "h"
+        :class "top-panel-window"
+
+        (left)
+        (center)
+        (right)
+    )
+)

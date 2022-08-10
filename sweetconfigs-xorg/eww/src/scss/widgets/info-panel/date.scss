@@ -1,0 +1,26 @@
+.info-panel {
+    .date-box {
+        background-color: $black-darker;
+        padding: 1em;
+        border-radius: 10px;
+        margin: .5em .5em 0em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    
+        .time-circle {
+            color: $green;
+        }
+    
+        .time-circle-text {
+            padding: 2em;
+            color: $green;
+            font-weight: bold;
+    
+            .time {
+                font-size: 2.5em;
+            }
+            .date {
+                font-size: 1em;
+            }
+        }
+    }
+}

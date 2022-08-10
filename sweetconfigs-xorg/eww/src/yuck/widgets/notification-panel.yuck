@@ -1,0 +1,185 @@
+(defwidget notification-card [?class summary body image ?SL ?R application timestamp]
+    (eventbox 
+        :onrightclick R
+        :class "notification-card-eventbox"
+
+        (box 
+            :space-evenly false 
+            :orientation "v"
+
+            (box 
+                :space-evenly true
+                :orientation "h" 
+                :class "notification-card-header"
+
+                (label 
+                    :class "notification-app-name" 
+                    :text application
+                    :halign "start"
+                )
+
+                (button 
+                    :onclick "scripts/logger remove ${SL}"
+                    :class "notification-close" 
+                    :halign "end"
+                    :tooltip "Remove this notification"
+                    ""
+                )
+            )
+
+            (box 
+                :orientation "h"
+                :space-evenly false
+
+                (box 
+                    :halign "start"
+                    :valign "center"
+                    :class "notification-image" 
+                    :style "background-image: url(\"${image}\");"
+                )
+
+                (box 
+                    :orientation "v"
+                    :space-evenly false
+                    :hexpand true
+                    :valign "center"
+                    :class "notification-card-box"
+                        
+                    (label 
+                        :limit-width 25
+                        :wrap true
+                        :text summary
+                        :halign "start"
+                        :valign "center"
+                        :class "notification-summary"
+                        :hexpand true
+                    )
+
+                    (label 
+                        :limit-width 30
+                        :wrap true
+                        :halign "start"
+                        :valign "center"
+                        :text body
+                        :tooltip body
+                        :class "notification-body"
+                    )
+
+                    (label 
+                        :class "notification-timestamp" 
+                        :text timestamp
+                        :valign "end"
+                        :halign "end"
+                    )
+                )
+            )
+        )
+    )
+)
+
+(defwidget notification-card-screenshot [?class summary image ?SL ?R application timestamp]
+    (eventbox 
+        :onrightclick R
+        :class "notification-card-eventbox"
+
+        (box 
+            :space-evenly false 
+            :orientation "v"
+
+            (box 
+                :space-evenly true
+                :orientation "h" 
+                :class "notification-card-header"
+
+                (label 
+                    :class "notification-app-name" 
+                    :text "${application}" 
+                    :halign "start"
+                )
+
+                (label 
+                    :class "notification-timestamp" 
+                    :text "${timestamp}" 
+                    :halign "center"
+                )
+
+                (button 
+                    :onclick "scripts/logger remove ${SL}"
+                    :class "notification-close" 
+                    :halign "end"
+                    :tooltip "Remove this notification"
+                    ""
+                )
+            )
+
+            (box 
+                :orientation "v"
+                :space-evenly false
+
+                (box
+                    :valign "center"
+                    :halign "center"
+                    :class "notification-image-screenshot" 
+                    :style "background-image: url(\"${image}\");"
+                )
+
+                (box 
+                    :orientation "h"
+                    :space-evenly false
+                    :halign "center"
+                    :class "notification-card-box"
+                        
+                    (button 
+                        :onclick "viewnior ${image} &" 
+                        :class "notification-screenshot-open" 
+                        "Open"
+                    )
+
+                    (button 
+                        :onclick "scripts/logger remove ${SL} && rm -rf ${image}" 
+                        :class "notification-screenshot-delete" 
+                        "Delete" 
+                    )
+                )
+            )
+        )
+    )
+)
+
+
+(defwidget notification-panel []
+    (box 
+        :orientation "h"
+        :space-evenly false
+        :class "notification-panel-window"
+
+        (box
+            :orientation "v"
+            :space-evenly false
+
+            (box
+                :orientation "h"
+                :space-evenly true
+
+                (label 
+                    :text "Notifications"
+                    :class "notification-box-label"
+                    :valign "center"
+                    :halign "start"
+                )
+
+                (button 
+                    :class "notification-box-clear"
+                    :onclick "scripts/logger clear"
+                    :valign "center"
+                    :halign "end" 
+                    "Clear All" 
+                )
+            )
+
+            (literal
+                :content notifications-cards
+            )
+        )
+    )
+)

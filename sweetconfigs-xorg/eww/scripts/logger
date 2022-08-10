@@ -1,0 +1,155 @@
+#!/bin/bash
+
+cache_dir="$HOME/.cache/eww/notify-logs"
+cache="$cache_dir/notifications.txt"
+
+[ ! -d $cache_dir ] && mkdir $cache_dir
+[ ! -f $cache ] && touch $cache
+
+create_cache () {
+    case $DUNST_URGENCY in
+        LOW|NORMAL|CRITICAL) 
+            urgency=$DUNST_URGENCY
+        ;;
+        *) 
+            urgency="OTHER"
+        ;;
+    esac
+
+    TIMESTAMP=$(date +%H:%M)
+
+    [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || summary="$DUNST_SUMMARY"
+    [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(printf "$DUNST_BODY" | perl -MHTML::Entities -pe 'decode_entities($_);')"
+
+    if [[ $body == *"discord"* ]]; then
+        fixed_body=$(echo $DUNST_BODY | awk FNR==3)    
+        if [[ ${#fixed_body} -ge 30 ]]; then
+            body=$(python -c "print('${fixed_body}' + ' ...')")
+        else
+            body=$fixed_body
+        fi
+    fi
+
+    if [[ "$DUNST_APP_NAME" == "Spotify" ]]; then
+        if [[ ${#DUNST_BODY} -ge 30 ]]; then
+            fixed_body=$(echo $DUNST_BODY | cut -c 1-30)
+            body=$(python -c "print('${fixed_body}' + ' ...')")
+        else
+            body=$DUNST_BODY
+        fi
+
+        if [[ ${#DUNST_SUMMARY} -ge 25 ]]; then
+            fixed_summary=$(echo $DUNST_SUMMARY | cut -c 1-25)
+            summary=$(python -c "print('${fixed_summary}' + ' ...')")
+        else
+            summary=$DUNST_SUMMARY
+        fi
+    fi
+
+    # TODO: Getting and caching web notification icons (dunstctl history won't show the icon path :()
+    if [[ $DUNST_ICON_PATH == "" ]]; then
+        APP_NAME=$(echo $DUNST_APP_NAME | awk '{print tolower($0)}')
+        ICON_PATH=/usr/share/icons/Papirus/128x128/apps/$APP_NAME.svg
+    else
+        FIXED_ICON_PATH=$(echo ${DUNST_ICON_PATH} | sed 's/32x32/48x48/g')
+        ICON_PATH=$FIXED_ICON_PATH
+    fi
+
+    # If you have a mpris player that send notification you can add one here just follow the layout
+    if [[ $DUNST_APP_NAME == "Spotify" ]]; then
+        ICON_PATH=$(scripts/music cover-notification spotify)
+    fi
+    if [[ $DUNST_APP_NAME == "Music Player Daemon" ]]; then
+        if [[ $DUNST_BODY =~ "by" ]]; then
+            ICON_PATH=$(scripts/music cover-notification mpd)
+        else
+            ICON_PATH=/usr/share/icons/Papirus/128x128/apps/mpd.svg
+        fi
+    fi
+
+    if [[ $DUNST_APP_NAME == "Screenshot" ]]; then
+        echo '(notification-card-screenshot :class "notification-card $notification-card-screenshot" :U "LOW" :SL "'$DUNST_ID'" :summary "'$summary'" :image "'$ICON_PATH'" :application "'$DUNST_APP_NAME'" :timestamp "'$TIMESTAMP'")' \
+        | cat - "$cache" \
+        | sponge "$cache"
+    elif [[ $DUNST_APP_NAME == "Volume" ]]; then
+        echo 'Null' # This is still a work in progress, for now this will be ignored by the notification-panel (Also you can follow the layout if you want to add ignore notifications)
+    elif [[ $DUNST_APP_NAME == "Brightness" ]]; then
+        echo 'Null'
+    else
+        echo '(notification-card :class "notification-card notification-card-'$DUNST_APP_NAME'" :U "'$DUNST_URGENCY'" :SL "'$DUNST_ID'" :body "'$body'" :summary "'$summary'" :image "'$ICON_PATH'" :application "'$DUNST_APP_NAME'" :timestamp "'$TIMESTAMP'")' \
+        | cat - "$cache" \
+        | sponge "$cache"
+    fi
+}
+
+make_literal () {
+    caches="$(tr '\n' ' ' < "$cache")"
+
+    if [[ "$caches" == "" ]]; then
+        echo '(box :class "notifications-empty-box" :height 550 :orientation "v" :space-evenly "false" (image :class "notifications-empty-banner" :valign "end" :vexpand true :path "assets/notifications/notifications-off.svg" :image-width 300 :image-height 200) (label :vexpand true :valign "start" :wrap true :class "notifications-empty-label" :text "No Notifications"))'
+    else    
+        echo "(scroll :height 550 :vscroll true (box :orientation 'v' :class 'notification-scroll-box' :spacing 10 :space-evenly 'false' $caches))"
+    fi
+}
+
+clear_logs () {
+    killall dunst 2>/dev/null
+    $HOME/.config/sweetconfigs-xorg/bin/system/notification & disown
+    printf > "$cache"
+    rm -rf $HOME/.cache/eww/music/notification-cover/*.png
+}
+
+subscribe () {
+    make_literal
+    
+    lines=$(cat $cache | wc -l)
+    
+    while sleep 0.1; do
+        
+        new=$(cat $cache | wc -l)
+
+        [[ $lines -ne $new ]] && lines=$new && echo
+    done | read_literal
+}
+
+read_literal () {
+    while read -r _; do
+        make_literal 
+    done
+}
+
+remove_line () {
+    sed -i '/SL "'$1'"/d' "$cache"
+}
+
+case $1 in
+    pop)
+        sed -i '1d' "$cache"
+    ;;
+    drop)
+        sed -i '$d' "$cache"
+    ;;
+    remove)
+        remove_line $2
+    ;;
+    clear) 
+        clear_logs
+    ;;
+    subscribe)
+        subscribe
+    ;;
+    criticals)
+        printf '%03d\n' $(cat $cache | grep CRITICAL | wc --lines)
+    ;;
+    lows)
+        printf '%03d\n' $(cat $cache | grep LOW | wc --lines)
+    ;;
+    normals)
+        printf '%03d\n' $(cat $cache | grep NORMAL | wc --lines)
+    ;;
+    *) 
+        create_cache
+    ;;
+esac
+
+sed -i '/^$/d' "$cache"

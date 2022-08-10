@@ -1,0 +1,34 @@
+.info-panel {
+    .cal-box {
+        background-color: $black-darker;
+        border-radius: 10px;
+        padding: 1.5em;
+        margin: 1em 0em .5em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+
+        .cal {
+            padding: 1em .5em 0em;
+            color: $pink;
+    
+            calendar:selected {
+                color: $green;
+            }
+          
+            calendar.header {
+                color: $pink;
+            }
+          
+            calendar.button {
+                color: $blue;
+            }
+          
+            calendar.highlight {
+                color: $blue;
+            }
+          
+            calendar:indeterminate {
+                color: $black-lighter;
+            }
+        }
+    }
+}

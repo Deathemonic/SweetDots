@@ -1,0 +1,103 @@
+configuration {
+    location:                       4;
+    font:                           "JetBrains Mono Medium 10";
+    show-icons:                     false;
+    display-drun: 					"";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+	click-to-exit: 					true;
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    text-color:                     @foreground;
+    border:                  		2px;
+    border-color:                  	@pink;
+    border-radius:                  30px;
+    width:                          100px;
+    x-offset:                       -10;
+    y-offset:                       0;
+}
+
+case-indicator {
+    background-color:               @background;
+    text-color:                     @foreground;
+}
+
+listview {
+    background-color:               @background;
+    columns:                        1;
+    spacing:                        10px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ listview ];
+    spacing:                       	10px;
+    padding:                        20px;
+}
+
+element {
+    background-color:               @darker;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  100%;
+    padding:                        14px;
+}
+
+element-icon {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           0px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+	font:							"Material Icons Round 16";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         0px;
+}
+
+element selected {
+    background-color:               @pink;
+    text-color:                     @background;
+    border:                  		0px;
+    border-radius:                  100%;
+    border-color:                  	@pink;
+}
+
+element.active,
+element.selected.urgent {
+    background-color:               @green;
+    text-color:                     @background;
+    border-color:                   @green;
+    border-radius:                  100%;
+}
+
+element.selected.urgent {
+  border-color:                     @pink;
+}
+
+element.urgent,
+element.selected.active {
+    background-color:               @red;
+    text-color:                     @background;
+    border-color:                   @red;
+    border-radius:                  100%;
+}
+
+element.selected.active {
+    border-color:                   @pink;
+}

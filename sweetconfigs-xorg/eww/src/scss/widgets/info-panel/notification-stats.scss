@@ -1,0 +1,64 @@
+.info-panel {
+    .stat-box {
+        background-color: $black-darker;
+        border-radius: 10px;
+        margin: .5em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+
+        .stats {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            border-radius: 10%;
+            padding: 5px;
+            margin: 1em 0em;
+
+            .low-circle,
+            .normal-circle,
+            .critical-circle {
+                background-color: $black-darker;
+            }
+        
+            .low-circle {
+                color: $blue;
+            }
+            .normal-circle {
+                color: $pink;
+            }
+            .critical-circle {
+                color: $red;
+            }
+
+            .low-circle-text,
+            .normal-circle-text,
+            .critical-circle-text {
+                padding: 1.5em;
+                font-size: 1.5em;
+            }
+
+            .low-circle-text {
+                color: $blue;
+            }
+            .normal-circle-text {
+                color: $pink;
+            }
+            .critical-circle-text {
+                color: $red;
+            }
+            
+            .low-text,
+            .normal-text,
+            .critical-text {
+                margin-top: .5em;
+            }
+
+            .low-text {
+                color: $blue;
+            }
+            .normal-text {
+                color: $pink;
+            }
+            .critical-text {
+                color: $red;
+            }
+        }
+    }
+}

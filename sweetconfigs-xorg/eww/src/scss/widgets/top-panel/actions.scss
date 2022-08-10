@@ -1,0 +1,47 @@
+.top-panel-window {
+    .actions {
+        font-size: 1.3em;
+        border-radius: 10px;
+        background-color: $black-darker;
+        padding: 0.5em;
+        margin-right: 1em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    }
+
+    .brightness-icon,
+    .volume-icon,
+    .network-icon {
+        margin: 0 .5em;
+    }
+
+    .brightness-icon {
+        color: $yellow;
+    }
+    .volume-icon {
+        color: $green;
+    }
+    .network-icon {
+        color: $purple;
+    }
+
+    scale trough {
+        all: unset;
+        background-color: $black-lighter;
+        border-radius: 5px;
+        min-height: 10px;
+        min-width: 80px;
+    }
+
+    .brightness-bar trough highlight {
+        background-color: $yellow;
+        border-radius: 5px;
+    }
+    .volume-bar trough highlight {
+        background-color: $green;
+        border-radius: 5px;
+    }
+    .network-speed {
+        font-size: 0.8em;
+        color: $purple;
+    }
+}

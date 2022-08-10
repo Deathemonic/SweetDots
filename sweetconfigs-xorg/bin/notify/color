@@ -6,5 +6,5 @@ image=/tmp/${color}.png
 if [[ "$color" ]]; then
   echo $color | tr -d "\n" | xclip -selection clipboard
   convert -size 48x48 xc:"$color" ${image}
-  notify-send -u low -r 69 -i ${image} "$color" "Copied to clipboard."
+  notify-send -a "Color Picker" -u low -i ${image} "$color" "Copied to clipboard"
 fi

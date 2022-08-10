@@ -1,0 +1,183 @@
+;; Variables
+(defvar info-panel false)
+(defvar control-panel false)
+(defvar music-panel false)
+
+(defvar top-panel-music false)
+(defvar top-panel-brightness false)
+(defvar top-panel-volume false)
+(defvar top-panel-network false)
+    
+(defvar players
+    "spotify,%any,firefox,chromium,brave,mpd"
+)
+
+;; Date and Time
+(defpoll time
+    :interval "1s"
+    "date +%I:%M"
+)
+(defpoll seconds
+    :interval "250ms"
+    "echo $(($(date +%S)* 100 / 60))"
+)
+(defpoll date
+    :interval "24h"
+    "date +'%B, %a %d'"
+)
+
+;; Weather
+(defpoll weather-col-one
+    :interval "250ms"
+    "scripts/weather color-1"
+)
+(defpoll weather-col-two
+    :interval "250ms"
+    "scripts/weather color-2"
+)
+(defpoll weather-icon
+    :interval "5s"
+    "scripts/weather icon"
+)
+(defpoll weather-temperature
+    :interval "5s"
+    "scripts/weather temperature"
+)
+(defpoll weather-status
+    :interval "5s"
+    "scripts/weather status"
+)
+(defpoll city
+    :interval "24h"
+    "scripts/weather city"
+)
+(defpoll country
+    :interval "24h"
+    "scripts/weather country"
+)
+
+;; Calendar
+(defpoll calendar-day 
+    :interval "10h"
+	"date '+%d'"
+)
+(defpoll calendar-month 
+    :interval "10h"
+	"echo $(($(date +%m) - 1))"
+)
+(defpoll calendar-year 
+    :interval "10h"
+	"date '+%Y'"
+)
+
+;; Notifications
+(deflisten notifications-cards 
+    "scripts/logger subscribe"
+)
+(defpoll lows
+    :interval "5s"
+    "scripts/logger lows"
+)
+(defpoll normals
+    :interval "5s"
+    "scripts/logger normals"
+)
+(defpoll criticals
+    :interval "5s"
+    "scripts/logger criticals"
+)
+
+;; Profile
+(defpoll name
+    :interval "24h"
+    "getent passwd `whoami` | cut -d : -f 5"
+)
+
+;; Controls
+(defpoll nl-check
+    :interval "250ms"
+    "scripts/controls nl-check"
+)
+(defpoll air-check
+    :interval "250ms"
+    "scripts/controls air-check"
+)
+(defpoll dnd-check
+    :interval "250ms"
+    "scripts/controls dnd-check"
+)
+(defpoll blue-check
+    :interval "250ms"
+    "scripts/controls blue-check"
+)
+
+;; Sliders
+(defpoll volume-icon
+	:interval "250ms"
+	"scripts/system volume-icon"
+)
+(defpoll volume-value
+	:interval "250ms"
+	"scripts/system volume-value"
+)
+(defpoll brightness-icon
+	:interval "250ms"
+	"scripts/system brightness-icon"
+)
+(defpoll brightness-value
+	:interval "250ms"
+	"scripts/system brightness-value"
+)
+(defpoll network-icon
+	:interval "250ms"
+	"scripts/system network-icon"
+)
+(defpoll network-speed
+	:interval "250ms"
+	"scripts/system network-speed"
+)
+(defpoll network-name
+	:interval "250ms"
+	"scripts/system network-name"
+)
+
+;; Music
+(defpoll music-cover
+	:interval "1s"
+	"scripts/music cover"
+)
+(defpoll song-status
+    :interval "1s"
+    "scripts/music status"
+)
+(defpoll song-artist
+    :interval "1s"
+    "scripts/music artist"
+)
+(defpoll song-title
+    :interval "1s"
+    "scripts/music title"
+)
+(defpoll song-position
+    :interval "250ms"
+    "scripts/music position"
+)
+(defpoll play-pause
+    :interval "250ms"
+	"scripts/music status-icon"
+)
+(defpoll title-artist
+	:interval "250ms"
+	"scripts/music title-artist"
+)
+(deflisten music-scroll
+    "scripts/scroll scroll-toggle"
+)
+
+;; Top Panel
+(deflisten workspaces
+	"scripts/workspaces"
+)
+(deflisten scroll
+	"scripts/scroll"
+)

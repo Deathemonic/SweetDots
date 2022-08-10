@@ -2,7 +2,7 @@
 
 # Terminal
 super + Return
-    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf
+    LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml
 
 # File Manager
 super + e
@@ -19,7 +19,7 @@ super + shift + {v,e,h}
 # Menus
 
 # App Launcher
-alt + F1
+super + a
     $HOME/.config/sweetconfigs-xorg/bin/rofi/launcher
 
 # Network Menu
@@ -32,7 +32,7 @@ super + p
 
 # Screenshot, Bluetooth, Windows, Run Menu
 super + {s,b,w,r}
-    $HOME/.config/sweetconfigs-xorg/bin/rofi/{screenshot,bluetooth,window,run}
+    $HOME/.config/sweetconfigs-xorg/bin/rofi/{screenshot rofi,bluetooth,window,run}
 
 # Widgets
 

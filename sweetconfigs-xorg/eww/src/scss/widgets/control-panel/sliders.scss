@@ -1,0 +1,43 @@
+.control-panel {
+    .slider {
+        margin: .5em 1em 1em;
+    }
+
+    scale trough {
+        all: unset;
+        background-color: $black-lighter;
+        border-radius: 20px;
+        min-height: 20px;
+        min-width: 250px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+
+        highlight {
+            margin: .35em;
+            border-radius: inherit;
+        }
+    }
+
+    .volume-bar trough highlight {
+        background-color: $green;
+        border-radius: 5px;
+    }
+
+    .brightness-bar trough highlight {
+        background-color: $yellow;
+        border-radius: 5px;
+    }
+
+    .volume-icon,
+    .brightness-icon {
+        font-size: 2em;
+        margin-right: .5em;
+    }
+
+    .volume-icon {
+        color: $green;
+    }
+
+    .brightness-icon {
+        color: $yellow;
+    }
+}

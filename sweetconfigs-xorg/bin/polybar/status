@@ -2,69 +2,63 @@
 
 bar="main"
 bar_pid=$(pgrep -a "polybar" | grep "$bar" | cut -d" " -f1)
+players="spotify,%any,firefox,chromium,brave,mpd"
+player_status=$(playerctl -p $players status)
+script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+exit=$?
 
-format="{{ title }} - {{ artist }}"
-
-update_hooks() {
+update_hooks () {
     while IFS= read -r id
     do
       polybar-msg -p "$id" hook music-play-pause $2 1>/dev/null 2>&1
     done < <(echo "$1")
 }
 
-player=$(playerctl -p spotify,%any,firefox,chromium,brave,mpd status 2>/dev/null)
-exit=$?
-
-case $control in
-  *)
-  case $1 in
-		next)
-            playerctl -p spotify,%any,firefox,chromium,brave,mpd next
-        ;;
-		previous)
-            playerctl -p spotify,%any,firefox,chromium,brave,mpd previous
-        ;;
-		toggle)
-            playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause
-        ;;
-  esac
-esac
+scroll () {
+    zscroll -l 20 \
+            --delay 1 \
+            --scroll-padding " | " \
+            --match-command "$script_dir/status scroll-music" \
+            --match-text "Playing" "--scroll 1" \
+            --match-text "Paused" "--scroll 0" \
+            --update-check true "$script_dir/status" &
+    wait
+}
 
 if [ $exit -eq 0 ]; then
-    status=$player
+    status=$player_status
 else
     status="Offline"
 fi
 
-if [ "$1" == "--status" ]; then
-    echo "$status"
+if [ "$1" == "scroll-music" ]; then
+    echo $status
 else
-    if [ "$status" = "Stopped" ]; then
+    if [ $status = "Stopped" ]; then
         echo "Offline"
-    elif [ "$status" = "Paused"  ]; then
+    elif [ $status = "Paused"  ]; then
         update_hooks "$bar_pid" 2
-        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$format"
-    elif [ "$status" = "Offline"  ]; then
-        echo "$status"
+        playerctl -p $players metadata --format '{{ artist }} - {{ title }}'
+    elif [ $status = "Offline"  ]; then
+        echo $status
     else
         update_hooks "$bar_pid" 1
-        playerctl -p spotify,%any,firefox,chromium,brave,mpd metadata --format "$format"
+        playerctl -p $players metadata --format '{{ artist }} - {{ title }}'
     fi
 fi
 
-docs () {
-    echo "
-    Usage:    status [Options]
-                        
-    Options:    
-    --status    -   Display what status of the player is on
-    next        -   Skip to the next music
-    previous    -   Skip back to the previous music
-    "
-}
 
 case $1 in
-    -h|-H|--h|--H|-help|-Help|--help|--Help|help|Help|h|H)
-        docs
+    scroll-toggle)
+        scroll
+    ;;
+    next)
+        playerctl -p $players next
+    ;;
+	previous)
+        playerctl -p $players previous
+    ;;
+	toggle)
+        playerctl -p $players play-pause
     ;;
 esac

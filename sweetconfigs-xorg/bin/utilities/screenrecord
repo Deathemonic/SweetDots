@@ -1,0 +1,157 @@
+#!/bin/bash
+
+rofi_command="rofi -theme"
+time=$(date +%Y-%m-%d-%H-%M-%S)
+geometry=$(xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current')
+dir="$(xdg-user-dir VIDEOS)/Screenrecords"
+file="Capture_$time.mp4"
+timer_icon="$HOME/.config/sweetconfigs-xorg/dunst/icons/clock.svg"
+
+[ ! -d $dir ] && mkdir -p $dir
+
+notify_user () {
+	if [[ -e $dir/$file ]]; then
+		notify-send -u low -a Screenrecorder "Saved in $dir"
+	else
+		notify-send -u -a Screenrecorder "Video Deleted"
+	fi
+}
+
+countdown () {
+	for sec in `seq $1 -1 1`; do
+	  notify-send -u low -a Clock -i $timer_icon -t 1000 "Countdown" "Starting in : $sec"
+		sleep 1
+	done
+}
+
+capture () {
+	countdown '3'
+	sleep 1
+	if [[ $1 == "noaudio" ]]; then
+		ffmpeg -video_size $geometry -framerate 25 -f x11grab -i :0.0+0,0 $dir/$file
+	else 
+		ffmpeg -video_size $geometry -framerate 25 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i default $dir/$file
+	fi
+	notify_user
+}
+
+capture_area () {
+	area_data=$(slop -f "%x %y %w %h %g %i") || exit 1
+	read -r X Y W H G ID < <(echo $area_data)
+	
+	countdown '3'
+	sleep 1
+	if [[ $1 == "noaudio" ]]; then
+		ffmpeg -video_size ${W}x${H} -framerate 25 -f x11grab -i :0.0+${X},${Y} $dir/$file
+	else
+		ffmpeg -video_size ${W}x${H} -framerate 25 -f x11grab -i :0.0+${X},${Y} -f pulse -ac 2 -i default $dir/$file
+	fi
+	notify_user
+}
+
+capture_timer () {
+	confirm=$($HOME/.config/sweetconfigs-xorg/bin/rofi/confirm 'Set a number')
+	confirm_config="$HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi"
+
+	if [[ $confirm =~ ^[0-9]+$ ]]; then
+		countdown $confirm
+		if [[ $1 == "noaudio" ]]; then
+		    ffmpeg -video_size $geometry -framerate 25 -f x11grab -i :0.0+0,0 $dir/$file
+	    else 
+		    ffmpeg -video_size $geometry -framerate 25 -f x11grab -i :0.0+0,0 -f pulse -ac 2 -i default $dir/$file
+	    fi
+		notify_user
+	else
+		$rofi_command $confirm_config -e "Please input a Number"
+	fi
+}
+
+capture_rofi () {
+	config="$HOME/.config/sweetconfigs-xorg/rofi/screenutils.rasi"
+
+	capture=""
+	area=""
+	timer=""
+    stop=""
+    withaudio=""
+	withoutaudio=""
+
+	options="$capture\n$area\n$timer\n$stop"
+    audio_options="$withaudio\n$withoutaudio"
+	chosen=$(echo -e $options | $rofi_command $config -p 'Take Screenshot' -dmenu -selected-row 0 -theme-str 'listview {lines: 4;}')
+
+    audio_chooser () {
+        audio_chosen=$(echo -e $audio_options | $rofi_command $config -p 'Choose' -dmenu -selected-row 0 -theme-str 'listview {lines: 2;}')
+        
+        if [[ $chosen == $capture ]]; then
+            case $audio_chosen in
+                $withaudio)
+                    capture
+                ;;
+                $withoutaudio)
+                    capture noaudio
+                ;;
+            esac
+        elif [[ $chosen == $area ]]; then
+            case $audio_chosen in
+                $withaudio)
+                    capture_area
+                ;;
+                $withoutaudio)
+                    capture_area noaudio
+                ;;
+            esac
+        elif [[ $chosen == $timer ]]; then
+            case $audio_chosen in
+                $withaudio)
+                    capture_timer
+                ;;
+                $withoutaudio)
+                    capture_timer noaudio
+                ;;
+            esac
+        fi
+    }
+
+	case $chosen in
+  		$capture)
+            audio_chooser
+		;;
+  		$area)
+			audio_chooser
+		;;
+  		$timer)
+			audio_chooser
+		;;
+        $stop)
+            [ `pidof ffmpeg` ] && pkill ffmpeg
+        ;;
+	esac
+}
+
+case $1 in
+	capture)
+		capture
+  	;;
+  	capture-area)
+    	capture_area
+  	;;
+    capture-timer)
+    	capture_timer
+  	;;
+  	capture-noaudio)
+    	capture noaudio
+  	;;
+  	capture-area-noaudio)
+    	capture_area noaudio
+  	;;
+    capture-timer-noaudio)
+    	capture_timer noaudio
+  	;;
+    capture-rofi)
+        capture_rofi
+    ;;
+  	capture-stop)
+    	[ `pidof ffmpeg` ] && pkill ffmpeg
+  	;;
+esac

@@ -1,10 +1,8 @@
 #!/bin/bash
 
-#!/bin/bash
-
 config="$HOME/.config/sweetconfigs-xorg/rofi/power.rasi"
 confirm_config="$HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi"
-confirm="$HOME/.config/sweetconfigs-xorg/bin/rofi/confirm"
+confirm="$HOME/.config/sweetconfigs-xorg/bin/rofi/confirm 'Are you Sure?'"
 rofi_command="rofi -theme"
 
 quit () {
@@ -19,11 +17,11 @@ quit () {
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
-shutdown=""
-reboot=""
-lock=""
-suspend=""
-logout=""
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
 
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 message="Options  -  Yes / No"

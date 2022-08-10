@@ -1,0 +1,16 @@
+* {
+    all: unset;
+}
+
+window {
+    color: $white;
+    font-family: "Roboto", "Sarasa Mono CL", "Material Icons Round";
+    font-weight: bold;
+}
+
+tooltip {
+    background-color: $black;
+    color: $pink;
+    font-family: "Roboto", "Sarasa Mono CL", "Material Icons Round";
+    font-weight: bold;
+}

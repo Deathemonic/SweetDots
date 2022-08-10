@@ -62,7 +62,7 @@ element {
 element-text {
     background-color: 				inherit;
     text-color:       				inherit;
-	font:							"icomoon\-feather 25";
+	font:							"Material Icons Round 25";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;

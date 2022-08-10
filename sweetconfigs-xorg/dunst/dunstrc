@@ -1,74 +1,77 @@
 [global]
-monitor = 0
-follow = mouse
+  monitor = 0
+  follow = mouse
 
-width = 300
-height = 80
-origin = bottom-right
-offset = 2x8
-scale = 0
+  width = 300
+  height = 80
+  origin = bottom-right
+  offset = 2x8
+  scale = 0
 
-indicate_hidden = yes
-shrink = no
+  indicate_hidden = yes
+  shrink = no
 
-separator_color = auto
-separator_height = 4
+  separator_color = auto
+  separator_height = 4
 
-line_height = 4
+  line_height = 4
 
-padding = 15
-horizontal_padding = 15
+  padding = 15
+  horizontal_padding = 15
 
-frame_width = 2
-corner_radius = 20
+  frame_width = 2
+  corner_radius = 20
 
-sort = no
-idle_threshold = 120
+  sort = no
+  idle_threshold = 120
 
-font = JetBrains Mono Medium 10
-markup = full
-format = %s\n%b
-alignment = center
+  font = JetBrains Mono Medium 10
+  markup = full
+  format = %s\n%b\n
+  alignment = center
 
-show_age_threshold = 60
-word_wrap = no
-ignore_newline = no
+  icon_path = /usr/share/icons/Papirus/128x128/status/:/usr/share/icons/Papirus/128x128/devices/
+  icon_theme = "Papirus"
 
-stack_duplicates = true
-hide_duplicate_count = yes
+  show_age_threshold = 60
+  word_wrap = no
+  ignore_newline = no
 
-show_indicators = no
+  stack_duplicates = true
+  hide_duplicate_count = yes
 
-icon_position = left
-max_icon_size = 50
+  show_indicators = no
 
-sticky_history = no
-history_length = 20
+  icon_position = left
+  max_icon_size = 50
 
-browser = x-www-browser -new-tab
-always_run_script = true
+  sticky_history = no
+  history_length = 20
+  
+  browser = x-www-browser -new-tab
+  always_run_script = true
 
-title = Dunst
-class = Dunst
+  title = Dunst
+  class = Dunst
 
 [urgency_low]
-timeout = 2
-background = "#1b1f23"
-foreground = "#b0ceef"
-frame_color = "#b0ceef"
+  timeout = 2
+  background = "#1b1f23"
+  foreground = "#a3cbe7"
+  frame_color = "#a3cbe7"
 
 [urgency_normal]
-timeout = 5
-background = "#1b1f23"
-foreground = "#ffdede"
-frame_color = "#ffdede"
+  timeout = 5
+  background = "#1b1f23"
+  foreground = "#ffdede"
+  frame_color = "#ffdede"
 
 [urgency_critical]
-timeout = 0
-background = "#1b1f23"
-foreground = "#e5a3a1"
-frame_color = "#e5a3a1"
+  timeout = 0
+  background = "#1b1f23"
+  foreground = "#e5a3a1"
+  frame_color = "#e5a3a1"
 
 [logger]
-summary="*"
-script="~/.config/eww/src/shell/logger.py"
+  summary = "*"
+  script = ~/Documents/Test/eww/Widgets-V4/scripts/logger

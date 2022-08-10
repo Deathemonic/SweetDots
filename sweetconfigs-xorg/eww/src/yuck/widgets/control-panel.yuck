@@ -1,0 +1,195 @@
+(defwidget control-panel []
+    (box 
+        :orientation "h"
+        :space-evenly false
+        :class "control-panel-window"
+
+		(box 
+            :style {control-panel ? "padding-right: 0em;" : "padding-right: 55em;"}
+            :class "control-panel-spacer" 
+        )
+
+        (box
+            :orientation "v"
+            :space-evenly false
+
+            (box
+                :orientation "v"
+                :space-evenly false
+                :class "control-panel"
+
+		        (box
+                    :orientation "h"
+                    :space-evenly false
+                    :class "profile-box"
+                
+                    (box
+                        :class "profile-picture"
+                    )
+                
+                    (label
+                        :valign "center"
+                        :class "profile-info"
+                        :text {name}
+                    )
+                )
+
+                (box
+                    :orientation "h"
+                    :class "control-box"
+                
+                    (box
+                        :class "controls"
+                    
+                        (button
+                            :tooltip "Night Light"
+                            :style {nl-check == "On" ? "background-color: #ece3b1; color: #1b1f23;" : "background-color: #1b1f23; color: #ece3b1"}
+                            :onclick "scripts/controls nl-toggle"
+                            {nl-check == "On" ? "" : ""}
+                        )
+                    
+                        (button
+                            :tooltip "Do Not Disturb"
+                            :style {dnd-check == "On" ? "background-color: #b4e3ad; color: #1b1f23;" : "background-color: #1b1f23; color: #b4e3ad"}
+                            :onclick "scripts/controls dnd-toggle"
+                            {dnd-check == "On" ? "" : ""}
+                        )
+                    
+                        (button
+                            :tooltip "Airplane Mode"
+                            :style {air-check == "On" ? "background-color: #ceace8; color: #1b1f23;" : "background-color: #1b1f23; color: #ceace8"}
+                            :onclick "scripts/controls air-toggle"
+                            {air-check == "On" ? "" : ""}
+                        )
+                    
+                        (button
+                            :tooltip "Bluetooth"
+                            :style {blue-check == "On" ? "background-color: #a3cbe7; color: #1b1f23;" : "background-color: #1b1f23; color: #a3cbe7"}
+                            :onclick "scripts/controls blue-toggle"
+                            {blue-check == "On" ? "" : ""}
+                        )
+                    )
+                )
+
+                (box 
+                    :orientation "h" 
+                    :space-evenly false
+                    :halign "center"
+                    :valign "center"
+                    :class "slider"
+
+		    		(label 
+                        :class "volume-icon" 
+                        :text {volume-icon}
+                    )
+
+		    		(scale
+                        :orientation "h"
+                        :class "volume-bar"
+                        :min 0
+		    			:max 101
+		    			:value volume-value
+		    			:tooltip "Volume: ${volume-value}%"
+		    			:onchange "amixer -D pulse sset Master {}%"
+		    		)
+		    	)
+
+		    	(box
+                    :orientation "h" 
+                    :space-evenly false
+                    :halign "center"
+                    :valign "center"
+                    :class "slider"
+                
+                    (label 
+                        :class "brightness-icon" 
+                        :text {brightness-icon}
+                    )
+                
+                    (scale
+                        :orientation "h"
+                        :class "brightness-bar"
+                        :min 0
+                        :max 101
+                        :value brightness-value
+                        :tooltip "Brightness: ${brightness-value}%"	
+                        :onchange "brightnessctl set {}%"
+                    
+                    )
+                )
+            )
+
+            (revealer 
+                :reveal music-panel
+                :transition "slideup"
+
+                (box
+                    :orientation "h"
+                    :space-evenly false
+                    :class "music-box"
+                
+                    (box
+                        :class "song-cover"
+                        :orientation "v"
+                        :style "background-image: url('${music-cover}')"
+                    
+                        (box 
+                            :class "song" 
+                            :orientation "v" 
+                            :space-evenly "false" 
+                            :hexpand "false" 
+                            :vexpand "false"
+                        
+                            (label 
+                                :class "now-playing" 
+                                :halign "start" 
+                                :text {song-status}
+                            )
+
+                            (label 
+                                :class "song-title" 
+                                :halign "start"			
+                                :text {song-title}
+                                :limit-width 23
+                            )
+                        
+                            (label 
+                                :class "song-artist" 
+                                :halign "start"			
+                                :text {song-artist}
+                                :limit-width 35
+                            )
+                        
+                            (label 
+                                :class "song-position" 
+                                :halign "start"			
+                                :text song-position
+                            )
+                        
+                            (box 
+                                :class "song-controls"
+                                :orientation "h"
+                                :halign "center"
+                            
+                                (button
+                                    :class "music-previous"
+                                    :onclick "playerctl -p ${players} previous" ""
+                                )
+                            
+                                (button
+                                    :class "music-play"
+                                    :onclick "playerctl -p ${players} play-pause" play-pause
+                                )
+
+                                (button
+                                    :class "music-next"
+                                    :onclick "playerctl -p ${players} next" ""
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)

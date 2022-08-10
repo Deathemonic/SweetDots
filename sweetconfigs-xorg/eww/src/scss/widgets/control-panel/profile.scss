@@ -1,0 +1,22 @@
+.control-panel {
+    .profile-box {
+        margin: 1em 1em 0;
+
+        .profile-picture {
+            background-image: url("assets/avatar.png");
+            background-repeat: no-repeat;
+            background-size: 50px;
+            background-position: center;
+            min-height: 50px;
+            min-width: 50px;
+            border: 2px solid $pink;
+            border-radius: 100%;
+        }
+
+        .profile-info {
+            margin: 1em;
+            color: $blue;
+            font-size: 15px;
+        }
+    }
+}

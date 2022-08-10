@@ -1,0 +1,206 @@
+(defwidget info-panel []
+    (box 
+        :orientation "h"
+        :space-evenly false
+        :class "info-panel-window"
+
+		(box 
+            :style {info-panel ? "padding-left: 75em;" : "padding-left: 0em;"}
+            :class "info-panel-spacer" 
+        )
+
+        (box
+            :orientation "h"
+            :space-evenly false
+            :class "info-panel"
+
+		    (box 
+                :orientation "v" 
+                :space-evenly false
+
+                (box
+                    :orientation "h"
+                    :space-evenly false
+                    :halign "center"
+
+		    	    (box 
+                        :orientation "v" 
+                        :space-evenly false
+                        :class "date-box" 
+
+		    	    	(circular-progress
+                            :class "time-circle"
+                            :value seconds
+                            :thickness 5
+                            :start-at seconds
+                        
+                            (box
+                                :orientation "v"
+                                :class "time-circle-text"
+                            
+                                (label
+                                    :class "time"
+                                    :text {time}
+                                )
+                            
+                                (label
+                                    :class "date"
+                                    :text {date}
+                                )
+                            )
+                        )
+		    	    )
+
+                    (box
+                        :orientation "v"
+                        :class "weather-box"
+                        :style "background: linear-gradient(135deg, ${weather-col-one}, ${weather-col-two});"
+                    
+                        (box
+                            :orientation "v"
+                            :halign "start"
+                            :valign "start"
+                            :class "weather-info"
+                        
+                            {weather-status}
+                        
+                            (label
+                                :halign "start"
+                                :text {weather-temperature}
+                            )
+                        
+                            (label
+                                :halign "start"
+                                :text "${city}, ${country}"
+                            )
+                        )
+
+                        (box
+                            :valign "end"
+                            :halign "end"
+                            :class "weather-icon"
+                            {weather-icon}
+                        )
+                    )
+                )
+
+                (box 
+		    		:orientation "v"
+		    		:space-evenly false
+                    :class "cal-box"
+                    :halign "center"
+
+		    		(calendar 
+                        :class "cal" 
+		    			:show-details false 
+                        :show-heading true 
+                        :show-day-names true
+		    			:day calendar-day 
+                        :month calendar-month 
+                        :year calendar-year
+                    )
+		    	)
+
+                (box
+                    :orientation "h"
+                    :space-evenly true
+                    :class "stat-box"
+
+                    (box
+                        :orientation "v"
+                        :halign "center"
+                        :class "stats"
+                        :space-evenly false
+
+                        (circular-progress 
+                            :hexpand false
+                            :vexpand false
+                            :value 100
+                            :thickness 3
+                            :class "low-circle"
+
+                            (label
+                                :hexpand false
+                                :vexpand false
+                                :class "low-circle-text"
+                                :text {lows}
+                            )
+                        )
+
+                        (label
+                            :class "low-text"
+                            :halign "center"
+                            :text "Low"
+                        )
+                    )
+
+
+                    (box
+                        :orientation "v"
+                        :halign "center"
+                        :class "stats"
+                        :space-evenly false
+
+                        (circular-progress
+                            :hexpand false
+                            :vexpand false
+                            :value 100
+                            :thickness 3
+                            :class "normal-circle"
+
+                            (label
+                                :hexpand false
+                                :vexpand false
+                                :class "normal-circle-text"
+                                :text {normals}
+                            )
+                        )
+
+                        (label
+                            :class "normal-text"
+                            :halign "center"
+                            :text "Normal"
+                        )
+                    )
+
+                    (box
+                        :orientation "v"
+                        :halign "center"
+                        :class "stats"
+                        :space-evenly false
+
+                        (circular-progress
+                            :hexpand false
+                            :vexpand false
+                            :value 100
+                            :thickness 3
+                            :class "critical-circle"
+
+                            (label
+                                :hexpand false
+                                :vexpand false
+                                :class "critical-circle-text"
+                                :text {criticals}
+                            )
+                        )
+
+                        (label
+                            :class "critical-text"
+                            :halign "center"
+                            :text "Critical"
+                        )
+                    )
+
+                )
+		    )
+
+            (box 
+				:width 15
+                :space-evenly true 
+                :halign "center"
+			)
+
+            (notification-panel)
+        )
+	)
+)

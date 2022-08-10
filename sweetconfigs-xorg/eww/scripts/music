@@ -1,42 +1,32 @@
 #!/bin/bash
 
-players=$(echo "playerctl -p spotify,%any,firefox,chromium,brave,mpd")
-player_status=$($players status)
-artist=$(playerctl metadata --format '{{ artist }}')
-title=$(playerctl metadata --format '{{ title }}')
-albumart="$($players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+players="spotify,%any,firefox,chromium,brave,mpd"
+player_status=$(playerctl -p $players status)
+artist=$(playerctl -p $players metadata --format '{{ artist }}')
+title=$(playerctl -p $players metadata --format '{{ title }}')
+albumart="$(playerctl -p $players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
 cache="$HOME/.cache/eww/music"
 
 [ ! -d $cache ] && mkdir $cache
 
 status_icon () {
     if [ "$player_status" = "Playing" ]; then
-	    icon=""
+	    echo ""
     elif [ "$player_status" = "Paused" ]; then
-	    icon=""
+	    echo ""
     else
-	    icon=""
+	    echo ""
     fi
-
-    echo $icon
 }
 
 status_value () {
-	player_name=$(echo $(playerctl -l) | cut -d '.' -f 1)
+	player_name=$(playerctl -p $players -l | head -n 1)
 
-	if [ "$player_status" = "Playing" ]; then
-		echo "Now Playing - via ${player_name^}"
-	else
-		echo "Music"
-	fi
+	[ "$player_status" = "Playing" ] && echo "Now Playing - via ${player_name^}" || echo "Music"
 }
 
 title () {
-    if [ -z "$title" ]; then
-		echo "Nothing Playing";
-	else
-		echo $title
-	fi
+    [ -z "$title" ] && echo "Nothing Playing" || echo $title
 }
 
 artist () {
@@ -51,30 +41,31 @@ artist () {
 	fi
 }
 
+cover_notification () {
+    cover_dir="$cache/notification-cover"
+    [ ! -d $cover_dir ] && mkdir $cover_dir
+    cover="$cover_dir/$RANDOM-cover.png"
+    fallback="$HOME/Documents/Test/eww/Widgets-V4/assets/fallback.png"
+
+    players_pass=$1
+
+    albumart="$(playerctl -p $players_pass metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+    [ $(playerctl -p $players_pass metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover
+
+    echo $cover | tail -n 1
+}
+
 cover () {
     cover="$cache/cover.png"
     fallback="$HOME/Documents/Test/eww/Bar/assets/fallback.png"
 
-    [ $($players metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover 
+    [ $(playerctl -p $players metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover 
     echo $cover
 }
 
-cover_notification () {
-    cover="$cache/$DUNST_SUMMARY.png"
-    cache_file="$cache/temp.png"
-
-    cover_url="$($players metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
-
-    if [[ $($players metadata mpris:artUrl) ]]; then
-	    curl -s "$cover_url" --output "$cache_file"
-    fi
-
-    cp "$cache_file" "$cover"
-}
-
 position () {
-    position=$(playerctl position | sed 's/..\{6\}$//')
-	duration=$(playerctl metadata mpris:length | sed 's/.\{6\}$//')
+    position=$(playerctl -p $players position | sed 's/..\{6\}$//')
+	duration=$(playerctl -p $players metadata mpris:length | sed 's/.\{6\}$//')
 	
     if [[ $position -gt 0 ]]; then
 	    printf "%0d:%02d" $((position%3600/60)) $((position%60))
@@ -86,15 +77,6 @@ position () {
 }
 
 case $1 in
-    next)
-        $players next
-    ;;
-	previous)
-        $players previous
-    ;;
-	toggle)
-        $players play-pause
-    ;;
     status)
         status_value
     ;;
@@ -114,7 +96,7 @@ case $1 in
         cover
     ;;
     cover-notification)
-        cover_notification
+        cover_notification $2
     ;;
     position)
         position || echo "--:-- / --:-- "

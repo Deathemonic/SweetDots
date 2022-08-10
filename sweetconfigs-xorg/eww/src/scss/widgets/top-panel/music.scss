@@ -1,0 +1,37 @@
+
+.top-panel-window {
+    .music-bar {
+        .song-cover-bar {
+            background-size: cover;
+            background-position: center;
+            min-height: 25px;
+            min-width: 25px;
+            margin: 10px;
+            border-radius: 100%;
+        }
+  
+        .song-bar {
+            color: $blue;
+            font-size: 1.1em;
+            margin-right: 1em;
+        }
+    
+        .music-play-bar {
+            color: $pink;
+            font-size: 1.5em;
+        }
+    
+        .music-previous-bar,
+        .music-next-bar {
+            color: $blue;
+            font-size: 1.5em;
+            margin: 0 0.5em;
+        }
+    
+        .music-previous-bar:hover,
+        .music-next-bar:hover,
+        .song-bar:hover {
+            color: $pink;
+        }
+    }
+}

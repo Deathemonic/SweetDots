@@ -1,0 +1,17 @@
+.top-panel-window {
+    .sysmenu {
+        margin: 0em 1.5em 0em 0.5em;
+      
+        button {
+            border-radius: 6px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: $red;
+            transition: 0.5s;
+
+            &:hover {
+                color: $blue;
+            }
+        }
+    }      
+}

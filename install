@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# v5.2.2
+# v5.3.1
 
 clear
 printf "DEV INSTALL\n"
@@ -9,7 +9,7 @@ sleep 2
 configs="$HOME/.config/"
 dotfiles="$HOME/.cache/SweetDots-Xorg/"
 sweetcache="$HOME/.cache/sweetcache/"
-packages="berry-git bspwm-git sxhkd-git i3-gaps-next-git polybar-git rofi alacritty picom-arian8j2-git dunst eww-git \
+packages="polybar-git rofi alacritty picom-arian8j2-git dunst eww-git ffmpeg\
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
    mpd mpdris2-git \
@@ -19,55 +19,148 @@ packages="berry-git bspwm-git sxhkd-git i3-gaps-next-git polybar-git rofi alacri
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
 printf "Making cache Folders"
-if [[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]]; then
-   mkdir "$cache" 2>/dev/null
-   mkdir "$sweetcache" 2>/dev/null
-fi
+[[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]] && mkdir "$cache" "$sweetcache" 2>/dev/null
+[[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
+sleep 2
+
+printf "Creating Backups\n"
+tempdir=$(mktemp -d -p $HOME/.backups)
+
+[[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
+[[ -d $configs/bspwm ]] && mv $configs/bspwm $tempdir
+[[ -d $configs/berry ]] && mv $configs/berry $tempdir
+[[ -d $configs/i3 ]] && mv $configs/i3 $tempdir
+[[ -d $configs/leftwm ]] && mv $configs/leftwm $tempdir
 sleep 2
 
 printf "Updating Packages\n"
-sudo pacman -Syu git curl bash zsh python
+sudo pacman -Syu git curl bash zsh python moreutils
 sleep 2
 
 clear
 printf "Installing AUR Helper\n"
 sleep 2
 
-echo " "
-
+echo
 printf "Pick a AUR Helper\n"
-
-echo " "
+echo
 
 printf "Yay (1)\n"
 printf "Paru (2)\n"
-read -p ": " aur
+echo
+read -p "AUR Helper : " aur
 
 case $aur in
    1)
-      clear
-      if [[ -f /usr/bin/yay ]]; then
-         yay -S $packages
-      else
-         cd $sweetcache
-         git clone https://aur.archlinux.org/yay-bin.git
-         cd yay-bin
-         makepkg -si
-         yay -S $packages
-      fi
+        clear
+        if [[ `which yay` ]]; then
+            yay -S $packages
+        else
+            cd $sweetcache
+            git clone https://aur.archlinux.org/yay-bin.git
+            cd yay-bin
+            makepkg -si
+            yay -S $packages
+        fi
    ;;
    2)
-      clear
-      if [[ -f /usr/bin/paru ]]; then
-         paru -S $packages
-      else
-         cd $sweetcache
-         git clone https://aur.archlinux.org/paru-bin.git
-         cd paru-bin
-         makepkg -si
-         paru -S $packages
-      fi
+        clear
+        if [[ `which paru` ]]; then
+            paru -S $packages
+        else
+            cd $sweetcache
+            git clone https://aur.archlinux.org/paru-bin.git
+            cd paru-bin
+            makepkg -si
+            paru -S $packages
+        fi
    ;;
+esac
+
+clear
+echo
+printf "Pick a Window Manager\n"
+echo
+
+printf "BSPWM (1)\n"
+printf "BerryWM (2)\n"
+printf "i3-Gaps (3)\n"
+printf "LeftWM (4)\n"
+echo
+printf "More Window Managers soon\n"
+echo
+read -p "Window Manager : " wm
+
+case $wm in
+    1)
+        cp -rf $dotfiles/window-managers/bspwm $configs
+        radius="bspc config border_radius 20"
+
+        clear
+        echo
+        printf "Choose which type of bspwm you want\n"
+        echo
+
+        echo
+        printf "bspwm-git (1) - The official build but without integrated border radius\n"
+        printf "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom\n"
+        echo
+        read -p "BSPWM: " bspwm
+
+        case $bspwm in
+            1)
+                bspwm_type="bspwm-git"
+                sed -i '/$radius/d' $configs/bspwm/bspwmrc
+            ;;
+            2)
+                bspwm_type="bspwm-rounded-corners-git"
+                if ! grep -Fxq $radius ./test.txt; then
+                    echo $radius >> ./test.txt
+                fi
+            ;;
+        esac
+
+        if [[ `which yay` ]]; then
+            yay -S $bspwm_type
+        elif [[ `which paru` ]]; then
+            paru -S $bspwm_type
+        else
+            echo "AUR Helper is not installed, Try running the script again"
+        fi
+    ;;
+    2)
+        cp -rf $dotfiles/window-managers/berry $configs
+
+        if [[ `which yay` ]]; then
+            yay -S berry-git
+        elif [[ `which paru` ]]; then
+            paru -S berry-git
+        else
+            echo "AUR Helper is not installed, Try running the script again"
+        fi
+    ;;
+    3)
+        cp -rf $dotfiles/window-managers/i3 $configs
+
+        if [[ `which yay` ]]; then
+            yay -S i3-gaps
+        elif [[ `which paru` ]]; then
+            paru -S i3-gaps
+        else
+            echo "AUR Helper is not installed, Try running the script again"
+        fi
+    ;;
+    4)
+        cp -rf $dotfiles/window-managers/leftwm $configs
+
+        if [[ `which yay` ]]; then
+            yay -S leftwm
+        elif [[ `which paru` ]]; then
+            paru -S leftwm
+        else
+            echo "AUR Helper is not installed, Try running the script again"
+        fi
+    ;;
 esac
 
 printf "Installing Packages\n"
@@ -76,29 +169,12 @@ printf "Cloning Repository\n"
 git clone https://github.com/Deathemonic/SweetDots -b xorg $dotfiles
 sleep 2
 
-printf "Creating Backups\n"
-tempdir=$(mktemp -d -p $HOME/.backups)
-
-[[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
-
-[[ -d $configs/bspwm ]] && mv $configs/bspwm $tempdir
-
-[[ -d $configs/berry ]] && mv $configs/berry $tempdir
-
-[[ -d $configs/i3 ]] && mv $configs/i3 $tempdir
-sleep 2
-
 printf "Copying Dotfiles\n"
-if [[ -d $configs/sweetconfigs-xorg ]]; then
-   echo "Configs already installed, skipping"
-else
-   cp -rf $dotfiles/sweetconfigs-xorg $configs
-fi
-
-[[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
-
-cp -rf $dotfiles/window-managers/* $configs
+[[ ! -d $configs/sweetconfigs-xorg ]] && cp -rf $dotfiles/sweetconfigs-xorg $configs || echo "Configs already installed, skipping"
 sleep 2
 
-clear
 printf "Done!\n"
+echo
+printf "If you have problems with the installer please create a issue from the repo, If you have something to improve please create a Pull Reques from the repo\n"
+
+exit 0

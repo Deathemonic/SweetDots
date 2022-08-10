@@ -1,0 +1,91 @@
+.notification-card-eventbox {
+    background-color: $black-lighter;
+    border-radius: 15px;
+}
+
+.notification-card-box {
+    padding: 1em;
+}
+
+.notification-card-header {
+    background-color: $black-darker;
+    border-radius: 15px 15px 0 0;
+    padding: 5px 20px 5px 20px;
+}
+
+.notification-app-name {
+    font-size: 1em;
+    color: $pink;
+}
+
+.notification-timestamp {
+    font-size: .8em;
+    color: $blue;
+}
+
+.notification-close {
+    color: $red;
+    font-size: 1em;
+    transition: 0.5s;
+
+    &:hover {
+        color: $blue;
+    }
+}
+
+.notification-summary {
+    font-size: 1.2em;
+    padding-bottom: 10px;
+    color: $pink;
+}
+
+.notification-body {
+    font-size: 1em;
+    color: $pink;
+}
+
+.notification-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 10px;
+    margin: 0 0 10px 20px;
+}
+
+.notification-image-screenshot {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-width: 300px;
+    min-height: 200px;
+    border-radius: 10px;
+    margin: 1em;
+}
+
+.notification-screenshot-open,
+.notification-screenshot-delete {
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 2em;
+    margin-right: 2em;
+    transition: 0.5s;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+}
+
+.notification-screenshot-open:hover,
+.notification-screenshot-delete:hover {
+    border-radius: 20px;
+    background-color: $black;
+    color: $blue;
+}
+
+.notification-screenshot-open {
+    background-color: $blue;
+    color: $black;
+}
+.notification-screenshot-delete {
+    background-color: $red;
+    color: $black;
+}

@@ -1,0 +1,21 @@
+.info-panel {
+    .weather-box {
+        border-radius: 10px;
+        padding: 20px 30px 0px 20px;
+        margin: .5em .5em 0em;
+        min-width: 100px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+
+        .weather-info {
+            color: $black;
+        }
+
+        .weather-icon {
+            color: $black;
+            font-family: 'JetBrainsMono Nerd Font';
+            font-weight: bold;
+            padding-right: 15px;
+            font-size: 4.5em;
+        }
+    }
+}

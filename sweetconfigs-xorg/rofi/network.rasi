@@ -36,12 +36,12 @@ prompt {
 
 textbox-prompt-colon {
    expand: 				false;
-   str: 				"";
+   str: 				"";
    border-radius: 			100%;
    background-color:             	@background;
    text-color: 				@foreground;
    padding:    				10px 10px 6px 10px;
-   font:				"icomoon\-feather 10";
+   font:				"Material Icons Round 10";
 }
 
 entry {

@@ -1,0 +1,12 @@
+.control-panel-window {
+    .control-panel-spacer {
+		transition: all 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	}
+
+    .control-panel {
+		border: 2px $pink solid;
+		background-color: $black;
+		padding: 10px;
+		border-radius: 20px;
+	}
+}

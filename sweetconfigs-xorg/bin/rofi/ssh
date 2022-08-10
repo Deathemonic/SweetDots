@@ -2,7 +2,7 @@
 
 rofi \
 	-show ssh \
-	-modi run,drun,ssh,window  \
+	-modi run,drun,ssh,window,filebrowser  \
 	-no-lazy-grab \
 	-scroll-method 0 \
 	-drun-match-fields all \

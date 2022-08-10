@@ -2,45 +2,64 @@
 
 brightness=$(brightnessctl i | grep -oP '\(\K[^%\)]+')
 volume=$(pamixer --get-volume)
-empty_battery="0"
+empty_battery="1"
 
 volume_icon () {
     if [ $volume -lt "35" ]; then
-        icon=""
+        icon=""
     elif [ $volume -lt "70" ]; then
-        icon=""
+        icon=""
     else
-        icon=""
+        icon=""
     fi
 
-    [ $(pamixer --get-mute) = "true" ] && icon=""
+    [ $(pamixer --get-mute) = "true" ] && icon=""
 
     echo $icon
 }
 
 brightness_icon () {
-    if [ $brightness -lt "40" ]; then
-        echo ""
+    if [ $brightness -lt "15" ]; then
+        echo ""
+    elif [ $brightness -lt "30" ]; then
+        echo ""
+    elif [ $brightness -lt "45" ]; then
+        echo ""
     elif [ $brightness -lt "60" ]; then
-        echo ""
+        echo ""
+    elif [ $brightness -lt "75" ]; then
+        echo ""
+    elif [ $brightness -lt "90" ]; then
+        echo ""
     else
-        echo ""
+        echo ""
     fi
 }
 
 network_icon () {
     wifi_check=$(cat /sys/class/net/w*/operstate)
     ethernet_check=$(cat /sys/class/net/e*/operstate)
+    wifi_strength=$(nmcli dev wifi list | awk '/\*/{if (NR!=1) {print $9}}')
 
     
-	if [ $wifi_check = up ]; then
-        echo ""
-    else
-        if [ $ethernet_check = up ]; then
-            echo ""
+	if [ $wifi_check = up ]; then 
+        if [ $wifi_strength -lt "10" ]; then
+            echo ""
+        elif [ $wifi_strength -lt "25" ]; then
+            echo ""
+        elif [ $wifi_strength -lt "45" ]; then
+            echo ""
+        elif [ $wifi_strength -lt "65" ]; then
+            echo ""
+        elif [ $wifi_strength -lt "85" ]; then
+            echo ""
         else
-            echo ""
+            echo ""
         fi
+    elif [ $ethernet_check = up ]; then 
+        echo ""
+    else 
+        echo ""
     fi
 }
 
@@ -64,11 +83,8 @@ network_speed () {
 
 network_name () {
     ssid=$(iwgetid -r)
-    if [ -z $ssid ]; then 
-        echo "Not Connected"
-    else 
-        echo "Connected to $ssid"
-    fi
+
+    [ -z $ssid ] && echo "Not Connected" || echo "Connected to $ssid"
 }
 
 
@@ -82,15 +98,15 @@ battery_empty () {
 
 battery_icon () {
     if [[ -d /sys/class/power_supply/ACAD ]]; then
-		echo ""
+		echo ""
 	elif [[ -d /sys/class/power_supply/BAT ]]; then
 		if [[ $(cat /sys/class/power_supply/BAT/status) == "Discharging" ]]; then
-			echo ""
+			echo ""
 		else
-			echo ""
+			echo ""
 		fi
 	else
-		echo ""
+		echo ""
 	fi
 }
 
@@ -193,9 +209,6 @@ case $1 in
     ;;
     battery-capacity)
         battery_capacity
-    ;;
-    power-menu)
-        ~/.config/sweetconfigs-xorg/bin/rofi/power
     ;;
     cpu-value)
         cpu_value

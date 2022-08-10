@@ -1,10 +1,10 @@
 * {
-	background:			#1b1f23;
-	foreground:			#ffdede;
-	darker:				#161a1e;
-	lighter:			#22262a;
-	pink:				#ffdede;
-	red:				#e5a3a1;
-	green:				#b4e3ad;
-	blue:				#a3cbe7;
+	background:			#1B1F23;
+	foreground:			#FFDEDE;
+	darker:				#161A1E;
+	lighter:			#22262A;
+	pink:				#FFDEDE;
+	red:				#E5A3A1;
+	green:				#B4E3AD;
+	blue:				#A3CBE7;
 }

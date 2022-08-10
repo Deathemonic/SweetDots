@@ -1,12 +1,7 @@
-(include "source/yuck/variables/bar.yuck")
-(include "source/yuck/variables/dashboard.yuck")
-(include "source/yuck/variables/lockscreen.yuck")
+(include "src/yuck/variables.yuck")
+(include "src/yuck/windows.yuck")
 
-(include "source/yuck/widgets/bar.yuck")
-(include "source/yuck/widgets/dashboard.yuck")
-(include "source/yuck/widgets/lockscreen.yuck")
-(include "source/yuck/widgets/notifications.yuck")
-
-(include "source/yuck/windows/bar.yuck")
-(include "source/yuck/windows/dashboard.yuck")
-(include "source/yuck/windows/lockscreen.yuck")
+(include "src/yuck/widgets/top-panel.yuck")
+(include "src/yuck/widgets/control-panel.yuck")
+(include "src/yuck/widgets/info-panel.yuck")
+(include "src/yuck/widgets/notification-panel.yuck")
