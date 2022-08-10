@@ -1,4 +1,5 @@
 # Rewrite Development Branch
+Will release when v2.0 is finish
 
 ## Rewrite Status
 
