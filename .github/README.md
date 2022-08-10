@@ -4,7 +4,7 @@
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/89)
 
 Configs (Wayland)
 
@@ -12,7 +12,7 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/70)
 
 Window Manager Configs (Wayland)
 
@@ -20,7 +20,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/73)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
 
 EWW (Wayland)
 
@@ -36,12 +36,8 @@ README
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
 
 ## Doing Now
 
-Making **<kbd>EWW Dashboard</kbd>**
-
-## Highlights
-
-**``Roboto`` will be the UI font instead of ``Jetbrains``**
+Improving **<kbd>Scripts and Configs</kbd>**
