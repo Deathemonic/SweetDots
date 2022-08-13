@@ -5,7 +5,7 @@ Will release when v2.0 is finish
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/89)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/95)
 
 Configs (Wayland)
 
@@ -13,7 +13,7 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/70)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/80)
 
 Window Manager Configs (Wayland)
 
@@ -21,7 +21,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/92)
 
 EWW (Wayland)
 
@@ -29,15 +29,15 @@ EWW (Wayland)
 
 Sweetpastel Ports
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
 
 README
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
 
 ## Doing Now
 
