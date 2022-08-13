@@ -86,7 +86,6 @@ confirm_install () {
         Y | y | Yes | yes)
             make_cache
             make_backup
-            updating_packages
         ;;
         *)
             alert -e "Aborting!"
@@ -350,6 +349,20 @@ finishing () {
     alert -s "Done!"
 }
 
-make_cache
-make_backup
-confirm_install
+first_choice () {
+    clear
+    read -p "Are you on Arch Linux? Y/N : "  $arch
+    echo
+    alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually, Read the repo's wiki for more information"
+
+    case $arch in
+        Y | y | Yes | yes)
+            confirm_install
+            updating_packages
+        ;;
+        * )
+            confirm_install
+            installing_dotfiles
+        ;;
+    esac
+}
