@@ -3,7 +3,7 @@ Will release when v2.0 is finish
 
 ## Early Access
 ```sh
-bash -c $(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
 
 ## Rewrite Status
