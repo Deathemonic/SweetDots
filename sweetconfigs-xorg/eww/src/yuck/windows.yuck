@@ -42,6 +42,13 @@
 			:width "98%"
 		)
 
+  	:reserve
+
+    	(struts 
+      		:side "top" 
+      		:distance "8%"
+    	)
+
 	:monitor 0
 	:stacking "bg"
 	:windowtype "dock"

@@ -12,8 +12,7 @@ send_notification () {
     else
         icon="$icon/volume-2.svg"
     fi
-
-    notify-send -a "Volume" -u normal -i $icon -r 699 "Volume : $volume"
+    notify-send -a "Volume" -u normal -i $icon -r 699 "Volume : $volume" -h int:value:$volume
 }
 
 docs () {

@@ -56,12 +56,14 @@
 
 [urgency_low]
   timeout = 2
+  highlight = "#ffdede"
   background = "#1b1f23"
   foreground = "#a3cbe7"
   frame_color = "#a3cbe7"
 
 [urgency_normal]
   timeout = 5
+  highlight = "#a3cbe7"
   background = "#1b1f23"
   foreground = "#ffdede"
   frame_color = "#ffdede"

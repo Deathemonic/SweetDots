@@ -14,9 +14,6 @@ packages="polybar-git rofi alacritty picom-arian8j2-git dunst eww-git ffmpeg\
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-icomoon-feather nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
-
-
-
 alert () {
     log_info="$(date +"%H:%M:%S") \e[0;34mINFO\e[0m"
     log_error="$(date +"%H:%M:%S") \e[1;31mERROR\e[0m"
@@ -65,6 +62,8 @@ make_backup () {
     [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
     [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
     [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
+
+    [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
 
     echo
     alert -s "Backup Done!"
@@ -124,7 +123,7 @@ installing_aur () {
     sleep 2
     echo
 
-    if [[ ! $(command -v yay) ]] && [[ ! $(command -v paru) ]]; then
+    if ! command -v yay && ! command -v paru; then
         alert -e "Can't find a AUR Helper, Installing"
         echo
 
@@ -226,7 +225,7 @@ pick_wm () {
                 2)
                     bspwm_type="bspwm-rounded-corners-git"
 
-                    if [[ ! $(grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc) ]]; then
+                    if ! grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc; then
                         echo $config_str >> $config_dir/bspwm/bspwmrc
                     fi
                 ;;
@@ -262,6 +261,8 @@ pick_wm () {
             if command -v paru; then
                 paru -S berry-git
 
+                sudo cp -rf $cache_dir/SweetDots/misc/xsessions/berry.desktop /usr/share/xsessions/
+
                 echo
                 alert -s "Installing Done!"
                 echo
@@ -269,6 +270,8 @@ pick_wm () {
                 installing_dotfiles
             elif command -v yay; then
                 yay -S berry-git
+
+                sudo cp -rf $cache_dir/SweetDots/misc/xsessions/berry.desktop /usr/share/xsessions/
 
                 echo
                 alert -s "Installing Done!"
@@ -345,8 +348,25 @@ noarch_wm () {
 
 installing_dotfiles () {
     alert "Copying Dotfiles"
-    [[ ! -d $config_dir/sweetconfigs-xorg ]] && cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir || alert -e "Configs are already existed. Skipping!"
-    
+
+    if [[ ! -d $config_dir/sweetconfigs-xorg ]]; then 
+        cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir
+    else
+        alert -e "SweetDots are already installed"
+        read -p "Do you want to install it anyway Y/N : " existed
+
+        case $existed in
+            Y|y|Yes|yes)
+                tempdir=$(mktemp -d -p $HOME/.backups)
+
+                [[ -d $config_dir/sweetconfigs-xorg ]] && mv $config_dir/sweetconfigs-xorg $tempdir
+                cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir
+            ;;
+        esac
+    fi
+
+    [[ ! -d $config_dir/mpDris2 ]] && cp -rf $cache_dir/SweetDots/misc/mpDris2 $config_dir
+
     echo
     alert -s "Copying Done!"
     sleep 2
