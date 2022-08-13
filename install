@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
+# v5.5.1
 
-# v5.3.1
+config_dir="$HOME/.config/"
+cache_dir="$HOME/.cache"
+cache="$cache_dir/sweetcache/"
 
-clear
-printf "DEV INSTALL\n"
-sleep 2
-
-configs="$HOME/.config/"
-dotfiles="$HOME/.cache/SweetDots-Xorg/"
-sweetcache="$HOME/.cache/sweetcache/"
 packages="polybar-git rofi alacritty picom-arian8j2-git dunst eww-git ffmpeg\
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
@@ -18,163 +14,335 @@ packages="polybar-git rofi alacritty picom-arian8j2-git dunst eww-git ffmpeg\
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-icomoon-feather nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
-printf "Making cache Folders"
-[[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]] && mkdir "$cache" "$sweetcache" 2>/dev/null
-[[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
-sleep 2
 
-printf "Creating Backups\n"
-tempdir=$(mktemp -d -p $HOME/.backups)
 
-[[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
-[[ -d $configs/bspwm ]] && mv $configs/bspwm $tempdir
-[[ -d $configs/berry ]] && mv $configs/berry $tempdir
-[[ -d $configs/i3 ]] && mv $configs/i3 $tempdir
-[[ -d $configs/leftwm ]] && mv $configs/leftwm $tempdir
-sleep 2
 
-printf "Updating Packages\n"
-sudo pacman -Syu git curl bash zsh python moreutils
-sleep 2
+alert () {
+    log_info="$(date +"%H:%M:%S") \e[0;34mINFO\e[0m"
+    log_error="$(date +"%H:%M:%S") \e[1;31mERROR\e[0m"
+    log_warning="$(date +"%H:%M:%S") \e[0;33mWARNING\e[0m"
+    log_success="$(date +"%H:%M:%S") \e[0;32mSUCCESS\e[0m"
+  
+    case $1 in
+        -e | --error)
+            printf "$log_error %s\n" $2
+        ;;
+        -w | --warning)
+            printf "$log_warning %s\n" $2
+        ;;
+        -s | --success)
+            printf "$log_success %s\n" $2
+        ;;
+        *)
+        printf "$log_info %s\n" $1
+        ;;
+    esac
+}
 
-clear
-printf "Installing AUR Helper\n"
-sleep 2
+make_cache () {
+    alert "Making Cache Folders"
 
-echo
-printf "Pick a AUR Helper\n"
-echo
+    [[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]] && mkdir -p "$cache" "$sweetcache" 2>/dev/null
+    [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
 
-printf "Yay (1)\n"
-printf "Paru (2)\n"
-echo
-read -p "AUR Helper : " aur
+    echo
+    alert -s "Caching Done!"
+    echo
+}
 
-case $aur in
-   1)
-        clear
-        if [[ `which yay` ]]; then
-            yay -S $packages
-        else
-            cd $sweetcache
-            git clone https://aur.archlinux.org/yay-bin.git
-            cd yay-bin
-            makepkg -si
-            yay -S $packages
-        fi
-   ;;
-   2)
-        clear
-        if [[ `which paru` ]]; then
-            paru -S $packages
-        else
-            cd $sweetcache
-            git clone https://aur.archlinux.org/paru-bin.git
-            cd paru-bin
-            makepkg -si
-            paru -S $packages
-        fi
-   ;;
-esac
+make_backup () {
+    alert "Making Backups"
+    echo
+    alert -w "Backup Folder is in ~/.backups"
 
-clear
-echo
-printf "Pick a Window Manager\n"
-echo
+    [[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null || alert -e "Can't Create a Backup Folder"
 
-printf "BSPWM (1)\n"
-printf "BerryWM (2)\n"
-printf "i3-Gaps (3)\n"
-printf "LeftWM (4)\n"
-echo
-printf "More Window Managers soon\n"
-echo
-read -p "Window Manager : " wm
+    tempdir=$(mktemp -d -p $HOME/.backups)
 
-case $wm in
-    1)
-        cp -rf $dotfiles/window-managers/bspwm $configs
-        radius="bspc config border_radius 20"
+    [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
+    [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
+    [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
+    [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
 
-        clear
+    echo
+    alert -s "Backup Done!"
+    echo
+}
+
+confirm_install () {
+    clear
+    printf "01010011 01110111 01100101 01100101 01110100\n"
+    printf "01000010 01100101 01110010 01110010 01111001\n"
+    printf "     The Rice with pastel colors\n"
+    echo
+
+    echo
+    confirm_msg=$(alert -w "Are you sure you want to continue? Y/N")
+    read -p "$confirm_msg : " confirm
+
+    case $confirm in
+        Y | y | Yes | yes)
+            make_cache
+            make_backup
+            updating_packages
+        ;;
+        *)
+            alert -e "Aborting!"
+        ;;
+    esac
+}
+
+updating_packages () {
+    alert "Updating Packages"
+
+    sudo pacman -Syu git curl bash zsh python moreutils
+
+    echo
+    alert -s "Update Done!"
+    echo
+
+    installing_aur
+}
+
+installing_aur () {
+    alert "Installing AUR"
+    sleep 1
+    echo
+
+    if [[ ! $(command -v yay) ]] && [[ ! $(command -v paru) ]]; then
+        alert -e "Can't find a AUR Helper, Installing"
         echo
-        printf "Choose which type of bspwm you want\n"
-        echo
 
+        alert "Pick a AUR Helper"
         echo
-        printf "bspwm-git (1) - The official build but without integrated border radius\n"
-        printf "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom\n"
-        echo
-        read -p "BSPWM: " bspwm
+        read -p "(1)paru | (2)yay : " helper
 
-        case $bspwm in
+        case $helper in
             1)
-                bspwm_type="bspwm-git"
-                sed -i '/$radius/d' $configs/bspwm/bspwmrc
+                cd $cache_dir
+                git clone https://aur.archlinux.org/paru-bin.git
+                cd paru-bin
+                makepkg -si
+                paru -S $packages
+
+                echo
+                alert -s "AUR Done!"
+                echo
+
+                pick_wm
             ;;
             2)
-                bspwm_type="bspwm-rounded-corners-git"
-                if ! grep -Fxq $radius ./test.txt; then
-                    echo $radius >> ./test.txt
-                fi
+                cd $cache_dir
+                git clone https://aur.archlinux.org/yay-bin.git
+                cd yay-bin
+                makepkg -si
+                yay -S $packages
+
+                echo
+                alert -s "AUR Done!"
+                echo
+
+                pick_wm
+            ;;
+            *)
+                alert -e "Invalid Choice. Aborting!"
+                exit 0
             ;;
         esac
+    else
+        if command -v yay; then
+            yay -S $packages
 
-        if [[ `which yay` ]]; then
-            yay -S $bspwm_type
-        elif [[ `which paru` ]]; then
-            paru -S $bspwm_type
+            echo
+            alert -s "AUR Done!"
+            echo
+
+            pick_wm
+        elif command -v paru; then
+            paru -S $packages
+
+            echo
+            alert -s "AUR Done!"
+            echo
+
+            pick_wm
         else
-            echo "AUR Helper is not installed, Try running the script again"
+            alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
         fi
-    ;;
-    2)
-        cp -rf $dotfiles/window-managers/berry $configs
+    fi
+}
 
-        if [[ `which yay` ]]; then
-            yay -S berry-git
-        elif [[ `which paru` ]]; then
-            paru -S berry-git
-        else
-            echo "AUR Helper is not installed, Try running the script again"
-        fi
-    ;;
-    3)
-        cp -rf $dotfiles/window-managers/i3 $configs
+pick_wm () {
+    echo
+    alert "Pick a Window Manager"
+    echo
 
-        if [[ `which yay` ]]; then
-            yay -S i3-gaps
-        elif [[ `which paru` ]]; then
-            paru -S i3-gaps
-        else
-            echo "AUR Helper is not installed, Try running the script again"
-        fi
-    ;;
-    4)
-        cp -rf $dotfiles/window-managers/leftwm $configs
+    echo "BSPWM (1)"
+    echo "BerryWM (2)"
+    echo "i3-Gaps (3)"
+    echo "LeftWM (4)"
+    echo
+    echo "More Window Manager will be added soon"
+    echo
+    read -p "Window Manager : " wm
 
-        if [[ `which yay` ]]; then
-            yay -S leftwm
-        elif [[ `which paru` ]]; then
-            paru -S leftwm
-        else
-            echo "AUR Helper is not installed, Try running the script again"
-        fi
-    ;;
-esac
+    case $wm in
+        1)
+            cp -rf $dotfiles/window-managers/bspwm $config_dir
+            config_str="bspc config border_radius 20"
 
-printf "Installing Packages\n"
+            echo
+            alert "Choose which type of bspwm you want"
+            echo
 
-printf "Cloning Repository\n"
-git clone https://github.com/Deathemonic/SweetDots -b xorg $dotfiles
-sleep 2
+            echo
+            printf "bspwm-git (1) - The official build but without integrated border radius"
+            printf "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom"
+            echo
+            read -p "BSPWM: " bspwm
 
-printf "Copying Dotfiles\n"
-[[ ! -d $configs/sweetconfigs-xorg ]] && cp -rf $dotfiles/sweetconfigs-xorg $configs || echo "Configs already installed, skipping"
-sleep 2
+            case $bspwm in
+                1)
+                    bspwm_type="bspwm-git"
 
-printf "Done!\n"
-echo
-printf "If you have problems with the installer please create a issue from the repo, If you have something to improve please create a Pull Reques from the repo\n"
+                    sed -i '/$config_str/d' $config_dir/bspwm/bspwmrc
+                ;;
+                2)
+                    bspwm_type="bspwm-rounded-corners-git"
 
-exit 0
+                    if ! grep -Fxq $config_str $config_dir/bspwm/bspwmrc; then
+                        echo $config_str >> $config_dir/bspwm/bspwmrc
+                    fi
+                ;;
+                *)
+                    alert -e "Invalid Choice. Aborting!"
+                    exit 0
+                ;;
+            esac
+
+            if command -v yay; then
+                yay -S $bspwm_type
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            elif command -v paru; then
+                paru -S $bspwm_type
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            else
+                alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+            fi
+        ;;
+        2)
+            cp -rf $dotfiles/window-managers/berry $config_dir
+
+            if command -v yay; then
+                yay -S berry-git
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            elif command -v paru; then
+                paru -S berry-git
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            else
+                alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+            fi
+        ;;
+        3)
+            cp -rf $dotfiles/window-managers/i3 $config_dir
+
+            if command -v yay; then
+                yay -S i3-gaps
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            elif command -v paru; then
+                paru -S i3-gaps
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            else
+                alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+            fi
+        ;;
+        4)
+            cp -rf $dotfiles/window-managers/leftwm $config_dir
+
+            if command -v yay; then
+                yay -S leftwm
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            elif command -v paru; then
+                paru -S leftwm
+
+                echo
+                alert -s "Installing Done!"
+                echo
+                
+                installing_dotfiles
+            else
+                alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+            fi
+        ;;
+        *)
+            alert -e "Invalid Choice. Aborting!"
+            exit 0
+        ;;
+    esac
+}
+
+installing_dotfiles () {
+    echo
+    alert "Cloning repository"
+
+    cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
+
+    echo
+    alert -s "Cloning Done!"
+    echo
+
+    alert "Copying Dotfiles"
+    [[ ! -d $config_dir/sweetconfigs-xorg ]] && cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir || alert -e "Configs are already existed. Skipping!"
+    
+    echo
+    alert -s "Copying Done!"
+    echo
+
+    finishing
+}
+
+finishing () {
+    alert -w "If you have problems with the installer please create a issue from the repo, If you have something to improve please create a Pull Reques from the repo"
+    echo
+
+    alert -s "Done!"
+}
+
+make_cache
+make_backup
+confirm_install
