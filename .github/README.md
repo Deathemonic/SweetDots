@@ -1,6 +1,11 @@
 # Rewrite Development Branch
 Will release when v2.0 is finish
 
+## Early Access
+```sh
+bash -c $(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)
+```
+
 ## Rewrite Status
 
 Configs (Xorg)
