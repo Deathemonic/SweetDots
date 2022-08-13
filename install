@@ -25,16 +25,16 @@ alert () {
   
     case $1 in
         -e | --error)
-            printf "$log_error %s\n" $2
+            printf "$log_error %s\n" "$2"
         ;;
         -w | --warning)
-            printf "$log_warning %s\n" $2
+            printf "$log_warning %s\n" "$2"
         ;;
         -s | --success)
-            printf "$log_success %s\n" $2
+            printf "$log_success %s\n" "$2"
         ;;
         *)
-        printf "$log_info %s\n" $1
+        printf "$log_info %s\n" "$1"
         ;;
     esac
 }
