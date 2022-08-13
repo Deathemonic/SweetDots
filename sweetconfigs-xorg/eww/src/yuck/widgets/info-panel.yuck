@@ -95,8 +95,8 @@
 		    			:show-details false 
                         :show-heading true 
                         :show-day-names true
-		    			:day calendar-day 
-                        :month calendar-month 
+		    			:day calendar-day
+                        :month calendar-month
                         :year calendar-year
                     )
 		    	)

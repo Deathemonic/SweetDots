@@ -1,7 +1,7 @@
 (include "src/yuck/variables.yuck")
 (include "src/yuck/windows.yuck")
 
-(include "src/yuck/widgets/top-panel.yuck")
 (include "src/yuck/widgets/control-panel.yuck")
 (include "src/yuck/widgets/info-panel.yuck")
 (include "src/yuck/widgets/notification-panel.yuck")
+(include "src/yuck/widgets/top-panel.yuck")

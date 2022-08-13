@@ -2,6 +2,7 @@
 (defvar info-panel false)
 (defvar control-panel false)
 (defvar music-panel false)
+(defvar lockscreen false)
 
 (defvar top-panel-music false)
 (defvar top-panel-brightness false)

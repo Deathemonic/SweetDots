@@ -11,8 +11,8 @@ cache_country="$cache/country"
 
 [ ! -d $cache ] && mkdir $cache
 
-key="f31178686acff62544cb03ba32e975cf"
-id="1724395"
+key=""
+id=""
 unit="metric"	# Available options : 'metric' or 'imperial'
 
 data () {
@@ -119,6 +119,8 @@ data () {
 		echo "$gradient_1" > $cache_gradient_1
 		echo "$gradient_2" > $cache_gradient_2
 	else
+		echo "-" > $cache_city
+		echo "-" > $cache_country
 		echo "Weather Unavailable" > $cache_status
 		echo "" > $cache_icon
 		echo "-" > $cache_temperature
@@ -132,24 +134,31 @@ case $1 in
         data
     ;;
     icon)
-        data && cat $cache_icon
+        data &
+		cat $cache_icon
     ;;
     color-1)
-        data && cat $cache_gradient_1
+        data &
+		cat $cache_gradient_1
     ;;
     color-2)
-        data && cat $cache_gradient_2
+        data & 
+		cat $cache_gradient_2
     ;;
     city)
-        data && cat $cache_city
+        data & 
+		cat $cache_city
     ;;
     country)
-        data && cat $cache_country
+        data & 
+		cat $cache_country
     ;;
     temperature)
-        data && cat $cache_temperature
+        data & 
+		cat $cache_temperature
     ;;
     status)
-        data && cat $cache_status
+        data &
+		cat $cache_status
     ;;
 esac

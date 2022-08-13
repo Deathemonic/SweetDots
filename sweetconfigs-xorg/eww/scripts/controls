@@ -5,7 +5,7 @@ cache="$HOME/.cache/eww"
 night_light="$cache/night-light.eww"
 do_not_disturb="$cache/do-not-disturb.eww"
 airplane_mode=$(nmcli radio all | awk 'FNR == 2 {print $2}')
-icon_dir="$HOME/Documents/Test/eww/Widgets-V4/assets/notifications"
+icon_dir="$HOME/.config/sweetconfigs-xorg/eww/assets/notifications"
 
 [ ! -d $cache ] && mkdir $cache
 

@@ -136,17 +136,11 @@ case $1 in
   	capture-area)
     	capture_area
   	;;
-    capture-timer)
-    	capture_timer
-  	;;
   	capture-noaudio)
     	capture noaudio
   	;;
   	capture-area-noaudio)
     	capture_area noaudio
-  	;;
-    capture-timer-noaudio)
-    	capture_timer noaudio
   	;;
     capture-rofi)
         capture_rofi

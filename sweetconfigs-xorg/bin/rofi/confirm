@@ -1,7 +1,0 @@
-#!/bin/bash
-
-rofi -dmenu\
-     -i\
-     -no-fixed-num-lines\
-     -p "$1 : "\
-     -theme $HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi

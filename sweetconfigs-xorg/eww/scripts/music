@@ -45,11 +45,16 @@ cover_notification () {
     cover_dir="$cache/notification-cover"
     [ ! -d $cover_dir ] && mkdir $cover_dir
     cover="$cover_dir/$RANDOM-cover.png"
-    fallback="$HOME/Documents/Test/eww/Widgets-V4/assets/fallback.png"
+    fallback="$HOME/.config/sweetconfigs-xorg/eww/assets/fallback.png"
 
     players_pass=$1
+    
+    if [[ $players_pass == "mpd" ]]; then
+      albumart="$(playerctl -p mpd metadata mpris:artUrl)"
+    else
+      albumart="$(playerctl -p $players_pass metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
+    fi
 
-    albumart="$(playerctl -p $players_pass metadata mpris:artUrl | sed -e 's/open.spotify.com/i.scdn.co/g')"
     [ $(playerctl -p $players_pass metadata mpris:artUrl) ] && curl -s "$albumart" --output $cover || cp $fallback $cover
 
     echo $cover | tail -n 1

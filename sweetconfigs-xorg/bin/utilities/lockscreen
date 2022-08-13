@@ -1,0 +1,49 @@
+#!/bin/bash
+
+i3lock --fill -i $HOME/.config/sweetconfigs-xorg/wallpapers/flowers.jpg \
+        -n -c 00000000 -e --pass-media-keys --pass-power-keys --pass-volume-keys --indicator \
+		--radius 50 --modif-size=9 --modif-pos="w/2:h/2-15" \
+		\
+		--time-str="%I:%M %p" \
+		--time-pos="w/2:h/4" \
+		--time-color=1b1f23 \
+		--time-size=69 \
+		--time-font="Roboto-Bold" \
+		\
+		--date-str="%A, %B %d" \
+		--date-pos="w/2:h/4+40" \
+		--date-color=161a1e \
+		--date-size=35 \
+		--date-font="Roboto-Bold" \
+		\
+		--verif-text="" \
+		--verif-color=22262a \
+		--verif-size=10 \
+		--verif-font="Roboto" \
+		\
+		--wrong-text="" \
+		--wrong-color=ee6a70 \
+		--wrong-size=10 \
+		--wrong-font="Roboto" \
+		\
+		--greeter-text="" \
+		--greeter-color=96d6b0 \
+		--greeter-size=60 \
+		--greeter-font="Material Icons Round" \
+		--greeter-pos="w/2:h/2+300" \
+		\
+		--ring-color=00000000 \
+		--ringver-color=96D6B0 \
+		--ringwrong-color=ee6a70 \
+		--ring-width=5 \
+		\
+		--insidever-color=079A8C02 \
+		--insidewrong-color=079A8C02 \
+		--inside-color=079A8C02 \
+		--ind-pos="w/2:h-130" \
+		\
+		--noinput-text="" \
+		\
+		--line-uses-inside --keyhl-color=cb92f2 --bshl-color=ee6a70 --separator-color=00000000 \
+		\
+		--pointer=default

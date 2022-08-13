@@ -40,7 +40,7 @@
 
                     (box 
                         :valign "center"
-                        :oreintation "h" 
+                        :orientation "h" 
 
                         (button
                             :class "music-previous-bar"
@@ -185,8 +185,8 @@
 	    	(button
 	    		:class "time-text"
 	    		:tooltip "${date}"
-	    		:onclick "bash scripts/open/info-panel &"
-                :onrightclick "bash scripts/open/control-panel &"
+	    		:onclick "scripts/open/info-panel &"
+                :onrightclick "scripts/open/control-panel &"
 	    		{time}
 	    	)
 	    )
@@ -200,7 +200,7 @@
     
             (button 
                 :class "sysmenu-btn"
-                :onclick "bash $HOME/.config/sweetconfigs-xorg/bin/rofi/power &"
+                :onclick "$HOME/.config/sweetconfigs-xorg/bin/menu/power &"
                 ""
             )
         )

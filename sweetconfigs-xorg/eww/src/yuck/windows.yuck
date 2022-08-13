@@ -1,20 +1,3 @@
-(defwindow info-panel
-	:geometry 
-
-        (geometry 
-            :x "-67%"
-			:y "0%" 
-			:width "0%" 
-			:height "0%"
-			:anchor "center left"
-        )
-
-	:windowtype "dock"
-	:wm-ignore false
-
-	(info-panel)
-)
-
 (defwindow control-panel
 	:geometry 
 
@@ -27,9 +10,26 @@
         )
 
 	:windowtype "dock"
-	:wm-ignore false
+	:wm-ignore true
 
 	(control-panel)
+)
+
+(defwindow info-panel
+	:geometry 
+
+        (geometry 
+            :x "-67%"
+			:y "0%" 
+			:width "0%" 
+			:height "0%"
+			:anchor "center left"
+        )
+
+	:windowtype "dock"
+	:wm-ignore true
+
+	(info-panel)
 )
 
 (defwindow top-panel

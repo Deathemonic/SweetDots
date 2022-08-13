@@ -1,0 +1,80 @@
+#!/bin/bash
+
+config="$HOME/.config/sweetconfigs-xorg/rofi/power.rasi"
+confirm_config="$HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi"
+rofi_command="rofi -theme"
+
+quit () {
+    if [ `pidof berry` ]; then
+        berryc quit
+    elif [ `pidof bspwm` ]; then
+        bspc quit
+    else
+        kill -9 -1
+    fi
+}
+
+uptime=$(uptime -p | sed -e 's/up //g')
+
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+message="Options  -  Yes / No"
+
+chosen="$(echo -e "$options" | $rofi_command $config -p "UP - $uptime" -dmenu -selected-row 2)"
+case $chosen in
+    $shutdown)
+		confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Are you Sure?')
+
+		if [[ $confirm == "yes" ]] || [[ $confirm == "Yes" ]] || [[ $confirm == "YES" ]] || [[ $confirm == "y" ]] || [[ $confirm == "Y" ]]; then
+			systemctl poweroff
+		elif [[ $confirm == "no" ]] || [[ $confirm == "No" ]] || [[ $confirm == "NO" ]] || [[ $confirm == "n" ]] || [[ $confirm == "N" ]]; then
+			exit
+        else
+			$rofi_command $confirm_config -e "$message"
+        fi
+    ;;
+    $reboot)
+		confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Are you Sure?')
+
+		if [[ $confirm == "yes" ]] || [[ $confirm == "Yes" ]] || [[ $confirm == "YES" ]] || [[ $confirm == "y" ]] || [[ $confirm == "Y" ]]; then
+			systemctl reboot
+		elif [[ $confirm == "no" ]] || [[ $confirm == "No" ]] || [[ $confirm == "NO" ]] || [[ $confirm == "n" ]] || [[ $confirm == "N" ]]; then
+			exit
+        else
+			$rofi_command $confirm_config -e "$message"
+        fi
+    ;;
+    $lock)
+        $rofi_command $confirm_config -e "Sorry but this feature is still work in progress :("
+    ;;
+    $suspend)
+		confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Are you Sure?')
+
+		if [[ $confirm == "yes" ]] || [[ $confirm == "Yes" ]] || [[ $confirm == "YES" ]] || [[ $confirm == "y" ]] || [[ $confirm == "Y" ]]; then
+			playerctl -a stop
+			pamixer -m
+			systemctl suspend
+			$HOME/.config/berry/bin/eww/lock
+		elif [[ $confirm == "no" ]] || [[ $confirm == "No" ]] || [[ $confirm == "NO" ]] || [[ $confirm == "n" ]] || [[ $confirm == "N" ]]; then
+			exit
+        else
+			$rofi_command $confirm_config -e "$message"
+        fi
+    ;;
+    $logout)
+		confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Are you Sure?')
+
+		if [[ $confirm == "yes" ]] || [[ $confirm == "Yes" ]] || [[ $confirm == "YES" ]] || [[ $confirm == "y" ]] || [[ $confirm == "Y" ]]; then
+            quit
+		elif [[ $confirm == "no" ]] || [[ $confirm == "No" ]] || [[ $confirm == "NO" ]] || [[ $confirm == "n" ]] || [[ $confirm == "N" ]]; then
+			exit
+        else
+			$rofi_command $confirm_config -e "$message"
+        fi
+    ;;
+esac

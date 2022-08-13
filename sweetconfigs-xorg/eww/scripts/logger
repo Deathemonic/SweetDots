@@ -57,11 +57,11 @@ create_cache () {
 
     # If you have a mpris player that send notification you can add one here just follow the layout
     if [[ $DUNST_APP_NAME == "Spotify" ]]; then
-        ICON_PATH=$(scripts/music cover-notification spotify)
+        ICON_PATH=$(./scripts/music cover-notification spotify)
     fi
     if [[ $DUNST_APP_NAME == "Music Player Daemon" ]]; then
         if [[ $DUNST_BODY =~ "by" ]]; then
-            ICON_PATH=$(scripts/music cover-notification mpd)
+            ICON_PATH=$(./scripts/music cover-notification mpd)
         else
             ICON_PATH=/usr/share/icons/Papirus/128x128/apps/mpd.svg
         fi
@@ -95,7 +95,7 @@ make_literal () {
 clear_logs () {
     killall dunst 2>/dev/null
     $HOME/.config/sweetconfigs-xorg/bin/system/notification & disown
-    printf > "$cache"
+    echo > "$cache"
     rm -rf $HOME/.cache/eww/music/notification-cover/*.png
 }
 

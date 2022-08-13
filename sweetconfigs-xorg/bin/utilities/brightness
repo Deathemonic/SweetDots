@@ -1,0 +1,42 @@
+#!/bin/bash
+
+icon="$HOME/.config/sweetconfigs-xorg/dunst/icons"
+steps=5
+
+send_notification () {
+  brightness=$(brightnessctl i | grep -oP '\(\K[^%\)]+')
+
+    if [[ "$brightness" -lt "40" ]]; then
+        icon="$icon/moon.svg"
+    elif [[ "$brightness" -lt "60" ]]; then
+        icon="$icon/loader.svg"
+    else
+        icon="$icon/sun.svg"
+    fi
+
+    notify-send -a Brightness -i $icon -t 2000 -r 500 "Brightness : $brightness" 
+}
+
+docs () {
+	echo "
+Usage:	brightness [Options]
+    
+Options:
+    up      -   Increase the brightness
+    down    -   Decrease the brightness
+	"
+}
+
+case $1 in
+    up)
+        brightnessctl set "${steps:-5}%+" -q
+        send_notification
+    ;;
+    down)
+        brightnessctl set "${steps:-5}%-" -q
+        send_notification
+    ;;
+    *)
+        docs
+    ;;
+esac

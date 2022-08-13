@@ -73,13 +73,15 @@ launch_bar_i3 () {
   fi
 }
 
-if [[ ! -f "$cachesystem" ]]; then
+if [[ ! -f $cachesystem ]]; then
   get_values
   set_values
-  touch ${cachesystem}
+  touch $cachesystem
 fi
 
-if [[ `pidof -x i3` ]]; then
+if [[ `pidof -x bspwm` ]]; then
+  eww -c $HOME/.config/sweetconfigs-xorg/eww open top-panel
+elif [[ `pidof -x i3` ]]; then
   launch_bar_i3
 else
   launch_bar

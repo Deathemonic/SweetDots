@@ -1,0 +1,51 @@
+#!/bin/bash
+
+icon="$HOME/.config/sweetconfigs-xorg/dunst/icons"
+
+send_notification () {
+    volume=$(pamixer --get-volume)
+
+    if [[ "$volume" -lt "35" ]]; then
+        icon="$icon/volume.svg"
+    elif [[ "$volume" -lt "70" ]]; then
+        icon="$icon/volume-1.svg"
+    else
+        icon="$icon/volume-2.svg"
+    fi
+
+    notify-send -a "Volume" -u normal -i $icon -r 699 "Volume : $volume"
+}
+
+docs () {
+	echo "
+Usage:	volume [Options]
+    
+Options:
+    up      -   Increase the volume
+    down    -   Decrease the volume
+    mute    -   Mute the volume
+	"
+}
+
+case $1 in
+    up)
+	    pamixer -i 5 --set-limit 100
+	    send_notification
+    ;;
+    down)
+	    pamixer -d 5 --set-limit 100
+	    send_notification
+    ;;
+    mute)
+	    pamixer -t
+        if [[ $(pamixer --get-mute) = "true" ]]; then
+            icon="$icon/volume-x.svg"
+            notify-send -a Volume -i $icon -r 699 "Volume : Muted"
+        else
+            send_notification
+        fi
+    ;;
+    *)
+        docs
+    ;;
+esac
