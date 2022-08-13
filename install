@@ -57,7 +57,7 @@ make_backup () {
     echo
     alert -w "Backup Folder is in ~/.backups"
 
-    [[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null || alert -e "Can't Create a Backup Folder"
+    [[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
 
     tempdir=$(mktemp -d -p $HOME/.backups)
 
