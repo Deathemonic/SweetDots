@@ -366,3 +366,5 @@ first_choice () {
         ;;
     esac
 }
+
+first_choice
