@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # v5.5.1
 
-config_dir="$HOME/.config/"
+config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
 cache="$cache_dir/sweetcache/"
 
@@ -43,7 +43,7 @@ make_cache () {
     alert "Making Cache Folders"
     sleep 2
 
-    [[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]] && mkdir -p "$cache" "$sweetcache" 2>/dev/null
+    [[ ! -d $cache_dir/SweetDots ]] && [[ ! -d $sweetcache ]] && mkdir -p "$cache" "$sweetcache" 2>/dev/null
     [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
 
     echo
@@ -72,6 +72,17 @@ make_backup () {
     sleep 5
 }
 
+cloning_dotfiles () {
+    alert "Cloning repository"
+    sleep 2
+
+    cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
+
+    echo
+    alert -s "Cloning Done!"
+    echo
+}
+
 confirm_install () {
     clear
     printf "01010011 01110111 01100101 01100101 01110100\n"
@@ -83,12 +94,14 @@ confirm_install () {
     read -p "Are you sure you want to continue? Y/N : " confirm
 
     case $confirm in
-        Y | y | Yes | yes)
+        Y|y|Yes|yes)
             make_cache
             make_backup
+            cloning_dotfiles
         ;;
         *)
             alert -e "Aborting!"
+            exit 0
         ;;
     esac
 }
@@ -191,7 +204,7 @@ pick_wm () {
 
     case $wm in
         1)
-            cp -rf $dotfiles/window-managers/bspwm $config_dir
+            cp -rf $cache_dir/SweetDots/window-managers/bspwm $config_dir
             config_str="bspc config border_radius 20"
 
             echo
@@ -199,8 +212,8 @@ pick_wm () {
             echo
 
             echo
-            printf "bspwm-git (1) - The official build but without integrated border radius"
-            printf "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom"
+            echo "bspwm-git (1) - The official build but without integrated border radius"
+            echo "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom"
             echo
             read -p "BSPWM: " bspwm
 
@@ -213,7 +226,7 @@ pick_wm () {
                 2)
                     bspwm_type="bspwm-rounded-corners-git"
 
-                    if ! grep -Fxq $config_str $config_dir/bspwm/bspwmrc; then
+                    if [[ ! $(grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc) ]]; then
                         echo $config_str >> $config_dir/bspwm/bspwmrc
                     fi
                 ;;
@@ -244,18 +257,18 @@ pick_wm () {
             fi
         ;;
         2)
-            cp -rf $dotfiles/window-managers/berry $config_dir
+            cp -rf $cache_dir/SweetDots/window-managers/berry $config_dir
 
-            if command -v yay; then
-                yay -S berry-git
+            if command -v paru; then
+                paru -S berry-git
 
                 echo
                 alert -s "Installing Done!"
                 echo
 
                 installing_dotfiles
-            elif command -v paru; then
-                paru -S berry-git
+            elif command -v yay; then
+                yay -S berry-git
 
                 echo
                 alert -s "Installing Done!"
@@ -267,7 +280,7 @@ pick_wm () {
             fi
         ;;
         3)
-            cp -rf $dotfiles/window-managers/i3 $config_dir
+            cp -rf $cache_dir/SweetDots/window-managers/i3 $config_dir
 
             if command -v yay; then
                 yay -S i3-gaps
@@ -290,7 +303,7 @@ pick_wm () {
             fi
         ;;
         4)
-            cp -rf $dotfiles/window-managers/leftwm $config_dir
+            cp -rf $cache_dir/SweetDots/window-managers/leftwm $config_dir
 
             if command -v yay; then
                 yay -S leftwm
@@ -319,17 +332,18 @@ pick_wm () {
     esac
 }
 
-installing_dotfiles () {
-    echo
-    alert "Cloning repository"
+noarch_wm () {
+    alert "Copying Window Managers"
     sleep 2
 
-    cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
+    cp -rf $cache_dir/SweetDots/window-managers/* $config_dir
 
     echo
-    alert -s "Cloning Done!"
+    alert -s "Copying Done!"
     echo
+}
 
+installing_dotfiles () {
     alert "Copying Dotfiles"
     [[ ! -d $config_dir/sweetconfigs-xorg ]] && cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir || alert -e "Configs are already existed. Skipping!"
     
@@ -351,17 +365,19 @@ finishing () {
 
 first_choice () {
     clear
-    read -p "Are you on Arch Linux? Y/N : "  $arch
     echo
     alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually, Read the repo's wiki for more information"
+    echo
+    read -p "Are you on Arch Linux? Y/N : " arch
 
     case $arch in
-        Y | y | Yes | yes)
+        Y|y|Yes|yes)
             confirm_install
             updating_packages
         ;;
-        * )
+        *)
             confirm_install
+            noarch_wm
             installing_dotfiles
         ;;
     esac
