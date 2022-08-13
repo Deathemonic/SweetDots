@@ -41,6 +41,7 @@ alert () {
 
 make_cache () {
     alert "Making Cache Folders"
+    sleep 2
 
     [[ ! -d $dotfiles ]] && [[ ! -d $sweetcache ]] && mkdir -p "$cache" "$sweetcache" 2>/dev/null
     [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
@@ -52,6 +53,7 @@ make_cache () {
 
 make_backup () {
     alert "Making Backups"
+    sleep 2
     echo
     alert -w "Backup Folder is in ~/.backups"
 
@@ -67,6 +69,7 @@ make_backup () {
     echo
     alert -s "Backup Done!"
     echo
+    sleep 5
 }
 
 confirm_install () {
@@ -77,8 +80,7 @@ confirm_install () {
     echo
 
     echo
-    confirm_msg=$(alert -w "Are you sure you want to continue? Y/N")
-    read -p "$confirm_msg : " confirm
+    read -p "Are you sure you want to continue? Y/N : " confirm
 
     case $confirm in
         Y | y | Yes | yes)
@@ -94,6 +96,7 @@ confirm_install () {
 
 updating_packages () {
     alert "Updating Packages"
+    sleep 2
 
     sudo pacman -Syu git curl bash zsh python moreutils
 
@@ -106,7 +109,7 @@ updating_packages () {
 
 installing_aur () {
     alert "Installing AUR"
-    sleep 1
+    sleep 2
     echo
 
     if [[ ! $(command -v yay) ]] && [[ ! $(command -v paru) ]]; then
@@ -175,6 +178,7 @@ installing_aur () {
 pick_wm () {
     echo
     alert "Pick a Window Manager"
+    sleep 2
     echo
 
     echo "BSPWM (1)"
@@ -319,6 +323,7 @@ pick_wm () {
 installing_dotfiles () {
     echo
     alert "Cloning repository"
+    sleep 2
 
     cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
 
@@ -331,6 +336,7 @@ installing_dotfiles () {
     
     echo
     alert -s "Copying Done!"
+    sleep 2
     echo
 
     finishing
@@ -338,6 +344,7 @@ installing_dotfiles () {
 
 finishing () {
     alert -w "If you have problems with the installer please create a issue from the repo, If you have something to improve please create a Pull Reques from the repo"
+    sleep 2
     echo
 
     alert -s "Done!"
