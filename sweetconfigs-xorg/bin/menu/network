@@ -793,7 +793,7 @@ def create_ap_list(adapter, active_connections):
 def notify(message, details=None, urgency="low"):
     """Use notify-send if available for notifications
     """
-    args = ["-u", urgency, "-a", "Network", message]
+    args = ["-u", urgency, "-a", "Network", "-i", "~/.config/sweetconfigs-xorg/dunst/icons/network.svg", message]
     if details is not None:
         args.append(details)
     if is_installed("notify-send"):

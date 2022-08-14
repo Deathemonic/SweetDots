@@ -2,12 +2,12 @@
 
 rofi \
 	-show $1 \
-	-modi run,ssh,drun,window,filebrowser  \
+	-modi "clipboard:greenclip print",run,ssh,drun,window,filebrowser,emoji  \
 	-no-lazy-grab \
 	-scroll-method 0 \
 	-drun-match-fields all \
 	-drun-display-format "{name}" \
 	-no-drun-show-actions \
-	-terminal kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf \
+	-terminal alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml \
 	-kb-cancel Alt-F1 \
 	-theme $HOME/.config/sweetconfigs-xorg/rofi/menu.rasi

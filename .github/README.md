@@ -1,16 +1,54 @@
 # Rewrite Development Branch
 Will release when v2.0 is finish
 
-## Early Access
+## :package: Installation
+
+- Auto Install
+
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
 
-## Rewrite Status
+<details><summary>Manual Install</summary>
+
+```sh
+git clone https://github.com/Deathemonic/SweetDots -b xorg && cd SweetDots
+```
+
+```sh
+mkdir ~/.backups
+```
+
+```sh
+mv ~/.config/berry ~/.backups/
+mv ~/.config/bspwm ~/.backups/
+mv ~/.config/i3 ~/.backups/
+mv ~/.config/leftwm ~/.backups/
+```
+
+```sh
+cp -rf sweetconfigs-xorg ~/.config/
+```
+
+```sh
+cp -rf window-managers/* ~/.config/
+```
+
+```sh
+cp -rf window-managers/berry ~/.config/
+cp -rf window-managers/bspwm ~/.config/
+cp -rf window-managers/i3 ~/.config/
+cp -rf window-managers/leftwm ~/.config/
+```
+
+</details>
+
+<details>
+<summary>Rewrite Status</summary>
 
 Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/95)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/98)
 
 Configs (Wayland)
 
@@ -18,7 +56,7 @@ Configs (Wayland)
 
 Window Manager Configs (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/80)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/95)
 
 Window Manager Configs (Wayland)
 
@@ -26,7 +64,7 @@ Window Manager Configs (Wayland)
 
 EWW (Xorg)
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/92)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/99)
 
 EWW (Wayland)
 
@@ -38,12 +76,10 @@ Sweetpastel Ports
 
 README
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/20)
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/85)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/90)
 
-## Doing Now
-
-Improving **<kbd>Scripts and Configs</kbd>**
+</details>

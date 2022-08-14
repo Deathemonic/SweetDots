@@ -29,7 +29,7 @@
 
                 (button 
                     :class "song-bar" 
-                    {title-artist}
+                    {music-scroll}
                     ;; Replace 'scroll' with 'title-artist' if your facing performance drop (Replacing with title-artist will not wrap the text)
                 )
 
@@ -150,7 +150,7 @@
                     :spacing 2
                 
                     (button
-                        :onclick "scripts/system network-menu"
+                        :onclick "$HOME/.config/sweetconfigs-xorg/bin/menu/network &"
                         :class "network-icon" 
                         {network-icon}
                     )

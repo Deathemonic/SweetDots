@@ -1,104 +1,69 @@
-# Applications
-
 # Terminal
 super + Return
     LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml
 
-# File Manager
+# GUI Apps
+super + shift {t,w}
+    {gedit,firefox}
 super + e
     nautilus
 
-# Standard Apps
-super + shift {t,w}
-    {gedit,firefox}
-
-# CLI Apps
-super + shift + {v,e,h}
-    LIBGL_ALWAYS_SOFTWARE=1 kitty -c $HOME/.config/sweetconfigs-xorg/kitty/kitty.conf -e {nvim,ranger,htop}
+# TUI Apps
+super + shift + {v,r,h}
+    LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml-e {nvim,ranger,htop}
 
 # Menus
-
-# App Launcher
-super + a
-    $HOME/.config/sweetconfigs-xorg/bin/rofi/launcher
-
-# Network Menu
-super + n
-    $HOME/.config/sweetconfigs-xorg/bin/rofi/network
-
-# Power Menu
+super + {a,r,s,w,f}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window, filebrowser}
 super + p
-    $HOME/.config/sweetconfigs-xorg/bin/rofi/power
-
-# Screenshot, Bluetooth, Windows, Run Menu
-super + {s,b,w,r}
-    $HOME/.config/sweetconfigs-xorg/bin/rofi/{screenshot rofi,bluetooth,window,run}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/power
+super + shift + e
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher emoji
+super + shift + {n,b}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
+super + shift + {s,r}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/{screenshot shot-rofi,screenrecord capture-rofi}
 
 # Widgets
-
-# Dashboard
-super + alt + d
-    $HOME/.config/sweetconfigs-xorg/bin/eww/dashboard
-
-# Sidepanel
-super + alt + s
-    $HOME/.config/sweetconfigs-xorg/bin/eww/sidepanel
-
-# Calendar
 super + alt + c
-    $HOME/.config/sweetconfigs-xorg/bin/eww/calendar
-
-# Lockscreen
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel
+super + alt + i
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel
 super + alt + l
-    $HOME/.config/sweetconfigs-xorg/bin/eww/lock
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/lockscreen
 
 # System
-
 # Color Picker
 super + g
-    $HOME/.config/sweetconfigs-xorg/bin/notify/color
-
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/color-picker
 # Take a screenshot
 Print
-    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot now
-
-# Take a screenshot in 5 seconds
-alt + Print
-    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in5
-
-# Take a screenshot in 10 seconds
-shift + Print
-    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot in10
-
-# Take a screenshot of a active window
-ctrl + Print
-    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot window
-
-# Take a screenshot of a selected area
-ctrl + alt + Print
-    $HOME/.config/sweetconfigs-xorg/bin/notify/screenshot area
-
-# Brightness Controls
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen
+super + alt + {w,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-window, shot-area}
+super + alt + {ctrl,shift}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-in3, shot-in10}
+# Capture the screen
+super + alt + {r,s}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture, capture-stop}
+super + alt + shift + {r,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture-noaudio, capture-area-noaudio}
+super + alt + ctrl + a
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-area
+# Function Keys
 XF86MonBrightness{Up,Down}
-    $HOME/.config/sweetconfigs-xorg/bin/notify/brightness{ up, down}
-
-# Volume Controls
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/brightness{ up, down}
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-    $HOME/.config/sweetconfigs-xorg/bin/notify/volume{ up, down, mute}
-
-# Music Controls
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/volume{ up, down, mute}
 XF86Audio{Next,Prev,Play}
     playerctl -p spotify,%any,firefox,chromium,brave,mpd{ next, previous, play-pause}
-
 XF86AudioStop
     playerctl -a stop
-
 # Reload Keybinds
 super + Escape
     pkill -USR1 -x sxhkd
 
-# Hotkeys
-
+# Window Manager
 # Close App
 super + {_,shift + }x
 	bspc node -{c,k}
@@ -172,7 +137,7 @@ alt + shift + {Left,Down,Up,Right}
 
 # Hide/Unhide Window
 super + shift + i
-	winmask		
+    winmask
 
 # Preselect the direction
 super + ctrl + alt +{Left,Right,Up,Down}
@@ -189,6 +154,3 @@ super + ctrl + space
 # Cancel the preselection for the focused desktop
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-~button3
-    xqp 0 $(xdo -id N Bspwm -n root) && jqmenu

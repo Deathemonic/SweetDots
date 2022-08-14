@@ -1,4 +1,3 @@
-
 .top-panel-window {
     .music-bar {
         .song-cover-bar {
@@ -14,11 +13,17 @@
             color: $blue;
             font-size: 1.1em;
             margin-right: 1em;
+            transition: 0.5s;
         }
     
         .music-play-bar {
             color: $pink;
             font-size: 1.5em;
+            transition: 0.5s;
+
+            &:hover {
+                color: $blue;
+            }
         }
     
         .music-previous-bar,
@@ -26,6 +31,7 @@
             color: $blue;
             font-size: 1.5em;
             margin: 0 0.5em;
+            transition: 0.5s;
         }
     
         .music-previous-bar:hover,

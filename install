@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
-# v5.5.1
+# v5.6.2
 
 config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
-cache="$cache_dir/sweetcache/"
 
-packages="polybar-git rofi alacritty picom-arian8j2-git dunst eww-git ffmpeg\
+tempdir=$(mktemp -d -p $HOME/.backups)
+[[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups 2>/dev/null
+
+packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-git ffmpeg \
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
    mpd mpdris2-git \
    brightnessctl playerctl light lm_sensors \
-   feh i3lock-color ksuperkey sddm yad cava xclip scrot gpick xfce4-power-manager zscroll neovim viewnior\
-   ttf-sarasa-gothic ttf-jetbrains-mono ttf-icomoon-feather nerd-fonts-jetbrains-mono \
+   feh i3lock-color sddm yad xclip scrot slop gpick xfce4-power-manager zscroll neovim viewnior \
+   ttf-sarasa-gothic ttf-jetbrains-mono ttf-material-icons-git nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
 alert () {
@@ -54,10 +56,6 @@ make_backup () {
     echo
     alert -w "Backup Folder is in ~/.backups"
 
-    [[ ! -d $HOME/.backups ]] && mkdir $HOME/.backups 2>/dev/null
-
-    tempdir=$(mktemp -d -p $HOME/.backups)
-
     [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
     [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
     [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
@@ -95,7 +93,6 @@ confirm_install () {
     case $confirm in
         Y|y|Yes|yes)
             make_cache
-            make_backup
             cloning_dotfiles
         ;;
         *)
@@ -109,7 +106,7 @@ updating_packages () {
     alert "Updating Packages"
     sleep 2
 
-    sudo pacman -Syu git curl bash zsh python moreutils
+    sudo pacman -Syu git curl bash zsh python moreutils perl
 
     echo
     alert -s "Update Done!"
@@ -196,6 +193,7 @@ pick_wm () {
     echo "BerryWM (2)"
     echo "i3-Gaps (3)"
     echo "LeftWM (4)"
+    echo "All (5)"
     echo
     echo "More Window Manager will be added soon"
     echo
@@ -203,8 +201,10 @@ pick_wm () {
 
     case $wm in
         1)
-            cp -rf $cache_dir/SweetDots/window-managers/bspwm $config_dir
             config_str="bspc config border_radius 20"
+
+            [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
+            cp -rf $cache_dir/SweetDots/window-managers/bspwm $config_dir
 
             echo
             alert "Choose which type of bspwm you want"
@@ -218,12 +218,12 @@ pick_wm () {
 
             case $bspwm in
                 1)
-                    bspwm_type="bspwm-git"
+                    bspwm="bspwm-git"
 
                     sed -i '/$config_str/d' $config_dir/bspwm/bspwmrc
                 ;;
                 2)
-                    bspwm_type="bspwm-rounded-corners-git"
+                    bspwm="bspwm-rounded-corners-git"
 
                     if ! grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc; then
                         echo $config_str >> $config_dir/bspwm/bspwmrc
@@ -235,16 +235,16 @@ pick_wm () {
                 ;;
             esac
 
-            if command -v yay; then
-                yay -S $bspwm_type
+            if command -v paru; then
+                paru -S $bspwm
 
                 echo
                 alert -s "Installing Done!"
                 echo
 
                 installing_dotfiles
-            elif command -v paru; then
-                paru -S $bspwm_type
+            elif command -v yay; then
+                yay -S $bspwm_type
 
                 echo
                 alert -s "Installing Done!"
@@ -256,6 +256,7 @@ pick_wm () {
             fi
         ;;
         2)
+            [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/berry $config_dir
 
             if command -v paru; then
@@ -283,18 +284,19 @@ pick_wm () {
             fi
         ;;
         3)
+            [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/i3 $config_dir
 
-            if command -v yay; then
-                yay -S i3-gaps
+            if command -v paru; then
+                paru -S i3-next-gaps
 
                 echo
                 alert -s "Installing Done!"
                 echo
 
                 installing_dotfiles
-            elif command -v paru; then
-                paru -S i3-gaps
+            elif command -v yay; then
+                yay -S i3-next-gaps
 
                 echo
                 alert -s "Installing Done!"
@@ -306,18 +308,73 @@ pick_wm () {
             fi
         ;;
         4)
+            [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/leftwm $config_dir
 
-            if command -v yay; then
-                yay -S leftwm
+            if command -v paru; then
+                paru -S leftwm-git
 
                 echo
                 alert -s "Installing Done!"
                 echo
 
                 installing_dotfiles
-            elif command -v paru; then
-                paru -S leftwm
+            elif command -v yay; then
+                yay -S leftwm-git
+
+                echo
+                alert -s "Installing Done!"
+                echo
+                
+                installing_dotfiles
+            else
+                alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+            fi
+        ;;
+        5)
+            noarch_wm
+
+            config_str="bspc config border_radius 20"
+            
+            echo
+            alert "Choose which type of bspwm you want"
+            echo
+
+            echo
+            echo "bspwm-git (1) - The official build but without integrated border radius"
+            echo "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom"
+            echo
+            read -p "BSPWM: " bspwm
+
+            case $bspwm in
+                1)
+                    bspwm="bspwm-git"
+
+                    sed -i '/$config_str/d' $config_dir/bspwm/bspwmrc
+                ;;
+                2)
+                    bspwm="bspwm-rounded-corners-git"
+
+                    if ! grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc; then
+                        echo $config_str >> $config_dir/bspwm/bspwmrc
+                    fi
+                ;;
+                *)
+                    alert -e "Invalid Choice. Aborting!"
+                    exit 0
+                ;;
+            esac
+
+            if command -v paru; then
+                paru -S $bspwm berry-git i3-next-gaps leftwm-git
+
+                echo
+                alert -s "Installing Done!"
+                echo
+
+                installing_dotfiles
+            elif command -v yay; then
+                yay -S $bspwm berry-git i3-next-gaps leftwm-git
 
                 echo
                 alert -s "Installing Done!"
@@ -336,6 +393,8 @@ pick_wm () {
 }
 
 noarch_wm () {
+    make_backup
+
     alert "Copying Window Managers"
     sleep 2
 
@@ -357,7 +416,6 @@ installing_dotfiles () {
 
         case $existed in
             Y|y|Yes|yes)
-                tempdir=$(mktemp -d -p $HOME/.backups)
 
                 [[ -d $config_dir/sweetconfigs-xorg ]] && mv $config_dir/sweetconfigs-xorg $tempdir
                 cp -rf $cache_dir/SweetDots/sweetconfigs-xorg $config_dir
@@ -369,6 +427,25 @@ installing_dotfiles () {
 
     echo
     alert -s "Copying Done!"
+    sleep 2
+    echo
+
+    executable
+}
+
+executable () {
+    alert "Setting scripts to be executables"
+    sleep 2
+
+    chmod +x $config_dir/sweetconfigs-xorg/bin/bar/*
+    chmod +x $config_dir/sweetconfigs-xorg/bin/menu/*
+    chmod +x $config_dir/sweetconfigs-xorg/bin/system/*
+    chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
+    chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
+    chmod +x $config_dir/sweetconfigs-xorg/bin/eww/scripts/*
+
+    echo
+    alert -s "Setting Done!"
     sleep 2
     echo
 

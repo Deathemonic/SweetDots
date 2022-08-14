@@ -5,7 +5,7 @@ time=$(date +%Y-%m-%d-%H-%M-%S)
 geometry=$(xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current')
 dir="$(xdg-user-dir VIDEOS)/Screenrecords"
 file="Capture_$time.mp4"
-timer_icon="$HOME/.config/sweetconfigs-xorg/dunst/icons/clock.svg"
+timer_icon="$HOME/.config/sweetconfigs-xorg/dunst/icons/timer.svg"
 
 [ ! -d $dir ] && mkdir -p $dir
 

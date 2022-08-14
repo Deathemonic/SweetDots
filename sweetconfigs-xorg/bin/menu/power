@@ -50,7 +50,7 @@ case $chosen in
         fi
     ;;
     $lock)
-        $rofi_command $confirm_config -e "Sorry but this feature is still work in progress :("
+        $HOME/.config/sweetconfigs-xorg/bin/utilities/lockscreen
     ;;
     $suspend)
 		confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Are you Sure?')
@@ -59,7 +59,7 @@ case $chosen in
 			playerctl -a stop
 			pamixer -m
 			systemctl suspend
-			$HOME/.config/berry/bin/eww/lock
+			$HOME/.config/sweetconfigs-xorg/bin/utilities/lockscreen
 		elif [[ $confirm == "no" ]] || [[ $confirm == "No" ]] || [[ $confirm == "NO" ]] || [[ $confirm == "n" ]] || [[ $confirm == "N" ]]; then
 			exit
         else

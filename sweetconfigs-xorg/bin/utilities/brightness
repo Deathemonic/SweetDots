@@ -1,20 +1,28 @@
 #!/bin/bash
 
-icon="$HOME/.config/sweetconfigs-xorg/dunst/icons"
+icon_dir="$HOME/.config/sweetconfigs-xorg/dunst/icons"
 steps=5
 
 send_notification () {
   brightness=$(brightnessctl i | grep -oP '\(\K[^%\)]+')
 
-    if [[ "$brightness" -lt "40" ]]; then
-        icon="$icon/moon.svg"
-    elif [[ "$brightness" -lt "60" ]]; then
-        icon="$icon/loader.svg"
+    if [ $brightness -lt "15" ]; then
+        icon="$icon_dir/brightness-1.svg"
+    elif [ $brightness -lt "30" ]; then
+        icon="$icon_dir/brightness-2.svg"
+    elif [ $brightness -lt "45" ]; then
+        icon="$icon_dir/brightness-3.svg"
+    elif [ $brightness -lt "60" ]; then
+        icon="$icon_dir/brightness-4.svg"
+    elif [ $brightness -lt "75" ]; then
+        icon="$icon_dir/brightness-5.svg"
+    elif [ $brightness -lt "90" ]; then
+        icon="$icon_dir/brightness-6.svg"
     else
-        icon="$icon/sun.svg"
+        icon="$icon_dir/brightness-7.svg"
     fi
 
-    notify-send -a Brightness -i $icon -t 2000 -r 500 "Brightness : $brightness" -h int:value:$brightness 
+    notify-send -a Brightness -i $icon -t 2000 -r 969696 "Brightness : $brightness" -h int:value:$brightness 
 }
 
 docs () {

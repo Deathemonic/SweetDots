@@ -14,6 +14,8 @@ configuration {
     display-ssh: 					"";
     display-drun: 					"";
     display-filebrowser:            "";
+    display-emoji:                  "";
+    display-clipboard:              "";
 }
 
 @import "colors.rasi"
@@ -72,7 +74,7 @@ mainbox {
 }
 
 listview {
-    columns:						2;
+    columns:						1;
     lines:						    7;
     cycle:                          false;
     dynamic:                        true;
@@ -98,7 +100,7 @@ element-text {
 }
 
 element {
-   padding:                                             10px;
+   padding:                                             10px 60px 10px 10px;
    margin:                                              5px;
    border-radius:                                       100%;
 }

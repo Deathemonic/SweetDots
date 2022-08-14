@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Warning: Do not delete or modify anything here unless you know what your doing
+
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # Set Background

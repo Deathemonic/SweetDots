@@ -11,260 +11,273 @@ font                            pango:JetBrains Mono Medium 10
 title_align                     center
 
 # Border Width
-for_window                      [class=".*"]    border pixel 2
+for_window                      [class=".*"]    border pixel 3
 
 # Gaps Size
 gaps                            inner           15
 gaps                            outer           0
 
 # Smart
-#smart_gaps                      on
-#smart_borders                   on
+# smart_gaps                      on
+# smart_borders                   on
 
 # Colors
 # class                         border          backgr.         text            indicator       child_border
-client.focused                  #DA6E89         #DA6E89         #FFFFFF         #98C379         #DA6E89
-client.focused_inactive         #61AFEF         #61AFEF         #1B1F23         #98C379         #61AFEF
-client.unfocused                #2C3038         #2C3038         #FFFFFF         #98C379         #2C3038
-client.urgent                   #C678DD         #C678DD         #FFFFFF         #98C379         #C678DD
-client.placeholder              #1B1F23         #1B1F23         #FFFFFF         #98C379         #1B1F23
-
+client.focused                  #FFDEDE         #FFDEDE         #F8F9FA         #B4E3AD         #FFDEDE
+client.focused_inactive         #A3CBE7         #A3CBE7         #1B1F23         #B4E3AD         #A3CBE7
+client.unfocused                #161A1E         #161A1E         #F8F9FA         #B4E3AD         #161A1E
+client.urgent                   #E5A3A1         #E5A3A1         #F8F9FA         #B4E3AD         #E5A3A1
+client.placeholder              #1B1F23         #1B1F23         #F8F9FA         #B4E3AD         #1B1F23
 client.background               #1B1F23
 
 # Keybinds
 
+# Alias
+set     $exec                   exec --no-startup-id
+set     $terminal               alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml
+set     $menu                   $HOME/.config/sweetconfigs-xorg/bin/menu
+set     $utilities              $HOME/.config/sweetconfigs-xorg/bin/utilities
+set     $widgets                $HOME/.config/sweetconfigs-xorg/bin/widgets
+set     $players                spotify,%any,firefox,chromium,brave,mpd
+set     $nogpu                  LIBGL_ALWAYS_SOFTWARE=1
+
+# Terminal
+bindsym $mod+Return 	        $exec "$nogpu $terminal"
+
 # Applications (GUI)
-bindsym $mod+Return 	        exec --no-startup-id "LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml"
-bindsym $mod+Shift+f 		exec --no-startup-id nautilus
-bindsym $mod+Shift+e 		exec --no-startup-id gedit
-bindsym $mod+Shift+w 		exec --no-startup-id firefox
+bindsym $mod+e   		$exec nautilus
+bindsym $mod+Shift+t   		$exec gedit
+bindsym $mod+Shift+w   		$exec firefox
 
 # Applications (CLI)
-bindsym $alt+Control+v 		exec --no-startup-id "alacritty --config-file $HOME/.config/i3/alacritty/alacritty.yml -e vim"
-bindsym $alt+Control+n 		exec --no-startup-id "alacritty --config-file $HOME/.config/i3/alacritty/alacritty.yml -e nvim"
-bindsym $alt+Control+r 		exec --no-startup-id "alacritty --config-file $HOME/.config/i3/alacritty/alacritty.yml -e ranger"
-bindsym $alt+Control+h 		exec --no-startup-id "alacritty --config-file $HOME/.config/i3/alacritty/alacritty.yml -e htop"
+bindsym $mod+Shift+v 		$exec "$nogpu $terminal -e nvim"
+bindsym $mod+Shift+r 		$exec "$nogpu $terminal -e ranger"
+bindsym $mod+Shift+h 		$exec "$nogpu $terminal -e htop"
 
 # Menus
-bindsym $alt+F1 		exec --no-startup-id $HOME/.config/i3/rofi/bin/launcher
-bindsym $mod+n 			exec --no-startup-id $HOME/.config/i3/rofi/bin/network_menu
-bindsym $mod+x 			exec --no-startup-id $HOME/.config/i3/rofi/bin/powermenu
-bindsym $mod+m 			exec --no-startup-id $HOME/.config/i3/rofi/bin/mpd
-bindsym $mod+s 			exec --no-startup-id $HOME/.config/i3/rofi/bin/screenshot
-bindsym $mod+r 			exec --no-startup-id $HOME/.config/i3/rofi/bin/asroot
-bindsym $mod+w 			exec --no-startup-id $HOME/.config/i3/rofi/bin/windows
+bindsym $mod+a 		        $exec "$menu/launcher drun"
+bindsym $mod+r                  $exec "$menu/launcher run"
+bindsym $mod+s 		        $exec "$menu/launcher ssh"
+bindsym $mod+w 		        $exec "$menu/launcher window"
+bindsym $mod+f                  $exec "$menu/launcher filebrowser"
+bindsym $mod+Shift+e            $exec "$menu/launcher emoji"
+bindsym $mod+p 			$exec $menu/power
+bindsym $mod+Shift+n            $exec $menu/network
+bindsym $mod+Shift+b 		$exec $menu/bluetooth
+bindsym $mod+Shift+s            $exec "$utilities/screenshot shot-rofi"
+bindsym $mod+Shift+r 		$exec "$utilities/screenrecord capture-rofi"
+
+# Widgets
+bindsym $mod+$alt+c 		$exec $widgets/control-panel
+bindsym $mod+$alt+i             $exec $widgets/info-panel
+bindsym $mod+$alt+l 		$exec $widgets/lockscreen
 
 # Functions
-bindsym XF86MonBrightnessUp 	exec --no-startup-id "brightness --inc"
-bindsym XF86MonBrightnessDown 	exec --no-startup-id "brightness --dec"
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id "volume --inc"
-bindsym XF86AudioLowerVolume 	exec --no-startup-id "volume --dec"
-bindsym XF86AudioMute 	        exec --no-startup-id "volume --toggle"
-bindsym XF86AudioNext 	        exec --no-startup-id "mpc next"
-bindsym XF86AudioPrev 	        exec --no-startup-id "mpc prev"
-bindsym XF86AudioPlay 	        exec --no-startup-id "mpc toggle"
-bindsym XF86AudioStop 	        exec --no-startup-id "mpc stop"
-bindsym Print 			exec --no-startup-id "takeshot --now"
-bindsym $mod+Print 		exec --no-startup-id "takeshot --in5"
-bindsym Shift+Print 		exec --no-startup-id "takeshot --in10"
-bindsym Control+Print 		exec --no-startup-id "takeshot --win"
-bindsym $mod+Control+Print 	exec --no-startup-id "takeshot --area"
+# Color Picker
+bindsym $mod+g                  $exec $utilities/color-picker
+# Take a screenshot
+bindsym Print                   $exec "$utilities/screenshot shot-screen"
+bindsym $mod+$alt+w             $exec "$utilities/screenshot shot-window"
+bindsym $mod+$alt+a             $exec "$utilities/screenshot shot-area"
+bindsym $mod+$alt+Control       $exec "$utilities/screenshot shot-in3"
+bindsym $mod+$alt+Shift         $exec "$utilities/screenshot shot-in10"
+# Capture the screen
+bindsym $mod+$alt+r             $exec "$utilities/screenrecord capture"
+bindsym $mod+$alt+s             $exec "$utilities/screenrecord capture-stop"
+bindsym $mod+$alt+Shift+r       $exec "$utilities/screenrecord capture-noaudio"
+bindsym $mod+$alt+Shift+a       $exec "$utilities/screenrecord capture-area-noaudio"
+bindsym $mod+$alt+Control+a     $exec "$utilities/screenrecord capture-area"
+# Function Keys
+bindsym XF86MonBrightnessUp 	$exec "$utilities/brightness up"
+bindsym XF86MonBrightnessDown 	$exec "$utilities/brightness down"
+bindsym XF86AudioRaiseVolume 	$exec "$utilities/volume up"
+bindsym XF86AudioLowerVolume 	$exec "$utilities/volume down"
+bindsym XF86AudioMute 	        $exec "$utilities/volume mute"
+bindsym XF86AudioNext 	        $exec "playerctl -p $players next"
+bindsym XF86AudioPrev 	        $exec "playerctl -p $players previous"
+bindsym XF86AudioPlay 	        $exec "playerctl -p $players play-pause"
+bindsym XF86AudioStop 	        $exec "playerctl -a stop"
 
 # Window Manager
+# Drag Resize
+floating_modifier               $mod
 
-# Lockscreen
-bindsym $alt+Control+l 			exec --no-startup-id "betterlockscreen --lock"
+# Kill / Quit
+bindsym $mod+q                  kill -9 -1
+bindsym $mod+x                  kill
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# Focus
+bindsym $mod+j                  focus left
+bindsym $mod+k                  focus down
+bindsym $mod+l                  focus up
+bindsym $mod+semicolon          focus right
 
-# kill focused window
-bindsym $mod+q kill
-bindsym $mod+c kill
+bindsym $mod+Left               focus left
+bindsym $mod+Down               focus down
+bindsym $mod+Up                 focus up
+bindsym $mod+Right              focus right
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# Move Window
+bindsym $mod+Shift+j            move left
+bindsym $mod+Shift+k            move down
+bindsym $mod+Shift+l            move up
+bindsym $mod+Shift+semicolon    move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Shift+Left         move left
+bindsym $mod+Shift+Down         move down
+bindsym $mod+Shift+Up           move up
+bindsym $mod+Shift+Right        move right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+# Slit Horizontal / Vertical
+bindsym $mod+h                  split h
+bindsym $mod+v                  split v
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# Fullscreen
+bindsym F11                     fullscreen toggle
 
-# split in horizontal orientation
-bindsym $mod+h split h
+# Container Layout
+bindsym $mod+Shift+z            layout stacking
+bindsym $mod+Shift+x            layout tabbed
+bindsym $mod+Shift+c            layout toggle split
 
-# split in vertical orientation
-bindsym $mod+v split v
+# Tiling / Floating
+bindsym $mod+space              floating toggle
+bindsym $mod+Shift+space        focus mode_toggle
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+# Focus Parent / Child
+bindsym $mod+f focus            parent
+bindsym $mod+d focus            child
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+z layout stacking
-bindsym $mod+Shift+x layout tabbed
-bindsym $mod+Shift+c layout toggle split
+# Workspaces
 
-# toggle tiling / floating
-bindsym $mod+space floating toggle
+# Switch
+bindsym $mod+1                  workspace number 1
+bindsym $mod+2                  workspace number 2
+bindsym $mod+3                  workspace number 3
+bindsym $mod+4                  workspace number 4
+bindsym $mod+5                  workspace number 5
+bindsym $mod+6                  workspace number 6
+bindsym $mod+7                  workspace number 7
+bindsym $mod+8                  workspace number 8
+bindsym $mod+9                  workspace number 9
+bindsym $mod+0                  workspace number 10
 
-# change focus between tiling / floating windows
-bindsym $mod+Shift+space focus mode_toggle
+# Move
+bindsym $mod+Shift+1            move container to workspace number 1
+bindsym $mod+Shift+2            move container to workspace number 2
+bindsym $mod+Shift+3            move container to workspace number 3
+bindsym $mod+Shift+4            move container to workspace number 4
+bindsym $mod+Shift+5            move container to workspace number 5
+bindsym $mod+Shift+6            move container to workspace number 6
+bindsym $mod+Shift+7            move container to workspace number 7
+bindsym $mod+Shift+8            move container to workspace number 8
+bindsym $mod+Shift+9            move container to workspace number 9
+bindsym $mod+Shift+0            move container to workspace number 10
 
-# focus the parent container
-bindsym $mod+a focus parent
+# i3
 
-# focus the child container
-bindsym $mod+d focus child
+# Reload i3 Config
+bindsym Control+$alt+c          reload
 
-##-- Workspaces ---------------------
+# Restart i3
+bindsym Control+Shift+r         restart
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+# Quit i3
+bindsym Control+Shift+q         exit
 
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+# States
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+# Resize
+bindsym $mod+Control+r          mode "Resize"
 
-# reload the configuration file
-bindsym Control+$alt+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Control+Shift+r restart
-# quit i3 session
-bindsym Control+Shift+q exit
-
-##-- Resize / Move / Gaps ------------------------
-
-# resize window (you can also use the mouse for that)
 mode "Resize" {
-        # These bindings trigger as soon as you enter the resize mode
+        # Binds
+        bindsym Left            resize shrink width 10 px or 10 ppt
+        bindsym Down            resize grow height 10 px or 10 ppt
+        bindsym Up              resize shrink height 10 px or 10 ppt
+        bindsym Right           resize grow width 10 px or 10 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+        # Exit
+        bindsym Return          mode "default"
+        bindsym Escape          mode "default"
+        bindsym $mod+r          mode "default"
 }
-bindsym $mod+Shift+r mode "Resize"
+
+# Move
+bindsym $mod+Shift+m            mode "Move"
 
 mode "Move" {
-        # These bindings trigger as soon as you enter the Move mode
+        # Binds
+        bindsym Left            move left 20px
+        bindsym Down            move down  20px
+        bindsym Up              move up 20px
+        bindsym Right           move right 20px
 
-        bindsym Left move left 20px
-        bindsym Down move down  20px
-        bindsym Up move up 20px
-        bindsym Right move right 20px
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+m mode "default"
+        # Exit
+        bindsym Return          mode "default"
+        bindsym Escape          mode "default"
+        bindsym $mod+m          mode "default"
 }
-bindsym $mod+Shift+m mode "Move"
 
-set $mode_gaps Gaps: (o)uter, (i)nner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# Gaps
+set $mode_gaps                  Gaps: (o)uter, (i)nner
+set $mode_gaps_outer            Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner            Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 
 mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+        # Binds
+        bindsym plus            gaps outer current plus 5
+        bindsym minus           gaps outer current minus 5
+        bindsym 0               gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+        bindsym Shift+plus      gaps outer all plus 5
+        bindsym Shift+minus     gaps outer all minus 5
+        bindsym Shift+0         gaps outer all set 0
 
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
+        # Exit
+        bindsym Return          mode "$mode_gaps"
+        bindsym Escape          mode "default"
 }
 
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+        # Binds
+        bindsym plus            gaps inner current plus 5
+        bindsym minus           gaps inner current minus 5
+        bindsym 0               gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+        bindsym Shift+plus      gaps inner all plus 5
+        bindsym Shift+minus     gaps inner all minus 5
+        bindsym Shift+0         gaps inner all set 0
 
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
+        # Exit
+        bindsym Return          mode "$mode_gaps"
+        bindsym Escape          mode "default"
 }
+
+bindsym $mod+Shift+g            mode "$mode_gaps"
 
 mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
+        bindsym o               mode "$mode_gaps_outer"
+        bindsym i               mode "$mode_gaps_inner"
+        bindsym Return          mode "$mode_gaps"
+        bindsym Escape          mode "default"
 }
 
-bindsym $mod+Shift+g mode "$mode_gaps"
+# Workspaces
 
-##-- Workspace Rules ------------------------
-assign [class="Lxappearance|Nitrogen"] 6
-assign [class="Pavucontrol|Xfce4-power-manager-settings"] 6
+# Assign
+assign [class="Lxappearance|Nitrogen"]                                                          6
+assign [class="Pavucontrol|Xfce4-power-manager-settings"]                                       6
 
 # Rules
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [class="alacritty-float"] floating enable
-for_window [class="Pcmanfm|Onboard|Yad"] floating enable
-for_window [class="Lxappearance|Nitrogen"] floating enable
-for_window [class="Pavucontrol|Xfce4-power-manager-settings|Nm-connection-editor"] floating enable
-for_window [class="feh|Viewnior|Gpicview|Gimp|MPlayer"] floating enable
-for_window [class="Kvantum Manager|qt5ct"] floating enable
-for_window [class="VirtualBox Manager|qemu|Qemu-system-x86_64"] floating enable
-
+for_window [window_role="pop-up"]                                                               floating enable
+for_window [window_role="task_dialog"]                                                          floating enable
+for_window [class="Pcmanfm|Onboard|Yad"]                                                        floating enable
+for_window [class="Lxappearance|Nitrogen"]                                                      floating enable
+for_window [class="Pavucontrol|Xfce4-power-manager-settings|Nm-connection-editor"]              floating enable
+for_window [class="feh|Viewnior|Gpicview|Gimp|MPlayer"]                                         floating enable
+for_window [class="Kvantum Manager|qt5ct"]                                                      floating enable
+for_window [class="VirtualBox Manager|qemu|Qemu-system-x86_64"]                                 floating enable
 
 # Autostart
 exec_always --no-startup-id $HOME/.config/sweetconfigs-xorg/bin/system/autostart

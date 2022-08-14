@@ -4,7 +4,7 @@
 # Warning: This file is important don't delete or modify anything unless know what your doing
 
 # Kill already running processs
-process=(sxhkd polybar picom dunst mpd mpDris2 xfce4-power-manager)
+process=(sxhkd polybar picom dunst mpd mpDris2 greenclip xfce4-power-manager)
 for processed in "${process[@]}"; do
 	if [[ `pidof ${processed}` ]]; then
 		killall -9 ${processed}
@@ -19,6 +19,9 @@ xsetroot -cursor_name left_ptr &
 
 # Polkit agent (Gnome)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Clipboard
+greenclip daemon &
 
 # Power Management
 xfce4-power-manager &
