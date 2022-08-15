@@ -28,6 +28,30 @@ Instead of making multiple ``Window Manager Configs`` with different style I opt
 ## :books: <samp>WIKI</samp> <kbd>RECOMMENDED</kbd>
 If you have problems or need some information about the dotfiles check [wiki page](https://github.com/Deathemonic/SweetDots/wiki), it provides extra information, some documentation, and a troubleshoot page
 
+   <table align="right">
+   <tr>
+      <th align="center">
+         <sup><sub>:warning: WARNING :warning:</sub></sup>
+      </th>
+   </tr>
+   <tr>
+      <td align="center">
+         <sup>
+            <sub>
+               <samp>
+                  THIS DOTFILES IS CONFIGURED AT 1080x800 WITH 96 DPI!
+		  <br>
+                  SOME STUFF MIGHT BREAK ON LOWER OR HIGHER
+                  <p align="center">
+                     RESOLUTIONS BUT WILL STILL WORK!
+                  </p>
+               </samp>
+            </sub>
+         </sup>
+      </td>
+   </tr>
+   </table>
+
 ## :package: <samp>INSTALL</samp>
 
 <details open>
@@ -96,6 +120,14 @@ Finally just reboot or logout of your session and log back in
 
 </details>
 
+## :gear: <samp>WAYLAND</samp>
+
+Work in Progress
+
+## :framed_picture: <samp>GALERY</samp>
+
+Work in Progress
+
 ## :art: <samp>COLORSCHEME</samp>
 
 It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**SweetPastel**](https://github.com/SweetPastel) was born.
@@ -113,15 +145,21 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 
 ## :bulb: <samp>ACKNOWLEDGEMENTS</samp>
 
-<details>
-<summary><b>:two_hearts: <samp>THANKS TO</samp></b></summary>
-<br>
+- :two_hearts: **Thanks to**
+
+	Here are the awesome people that ~~stole~~ borrowed code from
 	
-Here are the awesome people that ~~stole~~ borrowed code from
-	
-WIP
-	
-</details>
+	- [`adi1090x`](https://github.com/adi1090x) - For his configs and archcraft
+	- [`nickclyde`](https://github.com/nickclyde) - For his rofi-bluetooth script
+	- [`firecat53`](https://github.com/firecat53) - For networkmanager-dmenu
+	- [`siduck`](https://github.com/siduck) - For NvChad and base46
+	- [`PrayagS`](https://github.com/PrayagS) - For zscroll module
+	- [`Syndrizzle`](https://github.com/Syndrizzle) - For [dharmx's](https://github.com/dharmx) old logger
+	- [`dharmx`](https://github.com/dharmx) - For making vile
+	- [`coolors.co`](https://coolors.co) - Just a great tool
+	- [`Stack Overflow`](https://stackoverflow.com/) - For answering all my stupid question <kbd>Ctrl + C, Ctrl + V</kbd>
+	- [`kmakise_`](https://www.reddit.com/user/kmakise_/) - For finding a performance bug
+	- [`r/unixporn`](https://www.reddit.com/r/unixporn/) - A great hub for unix customization
 
 - :star2: **Inspiration**
  	- [`Manas140`](https://github.com/Manas140)
@@ -138,46 +176,9 @@ WIP
 	<a href="https://github.com/Deathemonic/SweetDots/graphs/contributors">
             <img src="https://contrib.rocks/image?repo=Deathemonic/SweetDots"/>
        	</a>
+	
+## :scroll: <samp>COPYING</samp>
 
-### Stats
+**SweetDots** is license under [MIT License](https://github.com/Deathemonic/SweetDots/blob/xorg/LICENSE)
 
-<details>
-<summary>Rewrite Status</summary>
-
-Configs (Xorg)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/98)
-
-Configs (Wayland)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
-
-Window Manager Configs (Xorg)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/95)
-
-Window Manager Configs (Wayland)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/37)
-
-EWW (Xorg)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/99)
-
-EWW (Wayland)
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/50)
-
-Sweetpastel Ports
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/69)
-
-README
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/20)
-
-Installer
-
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/90)
-
-</details>
+> Will free to use the code from this repo just make sure that credit me :smile:
