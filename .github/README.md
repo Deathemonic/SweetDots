@@ -48,7 +48,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xo
 <summary>Manual Install</summary>
 <br>
 	
+<<<<<<< HEAD
 > **Note**: First up install the dependencies need if not the dotfiles doesn't work. Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
+=======
+> **Note**: First up install the dependencies need if not the dotfiles doesn't work. Check out this link for the list of dependencies
+>>>>>>> 5f32917637fb740e7fce82043f36a26b6181b1e8
 
 1. Download or Clone the repo and go to that directory
 	
@@ -93,6 +97,11 @@ cp -rf window-managers/leftwm ~/.config/
 ```
 	
 Finally just reboot or logout of your session and log back in
+<<<<<<< HEAD
+=======
+
+### Stats	
+>>>>>>> 5f32917637fb740e7fce82043f36a26b6181b1e8
 
 </details>
 
