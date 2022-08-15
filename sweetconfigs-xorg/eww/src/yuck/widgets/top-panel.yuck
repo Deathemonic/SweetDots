@@ -1,8 +1,12 @@
 (defwidget left []
-    (literal
-        :halign "start"
-        :valign "center"
-        :content workspaces
+    (eventbox
+      :cursor "pointer"
+
+      (literal
+          :halign "start"
+          :valign "center"
+          :content workspaces
+      )
     )
 )
 
@@ -16,6 +20,7 @@
         (eventbox
             :onhover "${EWW_CMD} update top-panel-music=true"
             :onhoverlost "${EWW_CMD} update top-panel-music=false"
+            :cursor "pointer"
 
             (box 
                 :class "music-bar" 
@@ -30,7 +35,7 @@
                 (button 
                     :class "song-bar" 
                     {music-scroll}
-                    ;; Replace 'scroll' with 'title-artist' if your facing performance drop (Replacing with title-artist will not wrap the text)
+                    ;; Replace 'music-scroll' with 'title-artist' if your facing performance drop (Replacing with title-artist will not wrap the text)
                 )
 
                 (revealer
@@ -77,6 +82,7 @@
             (eventbox 
                 :onhover "${EWW_CMD} update top-panel-brightness=true"
                 :onhoverlost "${EWW_CMD} update top-panel-brightness=false"
+                :cursor "all-scroll"
 
                 (box
                     :orientation "h"  
@@ -110,15 +116,20 @@
             (eventbox 
                 :onhover "${EWW_CMD} update top-panel-volume=true"
                 :onhoverlost "${EWW_CMD} update top-panel-volume=false"
+                :cursor "all-scroll"
             
                 (box
                     :orientation "h" 	  
                     :space-evenly "false" 
                     :spacing 2
-                
-                    (button
-                        :onclick "pamixer -t"   
-                        :class "volume-icon" {volume-icon}
+                    
+                    (eventbox
+                      :cursor "pointer"
+                     
+                        (button
+                            :onclick "pamixer -t"   
+                            :class "volume-icon" {volume-icon}
+                        )
                     )
                 
                     (revealer 
@@ -143,6 +154,7 @@
             (eventbox 
                 :onhover "${EWW_CMD} update top-panel-network=true"
                 :onhoverlost "${EWW_CMD} update top-panel-network=false"
+                :cursor "pointer"
             
                 (box
                     :orientation "h" 	  
@@ -182,13 +194,17 @@
 	    		:text ""
 	    	)
 
-	    	(button
-	    		:class "time-text"
-	    		:tooltip "${date}"
-	    		:onclick "scripts/open/info-panel &"
-                :onrightclick "scripts/open/control-panel &"
-	    		{time}
-	    	)
+            (eventbox
+                :cursor "pointer"
+
+	    	    (button
+	    		    :class "time-text"
+	    		    :tooltip "${date}"
+	    		    :onclick "$HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel &"
+                    :onrightclick "$HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel &"
+  	    		    {time}
+	    	    )
+            )
 	    )
 
         (box 
@@ -197,11 +213,15 @@
             :space-evenly "false"
             :halign "center"
             :valign "center"
+
+            (eventbox
+                :cursor "pointer"
     
-            (button 
-                :class "sysmenu-btn"
-                :onclick "$HOME/.config/sweetconfigs-xorg/bin/menu/power &"
-                ""
+                (button 
+                    :class "sysmenu-btn"
+                    :onclick "$HOME/.config/sweetconfigs-xorg/bin/menu/power &"
+                    ""
+                )
             )
         )
     )

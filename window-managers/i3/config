@@ -42,7 +42,7 @@ set     $players                spotify,%any,firefox,chromium,brave,mpd
 set     $nogpu                  LIBGL_ALWAYS_SOFTWARE=1
 
 # Terminal
-bindsym $mod+Return 	        $exec "$nogpu $terminal"
+bindsym $mod+Return 	        $exec "$terminal"
 
 # Applications (GUI)
 bindsym $mod+e   		$exec nautilus
@@ -50,9 +50,9 @@ bindsym $mod+Shift+t   		$exec gedit
 bindsym $mod+Shift+w   		$exec firefox
 
 # Applications (CLI)
-bindsym $mod+Shift+v 		$exec "$nogpu $terminal -e nvim"
-bindsym $mod+Shift+r 		$exec "$nogpu $terminal -e ranger"
-bindsym $mod+Shift+h 		$exec "$nogpu $terminal -e htop"
+bindsym $mod+Shift+v 		$exec "$terminal -e nvim"
+bindsym $mod+Shift+r 		$exec "$terminal -e ranger"
+bindsym $mod+Shift+h 		$exec "$terminal -e htop"
 
 # Menus
 bindsym $mod+a 		        $exec "$menu/launcher drun"
@@ -61,6 +61,7 @@ bindsym $mod+s 		        $exec "$menu/launcher ssh"
 bindsym $mod+w 		        $exec "$menu/launcher window"
 bindsym $mod+f                  $exec "$menu/launcher filebrowser"
 bindsym $mod+Shift+e            $exec "$menu/launcher emoji"
+bindsym $mod+Shift+c            $exec "$menu/launcher clipboard"
 bindsym $mod+p 			$exec $menu/power
 bindsym $mod+Shift+n            $exec $menu/network
 bindsym $mod+Shift+b 		$exec $menu/bluetooth

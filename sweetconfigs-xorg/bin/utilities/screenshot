@@ -11,7 +11,7 @@ clipboard_icon="$HOME/.config/sweetconfigs-xorg/dunst/icons/clipboard.svg"
 [ ! -d $dir ] && mkdir -p $dir
 
 notify_user () {
-	notify-send -a Clipboard -i $clipboard_icon -u low -r 699 "Screenshot is copied to clipboard"
+	notify-send -a Clipboard -i $clipboard_icon -u low -r 699 "Clipboard" "Screenshot saved on clipboard"
 	viewnior $dir/$file
 	if [[ -e $dir/$file ]]; then
 		notify-send -a Screenshot -u low -i $dir/$file "Screenshot Saved"
@@ -41,42 +41,43 @@ magic () {
 }
 
 shot () {
-	cd $dir && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	cd $dir && maim -u -f png $file && magic && xclip -selection clipboard -t image/png -i $file
 	notify_user
 }
 
 shot_window () {
-	cd $dir && scrot -q100 -f -u -b "$file" && magic && xclip -selection clipboard -t image/png -i $file
+	cd $dir && maim -u -f png -i `xdotool getactivewindow` $file && magic && xclip -selection clipboard -t image/png -i $file
 	notify_user
 }
 
-shotarea () {
-	cd $dir && scrot --line color="#A3CBE7" -q100 -s -b "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+shot_area () {
+	cd $dir && maim -u -f png -s -b 2 -c 0.35,0.55,0.85,0.25 -l $file && magic && xclip -selection clipboard -t image/png -i $file
 	notify_user
 }
 
 shot_3 () {
 	countdown '3'
-	sleep 1 && cd $dir && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+	sleep 1 && cd $dir && maim -u -f png $file && magic && xclip -selection clipboard -t image/png -i $file
 	notify_user
 }
 
 shot_10 () {
 	countdown '10'
-	sleep 1 && cd $dir && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
-	notify_user
+	sleep 1 && cd $dir && maim -u -f png $file && magic && xclip -selection clipboard -t image/png -i $file
+  notify_user
 }
 
 shot_timer () {
-	confirm=$($HOME/.config/sweetconfigs-xorg/bin/rofi/confirm 'Set a number')
+	confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Set a number')
 	confirm_config="$HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi"
 
 	if [[ $confirm =~ ^[0-9]+$ ]]; then
 		countdown $confirm
-		sleep 1 && cd $dir && scrot -q100 "$file" -e 'xclip -selection clipboard -t image/png -i $f'
+		sleep 1 && cd $dir && maim -u -f png $file && magic && xclip -selection clipboard -t image/png -i $file
 		notify_user
 	else
 		$rofi_command $confirm_config -e "Please input a Number"
+    exit
 	fi
 }
 
@@ -98,7 +99,7 @@ shot_rofi () {
 			shot
 		;;
   		$area)
-			shotarea
+			shot_area
 		;;
   		$window)
 			shot_window
@@ -137,7 +138,7 @@ case $1 in
     	shot_window
     ;;
     shot-area)
-	    shotarea
+	    shot_area
     ;;
 	shot-in3)
 	    shot_3

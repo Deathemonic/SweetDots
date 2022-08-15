@@ -50,7 +50,7 @@ capture_area () {
 }
 
 capture_timer () {
-	confirm=$($HOME/.config/sweetconfigs-xorg/bin/rofi/confirm 'Set a number')
+	confirm=$($HOME/.config/sweetconfigs-xorg/bin/menu/confirm 'Set a number')
 	confirm_config="$HOME/.config/sweetconfigs-xorg/rofi/confirm.rasi"
 
 	if [[ $confirm =~ ^[0-9]+$ ]]; then

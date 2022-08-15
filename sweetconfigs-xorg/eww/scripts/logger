@@ -21,31 +21,6 @@ create_cache () {
     [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || summary="$DUNST_SUMMARY"
     [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(printf "$DUNST_BODY" | perl -MHTML::Entities -pe 'decode_entities($_);')"
 
-    if [[ $body == *"discord"* ]]; then
-        fixed_body=$(echo $DUNST_BODY | awk FNR==3)    
-        if [[ ${#fixed_body} -ge 30 ]]; then
-            body=$(python -c "print('${fixed_body}' + ' ...')")
-        else
-            body=$fixed_body
-        fi
-    fi
-
-    if [[ "$DUNST_APP_NAME" == "Spotify" ]]; then
-        if [[ ${#DUNST_BODY} -ge 30 ]]; then
-            fixed_body=$(echo $DUNST_BODY | cut -c 1-30)
-            body=$(python -c "print('${fixed_body}' + ' ...')")
-        else
-            body=$DUNST_BODY
-        fi
-
-        if [[ ${#DUNST_SUMMARY} -ge 25 ]]; then
-            fixed_summary=$(echo $DUNST_SUMMARY | cut -c 1-25)
-            summary=$(python -c "print('${fixed_summary}' + ' ...')")
-        else
-            summary=$DUNST_SUMMARY
-        fi
-    fi
-
     # TODO: Getting and caching web notification icons (dunstctl history won't show the icon path :()
     if [[ $DUNST_ICON_PATH == "" ]]; then
         APP_NAME=$(echo $DUNST_APP_NAME | awk '{print tolower($0)}')

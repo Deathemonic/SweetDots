@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# v5.6.2
+# v5.6.3
+
+# Why this looks bloated so a simple install script? 
+# Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
 
 config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
@@ -203,6 +206,7 @@ pick_wm () {
         1)
             config_str="bspc config border_radius 20"
 
+            [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
             [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/bspwm $config_dir
 
@@ -256,6 +260,7 @@ pick_wm () {
             fi
         ;;
         2)
+            [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
             [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/berry $config_dir
 
@@ -284,6 +289,7 @@ pick_wm () {
             fi
         ;;
         3)
+            [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
             [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/i3 $config_dir
 
@@ -308,6 +314,7 @@ pick_wm () {
             fi
         ;;
         4)
+            [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
             [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
             cp -rf $cache_dir/SweetDots/window-managers/leftwm $config_dir
 

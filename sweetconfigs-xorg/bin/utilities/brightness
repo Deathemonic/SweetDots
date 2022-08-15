@@ -22,7 +22,7 @@ send_notification () {
         icon="$icon_dir/brightness-7.svg"
     fi
 
-    notify-send -a Brightness -i $icon -t 2000 -r 969696 "Brightness : $brightness" -h int:value:$brightness 
+    notify-send -a Brightness -i $icon -t 2000 -r 969696 "Brightness : $brightness"
 }
 
 docs () {

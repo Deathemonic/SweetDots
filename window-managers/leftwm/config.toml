@@ -34,7 +34,7 @@ sloppy_mouse_follows_focus = true
 # Terminal
 [[keybind]]
 command = "Execute"
-value = "LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml"
 modifier = ["modkey"]
 key = "Return"
 
@@ -58,17 +58,17 @@ key = "w"
 # Apps (TUI)
 [[keybind]]
 command = "Execute"
-value = "LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e nvim"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e nvim"
 modifier = ["modkey", "Shift"]
 key = "v"
 [[keybind]]
 command = "Execute"
-value = "LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e ranger"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e ranger"
 modifier = ["modkey", "Shift"]
 key = "r"
 [[keybind]]
 command = "Execute"
-value = "LIBGL_ALWAYS_SOFTWARE=1 alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e htop"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e htop"
 modifier = ["modkey", "Shift"]
 key = "h"
 
@@ -103,6 +103,11 @@ command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher emoji"
 modifier = ["modkey", "Shift"]
 key = "e"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher clipboard"
+modifier = ["modkey", "Shift"]
+key = "c"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/power"

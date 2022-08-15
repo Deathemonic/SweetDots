@@ -1,45 +1,52 @@
 #!/bin/bash
 
 i3lock --fill -i $HOME/.config/sweetconfigs-xorg/wallpapers/cube.png \
-		-n -c 00000000 -e --pass-media-keys --pass-power-keys --pass-screen-keys  --pass-volume-keys --indicator --force-clock  \
+		-n -c 00000000 -e --pass-media-keys --pass-power-keys --pass-screen-keys  --pass-volume-keys --indicator --force-clock i3lock --show-failed-attempts  \
         --radius 69 --modif-size=9 --modif-pos="w/2:h/2-20" \
         \
         --time-str="%I:%M %p" \
-        --time-pos="w/2+0:h/2+0" \
-        --time-color=E4FFDE \
-        --time-size=14 \
+        --time-pos="w/2+0:h/2-200" \
+        --date-pos="w/2+0:h/2-150" \
+        --time-color=1B1F23 \
+        --date-color=1B1F23 \
+        --time-size=69 \
+        --date-size=25 \
         --time-font="Jetbrains Mono" \
+        --date-font="Jetbrains Mono" \
         \
         --verif-text="Verifying" \
-        --verif-color=E4FFDE \
-        --verif-size=10 \
+        --verif-color=B4E3AD \
+        --verif-size=15 \
+        --verif-pos="w/2-0:h/2+100" \
         --verif-font="Jetbrains Mono" \
         \
         --wrong-text="Incorrect, Try Again" \
-        --wrong-color=FF8E8E \
-        --wrong-size=8 \
+        --wrong-color=E5A3A1 \
+        --wrong-size=15 \
+        --wrong-pos="w/2-0:h/2+100" \
         --wrong-font="Jetbrains Mono" \
         \
         --greeter-text="" \
-        --greeter-color=212529 \
+        --greeter-color=B4E3AD \
         --greeter-size=60 \
         --greeter-font="Material Icons Round" \
-        --greeter-pos="w/2-0:h/2+285" \
+        --greeter-pos="w/2-0:h/2+230" \
         \
-        --ring-color=212529 \
-        --ringver-color=E4FFDE \
-        --ringwrong-color=FF8E8E \
+        --ring-color=1B1F23 \
+        --ringver-color=B4E3AD \
+        --ringwrong-color=E5A3A1 \
         --ring-width=5 \
         \
-        --insidever-color=079A8C02 \
-        --insidewrong-color=079A8C02 \
-        --inside-color=079A8C02 \
-        --ind-pos="w/2-0:h/2-38" \
+        --insidever-color=161A1E \
+        --insidewrong-color=161A1E \
+        --inside-color=161A1E \
+        --ind-pos="w/2-0:h/2+200" \
 		\
 		--lock-text="Locking" \
 		--lockfailed-text="Lock Failed!" \
         \
+        --status-pos="w/2-0:h/2+100" \
         --noinput-text="No Input" \
         \
-        --line-uses-inside --keyhl-color=E4FFDE --bshl-color=E4FFDE --separator-color=E4FFDE \
+        --line-uses-inside --keyhl-color=FFDEDE --bshl-color=FFDEDE --separator-color=FFDEDE \
         --pointer=default
