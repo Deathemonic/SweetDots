@@ -47,12 +47,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xo
 <details>
 <summary>Manual Install</summary>
 <br>
-	
-<<<<<<< HEAD
+
 > **Note**: First up install the dependencies need if not the dotfiles doesn't work. Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
-=======
-> **Note**: First up install the dependencies need if not the dotfiles doesn't work. Check out this link for the list of dependencies
->>>>>>> 5f32917637fb740e7fce82043f36a26b6181b1e8
 
 1. Download or Clone the repo and go to that directory
 	
@@ -97,13 +93,14 @@ cp -rf window-managers/leftwm ~/.config/
 ```
 	
 Finally just reboot or logout of your session and log back in
-<<<<<<< HEAD
-=======
-
-### Stats	
->>>>>>> 5f32917637fb740e7fce82043f36a26b6181b1e8
 
 </details>
+
+## :art: <samp>COLOR SCHEME</samp>
+
+It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**SweetPastel**](https://github.com/SweetPastel) was born.
+
+If you want to see the ports check it out at it's official [Github Page](https://github.com/SweetPastel)
 
 ### Stats	
 
