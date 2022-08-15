@@ -96,11 +96,15 @@ Finally just reboot or logout of your session and log back in
 
 </details>
 
-## :art: <samp>COLOR SCHEME</samp>
+## :art: <samp>COLORSCHEME</samp>
 
 It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**SweetPastel**](https://github.com/SweetPastel) was born.
 
 If you want to see the ports check it out at it's official [Github Page](https://github.com/SweetPastel)
+
+<div align="center">
+	<img src="https://user-images.githubusercontent.com/65948476/184591339-beba74a0-ddee-450b-a53d-e494857ad4dc.png" />
+</div>
 
 ### Stats	
 
