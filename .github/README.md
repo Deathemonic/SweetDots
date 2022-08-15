@@ -154,6 +154,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 	- [`firecat53`](https://github.com/firecat53) - For networkmanager-dmenu
 	- [`siduck`](https://github.com/siduck) - For NvChad and base46
 	- [`PrayagS`](https://github.com/PrayagS) - For zscroll module
+	- [`beyond9thousand`](https://github.com/beyond9thousand) - For polybar system tray
 	- [`Syndrizzle`](https://github.com/Syndrizzle) - For [dharmx's](https://github.com/dharmx) old logger
 	- [`dharmx`](https://github.com/dharmx) - For making vile
 	- [`coolors.co`](https://coolors.co) - Just a great tool
