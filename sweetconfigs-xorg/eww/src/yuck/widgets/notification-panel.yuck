@@ -18,12 +18,16 @@
                     :halign "start"
                 )
 
-                (button 
-                    :onclick "scripts/logger remove ${SL}"
-                    :class "notification-close" 
-                    :halign "end"
-                    :tooltip "Remove this notification"
-                    ""
+                (eventbox
+                    :cursor "pointer"
+
+                    (button 
+                        :onclick "scripts/logger remove ${SL}"
+                        :class "notification-close" 
+                        :halign "end"
+                        :tooltip "Remove this notification"
+                        ""
+                    )
                 )
             )
 
@@ -103,12 +107,16 @@
                     :halign "center"
                 )
 
-                (button 
-                    :onclick "scripts/logger remove ${SL}"
-                    :class "notification-close" 
-                    :halign "end"
-                    :tooltip "Remove this notification"
-                    ""
+                (eventbox
+                    :cursor "pointer"
+
+                    (button 
+                        :onclick "scripts/logger remove ${SL}"
+                        :class "notification-close" 
+                        :halign "end"
+                        :tooltip "Remove this notification"
+                        ""
+                    )
                 )
             )
 
@@ -123,22 +131,26 @@
                     :style "background-image: url(\"${image}\");"
                 )
 
-                (box 
-                    :orientation "h"
-                    :space-evenly false
-                    :halign "center"
-                    :class "notification-card-box"
-                        
-                    (button 
-                        :onclick "viewnior ${image} &" 
-                        :class "notification-screenshot-open" 
-                        "Open"
-                    )
+                (eventbox
+                    :cursor "pointer"
 
-                    (button 
-                        :onclick "scripts/logger remove ${SL} && rm -rf ${image}" 
-                        :class "notification-screenshot-delete" 
-                        "Delete" 
+                    (box 
+                        :orientation "h"
+                        :space-evenly false
+                        :halign "center"
+                        :class "notification-card-box"
+                        
+                        (button 
+                            :onclick "viewnior ${image} &" 
+                            :class "notification-screenshot-open" 
+                            "Open"
+                        )
+
+                        (button 
+                            :onclick "scripts/logger remove ${SL} && rm -rf ${image}" 
+                            :class "notification-screenshot-delete" 
+                            "Delete" 
+                        )
                     )
                 )
             )
@@ -168,12 +180,16 @@
                     :halign "start"
                 )
 
-                (button 
-                    :class "notification-box-clear"
-                    :onclick "scripts/logger clear"
-                    :valign "center"
-                    :halign "end" 
-                    "Clear All" 
+                (eventbox
+                    :cursor "pointer"
+                 
+                    (button 
+                        :class "notification-box-clear"
+                        :onclick "scripts/logger clear"
+                        :valign "center"
+                        :halign "end" 
+                        "Clear All" 
+                    )
                 )
             )
 

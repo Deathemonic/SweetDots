@@ -38,83 +38,94 @@
                     :orientation "h"
                     :class "control-box"
                 
-                    (box
-                        :class "controls"
+                    (eventbox
+                        :cursor "pointer"
+                        
+                        (box
+                            :class "controls"
                     
-                        (button
-                            :tooltip "Night Light"
-                            :style {nl-check == "On" ? "background-color: #ece3b1; color: #1b1f23;" : "background-color: #1b1f23; color: #ece3b1"}
-                            :onclick "scripts/controls nl-toggle"
-                            {nl-check == "On" ? "" : ""}
-                        )
-                    
-                        (button
-                            :tooltip "Do Not Disturb"
-                            :style {dnd-check == "On" ? "background-color: #b4e3ad; color: #1b1f23;" : "background-color: #1b1f23; color: #b4e3ad"}
-                            :onclick "scripts/controls dnd-toggle"
-                            {dnd-check == "On" ? "" : ""}
-                        )
-                    
-                        (button
-                            :tooltip "Airplane Mode"
-                            :style {air-check == "On" ? "background-color: #ceace8; color: #1b1f23;" : "background-color: #1b1f23; color: #ceace8"}
-                            :onclick "scripts/controls air-toggle"
-                            {air-check == "On" ? "" : ""}
-                        )
-                    
-                        (button
-                            :tooltip "Bluetooth"
-                            :style {blue-check == "On" ? "background-color: #a3cbe7; color: #1b1f23;" : "background-color: #1b1f23; color: #a3cbe7"}
-                            :onclick "scripts/controls blue-toggle"
-                            {blue-check == "On" ? "" : ""}
+                            (button
+                                :tooltip "Night Light"
+                                :style {nl-check == "On" ? "background-color: #ece3b1; color: #1b1f23;" : "background-color: #1b1f23; color: #ece3b1"}
+                                :onclick "scripts/controls nl-toggle"
+                                {nl-check == "On" ? "" : ""}
+                            )
+                        
+                            (button
+                                :tooltip "Do Not Disturb"
+                                :style {dnd-check == "On" ? "background-color: #b4e3ad; color: #1b1f23;" : "background-color: #1b1f23; color: #b4e3ad"}
+                                :onclick "scripts/controls dnd-toggle"
+                                {dnd-check == "On" ? "" : ""}
+                            )
+                        
+                            (button
+                                :tooltip "Airplane Mode"
+                                :style {air-check == "On" ? "background-color: #ceace8; color: #1b1f23;" : "background-color: #1b1f23; color: #ceace8"}
+                                :onclick "scripts/controls air-toggle"
+                                {air-check == "On" ? "" : ""}
+                            )
+                        
+                            (button
+                                :tooltip "Bluetooth"
+                                :style {blue-check == "On" ? "background-color: #a3cbe7; color: #1b1f23;" : "background-color: #1b1f23; color: #a3cbe7"}
+                                :onclick "scripts/controls blue-toggle"
+                                {blue-check == "On" ? "" : ""}
+                            )
                         )
                     )
                 )
 
-                (box 
-                    :orientation "h" 
-                    :space-evenly false
-                    :halign "center"
-                    :valign "center"
-                    :class "slider"
+                (eventbox
+                    :cursor "all-scroll"
 
-		    		(label 
-                        :class "volume-icon" 
-                        :text {volume-icon}
-                    )
+                    (box 
+                        :orientation "h" 
+                        :space-evenly false
+                        :halign "center"
+                        :valign "center"
+                        :class "slider"
 
-		    		(scale
-                        :orientation "h"
-                        :class "volume-bar"
-                        :min 0
-		    			:max 101
-		    			:value volume-value
-		    			:tooltip "Volume: ${volume-value}%"
-		    			:onchange "amixer -D pulse sset Master {}%"
-		    		)
-		    	)
+		    	    	(label 
+                            :class "volume-icon" 
+                            :text {volume-icon}
+                        )
 
-		    	(box
-                    :orientation "h" 
-                    :space-evenly false
-                    :halign "center"
-                    :valign "center"
-                    :class "slider"
-                
-                    (label 
-                        :class "brightness-icon" 
-                        :text {brightness-icon}
-                    )
-                
-                    (scale
-                        :orientation "h"
-                        :class "brightness-bar"
-                        :min 0
-                        :max 101
-                        :value brightness-value
-                        :tooltip "Brightness: ${brightness-value}%"	
-                        :onchange "brightnessctl set {}%"
+		    	    	(scale
+                            :orientation "h"
+                            :class "volume-bar"
+                            :min 0
+		    	    		:max 101
+		    	    		:value volume-value
+		    	    		:tooltip "Volume: ${volume-value}%"
+		    	    		:onchange "amixer -D pulse sset Master {}%"
+		    	    	)
+		    	    )
+                )
+
+                (eventbox
+                    :cursor "all-scroll"
+
+		    	    (box
+                        :orientation "h" 
+                        :space-evenly false
+                        :halign "center"
+                        :valign "center"
+                        :class "slider"
                     
+                        (label 
+                            :class "brightness-icon" 
+                            :text {brightness-icon}
+                        )
+                    
+                        (scale
+                            :orientation "h"
+                            :class "brightness-bar"
+                            :min 0
+                            :max 101
+                            :value brightness-value
+                            :tooltip "Brightness: ${brightness-value}%"	
+                            :onchange "brightnessctl set {}%"
+                        )
                     )
                 )
             )
@@ -126,6 +137,7 @@
                 (box
                     :orientation "h"
                     :space-evenly false
+                    :halign "center"
                     :class "music-box"
                 
                     (box
@@ -166,24 +178,40 @@
                                 :text song-position
                             )
                         
-                            (box 
-                                :class "song-controls"
-                                :orientation "h"
-                                :halign "center"
-                            
-                                (button
-                                    :class "music-previous"
-                                    :onclick "playerctl -p ${players} previous" ""
-                                )
-                            
-                                (button
-                                    :class "music-play"
-                                    :onclick "playerctl -p ${players} play-pause" play-pause
-                                )
+                            (eventbox
+                                :cursor "pointer"
 
-                                (button
-                                    :class "music-next"
-                                    :onclick "playerctl -p ${players} next" ""
+                                (box 
+                                    :class "song-controls"
+                                    :orientation "h"
+                                    :halign "center"
+  
+                                    (button
+                                        :class "music-controls"
+                                        :onclick "playerctl -p ${players} loop track" 
+                                        :onrightclick "playerctl -p ${players} loop playlist"
+                                        :onmiddleclick "playerctl -p ${players} loop none" ""
+                                    )
+                              
+                                    (button
+                                        :class "music-controls"
+                                        :onclick "playerctl -p ${players} previous" ""
+                                    )
+                              
+                                    (button
+                                        :class "music-play"
+                                        :onclick "playerctl -p ${players} play-pause" play-pause
+                                    )
+  
+                                    (button
+                                        :class "music-controls"
+                                        :onclick "playerctl -p ${players} next" ""
+                                    )
+  
+                                    (button
+                                        :class "music-controls"
+                                        :onclick "playerctl -p ${players} shuffle toggle" ""
+                                    )
                                 )
                             )
                         )

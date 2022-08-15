@@ -7,7 +7,6 @@
 			background-repeat: no-repeat;
 			background-position: center;
 			border-radius: 20px;
-			min-width: 335px;
 			transition: 1s;
 		}
 	
@@ -41,7 +40,7 @@
 				button {
 					font-size: 2.5em;
 					font-weight: bold;
-					margin: 0em 0.5em 0.2em 0.5em;
+					margin: 0 0.4em 0.2em;
 					padding: 5px;
 					transition: 0.5s;
 					text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
@@ -59,14 +58,12 @@
 					text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
 				}
 		  
-				.music-previous,
-				.music-next {
+				.music-controls {
 					color: $blue;
-				}
-		  
-				.music-previous:hover,
-				.music-next:hover {
-					color: $pink;
+          
+          			&:hover {
+            			color: $pink;
+          			}
 				}
 			}
 		}
