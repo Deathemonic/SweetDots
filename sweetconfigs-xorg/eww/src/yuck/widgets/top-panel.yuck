@@ -208,10 +208,27 @@
 	    )
 
         (box 
+	    	:orientation "h"
+	    	:space-evenly "false"
+	    	:halign "end"
+            :valign "center"
+
+            (eventbox
+                :cursor "pointer"
+
+                (button
+	    	        :class "tray"
+                    :onclick "$HOME/.config/sweetconfigs-xorg/bin/bar/tray eww &"
+                    {tray == "On" ? "" : ""}
+                )
+            )
+        )
+
+        (box 
             :class "sysmenu"
             :orientation "h"
             :space-evenly "false"
-            :halign "center"
+            :halign "end"
             :valign "center"
 
             (eventbox

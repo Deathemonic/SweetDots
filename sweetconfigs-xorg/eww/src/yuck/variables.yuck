@@ -182,3 +182,7 @@
 (deflisten scroll
 	"scripts/scroll"
 )
+(defpoll tray
+    :interval "250ms"
+    "$HOME/.config/sweetconfigs-xorg/bin/bar/tray eww-check"
+)

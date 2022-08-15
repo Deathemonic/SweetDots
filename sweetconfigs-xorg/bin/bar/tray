@@ -1,21 +1,51 @@
 #!/bin/bash
 
 hidden=/tmp/polytray.lock
-polybar="$HOME/.config/sweetconfigs-xorg/polybar/modules.ini"
 
-if [[ $(pidof stalonetray) ]]; then
-    if [[ ! -e $hidden ]]; then
-        polybar-msg action "#tray.hook.1"
-        xdo hide -n stalonetray
-        touch "$hidden"
-        perl -0 -i -pe 's/tray\ninitial=.*/tray\ninitial=2/g' "$polybar"
+polybar () {
+    config="$HOME/.config/sweetconfigs-xorg/polybar/modules.ini"
+
+    if [[ $(pidof stalonetray) ]]; then
+        if [[ ! -e $hidden ]]; then
+            polybar-msg action "#tray.hook.1"
+            xdo hide -n stalonetray
+            touch "$hidden"
+            sed -i 's/tray\ninitial=.*/tray\ninitial=2/g' "$config"
+        else
+            polybar-msg action "#tray.hook.0"
+            xdo show -n stalonetray
+            xdo raise -n stalonetray
+            rm "$hidden"
+            sed -i 's/tray\ninitial=.*/tray\ninitial=1/g' "$config"
+        fi
     else
-        polybar-msg action "#tray.hook.0"
-        xdo show -n stalonetray
-        xdo raise -n stalonetray
-        rm "$hidden"
-        perl -0 -i -pe 's/tray\ninitial=.*/tray\ninitial=1/g' "$polybar"
+        stalonetray -c $HOME/.config/sweetconfigs-xorg/polybar/stalonetrayrc &
     fi
-else
-    stalonetray -c $HOME/.config/sweetconfigs-xorg/polybar/stalonetrayrc &
-fi
+}
+
+eww () {
+    if [[ $(pidof stalonetray) ]]; then
+        if [[ ! -e $hidden ]]; then
+            xdo hide -n stalonetray
+            touch "$hidden"
+        else
+            xdo show -n stalonetray
+            xdo raise -n stalonetray
+            rm "$hidden"
+        fi
+    else
+        stalonetray -c $HOME/.config/sweetconfigs-xorg/polybar/stalonetrayrc &
+    fi
+}
+
+case $1 in
+    polybar)
+        polybar
+    ;;
+    eww)
+        eww
+    ;;
+    eww-check)
+        [[ ! -e $hidden ]] && echo "On" || echo "Off"
+    ;;
+esac

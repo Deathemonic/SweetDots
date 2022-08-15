@@ -1,15 +1,13 @@
 #!/bin/bash
 
+# Please credit https://github.com/nickclyde if you want to use this code
+
 divider="      "
 goback="Back"
 config="$HOME/.config/sweetconfigs-xorg/rofi/bluetooth.rasi"
 
 power_on () {
-    if bluetoothctl show | grep -q "Powered: yes"; then
-        return 0
-    else
-        return 1
-    fi
+    bluetoothctl show | grep -q "Powered: yes" && return 0 || return 1
 }
 
 toggle_power () {
@@ -90,11 +88,7 @@ toggle_discoverable () {
 
 device_connected () {
     device_info=$(bluetoothctl info "$1")
-    if echo "$device_info" | grep -q "Connected: yes"; then
-        return 0
-    else
-        return 1
-    fi
+    echo "$device_info" | grep -q "Connected: yes" && return 0 || return 1
 }
 
 toggle_connection () {
@@ -160,16 +154,12 @@ print_status () {
             if device_connected $device; then
                 device_alias=$(bluetoothctl info $device | grep "Alias" | cut -d ' ' -f 2-)
 
-                if [ $counter -gt 0 ]; then
-                    echo "  "
-                else
-                    echo "  "
-                fi
+                [ $counter -gt 0 ] && echo "  " || echo "  "
 
                 ((counter++))
             fi
         done
-        printf "\n"
+
     else
         echo "  "
     fi
@@ -181,11 +171,8 @@ device_menu () {
     device_name=$(echo $device | cut -d ' ' -f 3-)
     mac=$(echo $device | cut -d ' ' -f 2)
 
-    if device_connected $mac; then
-        connected="Connected: yes"
-    else
-        connected="Connected: no"
-    fi
+    device_connected $mac && connected="Connected: yes" || connected="Connected: no"
+
     paired=$(device_paired $mac)
     trusted=$(device_trusted $mac)
     options="$connected\n$paired\n$trusted\n$divider\n$goback\nExit"
@@ -221,7 +208,7 @@ show_menu () {
         pairable=$(pairable_on)
         discoverable=$(discoverable_on)
 
-        options="$devices\n$divider\n$power\n$scan\n$pairable\n$discoverable\nExit"
+        options="$devices\n$divider\n$power\n$scan\n$pairable\n$discoverable"
     else
         power="Power: off"
         options="$power\nExit"
@@ -247,15 +234,15 @@ show_menu () {
         ;;
         *)
             device=$(bluetoothctl devices | grep "$chosen")
-            if [[ $device ]]; then device_menu "$device"; fi
+            [[ $device ]] && device_menu "$device"
         ;;
     esac
 }
 
 rofi_command="rofi -theme $config -dmenu -p"
 
-case "$1" in
-    --status)
+case $1 in
+    status)
         print_status
     ;;
     *)

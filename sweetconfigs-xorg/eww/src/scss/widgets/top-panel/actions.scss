@@ -44,4 +44,15 @@
         font-size: 0.8em;
         color: $purple;
     }
+
+    .tray {
+        font-size: 1.5em;
+        margin: 0 .5em 0 0;
+        color: $green;
+        transition: 0.5s;
+
+        &:hover {
+            color: $blue;
+        }
+    }
 }
