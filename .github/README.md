@@ -59,12 +59,14 @@ If you have problems or need some information about the dotfiles check [wiki pag
 <br>
 
 <kbd>RECOMMENDED</kbd>
-	
-Just run this at your **Terminal** (``Curl`` and ``Bash`` needs to installed in your system)
 
+Copy and paste this command at your **Terminal**
+	
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
+
+> **Note**: You need ``Curl`` and ``Bash`` installed in your system
 
 </details>
 
