@@ -66,7 +66,7 @@ Copy and paste this command at your **Terminal**
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
 
-> **Note**: You need ``Curl`` and ``Bash`` installed in your system
+> **Note**: You need ``curl``, ``bash`` and ``git`` installed in your system
 
 </details>
 
