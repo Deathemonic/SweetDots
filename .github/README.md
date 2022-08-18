@@ -180,6 +180,14 @@ If you like my rice feel free to buy me a coffee it will help me a lot
             <img src="https://contrib.rocks/image?repo=Deathemonic/SweetDots"/>
        	</a>
 	
+## :memo: <samp>TODO</samp>
+
+- [ ] Wayland Version
+- [ ] Better Padding for Widgets
+- [ ] Make faster scripts
+- [ ] Improve the widget layout
+- [ ] Use pijulius's fork of picom
+	
 ## :scroll: <samp>COPYING</samp>
 
 **SweetDots** is license under [MIT License](https://github.com/Deathemonic/SweetDots/blob/xorg/LICENSE)
