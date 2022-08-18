@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.3
+# v5.6.4
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -8,7 +8,8 @@ config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
 
 tempdir=$(mktemp -d -p $HOME/.backups)
-[[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups 2>/dev/null
+[[ ! -d $HOME/.cache ]] && mkdir -p $HOME/.cache
+[[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
 
 packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-git ffmpeg \
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
@@ -26,17 +27,17 @@ alert () {
     log_success="$(date +"%H:%M:%S") \e[0;32mSUCCESS\e[0m"
   
     case $1 in
-        -e | --error)
+        -e)
             printf "$log_error %s\n" "$2"
         ;;
-        -w | --warning)
+        -w)
             printf "$log_warning %s\n" "$2"
         ;;
-        -s | --success)
+        -s)
             printf "$log_success %s\n" "$2"
         ;;
         *)
-        printf "$log_info %s\n" "$1"
+            printf "$log_info %s\n" "$1"
         ;;
     esac
 }
