@@ -188,6 +188,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Improve the widget layout
 - [ ] Use pijulius's fork of picom
 - [ ] Add more options for window manager forks
+- [ ] Add screenshots on README.md
 	
 ## :scroll: <samp>COPYING</samp>
 
