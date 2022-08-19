@@ -110,7 +110,7 @@ updating_packages () {
     alert "Updating Packages"
     sleep 2
 
-    sudo pacman -Syu git curl bash zsh python moreutils perl
+    sudo pacman -Syu git curl bash zsh python moreutils perl autoconf
 
     echo
     alert -s "Update Done!"
