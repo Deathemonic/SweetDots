@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.11
+# v5.6.12
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -17,7 +17,7 @@ packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-gi
    mpd mpdris2-git \
    brightnessctl playerctl light lm_sensors \
    feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll neovim viewnior \
-   ttf-sarasa-gothic ttf-jetbrains-mono ttf-material-design-icons ttf-roboto nerd-fonts-jetbrains-mono \
+   ttf-sarasa-gothic ttf-jetbrains-mono ttf-roboto nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
 alert () {
@@ -111,6 +111,9 @@ updating_packages () {
     sleep 2
 
     sudo pacman -Syu base-devel git curl bash zsh python moreutils perl cmake
+    
+    cd $cache_dir/SweetDots/misc/fonts/material-design-icons
+    makepkg -si
 
     echo
     alert -s "Update Done!"
@@ -432,6 +435,7 @@ installing_dotfiles () {
     fi
 
     [[ ! -d $config_dir/mpDris2 ]] && cp -rf $cache_dir/SweetDots/misc/mpDris2 $config_dir
+    
 
     echo
     alert -s "Copying Done!"
@@ -450,7 +454,7 @@ executable () {
     chmod +x $config_dir/sweetconfigs-xorg/bin/system/*
     chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
     chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
-    chmod +x $config_dir/sweetconfigs-xorg/bin/eww/scripts/*
+    chmod +x $config_dir/sweetconfigs-xorg/eww/scripts/*
 
     echo
     alert -s "Setting Done!"
