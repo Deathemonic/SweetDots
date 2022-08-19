@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.5
+# v5.6.7
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -110,7 +110,7 @@ updating_packages () {
     alert "Updating Packages"
     sleep 2
 
-    sudo pacman -Syu git curl bash zsh python moreutils perl autoconf
+    sudo pacman -Syu git curl bash zsh python moreutils perl autoconf automake
 
     echo
     alert -s "Update Done!"
