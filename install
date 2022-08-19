@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.9
+# v5.6.10
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -130,7 +130,7 @@ installing_aur () {
 
         alert "Pick a AUR Helper"
         echo
-        read -p "(1)paru | (2)yay : " helper
+        read -p "(1) paru | (2) yay : " helper
 
         case $helper in
             1)
@@ -193,11 +193,11 @@ pick_wm () {
     sleep 2
     echo
 
-    echo "BSPWM (1)"
-    echo "BerryWM (2)"
-    echo "i3-Gaps (3)"
-    echo "LeftWM (4)"
-    echo "All (5)"
+    echo "BSPWM      (1)"
+    echo "BerryWM    (2)"
+    echo "i3-Gaps    (3)"
+    echo "LeftWM     (4)"
+    echo "All        (5)"
     echo
     echo "More Window Manager will be added soon"
     echo
@@ -216,8 +216,8 @@ pick_wm () {
             echo
 
             echo
-            echo "bspwm-git (1) - The official build but without integrated border radius"
-            echo "bspwm-rounded-corners-git (2) - Adds integrated border radius without depending on picom"
+            echo "bspwm-git                     (1) - The official build but without integrated border radius"
+            echo "bspwm-rounded-corners-git     (2) - Adds integrated border radius without depending on picom"
             echo
             read -p "BSPWM: " bspwm
 
@@ -374,7 +374,7 @@ pick_wm () {
             esac
 
             if command -v paru; then
-                paru -S $bspwm berry-git i3-next-gaps leftwm-git
+                paru -S $bspwm berry-git i3-gaps-next-git leftwm-git
 
                 echo
                 alert -s "Installing Done!"
@@ -382,7 +382,7 @@ pick_wm () {
 
                 installing_dotfiles
             elif command -v yay; then
-                yay -S $bspwm berry-git i3-next-gaps leftwm-git
+                yay -S $bspwm berry-git i3-gaps-next-git leftwm-git
 
                 echo
                 alert -s "Installing Done!"
