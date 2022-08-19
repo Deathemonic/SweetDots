@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.10
+# v5.6.11
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -16,7 +16,7 @@ packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-gi
    bluez bluez-utils \
    mpd mpdris2-git \
    brightnessctl playerctl light lm_sensors \
-   feh i3lock-color sddm yad xclip scrot slop gpick xfce4-power-manager zscroll neovim viewnior \
+   feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll neovim viewnior \
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-material-icons ttf-roboto nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
