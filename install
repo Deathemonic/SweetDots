@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.4
+# v5.6.5
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -295,7 +295,7 @@ pick_wm () {
             cp -rf $cache_dir/SweetDots/window-managers/i3 $config_dir
 
             if command -v paru; then
-                paru -S i3-next-gaps
+                paru -S i3-gaps-next-git
 
                 echo
                 alert -s "Installing Done!"
@@ -303,7 +303,7 @@ pick_wm () {
 
                 installing_dotfiles
             elif command -v yay; then
-                yay -S i3-next-gaps
+                yay -S i3-gaps-next-git
 
                 echo
                 alert -s "Installing Done!"
