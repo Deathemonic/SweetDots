@@ -17,7 +17,7 @@ packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-gi
    mpd mpdris2-git \
    brightnessctl playerctl light lm_sensors \
    feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll neovim viewnior \
-   ttf-sarasa-gothic ttf-jetbrains-mono ttf-material-icons ttf-roboto nerd-fonts-jetbrains-mono \
+   ttf-sarasa-gothic ttf-jetbrains-mono ttf-material-design-icons ttf-roboto nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
 
 alert () {
