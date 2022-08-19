@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# v5.6.12
+# v5.6.13
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
 
 config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
-
 tempdir=$(mktemp -d -p $HOME/.backups)
-[[ ! -d $HOME/.cache ]] && mkdir -p $HOME/.cache
-[[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
 
 packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-git ffmpeg \
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
@@ -46,7 +43,8 @@ make_cache () {
     alert "Making Cache Folders"
     sleep 2
 
-    [[ ! -d $cache_dir/SweetDots ]] && [[ ! -d $sweetcache ]] && mkdir -p "$cache" "$sweetcache" 2>/dev/null
+    [[ ! -d $HOME/.cache ]] && mkdir -p $HOME/.cache
+    [[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
     [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
 
     echo
@@ -77,7 +75,11 @@ cloning_dotfiles () {
     alert "Cloning repository"
     sleep 2
 
-    cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
+    if [[ ! -d $cache_dir/SweetDots ]]; then
+        cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
+    else
+        cd $cache_dir/SweetDots && git pull
+    fi
 
     echo
     alert -s "Cloning Done!"
