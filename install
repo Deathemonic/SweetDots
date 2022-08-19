@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.13
+# v5.6.14
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -112,7 +112,7 @@ updating_packages () {
     alert "Updating Packages"
     sleep 2
 
-    sudo pacman -Syu base-devel git curl bash zsh python moreutils perl cmake
+    sudo pacman -Syu --needed base-devel git curl bash zsh python moreutils perl cmake
     
     cd $cache_dir/SweetDots/misc/fonts/material-design-icons
     makepkg -si
@@ -143,7 +143,7 @@ installing_aur () {
                 git clone https://aur.archlinux.org/paru-bin.git
                 cd paru-bin
                 makepkg -si
-                paru -S $packages
+                paru -S --needed $packages
 
                 echo
                 alert -s "AUR Done!"
@@ -156,7 +156,7 @@ installing_aur () {
                 git clone https://aur.archlinux.org/yay-bin.git
                 cd yay-bin
                 makepkg -si
-                yay -S $packages
+                yay -S --needed $packages
 
                 echo
                 alert -s "AUR Done!"
@@ -171,7 +171,7 @@ installing_aur () {
         esac
     else
         if command -v yay; then
-            yay -S $packages
+            yay -S --needed $packages
 
             echo
             alert -s "AUR Done!"
@@ -179,7 +179,7 @@ installing_aur () {
 
             pick_wm
         elif command -v paru; then
-            paru -S $packages
+            paru -S --needed $packages
 
             echo
             alert -s "AUR Done!"
