@@ -109,7 +109,7 @@ cp -rf sweetconfigs-xorg ~/.config/
 cp -rf window-managers/* ~/.config/
 ```
 	
-6. If you have bspwm then copy ``cp -rf window-managers/bspwm`` to ``~/.config`` then you if you have bspwm and berry then copy both folders and etc.
+- If you have bspwm then copy ``cp -rf window-managers/bspwm`` to ``~/.config`` then you if you have bspwm and berry then copy both folders and etc.
 
 ```sh
 cp -rf window-managers/berry ~/.config/
@@ -117,6 +117,36 @@ cp -rf window-managers/bspwm ~/.config/
 cp -rf window-managers/i3 ~/.config/
 cp -rf window-managers/leftwm ~/.config/
 ```
+
+- If you have berry you may have to copy the ``berry.desktop`` in the xsessions folder in order for the display manager to see it
+
+```sh
+sudo cp misc/xsessions/berry.desktop /usr/share/xsessions
+```
+
+6. Change the scripts into exutables
+
+```sh
+chmod +x $config_dir/sweetconfigs-xorg/bin/bar/*
+chmod +x $config_dir/sweetconfigs-xorg/bin/menu/*
+chmod +x $config_dir/sweetconfigs-xorg/bin/system/*
+chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
+chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
+chmod +x $config_dir/sweetconfigs-xorg/eww/scripts/*
+```
+
+- If you only installed bspwm then make ``bspwmrc`` into a excutable
+
+```sh
+chmod +x $config_dir/bspwm/bspwmrc
+```
+
+- If you only installed berry then make ``autostart`` into a excutable
+
+```sh
+chmod +x $config_dir/berry/autostart
+```
+
 	
 Finally just reboot or logout of your session and log back in
 
