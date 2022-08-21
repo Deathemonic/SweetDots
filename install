@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.14
+# v5.6.15
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -39,51 +39,24 @@ alert () {
     esac
 }
 
-make_cache () {
-    alert "Making Cache Folders"
-    sleep 2
-
-    [[ ! -d $HOME/.cache ]] && mkdir -p $HOME/.cache
-    [[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
-    [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
-
+first_choice () {
+    clear
     echo
-    alert -s "Caching Done!"
+    alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually, Read the repo's wiki for more information"
     echo
-}
+    read -p "Are you on Arch Linux? Y/N : " arch
 
-make_backup () {
-    alert "Making Backups"
-    sleep 2
-    echo
-    alert -w "Backup Folder is in ~/.backups"
-
-    [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
-    [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
-    [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
-    [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
-
-    [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
-
-    echo
-    alert -s "Backup Done!"
-    echo
-    sleep 5
-}
-
-cloning_dotfiles () {
-    alert "Cloning repository"
-    sleep 2
-
-    if [[ ! -d $cache_dir/SweetDots ]]; then
-        cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg
-    else
-        cd $cache_dir/SweetDots && git pull
-    fi
-
-    echo
-    alert -s "Cloning Done!"
-    echo
+    case $arch in
+        Y|y|Yes|yes)
+            confirm_install
+            updating_packages
+        ;;
+        *)
+            confirm_install
+            noarch_wm
+            installing_dotfiles
+        ;;
+    esac
 }
 
 confirm_install () {
@@ -106,6 +79,50 @@ confirm_install () {
             exit 0
         ;;
     esac
+}
+
+make_cache () {
+    echo
+    alert "Making Cache Folders"
+    sleep 2
+
+    [[ ! -d $HOME/.cache ]] && mkdir -p $HOME/.cache
+    [[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
+    [[ ! -d /usr/share/xsessions ]] && sudo mkdir -p /usr/share/xsessions/
+
+    echo
+    alert -s "Caching Done!"
+    echo
+}
+
+cloning_dotfiles () {
+    alert "Cloning repository"
+    sleep 2
+
+    [[ ! -d $cache_dir/SweetDots ]] && cd $cache_dir && git clone https://github.com/Deathemonic/SweetDots -b xorg || cd $cache_dir/SweetDots && git pull
+
+    echo
+    alert -s "Cloning Done!"
+    echo
+}
+
+make_backup () {
+    alert "Making Backups"
+    sleep 2
+    echo
+    alert -w "Backup Folder is in ~/.backups"
+
+    [[ -d $config_dir/bspwm ]] && mv $config_dir/bspwm $tempdir
+    [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
+    [[ -d $config_dir/i3 ]] && mv $config_dir/i3 $tempdir
+    [[ -d $config_dir/leftwm ]] && mv $config_dir/leftwm $tempdir
+
+    [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
+
+    echo
+    alert -s "Backup Done!"
+    echo
+    sleep 5
 }
 
 updating_packages () {
@@ -268,12 +285,11 @@ pick_wm () {
         2)
             [[ -d $config_dir/mpDris2 ]] && mv $config_dir/mpDris2 $tempdir
             [[ -d $config_dir/berry ]] && mv $config_dir/berry $tempdir
+            [[ ! -f /usr/share/xsessions/berry.desktop ]] && cp $cache_dir/misc/xsessions/berry.desktop /usr/share/xsessions/
             cp -rf $cache_dir/SweetDots/window-managers/berry $config_dir
 
             if command -v paru; then
                 paru -S berry-git
-
-                sudo cp -rf $cache_dir/SweetDots/misc/xsessions/berry.desktop /usr/share/xsessions/
 
                 echo
                 alert -s "Installing Done!"
@@ -282,8 +298,6 @@ pick_wm () {
                 installing_dotfiles
             elif command -v yay; then
                 yay -S berry-git
-
-                sudo cp -rf $cache_dir/SweetDots/misc/xsessions/berry.desktop /usr/share/xsessions/
 
                 echo
                 alert -s "Installing Done!"
@@ -348,6 +362,7 @@ pick_wm () {
             noarch_wm
 
             config_str="bspc config border_radius 20"
+            [[ ! -f /usr/share/xsessions/berry.desktop ]] && cp $cache_dir/misc/xsessions/berry.desktop /usr/share/xsessions/
             
             echo
             alert "Choose which type of bspwm you want"
@@ -368,9 +383,7 @@ pick_wm () {
                 2)
                     bspwm="bspwm-rounded-corners-git"
 
-                    if ! grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc; then
-                        echo $config_str >> $config_dir/bspwm/bspwmrc
-                    fi
+                    ! grep -Fxq "$config_str" $config_dir/bspwm/bspwmrc && echo $config_str >> $config_dir/bspwm/bspwmrc
                 ;;
                 *)
                     alert -e "Invalid Choice. Aborting!"
@@ -411,6 +424,7 @@ noarch_wm () {
     alert "Copying Window Managers"
     sleep 2
 
+    [[ ! -f /usr/share/xsessions/berry.desktop ]] && cp $cache_dir/misc/xsessions/berry.desktop /usr/share/xsessions/
     cp -rf $cache_dir/SweetDots/window-managers/* $config_dir
 
     echo
@@ -457,6 +471,9 @@ executable () {
     chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
     chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
     chmod +x $config_dir/sweetconfigs-xorg/eww/scripts/*
+    
+    [[ -f $config_dir/bspwm/bspwmrc ]] && chmod +x $config_dir/bspwm/bspwmrc
+    [[ -f $config_dir/berry/autostart ]] && chmod +x $config_dir/berry/autostart
 
     echo
     alert -s "Setting Done!"
@@ -472,26 +489,6 @@ finishing () {
     echo
 
     alert -s "Done!"
-}
-
-first_choice () {
-    clear
-    echo
-    alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually, Read the repo's wiki for more information"
-    echo
-    read -p "Are you on Arch Linux? Y/N : " arch
-
-    case $arch in
-        Y|y|Yes|yes)
-            confirm_install
-            updating_packages
-        ;;
-        *)
-            confirm_install
-            noarch_wm
-            installing_dotfiles
-        ;;
-    esac
 }
 
 first_choice
