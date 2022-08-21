@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v5.6.15
+# v5.6.16
 
 # Why this looks bloated so a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -270,7 +270,7 @@ pick_wm () {
             esac
 
             if command -v paru; then
-                paru -S $bspwm
+                paru -S $bspwm sxhkd
 
                 echo
                 alert -s "Installing Done!"
@@ -278,7 +278,7 @@ pick_wm () {
 
                 installing_dotfiles
             elif command -v yay; then
-                yay -S $bspwm_type
+                yay -S $bspwm_type sxhkd
 
                 echo
                 alert -s "Installing Done!"
@@ -296,7 +296,7 @@ pick_wm () {
             cp -rf $cache_dir/SweetDots/window-managers/berry $config_dir
 
             if command -v paru; then
-                paru -S berry-git
+                paru -S berry-git sxhkd
 
                 echo
                 alert -s "Installing Done!"
@@ -304,7 +304,7 @@ pick_wm () {
 
                 installing_dotfiles
             elif command -v yay; then
-                yay -S berry-git
+                yay -S berry-git sxhkd
 
                 echo
                 alert -s "Installing Done!"
@@ -399,7 +399,7 @@ pick_wm () {
             esac
 
             if command -v paru; then
-                paru -S $bspwm berry-git i3-gaps-next-git leftwm-git
+                paru -S $bspwm berry-git i3-gaps-next-git leftwm-git sxhkd
 
                 echo
                 alert -s "Installing Done!"
@@ -407,7 +407,7 @@ pick_wm () {
 
                 installing_dotfiles
             elif command -v yay; then
-                yay -S $bspwm berry-git i3-gaps-next-git leftwm-git
+                yay -S $bspwm berry-git i3-gaps-next-git leftwm-git sxhkd
 
                 echo
                 alert -s "Installing Done!"
