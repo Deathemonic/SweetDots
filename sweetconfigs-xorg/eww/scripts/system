@@ -174,9 +174,6 @@ temperature_value () {
 }
 
 case $1 in
-    eww-calendar)
-       $HOME/Documents/Test/eww/Sweet/scripts/calendar
-    ;;
     volume-icon)
         volume_icon
     ;;
@@ -198,9 +195,6 @@ case $1 in
     network-name)
         network_name
     ;;
-    network-menu)
-        ~/.config/sweetconfigs-xorg/bin/rofi/network
-    ;;
     empty-battery)
         battery_empty
     ;;
@@ -221,8 +215,5 @@ case $1 in
     ;;
     disk-value)
         df -h / | awk '{print $5}' | tail -n1 | sed 's/%//g'
-    ;;
-    notification-count)
-        [[ "$(dunstctl history | jq -r '.data[0]')" = "[]" ]] && echo "true" || echo "false"
     ;;
 esac
