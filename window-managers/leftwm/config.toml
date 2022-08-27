@@ -59,17 +59,17 @@ key = "w"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e nvim"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "v"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e ranger"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "r"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e htop"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "h"
 
 # Menus
@@ -96,17 +96,17 @@ key = "w"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher filebrowser"
-modifier = ["modkey"]
+modifier = ["modkey", "Alt"]
 key = "f"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher emoji"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "e"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher clipboard"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "c"
 [[keybind]]
 command = "Execute"

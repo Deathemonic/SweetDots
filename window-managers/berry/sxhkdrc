@@ -9,16 +9,16 @@ super + e
     nautilus
 
 # TUI Apps
-super + shift + {v,r,h}
+super + alt + {v,r,h}
     alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml-e {nvim,ranger,htop}
 
 # Menus
-super + {a,r,s,w,f}
-    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window, filebrowser}
+super + {a,r,s,w}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window}
 super + p
     $HOME/.config/sweetconfigs-xorg/bin/menu/power
-super + shift + {e,c}
-    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard}
+super + shift + {e,c,f}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard, filebrowser}
 super + shift + {n,b}
     $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
 super + shift + {s,r}
