@@ -76,4 +76,4 @@
 
 [logger]
   summary = "*"
-  script = ~/Documents/Test/eww/Widgets-V4/scripts/logger
+  script = $HOME/.config/sweetconfigs-xorg/eww/scripts/logger
