@@ -202,7 +202,8 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 
 - :muscle: **Contributors**
 	- [`Deathemonic`](https://github.com/Deathemonic) - Me obviously
-	- [`GG`](https://github.com/weebcyberpunk) - https://github.com/Deathemonic/SweetDots/pull/6
+	- [`GG`](https://github.com/weebcyberpunk) - Added mkdir to make sure directories exist https://github.com/Deathemonic/SweetDots/pull/6
+	- [`Rohith`](https://github.com/Rohith04MVK) - Fixed some paths https://github.com/Deathemonic/SweetDots/pull/7
 	
 	<br>
 
