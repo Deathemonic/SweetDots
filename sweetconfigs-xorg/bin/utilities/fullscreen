@@ -1,0 +1,14 @@
+#!/bin/bash
+
+id=$(wmctrl -l | awk '{print $1}' | xprop -root | grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | sed 's/^0x/0x0/')
+check=$(echo $(xwininfo -all -id $id | grep Fullscreen))
+
+if [[ $check == "Fullscreen" ]]; then
+    xdo lower -N eww-bar
+    wmctrl -r ':ACTIVE:' -b toggle,fullscreen
+else
+    xdo raise -N eww-bar
+    wmctrl -r ':ACTIVE:' -b toggle,fullscreen
+fi 
+
+# 何をしているのかわかりません
