@@ -12,7 +12,7 @@ packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-gi
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
    mpd mpdris2-git \
-   brightnessctl playerctl light lm_sensors \
+   brightnessctl playerctl light lm_sensors wmctrl \
    feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll-git neovim viewnior stalonetray redshift \
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-roboto nerd-fonts-jetbrains-mono \
    gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"

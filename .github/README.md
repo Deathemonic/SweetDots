@@ -217,7 +217,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Better Padding for Widgets
 - [ ] Make faster scripts
 - [ ] Improve the widget layout
-- [ ] Add top-panel to all window managers
+- [x] Add top-panel to all window managers
 - [ ] Use modules more on widgets
 - [ ] Add a config.ini on widgets for user variables
 - [ ] Use pijulius's fork of picom
