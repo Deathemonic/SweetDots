@@ -279,6 +279,13 @@ value = "loginctl kill-session $XDG_SESSION_ID"
 modifier = ["modkey", "Shift"]
 key = "q"
 
+# Fullscreen
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen"
+modifier = []
+key = "F11"
+
 # Move Windows
 [[keybind]]
 command = "MoveWindowUp"

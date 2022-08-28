@@ -18,19 +18,19 @@ get_values () {
 
 set_values () {
   if [[ "$adapter" ]]; then
-    sed -i -e "s/adapter = .*/adapter = $adapter/g" 						${system}
+    sed -i -e "s/adapter = .*/adapter = $adapter/g" ${system}
   fi
 
   if [[ "$battery" ]]; then
-    sed -i -e "s/battery = .*/battery = $battery/g" 						${system}
+    sed -i -e "s/battery = .*/battery = $battery/g" ${system}
   fi
 
   if [[ "$card" ]]; then
-    sed -i -e "s/graphics_card = .*/graphics_card = $card/g" 				        ${system}
+    sed -i -e "s/graphics_card = .*/graphics_card = $card/g" ${system}
   fi
 	
   if [[ "$interface" ]]; then
-    sed -i -e "s/network_interface = .*/network_interface = $interface/g" 	                ${system}
+    sed -i -e "s/network_interface = .*/network_interface = $interface/g" ${system}
   fi
 }
 
@@ -79,10 +79,15 @@ if [[ ! -f $cachesystem ]]; then
   touch $cachesystem
 fi
 
-if [[ `pidof -x bspwm` ]]; then
-  eww -c $HOME/.config/sweetconfigs-xorg/eww open top-panel
-elif [[ `pidof -x i3` ]]; then
-  launch_bar_i3
-else
-  launch_bar
-fi
+case $1 in
+  polybar)
+    if [[ `pidof -x i3` ]]; then
+    launch_bar_i3
+    else
+    launch_bar
+  fi
+  ;;
+  eww)
+    eww -c $HOME/.config/sweetconfigs-xorg/eww open top-panel
+  ;;
+esac

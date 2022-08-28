@@ -86,10 +86,10 @@ super + {h,v,q}
 
 # Fullscreen or Monocle
 F11
-    bspc node -t "~"fullscreen
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
 
 super + shift + f
-    bspc node -t "~"fullscreen
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
 
 # Toggle beetwen floating & tiled
 super + space

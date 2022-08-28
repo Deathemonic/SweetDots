@@ -89,10 +89,10 @@ super + shift + {1-9}
     berryc send_to_workspace {0-9}
 
 # Fullscreen
-super + space
-    berryc fullscreen
 F11
-    berryc fullscreen
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
+super + shift + f
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
 
 # Toggle Titlebar
 super + d

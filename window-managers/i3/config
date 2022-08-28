@@ -134,7 +134,7 @@ bindsym $mod+h                  split h
 bindsym $mod+v                  split v
 
 # Fullscreen
-bindsym F11                     fullscreen toggle
+bindsym F11                     $exec $utilities/fullscreen
 
 # Container Layout
 bindsym $mod+Shift+z            layout stacking
