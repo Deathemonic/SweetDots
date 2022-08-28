@@ -59,9 +59,9 @@ bindsym $mod+a 		        $exec "$menu/launcher drun"
 bindsym $mod+r                  $exec "$menu/launcher run"
 bindsym $mod+s 		        $exec "$menu/launcher ssh"
 bindsym $mod+w 		        $exec "$menu/launcher window"
-bindsym $mod+alt+f              $exec "$menu/launcher filebrowser"
-bindsym $mod+alt+e              $exec "$menu/launcher emoji"
-bindsym $mod+alt+c              $exec "$menu/launcher clipboard"
+bindsym $mod+Shift+f            $exec "$menu/launcher filebrowser"
+bindsym $mod+Shift+e            $exec "$menu/launcher emoji"
+bindsym $mod+Shift+c            $exec "$menu/launcher clipboard"
 bindsym $mod+p 			$exec $menu/power
 bindsym $mod+Shift+n            $exec $menu/network
 bindsym $mod+Shift+b 		$exec $menu/bluetooth
@@ -80,8 +80,8 @@ bindsym $mod+g                  $exec $utilities/color-picker
 bindsym Print                   $exec "$utilities/screenshot shot-screen"
 bindsym $mod+$alt+w             $exec "$utilities/screenshot shot-window"
 bindsym $mod+$alt+a             $exec "$utilities/screenshot shot-area"
-bindsym $mod+$alt+Control       $exec "$utilities/screenshot shot-in3"
-bindsym $mod+$alt+Shift         $exec "$utilities/screenshot shot-in10"
+bindsym $mod+$alt+Control+c     $exec "$utilities/screenshot shot-in3"
+bindsym $mod+$alt+Shift+c       $exec "$utilities/screenshot shot-in10"
 # Capture the screen
 bindsym $mod+$alt+r             $exec "$utilities/screenrecord capture"
 bindsym $mod+$alt+s             $exec "$utilities/screenrecord capture-stop"
@@ -134,12 +134,12 @@ bindsym $mod+h                  split h
 bindsym $mod+v                  split v
 
 # Fullscreen
-bindsym F11                     $exec $utilities/fullscreen
+bindsym F11                     fullscreen toggle
 
 # Container Layout
-bindsym $mod+Shift+z            layout stacking
-bindsym $mod+Shift+x            layout tabbed
-bindsym $mod+Shift+c            layout toggle split
+bindsym $mod+$alt+g            layout stacking
+bindsym $mod+$alt+t            layout tabbed
+bindsym $mod+$alt+y            layout toggle split
 
 # Tiling / Floating
 bindsym $mod+space              floating toggle

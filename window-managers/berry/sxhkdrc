@@ -9,7 +9,7 @@ super + e
     nautilus
 
 # TUI Apps
-super + alt + {v,r,h}
+super + alt + {v,e,h}
     alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml-e {nvim,ranger,htop}
 
 # Menus
@@ -17,7 +17,7 @@ super + {a,r,s,w}
     $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window}
 super + p
     $HOME/.config/sweetconfigs-xorg/bin/menu/power
-super + shift + {e,c,f}
+super + shift+ {e,c,f}
     $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard, filebrowser}
 super + shift + {n,b}
     $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
@@ -41,7 +41,7 @@ Print
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen
 super + alt + {w,a}
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-window, shot-area}
-super + alt + {ctrl,shift}
+super + alt + {ctrl,shift} + c
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-in3, shot-in10}
 # Capture the screen
 super + alt + {r,s}
@@ -90,8 +90,6 @@ super + shift + {1-9}
 
 # Fullscreen
 F11
-    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
-super + shift + f
     $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
 
 # Toggle Titlebar

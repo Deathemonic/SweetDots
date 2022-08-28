@@ -17,7 +17,7 @@ super + {a,r,s,w}
     $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window}
 super + p
     $HOME/.config/sweetconfigs-xorg/bin/menu/power
-super + alt + {e,c,f}
+super + shift+ {e,c,f}
     $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard, filebrowser}
 super + shift + {n,b}
     $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
@@ -41,7 +41,7 @@ Print
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen
 super + alt + {w,a}
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-window, shot-area}
-super + alt + {ctrl,shift}
+super + alt + {ctrl,shift} + c
     $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-in3, shot-in10}
 # Capture the screen
 super + alt + {r,s}
@@ -74,7 +74,7 @@ super + Escape
 
 # kill window
 ctrl + alt + Escape
-       xkill
+    xkill
 
 # Quit/Restart sweetconfigs-xorg
 ctrl + shift + {q,r}
@@ -86,10 +86,7 @@ super + {h,v,q}
 
 # Fullscreen or Monocle
 F11
-    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
-
-super + shift + f
-    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
+    $HOME/.config/sweetconfigs-xorg/eww/scripts/check_fullscreen
 
 # Toggle beetwen floating & tiled
 super + space

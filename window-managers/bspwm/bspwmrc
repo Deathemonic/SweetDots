@@ -27,6 +27,7 @@ bspc rule -a mpv state=floating
 bspc rule -a Conky state=floating
 bspc rule -a stalonetray state=floating
 bspc rule -a Lxappearance state=floating
+bspc rule -a Viewnior state=floating
 
 # Autostart (Important: Do not delete or modify unless you know what your doing)
 $HOME/.config/sweetconfigs-xorg/bin/system/autostart

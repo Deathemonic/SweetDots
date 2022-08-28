@@ -21,6 +21,8 @@ layouts = [
 scratchpad = []
 window_rules = [
     {window_class = "lxappearance", spawn_floating = true},
+    {window_class = "viewnior", spawn_floating = true},
+    {window_class = "feh", spawn_floating = true},
 ]
 layout_mode = "Workspace"
 insert_behavior = "Bottom"
@@ -96,17 +98,17 @@ key = "w"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher filebrowser"
-modifier = ["modkey", "Alt"]
+modifier = ["modkey", "Shift"]
 key = "f"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher emoji"
-modifier = ["modkey", "Alt"]
+modifier = ["modkey", "Shift"]
 key = "e"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher clipboard"
-modifier = ["modkey", "Alt"]
+modifier = ["modkey", "Shift"]
 key = "c"
 [[keybind]]
 command = "Execute"
@@ -177,13 +179,13 @@ key = "a"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in3"
-modifier = ["modkey", "Alt"]
-key = "Control"
+modifier = ["modkey", "Alt", "Control"]
+key = "c"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in10"
-modifier = ["modkey", "Alt"]
-key = "Shift"
+modifier = ["modkey", "Alt", "Shift"]
+key = "c"
 # Capture the screen
 [[keybind]]
 command = "Execute"
@@ -278,13 +280,6 @@ command = "Execute"
 value = "loginctl kill-session $XDG_SESSION_ID"
 modifier = ["modkey", "Shift"]
 key = "q"
-
-# Fullscreen
-[[keybind]]
-command = "Execute"
-value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen"
-modifier = []
-key = "F11"
 
 # Move Windows
 [[keybind]]
@@ -482,3 +477,9 @@ command = "MoveToTag"
 value = "9"
 modifier = ["modkey", "Shift"]
 key = "9"
+
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/eww/scripts/check_fullscreen"
+modifier = []
+key = "F11"
