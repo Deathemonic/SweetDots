@@ -31,7 +31,7 @@ workspaces () {
 }
 
 xprop -spy -root _NET_CURRENT_DESKTOP | while read -r; do
-  	echo '(box :orientation "h" :class "workspaces" :space-evenly true :halign "start" :valign "center" :vexpand true '"$(workspaces)"')'
+  	echo '(box :orientation "h" :class "workspaces" :space-evenly true :halign "start" :vexpand true '"$(workspaces)"')'
 done
 
 # スパゲッティはもうありませんが、出力は長くなります :(

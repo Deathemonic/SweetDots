@@ -4,10 +4,12 @@ id=$(wmctrl -l | awk '{print $1}' | xprop -root | grep _NET_ACTIVE_WINDOW | head
 check=$(echo $(xwininfo -all -id $id | grep Fullscreen))
 
 if [[ $check == "Fullscreen" ]]; then
-    xdo lower -N eww-top-panel
+    # xdo lower -N eww-top-panel
+    eww -c $HOME/.config/sweetconfigs-xorg/eww --toggle open top-panel
     wmctrl -r ':ACTIVE:' -b toggle,fullscreen
 else
-    xdo raise -N eww-top-panel
+    # xdo raise -N eww-top-panel
+    eww -c $HOME/.config/sweetconfigs-xorg/eww --toggle open top-panel
     wmctrl -r ':ACTIVE:' -b toggle,fullscreen
 fi 
 
