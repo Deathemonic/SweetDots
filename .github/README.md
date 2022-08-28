@@ -21,6 +21,8 @@
 
 ## :question: <samp>ABOUT</samp>
 
+<img alt="Rice Preview" align="right" width="400px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/.github/assets/unixporn.png"/>
+
 Welcome, Thanks for droping by! This is my dotfiles that I made, it's a dotfiles design to be understandable and hackable by anyone and themed with [**SweetPastel**](https://github.com/SweetPastel).
 
 Instead of making multiple ``Window Manager Configs`` with different style I opt in on just one style but it should be compatible to other ``Window Manage`` so if you switch to another ``Window Manager`` it should be the same style, except for **``BSPWM``** and **``i3``** because there top bars are different but overall it should be the same, plus it's less work. All the configs are stored in a folder so it won't conflict at your pre existing configs **(Except of the window managers they will conflict unless you backup your old files)**
