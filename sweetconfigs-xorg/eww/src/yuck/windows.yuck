@@ -46,7 +46,7 @@
 
     	(struts 
       		:side "top" 
-      		:distance "8%"
+      		:distance "7%"
     	)
 
 	:monitor 0
