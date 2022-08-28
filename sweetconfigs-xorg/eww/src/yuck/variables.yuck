@@ -2,12 +2,10 @@
 (defvar info-panel false)
 (defvar control-panel false)
 (defvar music-panel false)
+(defvar control-panel-hover false)
 (defvar lockscreen false)
 
 (defvar top-panel-music false)
-(defvar top-panel-brightness false)
-(defvar top-panel-volume false)
-(defvar top-panel-network false)
     
 (defvar players
     "spotify,%any,firefox,chromium,brave,mpd"

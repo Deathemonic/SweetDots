@@ -76,8 +76,6 @@ position () {
 	    printf "%0d:%02d" $((position%3600/60)) $((position%60))
 	    printf " / "
 	    printf "%0d:%02d" $((duration%3600/60)) $((duration%60))
-    else
-        echo " "
     fi
 }
 

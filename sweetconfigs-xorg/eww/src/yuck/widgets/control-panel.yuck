@@ -75,20 +75,25 @@
                     )
                 )
 
-                (eventbox
-                    :cursor "all-scroll"
+                (box 
+                    :orientation "h" 
+                    :space-evenly false
+                    :halign "center"
+                    :valign "center"
+                    :class "slider"
 
-                    (box 
-                        :orientation "h" 
-                        :space-evenly false
-                        :halign "center"
-                        :valign "center"
-                        :class "slider"
-
-		    	    	(label 
-                            :class "volume-icon" 
-                            :text {volume-icon}
+                    (eventbox
+                        :cursor "pointer"
+		    	        
+                        (button
+                            :onclick "pamixer -t"  
+                            :class "volume-icon"
+                            {volume-icon}
                         )
+                    )
+
+                    (eventbox
+                        :cursor "all-scroll"
 
 		    	    	(scale
                             :orientation "h"
@@ -97,7 +102,7 @@
 		    	    		:max 101
 		    	    		:value volume-value
 		    	    		:tooltip "Volume: ${volume-value}%"
-		    	    		:onchange "amixer -D pulse sset Master {}%"
+		    	    		:onchange "pamixer --set-volume {}"
 		    	    	)
 		    	    )
                 )
