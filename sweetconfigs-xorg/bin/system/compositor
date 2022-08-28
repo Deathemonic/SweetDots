@@ -4,6 +4,10 @@ killall -q picom
 
 while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
 
-# picom --config $HOME/.config/sweetconfigs-xorg/picom/picom.conf &
-# If you have problems uncomment the line bellow and comment the line above (This will enable experimental backend which is not recommended with low end devices)
-picom --experimental-backends --config $HOME/.config/sweetconfigs-xorg/picom/picom.conf
+if [[ `pidof -x i3` ]]; then
+    picom --config $HOME/.config/i3/picom.conf &
+    # picom --experimental-backends --config $HOME/.config/i3/picom.conf
+else
+    picom --config $HOME/.config/sweetconfigs-xorg/picom/picom.conf &
+    # picom --experimental-backends --config $HOME/.config/sweetconfigs-xorg/picom/picom.conf
+fi

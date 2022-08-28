@@ -82,10 +82,10 @@ fi
 case $1 in
   polybar)
     if [[ `pidof -x i3` ]]; then
-    launch_bar_i3
+      launch_bar_i3
     else
-    launch_bar
-  fi
+      launch_bar
+    fi
   ;;
   eww)
     eww -c $HOME/.config/sweetconfigs-xorg/eww open top-panel
