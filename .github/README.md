@@ -129,24 +129,24 @@ sudo cp misc/xsessions/berry.desktop /usr/share/xsessions
 6. Change the scripts into exutables
 
 ```sh
-chmod +x $config_dir/sweetconfigs-xorg/bin/bar/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/menu/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/system/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
-chmod +x $config_dir/sweetconfigs-xorg/eww/scripts/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/bar/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/menu/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/system/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/utilities/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/widgets/*
+chmod +x ~/.config/sweetconfigs-xorg/eww/scripts/*
 ```
 
 - If you only installed bspwm then make ``bspwmrc`` into a excutable
 
 ```sh
-chmod +x $config_dir/bspwm/bspwmrc
+chmod +x ~/.config/bspwm/bspwmrc
 ```
 
 - If you only installed berry then make ``autostart`` into a excutable
 
 ```sh
-chmod +x $config_dir/berry/autostart
+chmod +x ~/.config/berry/autostart
 ```
 
 	
