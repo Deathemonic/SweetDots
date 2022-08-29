@@ -222,8 +222,8 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [x] Add top-panel to all window managers
 - [ ] Use modules more on widgets
 - [ ] Add a config.ini on widgets for user variables
-- [ ] Use pijulius's fork of picom
-- [ ] Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs
+- [ ] ~~Use pijulius's fork of picom~~
+- [ ] ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
 - [ ] Add more options for window manager forks
 - [ ] Add screenshots on README.md
 	
