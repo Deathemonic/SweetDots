@@ -220,6 +220,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Make faster scripts
 - [ ] Improve the widget layout
 - [x] Add top-panel to all window managers
+- [ ] Use a better text scroller
 - [ ] Use modules more on widgets
 - [ ] Add a config.ini on widgets for user variables
 - [ ] ~~Use pijulius's fork of picom~~
