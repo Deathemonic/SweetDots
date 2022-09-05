@@ -23,10 +23,10 @@ gaps                            outer           0
 
 # Colors
 # class                         border          backgr.         text            indicator       child_border
-client.focused                  #FFDEDE         #FFDEDE         #F8F9FA         #B4E3AD         #FFDEDE
+client.focused                  #FFDEDE         #FFDEDE         #1B1F23         #B4E3AD         #FFDEDE
 client.focused_inactive         #A3CBE7         #A3CBE7         #1B1F23         #B4E3AD         #A3CBE7
 client.unfocused                #161A1E         #161A1E         #F8F9FA         #B4E3AD         #161A1E
-client.urgent                   #E5A3A1         #E5A3A1         #F8F9FA         #B4E3AD         #E5A3A1
+client.urgent                   #E5A3A1         #E5A3A1         #1B1F23         #B4E3AD         #E5A3A1
 client.placeholder              #1B1F23         #1B1F23         #F8F9FA         #B4E3AD         #1B1F23
 client.background               #1B1F23
 
@@ -50,16 +50,16 @@ bindsym $mod+Shift+t   		$exec gedit
 bindsym $mod+Shift+w   		$exec firefox
 
 # Applications (CLI)
-bindsym $mod+Shift+v 		$exec "$terminal -e nvim"
-bindsym $mod+Shift+r 		$exec "$terminal -e ranger"
-bindsym $mod+Shift+h 		$exec "$terminal -e htop"
+bindsym $mod+$alt+v 		$exec "$terminal -e nvim"
+bindsym $mod+$alt+e 		$exec "$terminal -e ranger"
+bindsym $mod+$alt+h 		$exec "$terminal -e htop"
 
 # Menus
 bindsym $mod+a 		        $exec "$menu/launcher drun"
 bindsym $mod+r                  $exec "$menu/launcher run"
 bindsym $mod+s 		        $exec "$menu/launcher ssh"
 bindsym $mod+w 		        $exec "$menu/launcher window"
-bindsym $mod+f                  $exec "$menu/launcher filebrowser"
+bindsym $mod+Shift+f            $exec "$menu/launcher filebrowser"
 bindsym $mod+Shift+e            $exec "$menu/launcher emoji"
 bindsym $mod+Shift+c            $exec "$menu/launcher clipboard"
 bindsym $mod+p 			$exec $menu/power
@@ -82,8 +82,8 @@ bindsym $mod+g                  $exec $utilities/color-picker
 bindsym Print                   $exec "$utilities/screenshot shot-screen"
 bindsym $mod+$alt+w             $exec "$utilities/screenshot shot-window"
 bindsym $mod+$alt+a             $exec "$utilities/screenshot shot-area"
-bindsym $mod+$alt+Control       $exec "$utilities/screenshot shot-in3"
-bindsym $mod+$alt+Shift         $exec "$utilities/screenshot shot-in10"
+bindsym $mod+$alt+Control+c     $exec "$utilities/screenshot shot-in3"
+bindsym $mod+$alt+Shift+c       $exec "$utilities/screenshot shot-in10"
 # Capture the screen
 bindsym $mod+$alt+r             $exec "$utilities/screenrecord capture"
 bindsym $mod+$alt+s             $exec "$utilities/screenrecord capture-stop"
@@ -139,9 +139,9 @@ bindsym $mod+v                  split v
 bindsym F11                     fullscreen toggle
 
 # Container Layout
-bindsym $mod+Shift+z            layout stacking
-bindsym $mod+Shift+x            layout tabbed
-bindsym $mod+Shift+c            layout toggle split
+bindsym $mod+$alt+g            layout stacking
+bindsym $mod+$alt+t            layout tabbed
+bindsym $mod+$alt+y            layout toggle split
 
 # Tiling / Floating
 bindsym $mod+space              floating toggle

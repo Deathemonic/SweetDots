@@ -21,6 +21,8 @@ layouts = [
 scratchpad = []
 window_rules = [
     {window_class = "lxappearance", spawn_floating = true},
+    {window_class = "viewnior", spawn_floating = true},
+    {window_class = "feh", spawn_floating = true},
 ]
 layout_mode = "Workspace"
 insert_behavior = "Bottom"
@@ -59,17 +61,17 @@ key = "w"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e nvim"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "v"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e ranger"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "r"
 [[keybind]]
 command = "Execute"
 value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e htop"
-modifier = ["modkey", "Shift"]
+modifier = ["modkey", "Alt"]
 key = "h"
 
 # Menus
@@ -96,7 +98,7 @@ key = "w"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher filebrowser"
-modifier = ["modkey"]
+modifier = ["modkey", "Shift"]
 key = "f"
 [[keybind]]
 command = "Execute"
@@ -177,13 +179,13 @@ key = "a"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in3"
-modifier = ["modkey", "Alt"]
-key = "Control"
+modifier = ["modkey", "Alt", "Control"]
+key = "c"
 [[keybind]]
 command = "Execute"
 value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in10"
-modifier = ["modkey", "Alt"]
-key = "Shift"
+modifier = ["modkey", "Alt", "Shift"]
+key = "c"
 # Capture the screen
 [[keybind]]
 command = "Execute"
@@ -475,3 +477,9 @@ command = "MoveToTag"
 value = "9"
 modifier = ["modkey", "Shift"]
 key = "9"
+
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/eww/scripts/check_fullscreen"
+modifier = []
+key = "F11"

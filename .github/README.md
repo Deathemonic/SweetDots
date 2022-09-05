@@ -21,9 +21,11 @@
 
 ## :question: <samp>ABOUT</samp>
 
+<img alt="Rice Preview" align="right" width="400px" src="https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/.github/assets/unixporn.png"/>
+
 Welcome, Thanks for droping by! This is my dotfiles that I made, it's a dotfiles design to be understandable and hackable by anyone and themed with [**SweetPastel**](https://github.com/SweetPastel).
 
-Instead of making multiple ``Window Manager Configs`` with different style I opt in on just one style but it should be compatible to other ``Window Manage`` so if you switch to another ``Window Manager`` it should be the same style, except for **``BSPWM``** and **``i3``** because there top bars are different but overall it should be the same, plus it's less work. All the configs are stored in a folder so it won't conflict at your pre existing configs **(Except of the window managers they will conflict unless you backup your old files)**
+Instead of making multiple ``Window Manager Configs`` with different style I opt in on just one style but it should be compatible to other ``Window Manage`` so if you switch to another ``Window Manager`` it should be the same style, plus it's less work. All the configs are stored in a folder so it won't conflict at your pre existing configs **(Except of the window managers they will conflict unless you backup your old files)**
 
 ## :books: <samp>WIKI</samp> <kbd>RECOMMENDED</kbd>
 If you have problems or need some information about the dotfiles check [wiki page](https://github.com/Deathemonic/SweetDots/wiki), it provides extra information, some documentation, and a troubleshoot page
@@ -127,24 +129,24 @@ sudo cp misc/xsessions/berry.desktop /usr/share/xsessions
 6. Change the scripts into exutables
 
 ```sh
-chmod +x $config_dir/sweetconfigs-xorg/bin/bar/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/menu/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/system/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/utilities/*
-chmod +x $config_dir/sweetconfigs-xorg/bin/widgets/*
-chmod +x $config_dir/sweetconfigs-xorg/eww/scripts/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/bar/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/menu/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/system/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/utilities/*
+chmod +x ~/.config/sweetconfigs-xorg/bin/widgets/*
+chmod +x ~/.config/sweetconfigs-xorg/eww/scripts/*
 ```
 
 - If you only installed bspwm then make ``bspwmrc`` into a excutable
 
 ```sh
-chmod +x $config_dir/bspwm/bspwmrc
+chmod +x ~/.config/bspwm/bspwmrc
 ```
 
 - If you only installed berry then make ``autostart`` into a excutable
 
 ```sh
-chmod +x $config_dir/berry/autostart
+chmod +x ~/.config/berry/autostart
 ```
 
 	
@@ -202,7 +204,8 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 
 - :muscle: **Contributors**
 	- [`Deathemonic`](https://github.com/Deathemonic) - Me obviously
-	- [`GG`](https://github.com/weebcyberpunk) - https://github.com/Deathemonic/SweetDots/pull/6
+	- [`GG`](https://github.com/weebcyberpunk) - Added mkdir to make sure directories exist https://github.com/Deathemonic/SweetDots/pull/6
+	- [`Rohith`](https://github.com/Rohith04MVK) - Fixed some paths https://github.com/Deathemonic/SweetDots/pull/7
 	
 	<br>
 
@@ -216,7 +219,12 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Better Padding for Widgets
 - [ ] Make faster scripts
 - [ ] Improve the widget layout
-- [ ] Use pijulius's fork of picom
+- [x] Add top-panel to all window managers
+- [ ] Use a better text scroller
+- [ ] Use modules more on widgets
+- [ ] Add a config.ini on widgets for user variables
+- [ ] ~~Use pijulius's fork of picom~~
+- [ ] ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
 - [ ] Add more options for window manager forks
 - [ ] Add screenshots on README.md
 	

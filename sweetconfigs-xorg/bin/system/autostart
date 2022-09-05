@@ -30,7 +30,9 @@ xfce4-power-manager &
 feh --bg-fill -r -z $HOME/.config/sweetconfigs-xorg/wallpapers/stairs.png &
 
 # Bar
-$HOME/.config/sweetconfigs-xorg/bin/system/bar &
+$HOME/.config/sweetconfigs-xorg/bin/system/bar eww &
+
+# Change eww to polybar if you want to use polybar instead (vice versa)
 
 # Notification
 $HOME/.config/sweetconfigs-xorg/bin/system/notification &

@@ -1,24 +1,41 @@
 .top-panel-window {
-    .ws {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin: 0em 0em 0em 1.5em;
+    .workspaces {
+        background-color: $black-darker;
+        border-radius: 0 20px 20px 0;
+        font-size: 1em;
+        font-weight: bold;
+        padding: 0 1.5em 0 1.5em;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        
+        button {
+            margin: .8em;
+            padding-left: 1px;
+            transition: 0.5s;
+                
+            &.active-occupied,
+            &.active-empty {
+                color: $pink;
 
-        .0, .01, .02, .03, .04, .05, .06, .07, .08, .09,
-        .011, .022, .033, .044, .055, .066, .077, .088, .099 {
-            margin: 0.8em;
-        }
+                &:hover {
+                    color: $blue;
+                }
+            }
 
-        .0 {
-            color: $black-lighter;
-        }
+            &.inactive-occupied {
+                color: $blue;
 
-        .01, .02, .03, .04, .05, .06, .07, .08, .09 {
-            color: $pink;
-        }
+                &:hover {
+                    color: $pink;
+                }
+            }
 
-        .011, .022, .033, .044, .055, .066, .077, .088, .099 {
-            color: $blue;
+            &.inactive-empty {
+                color: $black-lighter;
+
+                &:hover {
+                    color: $blue;
+                }
+            }
         }
     }
 }

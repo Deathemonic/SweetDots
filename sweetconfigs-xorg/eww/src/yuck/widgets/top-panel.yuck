@@ -1,12 +1,10 @@
 (defwidget left []
     (eventbox
-      :cursor "pointer"
+        :cursor "pointer"
 
-      (literal
-          :halign "start"
-          :valign "center"
-          :content workspaces
-      )
+        (literal
+            :content workspaces
+        )
     )
 )
 
@@ -74,109 +72,62 @@
         :space-evenly false
         :halign "end"
 
-        (box
-	    	:class "actions"
-	    	:orientation "h"
-	    	:space-evenly false
+        (eventbox
+            :onclick "$HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel &"
+            :onhover "${EWW_CMD} update control-panel-hover=true"
+            :onhoverlost "${EWW_CMD} update control-panel-hover=false"
+            :cursor "pointer"
 
-            (eventbox 
-                :onhover "${EWW_CMD} update top-panel-brightness=true"
-                :onhoverlost "${EWW_CMD} update top-panel-brightness=false"
-                :cursor "all-scroll"
+            (box
+	    	    :class "actions"
+                :style {control-panel-hover ? "background-color: #22262a; padding: .6em;" : "background-color: #1b1f23"}
+	    	    :orientation "h"
+	    	    :space-evenly false
+                :valign "center"
 
                 (box
                     :orientation "h"  
                     :space-evenly false
                     :spacing 2
-                
-                    (label 
-                        :class "brightness-icon" 
-                        :text {brightness-icon}			
-                    )
-                
-                    (revealer 
-                        :transition "slideleft" 
-                        :reveal top-panel-brightness   
-                        :duration "550ms"
-                    
-                        (scale 
-                            :class "brightness-bar"
-                            :value brightness-value
-                            :tooltip "Brightness: ${brightness-value}%" 
-                            :onchange "brightnessctl set {}%" 
-                            :orientation "h" 
-                            :flipped false 
-                            :max 101 
-                            :min 0
+
+                    (eventbox
+                        :onscroll "$HOME/.config/sweetconfigs-xorg/bin/utilities/brightness {}"
+            
+                        (label 
+                            :class "brightness-icon" 
+                            :tooltip "Brightness: ${brightness-value}%"	
+                            :text {brightness-icon}
                         )
                     )
                 )
-            )
-
-            (eventbox 
-                :onhover "${EWW_CMD} update top-panel-volume=true"
-                :onhoverlost "${EWW_CMD} update top-panel-volume=false"
-                :cursor "all-scroll"
-            
+                
                 (box
                     :orientation "h" 	  
                     :space-evenly "false" 
                     :spacing 2
-                    
+
                     (eventbox
-                      :cursor "pointer"
-                     
+                        :onscroll "$HOME/.config/sweetconfigs-xorg/bin/utilities/volume {}"
+                    
                         (button
                             :onclick "pamixer -t"   
-                            :class "volume-icon" {volume-icon}
-                        )
-                    )
-                
-                    (revealer 
-                        :transition "slideleft" 
-                        :reveal top-panel-volume       
-                        :duration "550ms"
-                    
-                        (scale    
-                            :class "volume-bar" 	  
-                            :value volume-value 
-                            :orientation "h"      
-                            :flipped false 
-                            :tooltip "Volume: ${volume-value}%" 
-                            :max 101 
-                            :min 0 
-                            :onchange "amixer -D pulse sset Master {}%" 
+                            :class "volume-icon" 
+		    	    		:tooltip "Volume: ${volume-value}%"
+                            {volume-icon}
                         )
                     )
                 )
-            )
-
-            (eventbox 
-                :onhover "${EWW_CMD} update top-panel-network=true"
-                :onhoverlost "${EWW_CMD} update top-panel-network=false"
-                :cursor "pointer"
-            
+                
                 (box
                     :orientation "h" 	  
                     :space-evenly false
                     :spacing 2
-                
+                    
                     (button
                         :onclick "$HOME/.config/sweetconfigs-xorg/bin/menu/network &"
+                        :tooltip "${network-name}"
                         :class "network-icon" 
                         {network-icon}
-                    )
-                
-                    (revealer 
-                        :transition "slideleft" 
-                        :reveal top-panel-network       
-                        :duration "550ms"
-                    
-                        (label
-                            :class "network-speed" 
-                            :text {network-speed}
-                            :tooltip "${network-name}"
-                        )
                     )
                 )
             )
@@ -201,7 +152,6 @@
 	    		    :class "time-text"
 	    		    :tooltip "${date}"
 	    		    :onclick "$HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel &"
-                    :onrightclick "$HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel &"
   	    		    {time}
 	    	    )
             )

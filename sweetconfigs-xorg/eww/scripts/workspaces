@@ -1,51 +1,37 @@
 #!/bin/bash
 
+nicknames=(一 二 三 四 五 六 七 八 九 十)
+start=0
+
 workspaces () {
-	o1=$(bspc query -D -d .occupied --names | grep 1)
-	o2=$(bspc query -D -d .occupied --names | grep 2)
-	o3=$(bspc query -D -d .occupied --names | grep 3)
-	o4=$(bspc query -D -d .occupied --names | grep 4)
-	o5=$(bspc query -D -d .occupied --names | grep 5)
-	o6=$(bspc query -D -d .occupied --names | grep 6)
-	o7=$(bspc query -D -d .occupied --names | grep 7)
-	o8=$(bspc query -D -d .occupied --names | grep 8)
-	o9=$(bspc query -D -d .occupied --names | grep 9)
+	wmctrl -d | awk '{ print $1 " " $2 " " $9 }' | grep -v NSP | while read -r id active name; do
+    	
+		name="${name#*_}"
+    	
+		if [ "$active" == '*' ]; then
+      		button_status="active"
+    	else
+      		button_status="inactive"
+    	fi
 
-	f1=$(bspc query -D -d focused --names | grep 1)
-	f2=$(bspc query -D -d focused --names | grep 2)
-	f3=$(bspc query -D -d focused --names | grep 3)
-	f4=$(bspc query -D -d focused --names | grep 4)
-	f5=$(bspc query -D -d focused --names | grep 5)
-	f6=$(bspc query -D -d focused --names | grep 6)
-	f7=$(bspc query -D -d focused --names | grep 7)
-	f8=$(bspc query -D -d focused --names | grep 8)
-	f9=$(bspc query -D -d focused --names | grep 9)
+    	if wmctrl -l | grep --regexp '.*\s\+'"$id"'\s\+.*' >/dev/null; then
+      		button_fill="occupied"
+      		button_name="${nicknames[$start]}"
+    	else
+      		button_fill="empty"
+      		button_name="${nicknames[$start]}"
+    	fi
 
-	content1="一"
-	content2="二"
-	content3="三"
-	content4="四"
-	content5="五"
-	content6="六"
-	content7="七"
-	content8="八"
-	content9="九"
-
-	[ "$f1" ] && content1=""
-	[ "$f2" ] && content2=""
-	[ "$f3" ] && content3=""
-	[ "$f4" ] && content4=""
-	[ "$f5" ] && content5=""
-	[ "$f6" ] && content6=""
-	[ "$f7" ] && content7=""
-	[ "$f8" ] && content8=""
-	[ "$f9" ] && content9=""
-
-	echo "(box :class \"ws\" :orientation \"h\"	:halign \"center\"	:valign \"start\"	 :space-evenly \"false\" :spacing \"-5\" (button :onclick \"bspc desktop -f 1\"	:class	\"0$o1$f1\" \"$content1\") (button :onclick \"bspc desktop -f 2\"	:class \"0$o2$f2\" \"$content2\") (button :onclick \"bspc desktop -f 3\"	:class \"0$o3$f3\" \"$content3\") (button :onclick \"bspc desktop -f 4\"	:class \"0$o4$f4\" \"$content4\") (button :onclick \"bspc desktop -f 5\"	:class \"0$o5$f5\" \"$content5\") (button :onclick \"bspc desktop -f 6\"	:class \"0$o6$f6\" \"$content6\") (button :onclick \"bspc desktop -f 7\"	:class \"0$o7$f7\" \"$content7\") (button :onclick \"bspc desktop -f 8\"	:class \"0$o8$f8\" \"$content8\") (button :onclick \"bspc desktop -f 9\"	:class \"0$o9$f9\" \"$content9\"))"
+    	load+="(button :class '$button_status-$button_fill'  :onclick 'wmctrl -s $id' '$button_name')"
+    
+      	echo -n $load
+      	load=""
+		((start=start+1))
+  	done
 }
 
-workspaces
-
-bspc subscribe desktop node_transfer | while read -r _ ; do
-    workspaces
+xprop -spy -root _NET_CURRENT_DESKTOP | while read -r; do
+  	echo '(box :orientation "h" :class "workspaces" :space-evenly true :halign "start" :vexpand true '"$(workspaces)"')'
 done
+
+# スパゲッティはもうありませんが、出力は長くなります :(
