@@ -71,7 +71,9 @@ bindsym $mod+Shift+r 		$exec "$utilities/screenrecord capture-rofi"
 # Widgets
 bindsym $mod+$alt+c 		$exec $widgets/control-panel
 bindsym $mod+$alt+i             $exec $widgets/info-panel
-bindsym $mod+$alt+l 		$exec $widgets/lockscreen
+
+# Lock screen
+bindsym $mod+$alt+l 		$exec $utilities/lockscreen
 
 # Functions
 # Color Picker
