@@ -8,8 +8,7 @@ script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 exit=$?
 
 update_hooks () {
-    while IFS= read -r id
-    do
+    while IFS= read -r id; do
       polybar-msg -p "$id" hook music-play-pause $2 1>/dev/null 2>&1
     done < <(echo "$1")
 }
@@ -32,15 +31,15 @@ else
 fi
 
 if [[ "$1" == "scroll-music" ]]; then
-    echo $status
+    echo $player_status
 else
-    if [ $status = "Stopped" ]; then
+    if [ $player_status = "Stopped" ]; then
         echo "Offline"
-    elif [ $status = "Paused"  ]; then
+    elif [ $player_status = "Paused"  ]; then
         update_hooks "$bar_pid" 2
         playerctl -p $players metadata --format '{{ artist }} - {{ title }}'
-    elif [ $status = "Offline"  ]; then
-        echo $status
+    elif [ $player_status = "Offline"  ]; then
+        echo $player_status
     else
         update_hooks "$bar_pid" 1
         playerctl -p $players metadata --format '{{ artist }} - {{ title }}'
