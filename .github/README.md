@@ -21,3 +21,7 @@ README
 Installer
 
 ![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+
+Highlights
+
+This might take long, I might remake the eww widgets
