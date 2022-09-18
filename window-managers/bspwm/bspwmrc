@@ -20,14 +20,15 @@ bspc config focus_follows_pointer true
 bspc config paddingless_monocle true
 bspc config single_monocle false
 
+bspc wm --adopt-orphans
+
 # Rules
-bspc rule -a feh state=floating
-bspc rule -a sxiv state=floating
-bspc rule -a mpv state=floating
-bspc rule -a Conky state=floating
-bspc rule -a stalonetray state=floating
-bspc rule -a Lxappearance state=floating
-bspc rule -a Viewnior state=floating
+bspc rule -r *:*
+
+floating=(alacritty_float Yad Onboard mpv Lxappearance Viewnior feh)
+bspc rule -a ${floating[@]} state=floating follow=on focus=on
+
+bspc rule -a stalonetray state=floating manage=off
 
 # Autostart (Important: Do not delete or modify unless you know what your doing)
 $HOME/.config/sweetconfigs-xorg/bin/system/autostart
