@@ -4,12 +4,14 @@
 # Warning: This file is important don't delete or modify anything unless know what your doing
 
 # Kill already running processs
-process=(sxhkd polybar picom dunst mpd mpDris2 greenclip xfce4-power-manager)
-for processed in "${process[@]}"; do
-	if [[ `pidof ${processed}` ]]; then
-		killall -9 ${processed}
-	fi
-done
+process=(sxhkd polybar picom dunst mpd mpDris2 greenclip xfce4-power-manager eww bspc berryc)
+if [[ `pidof ${process[@]}` ]]; then
+  killall -9 ${process[@]}
+fi
+
+# Fix Java
+export _JAVA_AWT_WM_NONREPARENTING=1
+# wmname LG3D
 
 # Load Xresources
 xrdb $HOME/.Xresources
