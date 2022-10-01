@@ -215,18 +215,27 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 	
 ## :memo: <samp>TODO</samp>
 
+**Focusing**
 - [ ] Wayland Version
-- [ ] Better Padding for Widgets
+- [ ] Port all the scripts to python
 - [ ] Make faster scripts
+
+**Planning**
+- [ ] Better Padding for Widgets
 - [ ] Improve the widget layout
-- [x] Add top-panel to all window managers
 - [ ] Use a better text scroller
 - [ ] Use modules more on widgets
 - [ ] Add a config.ini on widgets for user variables
-- [ ] ~~Use pijulius's fork of picom~~
-- [ ] ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
 - [ ] Add more options for window manager forks
 - [ ] Add screenshots on README.md
+
+**Done**
+- [x] Add top-panel to all window managers
+
+**Removed**
+- [ ] ~~Use pijulius's fork of picom~~
+- [ ] ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
+
 	
 ## :scroll: <samp>COPYING</samp>
 
