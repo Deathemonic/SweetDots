@@ -1,5 +1,14 @@
+import sys.path as spath
+
+from dynaconf import Dynaconf
 from fast_colorthief import get_dominant_color, get_palette
+from pathlib import Path
 from PIL import Image, ImageFilter
+
+current_dir = Path(__file__).resolve().parent
+config = Dynaconf(
+    setting_files = [f'{current_dir}/../config.toml']
+)
 
 
 # Here we add our arguments so it could be dynamic

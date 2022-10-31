@@ -1,1 +1,3 @@
-# Empty Config
+[music]
+    cache_dir = '$HOME/.cache/eww/music'
+    fallback_cover = '$HOME/.config/sweetconfigs/eww/assets/fallback_cover.png'
