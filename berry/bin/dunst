@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [[ `pidof dunst` ]]; then
-	pkill dunst
-fi
-
-dunst -config $HOME/.config/berry/dunst/dunstrc &
