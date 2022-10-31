@@ -18,16 +18,25 @@ def player_metadata(*args):
     name = args[0].props.player_name
     metadata['player'], metadata['status'] = name or 'none', args[0].props.status
 
-    if not "".join(metadata["xesam:artist"]):
-        metadata["xesam:artist"] = 'Unknown'
-    elif len(metadata["xesam:artist"]) == 1:
-        metadata["xesam:artist"] = metadata["xesam:artist"][0]
-    elif len(metadata["xesam:artist"]) == 2:
-        metadata["xesam:artist"] = ' and '.join(metadata["xesam:artist"])
+    if not ''.join(metadata['xesam:artist']):
+        metadata['xesam:artist'] = 'Unknown'
+    elif len(metadata['xesam:artist']) == 1:
+        if type(metadata['xesam:artist']) != list:
+            metadata['xesam:artist'] = metadata['xesam:artist']
+        else:
+            metadata['xesam:artist'] = metadata['xesam:artist'][0]
+    elif len(metadata['xesam:artist']) == 2:
+        metadata['xesam:artist'] = ' and '.join(metadata['xesam:artist'])
     else:
         metadata['xesam:artist'] = ' and '.join(
-            [','.join(metadata["xesam:artist"][:-1]), metadata["xesam:artist"][-1]]
+            [','.join(metadata['xesam:artist'][:-1]), metadata['xesam:artist'][-1]]
         )
+
+    if name == 'spotify' and \ 
+            'mpris:trackid' in args[0].props.metadata.keys() and \
+            'ad' in args[0].props.metadata['mpris:trackid']:
+        metadata['xesam:title'] = 'Advertisement'
+        metadata['xesam:artist'] = 'Free Plan'
     
     if (
         "file://" not in metadata['mpris:artUrl']
