@@ -2,13 +2,17 @@ Configs
 
 ![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
 
+Scripts
+
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/5)
+
 Window Manager Configs
 
 ![](https://us-central1-progress-markdown.cloudfunctions.net/progress/37)
 
 EWW
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/50)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/51)
 
 Sweetpastel Ports
 
@@ -20,7 +24,7 @@ README
 
 Installer
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/1)
 
 Highlights
 
