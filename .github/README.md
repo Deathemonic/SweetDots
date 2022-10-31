@@ -1,6 +1,6 @@
 Configs
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/55)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
 
 Scripts
 
@@ -8,11 +8,11 @@ Scripts
 
 Window Manager Configs
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/37)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
 
 EWW
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/51)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
 
 Sweetpastel Ports
 
