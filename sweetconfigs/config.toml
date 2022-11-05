@@ -1,1 +1,72 @@
-# Empty Config
+wallpaper = '$HOME/.config/sweetconfigs-xorg/wallpapers/stairs.png'
+xcompositor_config_file = '$HOME/.config/sweetconfigs-xorg/picom/picom.conf'
+
+[notification]
+    mako_config_file = '$HOME/.config/hypr/mako/config'
+    dunst_config_file = '$HOME/.config/sweetconfigs-xorg/dunst/dunstrc'
+    icon_dir = '$HOME/.config/sweetconfig-xorg/dunst/icons'
+
+[terminal]
+    foot_config_file = '$HOME/.config/sweetconfigs/terminal/foot/foot.ini'
+    alacritty_config_file = '$HOME/.config/sweetconfigs/terminal/alacritty/alacritty.yml'
+
+[gtk]
+    theme = 'SweetPastel'
+    icons = 'Papirus-Dark'
+    cursor = 'Pastel'
+    font = 'Roboto'
+    font_size = 9
+    cursor_size = 10
+    gtk2_dir = '$HOME/.gtkrc-2.0'
+    gtk3_dir = '$HOME/.config/gtk-3.0/settings.ini'
+    dark = true
+
+[menu]
+    app = 'wofi'
+    terminal = 'foot'
+    modi = 'clipboard:greenclip-print,run,ssh,drun,window,filebrowser,emoji'
+
+    [menu.launcher]
+        config = '$HOME/.config/openbox/rofi/default/launcher.rasi'
+        style = '$HOME/.config/hypr/wofi/style.css'
+        colors = '$HOME/.config/hypr/wofi/colors'
+
+    [menu.screenshot]
+        directory = '$HOME/Pictures/Screenshots'
+        config = '$HOME/.config/openbox/rofi/default/screenshot.rasi'
+        style = '$HOME/.config/sweetconfigs-wayland/wofi/menu.css'
+        colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
+
+        [menu.screenshot.icons]
+            now = ''
+            win = ''
+            area = ''
+            timer = ''
+
+    [menu.screenrecord]
+        directory = '$HOME/Videos/Screenrecord'
+        config = '$HOME/.config/sweetconfigs-wayland/wofi/menu'
+        style = '$HOME/.config/sweetconfigs-wayland/wofi/menu.css'
+        colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
+
+        [menu.screenrecord.icons]
+            now = ''
+            area = ''
+            timer = ''
+            audio = ''
+            no_audio = ''
+            stop = ''
+
+    [menu.network]
+        config = '$HOME/.config/sweetconfigs-wayland/wofi/menu'
+        style = '/home/deathemonic/.config/sway/wofi/style.css'
+        colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
+
+        list_saved = true
+        rofi_highlight = true
+        obscure = true
+        gui_if_available = true
+        compact = false
+        pinentry = ''
+        wifi_chars = '▂▄▆█'
+        rescan_delay = 1
