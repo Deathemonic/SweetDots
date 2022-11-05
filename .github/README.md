@@ -216,7 +216,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 ## :memo: <samp>TODO</samp>
 
 **Focusing**
-- [ ] Wayland Version
+- [ ] ~~Wayland Version~~ Merging everything to one branch (Wayland and Xorg)
 - [ ] Port all the scripts to python
 - [ ] Make faster scripts
 
