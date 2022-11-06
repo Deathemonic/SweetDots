@@ -1,10 +1,10 @@
 Configs
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/0)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/5)
 
 Scripts
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/12)
 
 Window Manager Configs
 
