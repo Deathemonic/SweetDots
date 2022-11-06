@@ -4,7 +4,7 @@ Configs
 
 Scripts
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/5)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
 
 Window Manager Configs
 
