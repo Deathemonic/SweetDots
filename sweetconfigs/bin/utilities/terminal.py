@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-from subprocess import run
-from os import path, environ
-from sys import path as spath
+from os import environ, path
 from pathlib import Path
+from subprocess import run
+from sys import path as spath
 
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
-from utils import config  # type: ignore
+from utils import config, path_expander  # type: ignore
 
 
 def arguments():
@@ -76,6 +76,6 @@ def main():
 if __name__ == '__main__':
     args, conf_foot, conf_ala = (
         arguments(),
-        path.expandvars(config.terminal.foot_config_file),
-        path.expandvars(config.terminal.alacritty_config_file)
+        path_expander(config.terminal.foot_config_file),
+        path_expander(config.terminal.alacritty_config_file)
     )

@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-from sys import path as spath
+from os import environ, path
 from pathlib import Path
-from subprocess import run
 from shlex import split
-from os import path, environ
+from subprocess import run
+from sys import path as spath
 
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
-from utils import config  # type: ignore
+from utils import config, path_expander  # type: ignore
 
 
 def arguments():
@@ -30,7 +30,7 @@ def command(show: str, terminal='alacritty', **kwargs):
                  '--color', kwargs.get('color', '')]
     }
     if app == 'rofi' or 'wofi':
-        cmd.extend(parameters.get(app))
+        cmd.extend(parameters.get(app))  # type: ignore
     return cmd
 
 
@@ -44,15 +44,15 @@ def main():
     match session:
         case 'wayland':
             if app == 'wofi' and args.modi:
-                run(command(args.modi, term, config=path.expandvars(launcher.config),
-                            style=path.expandvars(launcher.style), color=path.expandvars(launcher.colors)))
+                run(command(args.modi, term, config=path_expander(launcher.config),
+                            style=path_expander(launcher.style), color=path_expander(launcher.colors)))
             elif app == 'rofi' and args.modi:
-                run(command(args.modi, term, modi=config.menu.modi, config=passer(path.expandvars(launcher.config))))
+                run(command(args.modi, term, modi=config.menu.modi, config=passer(path_expander(launcher.config))))
             else:
                 exit(1)
         case 'x11':
             if app == 'wofi' or app == 'rofi' and args.modi:
-                run(command(args.modi, term, modi=config.menu.modi, config=passer(path.expandvars(launcher.config))))
+                run(command(args.modi, term, modi=config.menu.modi, config=passer(path_expander(launcher.config))))
             else:
                 exit(1)
 

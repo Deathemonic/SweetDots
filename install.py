@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-from cursesmenu import CursesMenu
-from subprocess import run
+
+def main():
+    pass
 
 
 if __name__ == '__main__':
-    pass
+    main()

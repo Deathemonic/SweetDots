@@ -1,5 +1,7 @@
-wallpaper = '$HOME/.config/sweetconfigs-xorg/wallpapers/stairs.png'
-xcompositor_config_file = '$HOME/.config/sweetconfigs-xorg/picom/picom.conf'
+# This is just a test config if you want a proper config check the examples folder
+
+wallpaper = '$HOME/.config/sweetconfigs/wallpapers/flowers.png'
+xcompositor_config_file = '$HOME/.config/sweetconfigs/etc/picom/picom.conf'
 
 [notification]
     mako_config_file = '$HOME/.config/hypr/mako/config'
@@ -33,6 +35,8 @@ xcompositor_config_file = '$HOME/.config/sweetconfigs-xorg/picom/picom.conf'
 
     [menu.screenshot]
         directory = '$HOME/Pictures/Screenshots'
+
+# TODO: Make the style and colors optional instead of required
         config = '$HOME/.config/openbox/rofi/default/screenshot.rasi'
         style = '$HOME/.config/sweetconfigs-wayland/wofi/menu.css'
         colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'

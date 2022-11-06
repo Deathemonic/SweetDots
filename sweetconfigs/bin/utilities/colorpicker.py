@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-from sys import path as spath
+from os import environ, path
 from pathlib import Path
 from subprocess import run
-from os import path, environ
+from sys import path as spath
+
 from PIL import Image
 
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
 from utils import notify  # type: ignore
-
 
 if __name__ == '__main__':
     session = environ['XDG_SESSION_TYPE']

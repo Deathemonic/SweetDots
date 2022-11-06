@@ -3,21 +3,23 @@
 import gi
 
 gi.require_version('NM', '1.0')
-from gi.repository import GLib, NM
 from locale import getpreferredencoding
-from os import path, environ
+from os import environ, path
 from pathlib import Path
 from shlex import split
 from shutil import which
-from subprocess import run, DEVNULL
 from struct import pack
+from subprocess import DEVNULL, run
 from sys import path as spath
 from time import sleep
 from uuid import uuid4
 
+from gi.repository import NM, GLib
+
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
-from utils import config, notify, check_installed  # type: ignore
+from utils import (check_installed, config, notify,  # type: ignore
+                   path_expander)
 
 
 def command(num_lines: int, promt='Networks', active_lines=None, **kwargs) -> list:
@@ -40,9 +42,9 @@ def command(num_lines: int, promt='Networks', active_lines=None, **kwargs) -> li
             'rofi': ['-password'],
             'wofi': ['-P']
         }
-        cmd.extend(pass_prompts.get(app))
+        cmd.extend(pass_prompts.get(app))  # type: ignore
     if app == 'rofi' or 'wofi':
-        cmd.extend(parameters.get(app))
+        cmd.extend(parameters.get(app))  # type: ignore
     else:
         exit(1)
     return cmd
@@ -67,7 +69,7 @@ def choose_adapter(client):
         case 'rofi':
             sel = run(command(len(devices),
                               promt='Choose Adapter',
-                              config=passer(path.expandvars(conf))),
+                              config=passer(path_expander(conf))),
                       capture_output=True,
                       check=False,
                       env=env,
@@ -76,9 +78,9 @@ def choose_adapter(client):
         case 'wofi':
             sel = run(command(len(devices),
                               promt='Choose Adapter',
-                              config=path.expandvars(conf),
-                              style=path.expandvars(style),
-                              color=path.expandvars(color)),
+                              config=path_expander(conf),
+                              style=path_expander(style),
+                              color=path_expander(color)),
                       capture_output=True,
                       check=False,
                       env=env,
@@ -453,7 +455,7 @@ def get_selection(all_actions):
         case 'rofi':
             sel = run(command(len(inp),
                               active_lines=active_lines,
-                              config=passer(path.expandvars(conf))),
+                              config=passer(path_expander(conf))),
                       capture_output=True,
                       check=False,
                       input='\n'.join(inp),
@@ -462,9 +464,9 @@ def get_selection(all_actions):
         case 'wofi':
             sel = run(command(len(inp),
                               active_lines=active_lines,
-                              config=path.expandvars(conf),
-                              style=path.expandvars(style),
-                              color=path.expandvars(color)),
+                              config=path_expander(conf),
+                              style=path_expander(style),
+                              color=path_expander(color)),
                       capture_output=True,
                       check=False,
                       input='\n'.join(inp),
@@ -607,7 +609,7 @@ def get_passphrase():
         case 'rofi':
             sel = run(command(0,
                               promt='Passphrase',
-                              config=passer(path.expandvars(conf))),
+                              config=passer(path_expander(conf))),
                       stdin=DEVNULL,
                       capture_output=True,
                       check=False,
@@ -615,14 +617,14 @@ def get_passphrase():
         case 'wofi':
             sel = run(command(0,
                               promt='Passphrase',
-                              config=path.expandvars(conf),
-                              style=path.expandvars(style),
-                              color=path.expandvars(color)),
+                              config=path_expander(conf),
+                              style=path_expander(style),
+                              color=path_expander(color)),
                       stdin=DEVNULL,
                       capture_output=True,
                       check=False,
                       encoding=enc).stdout
-    return sel
+    return sel  # type: ignore
 
 
 def delete_connection():
@@ -633,7 +635,7 @@ def delete_connection():
         case 'rofi':
             sel = run(command(len(conn_acts),
                               promt='Choose connection to delete: ',
-                              config=passer(path.expandvars(conf))),
+                              config=passer(path_expander(conf))),
                       capture_output=True,
                       check=False,
                       input=conn_names,
@@ -642,19 +644,19 @@ def delete_connection():
         case 'wofi':
             sel = run(command(len(conn_acts),
                               promt='Choose connection to delete: ',
-                              config=path.expandvars(conf),
-                              style=path.expandvars(style),
-                              color=path.expandvars(color)),
+                              config=path_expander(conf),
+                              style=path_expander(style),
+                              color=path_expander(color)),
                       capture_output=True,
                       check=False,
                       input=conn_names,
                       encoding=enc,
                       env=env).stdout
 
-    if not sel.rstrip():
+    if not sel.rstrip():  # type: ignore
         exit(1)
-    action = [i for i in conn_acts if str(i) == sel.rstrip()]
-    assert len(action) == 1, f'Selection was ambiguous: {str(sel)}'
+    action = [i for i in conn_acts if str(i) == sel.rstrip()]  # type: ignore
+    assert len(action) == 1, f'Selection was ambiguous: {str(sel)}'  # type: ignore
     action[0]()
     loop.run()
 
@@ -755,11 +757,11 @@ def verify_conn(client, result, data):
             notify(
                 app=notify_app,
                 summary='Connection',
-                body=f'Connection to {conn.get_id()} failed',
+                body=f'Connection to {conn.get_id()} failed',  # type: ignore
                 icon=notify_icon,
                 urgent=2
             )
-            conn.delete_async(None, None, None)
+            conn.delete_async(None, None, None)  # type: ignore
         except UnboundLocalError:
             pass
     finally:

@@ -1,10 +1,13 @@
 from dynaconf import Dynaconf
 from gi import require_version
+
 require_version('Notify', '0.7')
-from gi.repository import Notify
+from os import path
 from pathlib import Path
-from psutil import process_iter, NoSuchProcess, AccessDenied, ZombieProcess
 from shutil import which
+
+from gi.repository import Notify
+from psutil import AccessDenied, NoSuchProcess, ZombieProcess, process_iter
 
 current_dir = Path(__file__).resolve().parent
 config = Dynaconf(
@@ -39,3 +42,7 @@ def process_fetch(name: str, pid: bool = False) -> bool | int:
 
 def check_installed(cmd: str):
     return which(cmd) is not None
+
+
+def path_expander(pathname: str):
+    return path.expanduser(path.expandvars(pathname))

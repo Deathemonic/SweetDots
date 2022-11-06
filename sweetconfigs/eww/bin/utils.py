@@ -4,22 +4,23 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('GdkPixbuf', '2.0')
 
-from dynaconf import Dynaconf
-from fast_colorthief import get_dominant_color, get_palette
-from gi.repository import GdkPixbuf, Gio, GLib, Gtk
 from html.parser import HTMLParser
 from io import StringIO
 from json import dumps, loads
 from os import path
 from pathlib import Path, PosixPath
-from PIL import Image, ImageFilter
-from re import search
 from random import choice
-from requests import get, exceptions
-from sys import stdout, stderr
+from re import search
+from sys import stderr, stdout
 from time import sleep
 from typing import Callable, Iterable
 from unicodedata import category
+
+from dynaconf import Dynaconf
+from fast_colorthief import get_dominant_color, get_palette
+from gi.repository import GdkPixbuf, Gio, GLib, Gtk
+from PIL import Image, ImageFilter
+from requests import exceptions, get
 
 current_dir = Path(__file__).resolve().parent
 config = Dynaconf(
@@ -297,7 +298,11 @@ def color_img(imagepath: any, quality: int = 1, colors: int = 10, primary: bool 
     return [rgb_to_hex(c) for c in palette]
 
 
-def blur_img(imagepath: str):
+def blur_img(imagepath: str, save: str, intensity: int):
     image = Image.open(imagepath)
     blur = image.filter(ImageFilter.GaussianBlur(intensity))
     blur.save(save)
+
+
+def path_expander(pathname: str):
+    return path.expanduser(path.expandvars(pathname))

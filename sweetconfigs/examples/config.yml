@@ -1,0 +1,67 @@
+wallpaper: $HOME/.config/sweetconfigs/wallpapers/flowers.png
+xcompositor_config_file: $HOME/.config/sweetconfigs/etc/picom/picom.conf
+
+notification:
+  mako_config_file: $HOME/.config/sweetconfigs/notification/mako/config
+  dunst_config_file: $HOME/.config/sweetconfigs/notification/dunst/dunstrc
+  custom_icon_dir: $HOME/.config/sweetconfigs/notification/icons
+
+terminal:
+  foot_config_file: $HOME/.config/sweetconfigs/terminal/foot/foot.ini
+  alacritty_config_file: $HOME/.config/sweetconfigs/terminal/alacritty/alacritty.yml
+
+gtk:
+  theme: 'SweetPastel'
+  icons: 'Papirus-Dark'
+  cursor: 'Pastel'
+  font: 'Roboto'
+  font_size: 9
+  cursor_size: 10
+  gtk2_dir: $HOME/.gtkrc-2.0
+  gtk3_dir: $HOME/.config/gtk-3.0/settings.ini
+  dark: True
+
+menu:
+  app: rofi
+  terminal: 'alacritty'
+  modi: 'run,ssh,drun,window,filebrowser'
+
+  launcher:
+    config: $HOME/.config/sweetconfigs/menu/rofi/menu.rasi
+    style: $HOME/.config/sweetconfigs/menu/wofi/style.css
+    colors: $HOME/.config/sweetconfigs/menu/wofi/colors
+
+  screenshot:
+    directory: $HOME/Pictures/Screenshots
+    config: $HOME/.config/sweetconfigs/menu/rofi/screenshot.rasi
+
+    icons:
+      now: ''
+      win: ''
+      area: ''
+      timer: ''
+
+  screenrecord:
+    directory: $HOME/Videos/Screenrecord
+    config: $HOME/.config/sweetconfigs/menu/rofi/screenrecord.rasi
+
+    icons:
+      now: ''
+      win: ''
+      area: ''
+      timer: ''
+      audio: ''
+      no_audio: ''
+      stop: ''
+
+  network:
+    config: $HOME/.config/sweetconfigs/menu/rofi/network.rasi
+
+    list_saved: True
+    rofi_highlight: True
+    obscure: True
+    gui_if_available: True
+    compact: False
+    pinentry: False
+    wifi_chars: False
+    rescan_delay: 1

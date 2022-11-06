@@ -11,11 +11,13 @@ from string import ascii_letters, digits
 from subprocess import run
 from sys import path as spath
 from time import sleep
+
 from yad import YAD
 
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
-from utils import config, notify, process_fetch, check_installed  # type: ignore
+from utils import (check_installed, config, notify,  # type: ignore
+                   path_expander, process_fetch)
 
 
 def arguments():
@@ -178,7 +180,7 @@ def command(lines: int, **kwargs):
                  '--color', kwargs.get('color', '')]
     }
     if app == 'rofi' or 'wofi':
-        cmd.extend(parameters.get(app))
+        cmd.extend(parameters.get(app))  # type: ignore
     return cmd
 
 
@@ -205,9 +207,9 @@ def get_selection():
             if app == 'wofi':
                 chosen = run(
                     command(len(Choices),
-                            config=path.expandvars(screenshot.config),
-                            style=path.expandvars(screenshot.style),
-                            color=path.expandvars(screenshot.colors)
+                            config=path_expander(screenshot.config),
+                            style=path_expander(screenshot.style),
+                            color=path_expander(screenshot.colors)
                             ),
                     input=caller,
                     capture_output=True
@@ -215,7 +217,7 @@ def get_selection():
             elif app == 'rofi':
                 chosen = run(
                     command(len(Choices),
-                            config=passer(path.expandvars(screenshot.config))),
+                            config=passer(path_expander(screenshot.config))),
                     input=caller,
                     capture_output=True
                 ).stdout.decode('utf-8').rstrip()
@@ -225,7 +227,7 @@ def get_selection():
             if app == 'wofi' or app == 'rofi':
                 chosen = run(
                     command(len(Choices),
-                            config=passer(path.expandvars(screenshot.config))),
+                            config=passer(path_expander(screenshot.config))),
                     input=caller,
                     capture_output=True
                 ).stdout.decode('utf-8').rstrip()
@@ -233,7 +235,7 @@ def get_selection():
                 exit(1)
 
     # noinspection PyUnboundLocalVariable
-    match chosen:
+    match chosen:  # type: ignore
         case Choices.now.value:
             Capture(session).shot_now()
         case Choices.win.value:
@@ -271,7 +273,7 @@ if __name__ == '__main__':
         ''.join(choice(ascii_letters + digits) for _ in range(10))
     )
     cpath, cfile = (
-        path.expandvars(screenshot.get('directory', '$HOME/Pictures/Screenshots')),
+        path_expander(screenshot.get('directory', '$HOME/Pictures/Screenshots')),
         f'Screenshot_{datetime.now():%Y-%m-%d-%I-%S}_{random}.png'
     )
 

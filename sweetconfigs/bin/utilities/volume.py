@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-from sys import path as spath
+from os import path
 from pathlib import Path
 from subprocess import run
-from os import path
+from sys import path as spath
 
 current_dir = Path(__file__).resolve().parent
 spath.insert(1, f'{current_dir}/../system')
-from utils import config, notify  # type: ignore
+from utils import config, notify, path_expander  # type: ignore
 
 
 def arguments():
@@ -37,7 +37,7 @@ def send(**kwargs):
 if __name__ == '__main__':
     args, icon_path = (
         arguments(),
-        path.expandvars(config.notify_icon_dir)
+        path_expander(config.notify_icon_dir)
     )
 
     if args.up:

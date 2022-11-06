@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from subprocess import run
-from utils import config
-from shutil import which
 from os import path
+from shutil import which
+from subprocess import run
+
+from utils import config, path_expander
 
 
 def execute(commands: tuple, main: str = ''):
@@ -14,8 +15,8 @@ def execute(commands: tuple, main: str = ''):
             case 'gsettings':
                 cmd = ['gsettings', 'set']
         # noinspection PyUnboundLocalVariable
-        cmd.extend(command)
-        return cmd
+        cmd.extend(command)  # type: ignore
+        return cmd  # type: ignore
 
 
 def change_value(keyval, file):
@@ -61,15 +62,15 @@ def settings(**kwargs):
         else:
             configure_dark = [change_value(f'gtk-application-prefer-dark-theme={c}0{c}', file)]
 
-        run(execute(configure_dark, main='sed'))
-        run(execute(configure, main='sed'))
+        run(execute(configure_dark, main='sed'))  # type: ignore
+        run(execute(configure, main='sed'))  # type: ignore
 
-    options(path.expandvars(kwargs['gtk3']))
-    options(path.expandvars(kwargs['gtk2']), '"')
+    options(path_expander(kwargs['gtk3']))
+    options(path_expander(kwargs['gtk2']), '"')
 
-    run(execute(assign, main='gsettings'))
+    run(execute(assign, main='gsettings'))  # type: ignore
     if which('easyeffects'):
-        run(execute(assign_easyeffects, main='gsettings'))
+        run(execute(assign_easyeffects, main='gsettings'))  # type: ignore
 
 
 if __name__ in '__main__':
