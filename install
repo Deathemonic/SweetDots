@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # v5.6.16
 
-# Why this looks bloated so a simple install script? 
+# Why this looks bloated for a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
 
 config_dir="$HOME/.config"
