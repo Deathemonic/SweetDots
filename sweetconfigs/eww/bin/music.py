@@ -1,15 +1,17 @@
 #!/usr/bin/env --split-string=python -u
 
 from gi import require_version
+
 require_version('Playerctl', '2.0')
-from gi.repository import GLib, Playerctl
 from json import dumps, loads
-from pathlib import Path, PosixPath
-from requests import get, exceptions
-from shutil import copyfileobj
 from os import path
-from utils import config, color_img
-from urllib.parse import urlparse, unquote
+from pathlib import Path, PosixPath
+from shutil import copyfileobj
+from urllib.parse import unquote, urlparse
+
+from gi.repository import GLib, Playerctl
+from requests import exceptions, get
+from utils import color_img, config
 
 
 def player_metadata(*args):
@@ -35,15 +37,17 @@ def player_metadata(*args):
     elif len(metadata['xesam:artist']) == 1:
         if metadata['xesam:artist'] != list:
             metadata['xesam:artist'] = metadata['xesam:artist']
-        metadata['xesam:artist'] = metadata['xesam:artist'][0]
+        else:
+            metadata['xesam:artist'] = metadata['xesam:artist'][0]
     elif len(metadata['xesam:artist']) == 2:
         metadata['xesam:artist'] = ' and '.join(metadata['xesam:artist'])
     else:
         if metadata['xesam:artist'] != list:
             metadata['xesam:artist'] = metadata['xesam:artist']
-        metadata['xesam:artist'] = ' and '.join(
-            [', '.join(metadata['xesam:artist'][:-1]), metadata['xesam:artist'][-1]]
-        )
+        else:
+            metadata['xesam:artist'] = ' and '.join(
+                [', '.join(metadata['xesam:artist'][:-1]), metadata['xesam:artist'][-1]]
+            )
 
     if (
             'file://' not in metadata['mpris:artUrl']
