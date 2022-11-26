@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+CFGDIR="$HOME/.config"
+BSPDIR="$CFGDIR/bspwm"
+THEMEDIR="$BSPDIR/themes"
+XFILE="$BSPDIR/xsettingsd"
+
+rofi_cmd="rofi -theme $BSPDIR/rofi/themes/themes.rasi"
+
+# Themes
+random=" Random"
+default=" Default"
+theme_1=" Beach"
+theme_2=" Blade"
+theme_3=" Bouquet"
+theme_4=" Cyberpunk"
+theme_5=" Dracula"
+theme_6=" Flowers"
+theme_7=" Forest"
+theme_8=" Groot"
+theme_9=" Gruvbox"
+theme_10=" Hack"
+theme_11=" Keyboards"
+theme_12=" Light"
+theme_13=" Manhattan"
+theme_14=" Nordic"
+theme_15=" Pastel"
+theme_16=" Rick"
+theme_17=" Slime"
+theme_18=" Spark"
+theme_19=" Tealize"
+theme_20=" Wave"
+
+# Variable passed to rofi
+options="$random\n$default\n\n$theme_1\n$theme_2\n$theme_3\n$theme_4\n$theme_5\
+\n$theme_6\n$theme_7\n$theme_8\n$theme_9\n$theme_10\
+\n$theme_11\n$theme_12\n$theme_13\n$theme_14\n$theme_15\
+\n$theme_16\n$theme_17\n$theme_18\n$theme_19\n$theme_20"
+
+## Apply theme
+set_style() {
+	# apply color-scheme
+	cat "$THEMEDIR"/${1}.bash > "$THEMEDIR"/current.bash
+	echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
+	
+	# set gtk theme, icons and cursor
+	if [[ `pidof xsettingsd` ]]; then
+		sed -i -e "s|Net/ThemeName .*|Net/ThemeName \"$2\"|g" ${XFILE}
+		sed -i -e "s|Net/IconThemeName .*|Net/IconThemeName \"$3\"|g" ${XFILE}
+		sed -i -e "s|Gtk/CursorThemeName .*|Gtk/CursorThemeName \"$4\"|g" ${XFILE}
+	else
+		sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=\"$2\"/g" ${HOME}/.gtkrc-2.0
+		sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=\"$3\"/g" ${HOME}/.gtkrc-2.0
+		sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=\"$4\"/g" ${HOME}/.gtkrc-2.0
+		
+		sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=$2/g" ${CFGDIR}/gtk-3.0/settings.ini
+		sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=$3/g" ${CFGDIR}/gtk-3.0/settings.ini
+		sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=$4/g" ${CFGDIR}/gtk-3.0/settings.ini
+	fi
+	
+	# reload bspwm
+	bspc wm -r
+}
+
+## Apply random theme
+random_theme() {
+	## Set you wallpaper directory here.
+	WALLDIR="`xdg-user-dir PICTURES`/wallpapers"
+	WALFILE="$HOME/.cache/wal/colors.sh"
+	
+	if [[ `which wal` ]]; then
+		dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/hourglass.png "Generating Colorscheme. Please wait..."
+		wal -q -n -s -t -e -i "$WALLDIR"
+		if [[ "$?" != 0 ]]; then
+			dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "Failed to generate colorscheme."
+			exit
+		fi
+		if [[ -f "$WALFILE" ]]; then
+			cat "$WALFILE" > "$THEMEDIR"/current.bash
+			echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
+			bspc wm -r
+		fi
+	else
+		dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' is not installed."
+	fi
+}
+
+chosen="$(echo -e "$options" | $rofi_cmd -p "Available themes : (20 + ∞)" -dmenu -selected-row 0)"
+case $chosen in
+    $random)
+        random_theme
+        ;;
+    $default)
+        set_style  'nord' 'Arc-Dark' 'Arc-Circle' 'Qogirr'
+        ;;
+    $theme_1)
+        set_style  'beach' 'Arc-Lighter' 'Arc-Circle' 'Fluent'
+        ;;
+    $theme_2)
+        set_style  'blade' 'Blade' 'Nordic-Folders' 'LyraS'
+        ;;
+    $theme_3)
+        set_style  'bouquet' 'Juno-mirage' 'Luna-Dark' 'Future-dark'
+        ;;
+    $theme_4)
+        set_style  'cyberpunk' 'Cyberpunk' 'Archcraft-Dark' 'LyraB'
+        ;;
+    $theme_5)
+        set_style  'dracula' 'Dracula' 'Nordic-Folders' 'Sweet'
+        ;;
+    $theme_6)
+        set_style  'flowers' 'Kripton' 'Zafiro' 'Fluent-dark'
+        ;;
+    $theme_7)
+        set_style  'forest' 'Adapta-Nokto' 'Luv-Folders-Dark' 'Vimix'
+        ;;
+    $theme_8)
+        set_style  'groot' 'Groot' 'Luna-Dark' 'Pear'
+        ;;
+    $theme_9)
+        set_style  'gruvbox' 'Gruvbox' 'Luna-Dark' 'Future-dark'
+        ;;
+    $theme_10)
+        set_style  'hack' 'Hack' 'Hack' 'LyraB'
+        ;;
+    $theme_11)
+        set_style  'keyboards' 'Sweet-Dark' 'Zafiro-Purple' 'Sweet'
+        ;;
+    $theme_12)
+        set_style  'light' 'White' 'Arc-Circle' 'Fluent-dark'
+        ;;
+    $theme_13)
+        set_style  'manhattan' 'Manhattan' 'Luv-Folders-Dark' 'Vimix-dark'
+        ;;
+    $theme_14)
+        set_style  'nordic' 'Nordic' 'Nordic-Folders' 'Qogirr-dark'
+        ;;
+    $theme_15)
+        set_style  'pastel' 'White' 'Qogir' 'Qogirr-dark'
+        ;;
+    $theme_16)
+        set_style  'rick' 'Rick' 'Zafiro' 'Vimix-dark'
+        ;;
+    $theme_17)
+        set_style  'slime' 'Slime' 'Luv-Folders' 'Qogirr-dark'
+        ;;
+    $theme_18)
+        set_style  'spark' 'Spark' 'Luv-Folders' 'Vimix'
+        ;;
+    $theme_19)
+        set_style  'tealize' 'Juno-palenight' 'Luv-Folders-Dark' 'Vimix'
+        ;;
+    $theme_20)
+        set_style  'wave' 'Wave' 'Luv-Folders-Dark' 'Vimix'
+        ;;
+esac

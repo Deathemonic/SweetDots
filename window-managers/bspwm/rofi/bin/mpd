@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+DIR="$HOME/.config/bspwm"
+rofi_cmd="rofi -theme $DIR/rofi/themes/mpd.rasi"
+
+button_music=''
+button_play=''
+button_pause=''
+button_stop=''
+button_next=''
+button_previous=''
+button_repeat=''
+button_shuffle=''
+button_error=''
+
+# Colors
+active=""
+urgent=""
+
+# Gets the current status of mpd
+status="$(mpc status)"
+
+# Defines the Play / Pause option content
+if [[ $status == *"[playing]"* ]]; then
+	toggle="$button_pause"
+else
+	toggle="$button_play"
+fi
+
+# Display if repeat mode is on / off
+tog_repeat="$button_repeat"
+if [[ $status == *"repeat: on"* ]]; then
+    active="-a 4"
+elif [[ $status == *"repeat: off"* ]]; then
+    urgent="-u 4"
+else
+    tog_repeat="$button_error"
+fi
+
+# Display if random mode is on / off
+tog_random="$button_shuffle"
+if [[ $status == *"random: on"* ]]; then
+    [ -n "$active" ] && active+=",5" || active="-a 5"
+elif [[ $status == *"random: off"* ]]; then
+    [ -n "$urgent" ] && urgent+=",5" || urgent="-u 5"
+else
+    tog_random="$button_error"
+fi
+
+# Variable passed to rofi
+options="$toggle\n$button_stop\n$button_previous\n$button_next\n$tog_repeat\n$tog_random"
+
+# Get the current playing song
+current=$(mpc current)
+# If mpd isn't running it will return an empty string, we don't want to display that
+if [[ -z "$current" ]]; then
+    current="None"
+fi
+
+# Spawn the mpd menu with the "Play / Pause" entry selected by default
+chosen="$(echo -e "$options" | $rofi_cmd -p "$current" -dmenu $active $urgent -selected-row 0)"
+case $chosen in
+    $button_previous)
+        mpc -q prev && kunst --size 60x60 --silent
+        ;;
+    $toggle)
+        mpc -q toggle && kunst --size 60x60 --silent
+        ;;
+    $button_stop)
+        mpc -q stop
+        ;;
+    $button_next)
+        mpc -q next && kunst --size 60x60 --silent
+        ;;
+    $tog_repeat)
+        mpc -q repeat
+        ;;
+    $tog_random)
+        mpc -q random
+        ;;
+esac

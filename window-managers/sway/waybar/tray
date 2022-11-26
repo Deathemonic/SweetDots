@@ -1,0 +1,13 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 40,
+    "mode": "hide",
+
+    "modules-right": ["tray"],
+
+    "tray": {
+        "icon-size": 20,
+        "spacing": 10
+    }
+}

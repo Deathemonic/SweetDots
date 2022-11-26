@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Kill already running process
+_ps=(waybar mako mpd mpDris2 polkit-gnome)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Polkit agent
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Set wallpaper
+swaybg --output '*' --mode fill --image ~/.config/hypr/wallpapers/wallpaper.jpg &
+
+# Apply themes
+ ~/.config/sweetconfigs-wayland/bin/system/gtk &
+
+# Lauch notification daemon (mako)
+~/.config/hypr/scripts/notifications &
+
+# Lauch statusbar (waybar)
+~/.config/hypr/scripts/statusbar &
+
+# Start mpd
+exec mpd &
+exec mpDris2 &

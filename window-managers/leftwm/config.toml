@@ -1,0 +1,485 @@
+modkey = "Mod4"
+mousekey = "Mod4"
+workspaces = []
+tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+layouts = [
+    "Fibonacci", 
+    "MainAndVertStack", 
+    "MainAndHorizontalStack", 
+    "MainAndDeck", 
+    "GridHorizontal", 
+    "EvenHorizontal", 
+    "EvenVertical", 
+    "LeftMain", 
+    "CenterMain", 
+    "CenterMainBalanced", 
+    "CenterMainFluid", 
+    "Monocle", 
+    "RightWiderLeftStack", 
+    "LeftWiderRightStack"
+]
+scratchpad = []
+window_rules = [
+    {window_class = "lxappearance", spawn_floating = true},
+    {window_class = "viewnior", spawn_floating = true},
+    {window_class = "feh", spawn_floating = true},
+]
+layout_mode = "Workspace"
+insert_behavior = "Bottom"
+disable_current_tag_swap = false
+disable_tile_drag = false
+disable_window_snap = true
+focus_behaviour = "Sloppy"
+focus_new_windows = true
+sloppy_mouse_follows_focus = true
+
+# Terminal
+[[keybind]]
+command = "Execute"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml"
+modifier = ["modkey"]
+key = "Return"
+
+# Apps (GUI)
+[[keybind]]
+command = "Execute"
+value = "nautilus"
+modifier = ["modkey"]
+key = "e"
+[[keybind]]
+command = "Execute"
+value = "gedit"
+modifier = ["modkey", "Shift"]
+key = "t"
+[[keybind]]
+command = "Execute"
+value = "firefox"
+modifier = ["modkey", "Shift"]
+key = "w"
+
+# Apps (TUI)
+[[keybind]]
+command = "Execute"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e nvim"
+modifier = ["modkey", "Alt"]
+key = "v"
+[[keybind]]
+command = "Execute"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e ranger"
+modifier = ["modkey", "Alt"]
+key = "r"
+[[keybind]]
+command = "Execute"
+value = "alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml -e htop"
+modifier = ["modkey", "Alt"]
+key = "h"
+
+# Menus
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher drun"
+modifier = ["modkey"]
+key = "a"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher run"
+modifier = ["modkey"]
+key = "r"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher ssh"
+modifier = ["modkey"]
+key = "s"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher window"
+modifier = ["modkey"]
+key = "w"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher filebrowser"
+modifier = ["modkey", "Shift"]
+key = "f"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher emoji"
+modifier = ["modkey", "Shift"]
+key = "e"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/launcher clipboard"
+modifier = ["modkey", "Shift"]
+key = "c"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/power"
+modifier = ["modkey"]
+key = "p"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/network"
+modifier = ["modkey", "Shift"]
+key = "n"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/menu/bluetooth"
+modifier = ["modkey", "Shift"]
+key = "b"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-rofi"
+modifier = ["modkey", "Shift"]
+key = "s"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-rofi"
+modifier = ["modkey", "Shift"]
+key = "r"
+
+# Widgets
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel"
+modifier = ["modkey", "Alt"]
+key = "c"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel"
+modifier = ["modkey", "Alt"]
+key = "i"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/widgets/lockscreen"
+modifier = ["modkey", "Alt"]
+key = "l"
+
+# System
+# Color Picker
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/color-picker"
+modifier = ["modkey"]
+key = "g"
+# Take a screenshot
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen"
+modifier = [""]
+key = "Print"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-window"
+modifier = ["modkey", "Alt"]
+key = "w"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-area"
+modifier = ["modkey", "Alt"]
+key = "a"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in3"
+modifier = ["modkey", "Alt", "Control"]
+key = "c"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-in10"
+modifier = ["modkey", "Alt", "Shift"]
+key = "c"
+# Capture the screen
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture"
+modifier = ["modkey", "Alt"]
+key = "r"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-stop"
+modifier = ["modkey", "Alt"]
+key = "s"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-noaudio"
+modifier = ["modkey", "Alt", "Shift"]
+key = "r"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screebrecord capture-area-noaudio"
+modifier = ["modkey", "Alt", "Shift"]
+key = "a"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-area"
+modifier = ["modkey", "Alt", "Control"]
+key = "a"
+# Function Keys
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/brightness up"
+modifier = []
+key = "XF86XK_MonBrightnessUp"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/brightness down"
+modifier = []
+key = "XF86XK_MonBrightnessDown"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/volume up"
+modifier = []
+key = "XF86XK_AudioRaiseVolume"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/volume down"
+modifier = []
+key = "XF86XK_AudioLowerVolume"
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/bin/utilities/volume mute"
+modifier = []
+key = "XF86XK_AudioMute"
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify,%any,firefox,chromium,brave,mpd previous"
+modifier = []
+key = "XF86XK_AudioPrev"
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify,%any,firefox,chromium,brave,mpd next"
+modifier = []
+key = "XF86XK_AudioNext"
+[[keybind]]
+command = "Execute"
+value = "playerctl -p spotify,%any,firefox,chromium,brave,mpd play-pause"
+modifier = []
+key = "XF86XK_AudioPlay"
+[[keybind]]
+command = "Execute"
+value = "playerctl -a stop"
+modifier = []
+key = "XF86XK_AudioStop"
+
+# Window Manager
+# Close App
+[[keybind]]
+command = "CloseWindow"
+value = ""
+modifier = ["modkey"]
+key = "x"
+
+# Reload
+[[keybind]]
+command = "SoftReload"
+value = ""
+modifier = ["Control", "Shift"]
+key = "r"
+
+# Quit
+[[keybind]]
+command = "Execute"
+value = "loginctl kill-session $XDG_SESSION_ID"
+modifier = ["modkey", "Shift"]
+key = "q"
+
+# Move Windows
+[[keybind]]
+command = "MoveWindowUp"
+value = ""
+modifier = ["modkey", "Shift"]
+key = "k"
+[[keybind]]
+command = "MoveWindowDown"
+value = ""
+modifier = ["modkey", "Shift"]
+key = "j"
+[[keybind]]
+command = "MoveWindowUp"
+value = ""
+modifier = ["modkey", "Shift"]
+key = "Up"
+[[keybind]]
+command = "MoveWindowDown"
+value = ""
+modifier = ["modkey", "Shift"]
+key = "Down"
+[[keybind]]
+command = "MoveWindowTop"
+value = ""
+modifier = ["modkey", "Shift"]
+key = "l"
+
+# Focus Window
+[[keybind]]
+command = "FocusWindowUp"
+value = ""
+modifier = ["modkey"]
+key = "k"
+[[keybind]]
+command = "FocusWindowDown"
+value = ""
+modifier = ["modkey"]
+key = "j"
+[[keybind]]
+command = "FocusWindowUp"
+value = ""
+modifier = ["modkey"]
+key = "Up"
+[[keybind]]
+command = "FocusWindowDown"
+value = ""
+modifier = ["modkey"]
+key = "Down"
+
+# Focus Workspaces
+[[keybind]]
+command = "FocusWorkspaceNext"
+value = ""
+modifier = ["modkey"]
+key = "l"
+[[keybind]]
+command = "FocusWorkspacePrevious"
+value = ""
+modifier = ["modkey"]
+key = "h"
+[[keybind]]
+command = "FocusWorkspaceNext"
+value = ""
+modifier = ["modkey"]
+key = "Right"
+[[keybind]]
+command = "FocusWorkspacePrevious"
+value = ""
+modifier = ["modkey"]
+key = "Left"
+
+# Change Layout
+[[keybind]]
+command = "NextLayout"
+value = ""
+modifier = ["modkey", "Control"]
+key = "k"
+[[keybind]]
+command = "PreviousLayout"
+value = ""
+modifier = ["modkey", "Control"]
+key = "j"
+[[keybind]]
+command = "NextLayout"
+value = ""
+modifier = ["modkey", "Control"]
+key = "Up"
+[[keybind]]
+command = "PreviousLayout"
+value = ""
+modifier = ["modkey", "Control"]
+key = "Down"
+
+# Workspaces
+[[keybind]]
+command = "MoveToLastWorkspace"
+value = ""
+modifier = ["modkey", "Control"]
+key = "w"
+[[keybind]]
+command = "SwapTags"
+value = ""
+modifier = ["modkey"]
+key = "w"
+# Go to Tag
+[[keybind]]
+command = "GotoTag"
+value = "1"
+modifier = ["modkey"]
+key = "1"
+[[keybind]]
+command = "GotoTag"
+value = "2"
+modifier = ["modkey"]
+key = "2"
+[[keybind]]
+command = "GotoTag"
+value = "3"
+modifier = ["modkey"]
+key = "3"
+[[keybind]]
+command = "GotoTag"
+value = "4"
+modifier = ["modkey"]
+key = "4"
+[[keybind]]
+command = "GotoTag"
+value = "5"
+modifier = ["modkey"]
+key = "5"
+[[keybind]]
+command = "GotoTag"
+value = "6"
+modifier = ["modkey"]
+key = "6"
+[[keybind]]
+command = "GotoTag"
+value = "7"
+modifier = ["modkey"]
+key = "7"
+[[keybind]]
+command = "GotoTag"
+value = "8"
+modifier = ["modkey"]
+key = "8"
+[[keybind]]
+command = "GotoTag"
+value = "9"
+modifier = ["modkey"]
+key = "9"
+# Move to Tag
+[[keybind]]
+command = "MoveToTag"
+value = "1"
+modifier = ["modkey", "Shift"]
+key = "1"
+[[keybind]]
+command = "MoveToTag"
+value = "2"
+modifier = ["modkey", "Shift"]
+key = "2"
+[[keybind]]
+command = "MoveToTag"
+value = "3"
+modifier = ["modkey", "Shift"]
+key = "3"
+[[keybind]]
+command = "MoveToTag"
+value = "4"
+modifier = ["modkey", "Shift"]
+key = "4"
+[[keybind]]
+command = "MoveToTag"
+value = "5"
+modifier = ["modkey", "Shift"]
+key = "5"
+[[keybind]]
+command = "MoveToTag"
+value = "6"
+modifier = ["modkey", "Shift"]
+key = "6"
+[[keybind]]
+command = "MoveToTag"
+value = "7"
+modifier = ["modkey", "Shift"]
+key = "7"
+[[keybind]]
+command = "MoveToTag"
+value = "8"
+modifier = ["modkey", "Shift"]
+key = "8"
+[[keybind]]
+command = "MoveToTag"
+value = "9"
+modifier = ["modkey", "Shift"]
+key = "9"
+
+[[keybind]]
+command = "Execute"
+value = "$HOME/.config/sweetconfigs-xorg/eww/scripts/check_fullscreen"
+modifier = []
+key = "F11"

@@ -1,0 +1,28 @@
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+;;
+;; System Variables (Edit according to your system)
+;;
+;; Warning : DO NOT DELETE THIS FILE
+;;
+;; Run `ls -1 /sys/class/power_supply/` to list list batteries and adapters.
+;;
+;; Run `ls -1 /sys/class/backlight/` to list available graphics cards.
+;;
+;; Run `ip link | awk '/state UP/ {print $2}' | tr -d :` to get active network interface.
+;;
+;; Polybar Variables For Modules :
+;; card = ${system.sys_graphics_card}
+;; battery = ${system.sys_battery}
+;; adapter = ${system.sys_adapter}
+;; interface = ${system.sys_network_interface}
+
+[system]
+sys_adapter = ACAD
+sys_battery = BAT1
+sys_graphics_card = amdgpu_bl0
+sys_network_interface = wlan0
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_

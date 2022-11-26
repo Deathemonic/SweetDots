@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Warning: Do not delete or modify anything here unless you know what your doing
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# Set Background
+if [ -x "$(command -v feh)" ]; then
+  feh --bg-scale $SCRIPTPATH/down.jpg
+fi
+
+echo "UnloadTheme" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
+
+pkill picom
+pkill polybar
+pkill dunst
+pkill mpd
+pkill mpDris2
+pkill xfce4-power-manager

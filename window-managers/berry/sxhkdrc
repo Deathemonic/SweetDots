@@ -1,0 +1,117 @@
+# Terminal
+super + Return
+    alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml
+
+# GUI Apps
+super + shift {t,w}
+    {gedit,firefox}
+super + e
+    nautilus
+
+# TUI Apps
+super + alt + {v,e,h}
+    alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml-e {nvim,ranger,htop}
+
+# Menus
+super + {a,r,s,w}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window}
+super + p
+    $HOME/.config/sweetconfigs-xorg/bin/menu/power
+super + shift+ {e,c,f}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard, filebrowser}
+super + shift + {n,b}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
+super + shift + {s,r}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/{screenshot shot-rofi,screenrecord capture-rofi}
+
+# Widgets
+super + alt + c
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel
+super + alt + i
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel
+super + alt + l
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/lockscreen
+
+# System
+# Color Picker
+super + g
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/color-picker
+# Take a screenshot
+Print
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen
+super + alt + {w,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-window, shot-area}
+super + alt + {ctrl,shift} + c
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-in3, shot-in10}
+# Capture the screen
+super + alt + {r,s}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture, capture-stop}
+super + alt + shift + {r,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture-noaudio, capture-area-noaudio}
+super + alt + ctrl + a
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-area
+# Function Keys
+XF86MonBrightness{Up,Down}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/brightness{ up, down}
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/volume{ up, down, mute}
+XF86Audio{Next,Prev,Play}
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd{ next, previous, play-pause}
+XF86AudioStop
+    playerctl -a stop
+# Reload Keybinds
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Window Manager
+# Grow/Shink Window
+super + shift +  {Left, Down, Up, Right}
+    berryc window_resize {-50 0, 0 50, 0 -50, 50 0}
+super + ctrl + {Left, Down, Up, Right}
+    berryc window_move {-50 0, 0 50, 0 -50, 50 0}
+
+# Tiling
+super + Left
+    berryc snap_left
+super + Right
+    berryc snap_right
+super + Up
+    berryc window_monocle
+super + Down
+    berryc window_resize_absolute 1000 650 && berryc window_center
+
+# Go to Tag
+super + {1-9}
+    berryc switch_workspace {0-9}
+
+# Move to Tag
+super + shift + {1-9}
+    berryc send_to_workspace {0-9}
+
+# Fullscreen
+F11
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/fullscreen
+
+# Toggle Titlebar
+super + d
+    berryc toggle_decorations
+
+# Alt Tab
+alt + Tab
+    berryc cycle_focus
+
+# Center Focused Window
+super + c
+    berryc window_center
+
+# Close Window
+super + x
+    berryc window_close
+
+# Quit
+super + shift + q
+    berryc quit
+
+# Mouse Buttons
+~button1
+    berryc pointer_focus

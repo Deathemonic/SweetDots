@@ -1,0 +1,153 @@
+# Terminal
+super + Return
+    alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml
+
+# GUI Apps
+super + shift {t,w}
+    {gedit,firefox}
+super + e
+    nautilus
+
+# TUI Apps
+super + alt + {v,e,h}
+    alacritty --config-file $HOME/.config/sweetconfigs-xorg/alacritty/alacritty.yml-e {nvim,ranger,htop}
+
+# Menus
+super + {a,r,s,w}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ drun, run, ssh, window}
+super + p
+    $HOME/.config/sweetconfigs-xorg/bin/menu/power
+super + shift+ {e,c,f}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/launcher{ emoji, clipboard, filebrowser}
+super + shift + {n,b}
+    $HOME/.config/sweetconfigs-xorg/bin/menu/{network,bluetooth}
+super + shift + {s,r}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/{screenshot shot-rofi,screenrecord capture-rofi}
+
+# Widgets
+super + alt + c
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/control-panel
+super + alt + i
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/info-panel
+super + alt + l
+    $HOME/.config/sweetconfigs-xorg/bin/widgets/lockscreen
+
+# System
+# Color Picker
+super + g
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/color-picker
+# Take a screenshot
+Print
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot shot-screen
+super + alt + {w,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-window, shot-area}
+super + alt + {ctrl,shift} + c
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenshot{ shot-in3, shot-in10}
+# Capture the screen
+super + alt + {r,s}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture, capture-stop}
+super + alt + shift + {r,a}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord{ capture-noaudio, capture-area-noaudio}
+super + alt + ctrl + a
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/screenrecord capture-area
+# Function Keys
+XF86MonBrightness{Up,Down}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/brightness{ up, down}
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    $HOME/.config/sweetconfigs-xorg/bin/utilities/volume{ up, down, mute}
+XF86Audio{Next,Prev,Play}
+    playerctl -p spotify,%any,firefox,chromium,brave,mpd{ next, previous, play-pause}
+XF86AudioStop
+    playerctl -a stop
+# Reload Keybinds
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Window Manager
+# Close App
+super + {_,shift + }x
+	bspc node -{c,k}
+
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# kill window
+ctrl + alt + Escape
+    xkill
+
+# Quit/Restart sweetconfigs-xorg
+ctrl + shift + {q,r}
+	bspc {quit,wm -r}
+	
+# Split horizontal, vertical or cancel
+super + {h,v,q}
+	bspc node -p {east,south,cancel}
+
+# Fullscreen or Monocle
+F11
+    $HOME/.config/sweetconfigs-xorg/eww/scripts/check_fullscreen
+
+# Toggle beetwen floating & tiled
+super + space
+    bspc node -t "~"{floating,tiled}
+
+# Pseudo Tiled & tiled mode
+super + alt + {p,t}
+    bspc node -t "~"{pseudo_tiled,tiled}
+
+# Set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# Send the window to another edge of the screen
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Change focus to next window, including floating window
+alt + {_,shift + }Tab
+	bspc node -f {next.local,prev.local}
+
+# Switch workspace
+ctrl + alt + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+# Switch to last opened workspace
+super + {Tab,grave}
+	bspc {node,desktop} -f last
+
+# Send focused window to another workspace
+super + {_,shift + }{1-8}
+	bspc {desktop -f,node -d} '^{1-8}'
+
+# Expanding windows
+super + control + {Left,Right,Up,Down}
+	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+	
+# Shrinking windows
+super + alt + {Left,Right,Up,Down}
+	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+	
+# Move floating windows
+alt + shift + {Left,Down,Up,Right}
+	bspc node -v {20 0,0 20,0 -20,-20 0}
+
+# Hide/Unhide Window
+super + shift + i
+    winmask
+
+# Preselect the direction
+super + ctrl + alt +{Left,Right,Up,Down}
+	bspc node -p {west,east,north,south}
+
+# Preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# Cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel

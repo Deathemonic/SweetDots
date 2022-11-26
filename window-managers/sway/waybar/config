@@ -1,0 +1,112 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+
+    "modules-center": ["sway/workspaces", "custom/status", "custom/prev", "custom/playpause", "custom/next", "pulseaudio", "backlight", "bluetooth", "network", "clock", "custom/power"],
+
+    "sway/workspaces": {
+		"disable-scroll": false,
+		"all-outputs": true,
+		"format": "{icon}",
+	 	"persistent_workspaces": {
+	 		"1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+	    },
+        "format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十"
+        }
+    },
+
+    "custom/prev": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "$HOME/.config/sway/bin/waybar/status previous"
+    },
+
+    "custom/playpause": {
+        "escape": true,
+        "return-type": "json",
+        "tooltip": false,
+        "interval": 1,
+        "on-click": "$HOME/.config/sway/bin/waybar/status toggle",
+        "exec": "$HOME/.config/sway/bin/waybar/playpause 2> /dev/null"
+    },
+
+    "custom/next": {
+        "tooltip": false,
+        "format": "",
+        "on-click": "$HOME/.config/sway/bin/waybar/status next"
+    },
+
+    "custom/status": {
+        "escape": true,
+        "exec": "$HOME/.config/sway/bin/waybar/scroll 2> /dev/null"
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": " Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pamixer -t"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", ""],
+        "on-scroll-up": "brightnessctl set 5:-5%+ -q",
+        "on-scroll-down": "brightnessctl set 5:-5%- -q"
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-disabled": "",
+        "format-connected": " {num_connections} Connected",
+	    "tooltip-format": "{status}",
+        "on-click": "$HOME/.config/sway/bin/wofi/bluetooth"
+    },
+
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} | {gwaddr} | {signalStrength}%",
+        "format-linked": "{ifname}",
+        "format-disconnected": " Offline",
+        "format-alt": " {bandwidthDownBits} | {bandwidthUpBits}",
+        "on-click-right": "$HOME/.config/sway/bin/wofi/network.py"
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": " {:%I:%M %p}",
+        "format-alt": " {:%m-%d-%y}"
+    },
+
+    "custom/power": {
+        "tooltip": false,
+        "format": ""
+    }
+}

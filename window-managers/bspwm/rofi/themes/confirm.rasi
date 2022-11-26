@@ -1,0 +1,27 @@
+/* Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com> */
+/* Everyone is permitted to copy and distribute copies of this file under GNU-GPL3 */
+
+@import "font.rasi"
+@import "colors.rasi"
+
+* {
+    background-color:       @background;
+    text-color:             @foreground;
+}
+
+window {
+    width:      			200px;
+    padding:    			20px;
+    border:					1px;
+    border-radius:          0px;
+    border-color:           @selected;
+    location:               center;
+    x-offset:               0;
+    y-offset:               -4%;
+}
+
+entry {
+    expand: 				true;
+    width: 					150px;
+    text-color:				@selected;
+}

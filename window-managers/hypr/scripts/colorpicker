@@ -1,0 +1,14 @@
+#!/bin/bash
+
+color=$(hyprpicker)
+image=/tmp/${color}.png
+
+echo $color | wl-copy
+convert -size 48x48 xc:"$color" ${image}
+notify-send -u low -a "Color Picker" -i ${image} "$color" "Copied to Clipboard" -h string:x-canonical-private-synchronous:sys-notify
+
+#if [[ $color ]]; then
+#  echo ${color} | tr -d "\n" | wl-copy
+#  convert -size 48x48 xc:"$color" ${image}
+#  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i ${image} "$color, copied to clipboard."
+#fi

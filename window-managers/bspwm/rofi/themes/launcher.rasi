@@ -1,0 +1,185 @@
+/* Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com> */
+/* Everyone is permitted to copy and distribute copies of this file under GNU-GPL3 */
+
+configuration {
+    location: 						0;
+    fixed-num-lines: 				true;
+    show-icons: 					false;
+    sidebar-mode: 					true;
+    scroll-method: 					1;
+    window-format: 					"[{w}] ··· {c} ···   {t}";
+    click-to-exit: 					true;
+    combi-hide-mode-prefix: 		false;
+    display-window: 				"";
+    display-windowcd: 				"";
+    display-run: 					"";
+    display-ssh: 					"";
+    display-drun: 					"";
+    display-combi: 					"";
+}
+
+@import "font.rasi"
+@import "colors.rasi"
+
+* {
+    background-color:             	@background;
+}
+
+window {
+    border: 						1px;
+    border-color: 					@selected;
+    border-radius: 					0px;
+    width: 							500px;
+    height: 						0px;
+}
+
+prompt {
+    spacing: 						0;
+    border: 						0;
+    background-color:             	@highlight;
+    text-color: 					@background;
+    padding:    					6px 10px 6px 10px;
+}
+
+textbox-prompt-colon {
+    expand: 						false;
+    str: 							"";
+    padding:    					6px 4px 6px 4px;
+    text-color: 					inherit;
+}
+
+entry {
+    spacing:    					0;
+    expand:                         true;
+    horizontal-align:               0;
+    text-color: 					@foreground;
+    placeholder-color:              @foreground;
+    placeholder:                    "Search...";
+    padding:    					6px 2px 6px 2px;
+    border: 						0px 0px 1px 0px;
+    border-color: 					@selected;
+    border-radius: 					0px;
+}
+
+case-indicator {
+    spacing:    					0;
+    text-color: 					@foreground;
+}
+
+inputbar {
+    spacing:    					0px;
+    text-color: 					@foreground;
+    border: 						0px;
+    border-color: 					@selected;
+    border-radius: 					0px;
+    children: 						[ prompt,textbox-prompt-colon,entry ];
+}
+
+mainbox {
+    border: 						0px;
+    border-color: 					@selected;
+    spacing: 						6px;
+    padding: 						10px;
+}
+
+listview {
+    lines:							7;
+    columns:						1;
+    fixed-height: 					0;
+    border: 						0px;
+    border-color: 					@foreground;
+    spacing: 						2px;
+    scrollbar: 						false;
+    padding: 						4px 0px 0px;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element {
+    border: 						0px;
+    padding: 						7px;
+}
+element normal.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element normal.urgent {
+    background-color: 				@background;
+    text-color:       				@off;
+}
+element normal.active {
+    background-color: 				@background;
+    text-color:       				@on;
+}
+element selected.normal {
+    background-color: 				@selected;
+    text-color:       				@background;
+    border: 						0px;
+    border-color: 					@selected;
+}
+element selected.urgent {
+    background-color: 				@background;
+    text-color:       				@off;
+}
+element selected.active {
+    background-color: 				@background;
+    text-color:       				@selected;
+}
+element alternate.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.urgent {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.active {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+
+sidebar {
+    border:       					0px;
+    border-color: 					@selected;
+    border-radius: 					0px;
+}
+
+button {
+    margin: 						5px 0px 0px 0px;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    padding: 						7px;
+    text-color: 					@foreground;
+    border: 						0px;
+    border-radius: 					0px;
+    border-color: 					@selected;
+}
+
+button selected {
+    background-color:             	@selected;
+    text-color: 					@background;
+    border: 						0px;
+    border-radius: 					0px;
+    border-color: 					@selected;
+}
+
+scrollbar {
+    width:        					4px;
+    border:       					0px;
+    handle-color: 					@foreground;
+    handle-width: 					8px;
+    padding:      					0;
+}
+
+message {
+    border: 						0px;
+    border-color: 					@selected;
+    padding: 						1px;
+}
+
+textbox {
+    text-color: 					@foreground;
+}

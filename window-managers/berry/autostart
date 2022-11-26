@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Set decoration geometry
+berryc border_width 		0
+berryc inner_border_width 	4
+berryc title_height 		30
+berryc edge_gap 		    70 5 10 10
+
+# Set decoration colors
+berryc focus_color 		    FFDEDE
+berryc unfocus_color 		A3CBE7
+berryc inner_focus_color 	FFDEDE
+berryc inner_unfocus_color 	A3CBE7
+berryc text_focus_color 	1B1F23
+berryc text_unfocus_color 	1B1F23
+
+# Options
+berryc set_font 		    "JetbrainsMonoNerdFont-10"
+berryc smart_place 		    "true"
+berryc draw_text 		    "true"
+berryc edge_lock 		    "true"
+berryc json_status 		    "true"
+berryc decorate_new 	    "true"
+berryc pointer_interval      0
+berryc manage 			     Dialog|Toolbar|Menu|Splash|Utility 
+
+# Autostart (Important: Do not delete or modify unless you know what your doing)
+$HOME/.config/sweetconfigs-xorg/bin/system/autostart
+sxhkd -c $HOME/.config/berry/sxhkdrc &
