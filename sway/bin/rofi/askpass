@@ -1,8 +1,0 @@
-#!/bin/bash
-
-rofi -dmenu\
-     -password\
-     -i\
-     -no-fixed-num-lines\
-     -p "User Password: "\
-     -theme $HOME/.config/berry/rofi/askpass.rasi &
