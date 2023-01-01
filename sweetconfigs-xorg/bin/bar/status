@@ -33,12 +33,12 @@ fi
 if [[ "$1" == "scroll-music" ]]; then
     echo $player_status
 else
-    if [ $player_status = "Stopped" ]; then
+    if [ "$player_status" == "Stopped" ]; then
         echo "Offline"
-    elif [ $player_status = "Paused"  ]; then
+    elif [ "$player_status" == "Paused"  ]; then
         update_hooks "$bar_pid" 2
         playerctl -p $players metadata --format '{{ artist }} - {{ title }}'
-    elif [ $player_status = "Offline"  ]; then
+    elif [ "$player_status" == "Offline"  ]; then
         echo $player_status
     else
         update_hooks "$bar_pid" 1
