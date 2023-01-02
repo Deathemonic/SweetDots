@@ -191,8 +191,8 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 	- [`beyond9thousand`](https://github.com/beyond9thousand) - For polybar system tray
 	- [`Syndrizzle`](https://github.com/Syndrizzle) - For [dharmx's](https://github.com/dharmx) old logger
 	- [`dharmx`](https://github.com/dharmx) - For making vile
-	- [`coolors.co`](https://coolors.co) - Just a great tool
-	- [`Stack Overflow`](https://stackoverflow.com/) - For answering all my stupid question <kbd>Ctrl + C, Ctrl + V</kbd>
+	- [`coolors.co`](https://coolors.co) - Just a great color tool
+	- [`Stack Overflow`](https://stackoverflow.com/) - For answering all my stupid questions <kbd>Ctrl + C, Ctrl + V</kbd>
 	- [`kmakise_`](https://www.reddit.com/user/kmakise_/) - For finding a performance bug
 	- [`r/unixporn`](https://www.reddit.com/r/unixporn/) - A great hub for unix customization
 
@@ -206,6 +206,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 	- [`Deathemonic`](https://github.com/Deathemonic) - Me obviously
 	- [`GG`](https://github.com/weebcyberpunk) - Added mkdir to make sure directories exist https://github.com/Deathemonic/SweetDots/pull/6
 	- [`Rohith`](https://github.com/Rohith04MVK) - Fixed some paths https://github.com/Deathemonic/SweetDots/pull/7 https://github.com/Deathemonic/SweetDots/pull/8
+	- [`Kutuzov`](https://github.com/ArchieSW) - bin/status/bar syntax fix https://github.com/Deathemonic/SweetDots/pull/10
 	
 	<br>
 
@@ -233,8 +234,8 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [x] Add top-panel to all window managers
 
 **Removed**
-- [ ] ~~Use pijulius's fork of picom~~
-- [ ] ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
+- ~~Use pijulius's fork of picom~~
+- ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
 
 	
 ## :scroll: <samp>COPYING</samp>
