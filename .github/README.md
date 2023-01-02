@@ -229,6 +229,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Add a config.ini on widgets for user variables
 - [ ] Add more options for window manager forks
 - [ ] Add screenshots on README.md
+- [ ] Nix Support
 
 **Done**
 - [x] Add top-panel to all window managers
