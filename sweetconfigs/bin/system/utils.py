@@ -1,17 +1,19 @@
-from dynaconf import Dynaconf
-from gi import require_version
+import contextlib
+import logging
+import os
+import pathlib
+import sys
 
-require_version('Notify', '0.7')
-from os import path
-from pathlib import Path
 from shutil import which
 
+from dynaconf import Dynaconf
+from gi import require_version
+require_version('Notify', '0.7')
 from gi.repository import Notify
 from psutil import AccessDenied, NoSuchProcess, ZombieProcess, process_iter
 
-current_dir = Path(__file__).resolve().parent
 config = Dynaconf(
-    settings_files=[f'{current_dir}/../../config.toml']
+    settings_files=[f'{pathlib.Path(__file__).resolve().parent}/../../config.toml']
 )
 
 
@@ -28,16 +30,32 @@ def notify(urgent: int = 0, **kwargs):
 
 def process_fetch(name: str, pid: bool = False) -> bool | int:
     for proc in process_iter():
-        try:
+        with contextlib.suppress(NoSuchProcess, AccessDenied, ZombieProcess):
             if name.lower() in proc.name().lower():
-                if pid:
-                    return proc.pid
-                return True
-        except (NoSuchProcess,
-                AccessDenied,
-                ZombieProcess):
-            pass
+                return proc.pid if pid else True
     return False
+
+
+def logging():
+    try:
+        from rich.logging import RichHandler
+        logging.basicConfig(
+            format='%(message)s', 
+            level='NOTSET', 
+            datefmt='[%X]', 
+            handlers=[RichHandler(rich_tracebacks=True)]
+        )
+        logging.getLogger('rich')
+    except ImportError:
+        logging.basicConfig(
+            format='[%(levelname)s\033[0m] \033[1;31m%(module)s\033[0m: %(message)s', 
+            level='NOTSET', 
+            stream=sys.stdout
+        )
+        logging.addLevelName(logging.ERROR, '\033[1;31mE')
+        logging.addLevelName(logging.INFO, '\033[1;32mI')
+        logging.addLevelName(logging.WARNING, '\033[1;33mW')
+
 
 
 def check_installed(cmd: str):
@@ -45,4 +63,4 @@ def check_installed(cmd: str):
 
 
 def path_expander(pathname: str):
-    return path.expanduser(path.expandvars(pathname))
+    return os.path.expanduser(os.path.expandvars(pathname))

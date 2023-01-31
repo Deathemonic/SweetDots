@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-from os import environ, path
+from os import environ
 from pathlib import Path
 from shlex import split
 from subprocess import run
@@ -12,13 +12,7 @@ spath.insert(1, f'{current_dir}/../system')
 from utils import config, path_expander  # type: ignore
 
 
-def arguments():
-    parser = ArgumentParser(description='a simple launcher script')
-    parser.add_argument('modi', help='specify which modi to show')
-    return parser.parse_args()
-
-
-def command(show: str, terminal='alacritty', **kwargs):
+def command(show: str, cmd: list, app: str, terminal: str = 'alacritty', **kwargs) -> list:
     parameters = {
         'rofi': ['-show', show, '-modi', kwargs.get('modi', show),
                  '-scroll-method', '0', '-drun-match-field', 'all',
@@ -29,41 +23,60 @@ def command(show: str, terminal='alacritty', **kwargs):
                  '--style', kwargs.get('style', ''),
                  '--color', kwargs.get('color', '')]
     }
-    if app == 'rofi' or 'wofi':
-        cmd.extend(parameters.get(app))  # type: ignore
+    cmd.extend(parameters.get(app))
     return cmd
 
 
-def passer(conf: str):
-    if app == 'rofi' and conf.endswith('rasi'):
+def passer(conf: str, cmd: list, app: str) -> list:
+    if app == 'rofi' and conf.endswith('.rasi'):
         return cmd.extend(['-theme', conf])
     return cmd.extend([])
 
 
+def arguments():
+    parser = ArgumentParser(description='a simple launcher script')
+    parser.add_argument('modi', help='specify which modi to show')
+    return parser.parse_args()
+
+
 def main():
-    match session:
-        case 'wayland':
-            if app == 'wofi' and args.modi:
-                run(command(args.modi, term, config=path_expander(launcher.config),
-                            style=path_expander(launcher.style), color=path_expander(launcher.colors)))
-            elif app == 'rofi' and args.modi:
-                run(command(args.modi, term, modi=config.menu.modi, config=passer(path_expander(launcher.config))))
-            else:
-                exit(1)
-        case 'x11':
-            if app == 'wofi' or app == 'rofi' and args.modi:
-                run(command(args.modi, term, modi=config.menu.modi, config=passer(path_expander(launcher.config))))
-            else:
-                exit(1)
-
-
-if __name__ == '__main__':
-    term, launcher, app, args, session = (
+    term, launcher, app, args = (
         config.menu.terminal,
         config.menu.launcher,
         config.menu.app,
         arguments(),
-        environ['XDG_SESSION_TYPE']
     )
     cmd = split(app)
+    
+    try:
+        session = environ['XDG_SESSION_TYPE']
+    except KeyError:
+        print('XDG_SESSION_TYPE is not set')
+        exit(1)
+        
+    
+    if session == 'wayland' and app == 'wofi' and args.modi:
+        run(command(
+                args.modi, cmd, app, term, 
+                config=path_expander(launcher.config),
+                style=path_expander(launcher.style), 
+                color=path_expander(launcher.colors)
+            ) if app == 'wofi' else command(
+                args.modi, cmd, app, term, 
+                modi=config.menu.modi, 
+                config=passer(path_expander(launcher.config, cmd, app))
+            )
+        )
+    elif session == 'x11' and args.modi and app == 'rofi' or app == 'wofi':
+        run(command(
+                args.modi, cmd, app, term, 
+                modi=config.menu.modi, 
+                config=passer(path_expander(launcher.config, cmd, app))
+            )
+        )
+    else:
+        exit(1)
+
+
+if __name__ == '__main__':
     main()

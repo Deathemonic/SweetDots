@@ -1,175 +1,156 @@
 #!/usr/bin/env python
 
+
+import os
+import pathlib
+import string
+import sys
+import logging
+
 from argparse import ArgumentParser
 from datetime import datetime
 from enum import Enum
-from os import environ, path
-from pathlib import Path, PosixPath
+
 from secrets import choice
 from shlex import split
-from string import ascii_letters, digits
 from subprocess import run
-from sys import path as spath
 from time import sleep
 
 from yad import YAD
 
-current_dir = Path(__file__).resolve().parent
-spath.insert(1, f'{current_dir}/../system')
-from utils import (check_installed, config, notify,  # type: ignore
-                   path_expander, process_fetch)
+sys.path.insert(1, f'{pathlib.Path(__file__).resolve().parent}/../system')
+import utils  #type: ignore
 
 
-def arguments():
-    parser = ArgumentParser(description='a simple screenshot script')
-    parser.add_argument('-n', '--now', action='store_true', help='take a screenshot now')
-    parser.add_argument('-w', '--window', action='store_true',
-                        help='take a screenshot of a active window (Wayland: Only works in Sway and Hyprland)')
-    parser.add_argument('-a', '--area', action='store_true', help='take a screenshot of a specific area')
-    parser.add_argument('-t', '--timer', action='store_true', help='set a timer to screenshot now')
-    parser.add_argument('-m', '--menu', action='store_true',
-                        help='launch Rofi or Wofi and use it screenshot (Only works if you have Sweetconfigs)')
-    return parser.parse_args()
+class Capture:
+    screenshot_conf = utils.config.menu.screenshot
+    
+    target_file, location_path = (
+        utils.path_expander(screenshot_conf.get(
+                'directory', '$HOME/Pictures/Screenshots'
+            )
+        ),
+        f'Screenshot_{datetime.now():%Y-%m-%d-%H-%M-%S}_' \
+        f'{"".join(choice(string.ascii_letters + string.digits) for _ in range(10))}.png'
+    )
+    
+    def __init__(self, session: str) -> None:
+        self.session = session
 
+    def clipboard(self):
+        if self.session == 'wayland':
+            with open(f'{self.location_path}/{self.target_file}', 'rb') as output:
+                run(['wl-copy', '-t', 'image/png'], stdin=output) if utils.check_installed('wl-copy') else \
+                    logging.warning('wl-copy is not installed')
+        elif self.session == 'x11':
+            run(['xclip', '-selection', 'clipboard', '-t', 'image/png', '-i', '']) if utils.check_installed('xclip') else \
+                logging.warning('xclip is not installed')
+        else:
+            exit(1)
+                
+    def now(self):
+        run(['main', '-u', '-f', 'png', f'{self.location_path}/{self.target_file}']) if self.session == 'x11' else run(['grim', f'{self.location_path}/{self.target_file}'])
+        Capture(self.session).clipboard()
+        open_file()
+        
+    def window(self):
+        if self.session == 'wayland':
+            if utils.process_fetch('sway'):
+                active_window = run(
+                    ['swaymsg', '-t', 'get_tree'],
+                    capture_output=True
+                ).stdout
+                position = run(
+                    [
+                        'jq', '-r',
+                        '.. | select(.type?) | select(.focused).rect | "\\(.x),\\(.y) \\(.width)x\\(.height)"'
+                    ],
+                    input=active_window,
+                    capture_output=True,
+                ).stdout.decode('utf-8').strip()
+                run(['grim', '-g', position, f''])
+            elif utils.process_fetch('Hyprland') or utils.process_fetch('hyprland'):
+                active_window = run(
+                    ['hyprctl', 'activewindow'],
+                    capture_output=True
+                ).stdout
+                position = run(
+                    ['awk', 'NR==2 {print $2}'],
+                    input=active_window,
+                    capture_output=True
+                ).stdout.decode('utf-8').rstrip()
+                location = run(
+                    ['awk', 'NR==3 {sub(/,/,"x"); print $2}'],
+                    input=active_window,
+                    capture_output=True
+                ).stdout.decode('utf-8').rstrip()
+                run(['grim', '-g', f'{position} {location}', f'{self.location_path}/{self.target_file}'])
+            else:
+                logging.error('Unable to capture active windoww')
+                exit(1)
+            Capture(self.session).clipboard()
+            open_file()
+    
+    def area(self):
+        if self.session == 'wayland':
+            area = run(
+                ['slurp', '-b', '1B1F23AA', '-c', 'FFDEDEFF', '-s', '00000000'],
+                check=True,
+                text=True,
+                capture_output=True
+            ).stdout.rstrip()
+            run(['grim', '-g', area, f'{self.location_path}/{self.target_file}'])
+        elif self.session == 'x11':
+            run(['maim', '-u', '-f', 'png', '-s', '-b', '2', '-c',
+                '0.35,0.55,0.85,0.25', '-l', f'{self.location_path}/{self.target_file}'])
+        
+        Capture(self.session).clipboard()
+        open_file()
+            
+    def timer(self, time: int):
+        countdown(time)
+        sleep(2)
+        
+        run(['grim', f'{self.location_path}/{self.target_file}']) if self.session == 'wayland' else run([
+            'maim', '-u', '-f', 'png' f'{self.location_path}/{self.target_file}'])
+        
+        Capture(self.session).clipboard()
+        open_file()
+            
 
 def open_file():
-    notify(app='Clipboard', summary='Screenshot', body='Saved on Clipboard', urgent=0)
-    run(['xdg-open', f'{cpath}/{cfile}'])
-    if path.exists(f'{cpath}/{cfile}'):
-        notify(
+    utils.notify(app='Clipboard', summary='Screenshot', body='Saved on Clipboard', urgent=0)
+    run(['xdg-open', f'{Capture.location_path}/{Capture.target_file}']) if utils.check_installed('xdg-open') else \
+        logging.warning('xdg-open is not installed')
+    if os.path.exists(f'{Capture.location_path}/{Capture.target_file}'):
+        utils.notify(
             app='Screenshot',
             summary='Screenshot',
             body='Saved',
-            icon=f'{cpath}/{cfile}',
+            icon=f'{Capture.location_path}/{Capture.target_file}',
             urgent=0
         )
     else:
-        notify(
+        utils.notify(
             app='Screenshot',
             summary='Screenshot',
-            body='Saved',
+            body='Deleted',
             urgent=0
         )
 
 
 def countdown(count: int):
     for sec in range(count, 0, -1):
-        notify(
+        utils.notify(
             app='Countdown',
             summary='Screenshot',
             body=f'Capturing in: {sec}',
             urgent=0
         )
         sleep(1)
+        
 
-
-class Capture:
-    def __init__(self, session: str):
-        self.session = session
-
-    def clipboard(self):
-        match self.session:
-            case 'x11':
-                run(['xclip', '-selection', 'clipboard', '-t', 'image/png', '-i', ''])
-            case 'wayland':
-                with open(f'{cpath}/{cfile}', 'rb') as outfile:
-                    run(['wl-copy', '-t', 'image/png'], stdin=outfile)
-
-    def shot_now(self):
-        match self.session:
-            case 'x11':
-                run(['main', '-u', '-f', 'png', f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-            case 'wayland':
-                run(['grim', f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-
-    def shot_window(self):
-        match self.session:
-            case 'x11':
-                active_window = run(
-                    ['xdotool', 'getactivewindow'],
-                    check=True,
-                    text=True,
-                    capture_output=True,
-                ).stdout.rstrip()
-                run(['maim', '-u', '-f', 'png', '-i', active_window, f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-            case 'wayland':
-                if process_fetch('sway'):
-                    active_window = run(
-                        ['swaymsg', '-t', 'get_tree'],
-                        capture_output=True
-                    ).stdout
-                    position = run(
-                        ['jq', '-r',
-                         '.. | select(.type?) | select(.focused).rect | "\\(.x),\\(.y) \\(.width)x\\(.height)"'],
-                        input=active_window,
-                        capture_output=True,
-                    ).stdout.decode('utf-8').rstrip()
-                    run(['grim', '-g', position, f'{cpath}/{cfile}'])
-                    Capture(self.session).clipboard()
-                    open_file()
-                elif process_fetch('Hyprland') or process_fetch('hyprland'):
-                    active_window = run(
-                        ['hyprctl', 'activewindow'],
-                        capture_output=True
-                    ).stdout
-                    position = run(
-                        ['awk', 'NR==2 {print $2}'],
-                        input=active_window,
-                        capture_output=True
-                    ).stdout.decode('utf-8').rstrip()
-                    location = run(
-                        ['awk', 'NR==3 {sub(/,/,"x"); print $2}'],
-                        input=active_window,
-                        capture_output=True
-                    ).stdout.decode('utf-8').rstrip()
-                    run(['grim', '-g', f'{position} {location}', f'{cpath}/{cfile}'])
-                    Capture(self.session).clipboard()
-                    open_file()
-                else:
-                    print('Unable to fetch active window')
-                    exit(1)
-
-    def shot_area(self):
-        match self.session:
-            case 'x11':
-                run(['maim', '-u', '-f', 'png', '-s', '-b', '2', '-c',
-                     '0.35,0.55,0.85,0.25', '-l', f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-            case 'wayland':
-                area = run(
-                    ['slurp', '-b', '1B1F23AA', '-c', 'FFDEDEFF', '-s', '00000000'],
-                    check=True,
-                    text=True,
-                    capture_output=True
-                ).stdout.rstrip()
-                run(['grim', '-g', area, f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-
-    def shot_timer(self, time: int):
-        match self.session:
-            case 'x11':
-                countdown(time)
-                sleep(2)
-                run(['maim', '-u', '-f', 'png', f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-            case 'wayland':
-                countdown(time)
-                sleep(2)
-                run(['grim', f'{cpath}/{cfile}'])
-                Capture(self.session).clipboard()
-                open_file()
-
-
-def command(lines: int, **kwargs):
+def command(lines: int, cmd: list, app: str, **kwargs) -> list:
     parameters = {
         'rofi': ['-dmenu', '-p', kwargs.get('promt', 'Take a Screenshot'),
                  '-selected-row', '0', '-l', f'{lines}'],
@@ -179,108 +160,110 @@ def command(lines: int, **kwargs):
                  '--style', kwargs.get('style', ''),
                  '--color', kwargs.get('color', '')]
     }
-    if app == 'rofi' or 'wofi':
-        cmd.extend(parameters.get(app))  # type: ignore
+    cmd.extend(parameters.get(app))
     return cmd
 
 
-def passer(conf: str):
-    if app == 'rofi' and screenshot.config.endswith('rasi'):
+def passer(conf: str, cmd: list, app: str) -> list:
+    if app == 'rofi' and conf.endswith('.rasi'):
         return cmd.extend(['-theme', conf])
     return cmd.extend([])
 
 
-def get_selection():
+def get_selection(session: str, app: str):
+    shot_conf, app = Capture.screenshot_conf, utils.config.menu.get('app', 'rofi')
+    cmd = split(app)
     class Choices(Enum):
-        now = screenshot.icons.get('now', 'N')
-        win = screenshot.icons.get('win', 'W')
-        area = screenshot.icons.get('area', 'A')
-        timer = screenshot.icons.get('timer', 'T')
-
+        now = shot_conf.icons.get('now', 'N')
+        win = shot_conf.icons.get('win', 'W')
+        area = shot_conf.icons.get('area', 'A')
+        timer = shot_conf.icons.get('timer', 'T')
+    
     caller = run(
         ['echo', '-e', '\n'.join(c.value for c in Choices)],
         capture_output=True
     ).stdout
-
-    match session:
-        case 'x11':
-            if app == 'wofi':
-                chosen = run(
-                    command(len(Choices),
-                            config=path_expander(screenshot.config),
-                            style=path_expander(screenshot.style),
-                            color=path_expander(screenshot.colors)
-                            ),
-                    input=caller,
-                    capture_output=True
-                ).stdout.decode('utf-8').rstrip()
-            elif app == 'rofi':
-                chosen = run(
-                    command(len(Choices),
-                            config=passer(path_expander(screenshot.config))),
-                    input=caller,
-                    capture_output=True
-                ).stdout.decode('utf-8').rstrip()
-            else:
-                exit(1)
-        case 'wayland':
-            if app == 'wofi' or app == 'rofi':
-                chosen = run(
-                    command(len(Choices),
-                            config=passer(path_expander(screenshot.config))),
-                    input=caller,
-                    capture_output=True
-                ).stdout.decode('utf-8').rstrip()
-            else:
-                exit(1)
-
-    # noinspection PyUnboundLocalVariable
-    match chosen:  # type: ignore
+        
+    chosen = run(
+        command(
+            len(Choices),
+            cmd,
+            app,
+            config=utils.path_expander(shot_conf.config),
+            style=utils.path_expander(shot_conf.style),
+            color=utils.path_expander(shot_conf.colors)
+        ),
+        input=caller,
+        capture_output=True
+    ).stdout.decode('utf-8').strip() if app == 'wofi' and session == 'wayland' else run(
+        command(
+            len(Choices),
+            cmd,
+            app,
+            config=passer(utils.path_expander(shot_conf.config), cmd, app)),
+            input=caller,
+            capture_output=True
+        ).stdout.decode('utf-8').strip() if app == 'rofi' or 'wofi' and session == 'wayland' or 'x11' else exit(1)
+    
+    match chosen:
         case Choices.now.value:
-            Capture(session).shot_now()
+            Capture(session).now()
         case Choices.win.value:
-            Capture(session).shot_window()
+            Capture(session).window()
         case Choices.area.value:
-            Capture(session).shot_area()
+            Capture(session).area()
         case Choices.timer.value:
-            Capture(session).shot_timer(yad.Scale(max=100, step=1))
+            Capture(session).timer(yad.Scale(max=100, step=1))
+
+
+
+def arguments():
+    parser = ArgumentParser(description='a simple screenshot script')
+    parser.add_argument(
+        '-n', '--now', 
+        action='store_true', 
+        help='take a screenshot now'
+    )
+    parser.add_argument(
+        '-w', '--window', action='store_true',
+        help='take a screenshot of a active window (Wayland: Only works in Sway and Hyprland)')
+    parser.add_argument('-a', '--area', action='store_true', help='take a screenshot of a specific area')
+    parser.add_argument('-t', '--timer', action='store_true', help='set a timer to screenshot now')
+    parser.add_argument('-m', '--menu', action='store_true',
+                        help='launch Rofi or Wofi and use it screenshot (Only works if you have Sweetconfigs)')
+    return parser.parse_args()
 
 
 def main():
-    PosixPath(cpath).mkdir(parents=True, exist_ok=True)
+    args = arguments()
+    
+    try:
+        session = os.environ['XDG_SESSION_TYPE']
+    except KeyError:
+        logging.error('XDG_SESSION_TYPE is not set')
+        exit(1)
+        
+    if session == 'x11' and not utils.check_installed('main'):
+        logging.error('main is not installed')
+        exit(1)
+    elif session == 'wayland' and not utils.check_installed('grim'):
+        logging.error('grim is not installed')
+        exit(1)
+    
+    pathlib.PosixPath(Capture.location_path).mkdir(parents=True, exist_ok=True)
+    
     if args.now:
-        Capture(session).shot_now()
+        Capture(session).now()
     elif args.window:
-        Capture(session).shot_window()
+        Capture(session).window()
     elif args.area:
-        Capture(session).shot_area()
+        Capture(session).area()
     elif args.timer:
-        Capture(session).shot_timer(yad.Scale(max=100, step=1))
+        Capture(session).timer(yad.Scale(max=100, step=1))
     elif args.menu:
         get_selection()
-
-
+        
+        
 if __name__ == '__main__':
-    args, yad, session, screenshot = (
-        arguments(),
-        YAD(),
-        environ['XDG_SESSION_TYPE'],
-        config.menu.screenshot,
-    )
-    app = config.menu.get('app', 'rofi')
-    cmd, random = (
-        split(app),
-        ''.join(choice(ascii_letters + digits) for _ in range(10))
-    )
-    cpath, cfile = (
-        path_expander(screenshot.get('directory', '$HOME/Pictures/Screenshots')),
-        f'Screenshot_{datetime.now():%Y-%m-%d-%I-%S}_{random}.png'
-    )
-
-    match session:
-        case 'x11' if check_installed('maim'):
-            main()
-        case 'wayland' if check_installed('grim'):
-            main()
-        case _:
-            print('Cannot start script do to lack of dependencies, Please install grim or maim')
+    main()
+    
