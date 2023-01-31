@@ -121,7 +121,7 @@ class Capture:
 def open_file():
     utils.notify(app='Clipboard', summary='Screenshot', body='Saved on Clipboard', urgent=0)
     run(['xdg-open', f'{Capture.location_path}/{Capture.target_file}']) if utils.check_installed('xdg-open') else \
-        logging.warning('xdg-open is not installed')
+        logging.warning('cannot execute xdg-open')
     if os.path.exists(f'{Capture.location_path}/{Capture.target_file}'):
         utils.notify(
             app='Screenshot',
