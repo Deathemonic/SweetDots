@@ -1,6 +1,6 @@
 What is planned?
 
-- I'm merging both my xorg and wayland dotfiles into one and port most the scripts into python (Might report it to lua).
+- I'm merging both my xorg and wayland dotfiles into one and port most the scripts into python (Might re-port it to lua).
  This will use config files to work so you don't have to edit the scripts to change the directory or wallpaper.
 
 Current problems
