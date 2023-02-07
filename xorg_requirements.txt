@@ -1,0 +1,6 @@
+xorg
+alacritty
+polybar
+rofi
+dunst
+# Temporary, will add more
