@@ -1,0 +1,7 @@
+wayland
+xorg-xwayland
+foot
+waybar
+mako
+wofi # might replace with a new one because it not maintained anymore
+# Temporary, will add more
