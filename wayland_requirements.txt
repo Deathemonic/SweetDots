@@ -4,4 +4,7 @@ foot
 waybar
 mako
 wofi # might replace with a new one because it not maintained anymore
+slurp
+wl-copy
+grim
 # Temporary, will add more
