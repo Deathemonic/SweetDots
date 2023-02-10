@@ -1,0 +1,5 @@
+
+{
+	"name": "ArchContainer",
+	"image": "samip537/archlinux:amd64-yay"
+}

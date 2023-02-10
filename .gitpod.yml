@@ -1,9 +1,0 @@
-image: gitpod/workspace-full-vnc
-
-tasks:
-  - command: sudo docker-up && docker
-    name: Docker daemeon
-  - command: sudo apt update && sudo apt upgrade -y && sudo apt install firefox -y && clear && echo "Firefox Is Installed."
-    name: Firefox
-  - command: source <(curl -s https://gitlab.com/nstoc6696/Gitpod-VNC/-/raw/master/aliases.sh)
-    name: Aliases
