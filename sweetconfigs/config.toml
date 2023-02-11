@@ -33,19 +33,30 @@ xcompositor_config_file = '$HOME/.config/sweetconfigs/etc/picom/picom.conf'
         style = '$HOME/.config/hypr/wofi/style.css'
         colors = '$HOME/.config/hypr/wofi/colors'
 
+    [menu.power]
+        config = '$HOME/.config/sweetconfigs/configs/menu/wofi/screenutils'
+        style = '$HOME/.config/hypr/wofi/style.css'
+        colors = '$HOME/.config/hypr/wofi/colors'
+
+        [menu.power.icons]
+            shutdown = 'S'
+            reboot = 'R'
+            lock = 'C'
+            suspend = 'H'
+            logout = 'L'
+
+
     [menu.screenshot]
         directory = '$HOME/Pictures/Screenshots'
-
-# TODO: Make the style and colors optional instead of required
-        config = '$HOME/.config/openbox/rofi/default/screenshot.rasi'
+        config = '$HOME/.config/sweetconfigs/configs/menu/wofi/screenutils'
         style = '$HOME/.config/sweetconfigs-wayland/wofi/menu.css'
         colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
 
         [menu.screenshot.icons]
-            now = ''
-            win = ''
-            area = ''
-            timer = ''
+            now = 'N'
+            win = 'W'
+            area = 'A'
+            timer = 'T'
 
     [menu.screenrecord]
         directory = '$HOME/Videos/Screenrecord'
@@ -54,12 +65,12 @@ xcompositor_config_file = '$HOME/.config/sweetconfigs/etc/picom/picom.conf'
         colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
 
         [menu.screenrecord.icons]
-            now = ''
-            area = ''
-            timer = ''
-            audio = ''
-            no_audio = ''
-            stop = ''
+            now = 'N'
+            area = 'A'
+            timer = 'T'
+            audio = 'A'
+            no_audio = 'M'
+            stop = 'S'
 
     [menu.network]
         config = '$HOME/.config/sweetconfigs-wayland/wofi/menu'
