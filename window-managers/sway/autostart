@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# GTK
+exec_always     $HOME/.config/sway/bin/gsettings
+
+# Bar
+exec    $HOME/.config/sway/bin/bar
+
+# Notfication
+# exec    $HOME/.config/sway/bin/dunst
+
+exec $HOME/.config/sway/bin/dunst
+
+# Autotiling
+exec_always    autotiling
+
+# Mpd
+exec 	$HOME/.config/sway/bin/music

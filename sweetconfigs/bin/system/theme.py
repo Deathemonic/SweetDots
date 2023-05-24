@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 
-from os import path
 from shutil import which
 from subprocess import run
 
 from utils import config, path_expander
 
 
-def execute(commands: tuple, main: str = ''):
+def execute(commands: tuple, method: str = ''):
     for command in commands:
-        match main:
-            case 'sed':
-                cmd = ['sed', '-i']
-            case 'gsettings':
-                cmd = ['gsettings', 'set']
+        if method == 'gsettings':
+            cmd = ['gsettings', 'set']
+
+        elif method == 'sed':
+            cmd = ['sed', '-i']
         # noinspection PyUnboundLocalVariable
         cmd.extend(command)  # type: ignore
         return cmd  # type: ignore
@@ -57,23 +56,23 @@ def settings(**kwargs):
             change_value(f'gtk-cursor-theme-name={c}{kwargs["cursor"]}{c}', file),
             change_value(f'gtk-cursor-theme-size={kwargs["cursor_size"]}', file),
         )
-        if conf.dark:
+        if kwargs["dark"]:
             configure_dark = [change_value(f'gtk-application-prefer-dark-theme={c}1{c}', file)]
         else:
             configure_dark = [change_value(f'gtk-application-prefer-dark-theme={c}0{c}', file)]
 
-        run(execute(configure_dark, main='sed'))  # type: ignore
-        run(execute(configure, main='sed'))  # type: ignore
+        run(execute(configure_dark, method='sed'))  # type: ignore
+        run(execute(configure, method='sed'))  # type: ignore
 
     options(path_expander(kwargs['gtk3']))
     options(path_expander(kwargs['gtk2']), '"')
 
-    run(execute(assign, main='gsettings'))  # type: ignore
+    run(execute(assign, method='gsettings'))  # type: ignore
     if which('easyeffects'):
-        run(execute(assign_easyeffects, main='gsettings'))  # type: ignore
+        run(execute(assign_easyeffects, method='gsettings'))  # type: ignore
 
 
-if __name__ in '__main__':
+def main():
     conf = config.gtk
     settings(
         theme=conf.theme,
@@ -83,5 +82,10 @@ if __name__ in '__main__':
         cursor_size=conf.cursor_size,
         font_size=conf.font_size,
         gtk2=conf.gtk2_dir,
-        gtk3=conf.gtk3_dir
+        gtk3=conf.gtk3_dir,
+        dark=conf.dark
     )
+
+
+if __name__ in '__main__':
+    main()

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-rofi -dmenu\
-     -i\
-     -no-fixed-num-lines\
-     -p "Are You Sure? : "\
-     -theme $HOME/.config/sway/rofi/confirm.rasi

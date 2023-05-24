@@ -1,0 +1,10 @@
+output "VGA-1" {
+    mode  1366x768@59.964Hz
+    pos 0 0
+    transform normal
+    scale 1.0
+    scale_filter nearest
+    adaptive_sync off
+    dpms on
+}
+output "LVDS-1" disable

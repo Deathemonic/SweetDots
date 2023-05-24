@@ -321,8 +321,8 @@ def main() -> None:
         logging.error("XDG_SESSION_TYPE is not set")
         exit(1)
 
-    if session == "x11" and not utils.check_installed("main"):
-        logging.error("main is not installed")
+    if session == "x11" and not utils.check_installed("maim"):
+        logging.error("maim is not installed")
         exit(1)
     elif session == "wayland" and not utils.check_installed("grim"):
         logging.error("grim is not installed")

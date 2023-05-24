@@ -1,7 +1,7 @@
 # Path
 include /etc/sway/config.d/*
-include $HOME/.config/sway/bin/autostart
-include $HOME/.config/sway/bin/keybinds
+include $HOME/.config/sway/autostart
+include $HOME/.config/sway/keybinds
 
 # Settings
 
