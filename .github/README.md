@@ -68,7 +68,7 @@ Copy and paste this command at your **Terminal**
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
 
-> **Note**: You need ``curl``, ``bash`` and ``git`` installed in your system
+> **Note**: You need ``curl``, ``bash`` and ``git`` installed in your system. Also if you are not using ``archlinux`` the installer won't install the dependencies automatically you have to manually install them. Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
 
 </details>
 
