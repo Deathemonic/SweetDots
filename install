@@ -1,5 +1,5 @@
 #!/bin/sh
-# v5.6.17
+# v5.7.0
 
 # Why this looks bloated for a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -15,7 +15,8 @@ packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-gi
    brightnessctl playerctl light lm_sensors wmctrl \
    feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll-git neovim viewnior stalonetray redshift \
    ttf-sarasa-gothic ttf-jetbrains-mono ttf-roboto nerd-fonts-jetbrains-mono \
-   gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme"
+   gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme \
+   xdg-user-dirs xdg-utils"
 
 alert () {
     log_info="$(date +"%H:%M:%S") \e[0;34mINFO\e[0m"
@@ -485,6 +486,23 @@ executable () {
 
     echo
     alert -s "Setting Done!"
+    sleep 2
+    echo
+
+    environments
+}
+
+environments () {
+    alert "Setting environments"
+    sleep 2
+
+    cp -f $cache_dir/SweetDots/misc/env/user-dirs.dirs $config_dir
+    cp -f $cache_dir/SweetDots/misc/env/.zshenv $HOME
+
+    xdg-user-dirs-update
+
+    echo
+    alert -s "Environments Done!"
     sleep 2
     echo
 
