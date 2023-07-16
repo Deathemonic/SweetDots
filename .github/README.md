@@ -154,14 +154,6 @@ Finally just reboot or logout of your session and log back in
 
 </details>
 
-## :gear: <samp>WAYLAND</samp>
-
-Work in Progress
-
-## :framed_picture: <samp>GALERY</samp>
-
-Work in Progress
-
 ## :art: <samp>COLORSCHEME</samp>
 
 It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**SweetPastel**](https://github.com/SweetPastel) was born.
@@ -190,11 +182,11 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 	- [`PrayagS`](https://github.com/PrayagS) - For zscroll module
 	- [`beyond9thousand`](https://github.com/beyond9thousand) - For polybar system tray
 	- [`Syndrizzle`](https://github.com/Syndrizzle) - For [dharmx's](https://github.com/dharmx) old logger
-	- [`dharmx`](https://github.com/dharmx) - For making vile
+	- [`dharmx`](https://github.com/dharmx) - For making vile, and widget inspiration
 	- [`coolors.co`](https://coolors.co) - Just a great color tool
 	- [`Stack Overflow`](https://stackoverflow.com/) - For answering all my stupid questions <kbd>Ctrl + C, Ctrl + V</kbd>
 	- [`kmakise_`](https://www.reddit.com/user/kmakise_/) - For finding a performance bug
-	- [`r/unixporn`](https://www.reddit.com/r/unixporn/) - A great hub for unix customization
+	- [`r/unixporn`](https://www.reddit.com/r/unixporn/) - A great hub for unix customization (Goodbye :frowning_face:)
 
 - :star2: **Inspiration**
  	- [`Manas140`](https://github.com/Manas140)
@@ -219,15 +211,13 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 **Focusing**
 - [ ] ~~Wayland Version~~ Merging everything to one branch (Wayland and Xorg)
 - [ ] Port all the scripts to python
-- [ ] Make faster scripts
 
 **Planning**
 - [ ] Better Padding for Widgets
 - [ ] Improve the widget layout
-- [ ] Use a better text scroller
+- [ ] Use a better text scroller (Might create my own in rust)
 - [ ] Use modules more on widgets
-- [ ] Add a config.ini on widgets for user variables
-- [ ] Add more options for window manager forks
+- [ ] Add a cconfiguration file to manage the configs easily
 - [ ] Add screenshots on README.md
 - [ ] Nix Support
 
@@ -237,6 +227,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 **Removed**
 - ~~Use pijulius's fork of picom~~
 - ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
+- ~~Add more options for window manager forks~~ - Will heavily focus on just the configs
 
 	
 ## :scroll: <samp>COPYING</samp>
