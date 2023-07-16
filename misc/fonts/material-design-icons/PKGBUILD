@@ -21,7 +21,7 @@ noextract=("MaterialIcons-Regular.ttf"
 	"MaterialIconsSharp-Regular.otf"
 	"MaterialIconsTwoTone-Regular.otf"
 	"LICENSE")
-sha256sums=('0cd0a118ac46affca1d15456197d260dd8de7c0b08d3e0f9c93bbb229e5e72ab' 'ff43f73789a6d3b9cd1b3ce7be15b7c1f8c69ee7d2877ae96ba2961002701f8e' 'a853f50913597e67f76facd269ff230c2f3038f9acadec04dd653080785dee25' '98d9f9a2b24525107aefbe5ee386bcc049d70ad0ae9b7380568e133f06d05f05' '4c7c14348cd5ea52cb350fe6465b97de4158146aa2b133c5cf327f39dd40bcb4' '58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd')
+sha256sums=('SKIP')
 
 package() {
 	install -Dm644 MaterialIcons-Regular.ttf "$pkgdir/usr/share/fonts/TTF/MaterialIcons-Regular.otf"

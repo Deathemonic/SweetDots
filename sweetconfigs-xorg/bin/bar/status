@@ -1,7 +1,6 @@
 #!/bin/bash
 
-bar="main"
-bar_pid=$(pgrep -a "polybar" | grep "$bar" | cut -d" " -f1)
+bar_pid=$(pgrep -a "polybar" | cut -d" " -f1)
 players="spotify,%any,firefox,chromium,brave,mpd"
 player_status=$(playerctl -p $players status)
 script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
