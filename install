@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# v5.6.16
+#!/bin/sh
+# v5.6.17
 
 # Why this looks bloated for a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -8,7 +8,7 @@ config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
 tempdir=$(mktemp -d -p $HOME/.backups)
 
-packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-git ffmpeg \
+packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww ffmpeg \
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
    mpd mpdris2-git \
@@ -42,7 +42,8 @@ alert () {
 first_choice () {
     clear
     echo
-    alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually, Read the repo's wiki for more information"
+    alert -w "If you are not on archlinux it will just install the dotfile you might have to install the dependencies manually"
+    alert "Read the repo's wiki for more information."
     echo
     read -p "Are you on Arch Linux? Y/N : " arch
 
@@ -491,7 +492,8 @@ executable () {
 }
 
 finishing () {
-    alert -w "If you have problems with the installer please create a issue from the repo, If you have something to improve please create a Pull Reques from the repo"
+    alert "If you have problems with the installer please create a issue from the repo."
+    alert "If you have something to improve please create a pull request from the repo."
     sleep 2
     echo
 
