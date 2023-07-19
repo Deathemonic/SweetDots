@@ -1,0 +1,5 @@
+terminal:
+  foot_config_file: '$HOME/.config/sweet-configs/terminals/foot/foot.ini'
+  alacritty_config_file: '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
+
+  force_use_alacritty: false

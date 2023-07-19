@@ -1,0 +1,55 @@
+* {
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 1);
+}
+
+window {
+  font-family: "Roboto";
+  font-size: 12px;
+
+  margin: 0 0 0 0;
+  border: 2px solid #161a1e;
+  border-radius: 8px;
+
+  background-color: #1b1f23;
+}
+
+#input {
+  padding: 4px 4px 4px 20px;
+  margin: 20px 20px 20px 20px;
+  font-weight: bold;
+
+  color: #ffdede;
+  background-color: #343a40;
+}
+
+#input image {
+  color: #ffdede;
+}
+
+#input:focus {
+  background-color: #161a1e;
+}
+
+#inner-box {
+  margin: 0 20px 20px 20px;
+  
+  color: #ffdede;
+}
+
+#outer-box {
+  margin: 20px 0 20px 0;
+  padding: 0 0 0 0;
+  border-radius: 20px;
+}
+
+#text {
+  margin: 0 0 0 10px;
+}
+
+
+#entry {
+  margin: 5px 2px 5px 2px;
+  padding: 5px 5px 5px 5px;
+}
+
+

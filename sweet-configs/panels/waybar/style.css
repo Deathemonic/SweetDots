@@ -1,0 +1,166 @@
+* {
+  font-family: "Roboto", "Sarasa UI J";
+  font-weight: bold;
+  font-size: 12px;
+}
+
+window#waybar { 
+  border-radius: 0 0 12px 12px;
+
+  background-color: #1b1f23;
+	color: #ffdede;
+}
+
+window#waybar.hidden {
+  opacity: 0.5;
+}
+
+#workspaces button {
+  border-radius: 8px;
+  margin: 10px 10px 10px 0px;
+
+  color: #FFDEDE;
+}
+
+#workspaces button.visible {
+  color: #161A1E; 
+  background-color: #ffdede;
+}
+
+
+#clock {
+  margin: 0 15px 0 15px;
+
+  color: #b4e3ad;
+}
+
+#network {
+  margin: 0 0 0 15px;
+  color: #ceace8;
+}
+
+#pulseaudio {
+  margin: 0 15px 0 2px;
+
+  color: #c9d4ff;
+}
+
+#backlight {
+	background-color: #cba6f7;
+}
+
+#battery {
+	background-color: #f9e2af;
+}
+
+#battery.charging {
+}
+
+#battery.plugged {
+}
+
+@keyframes blink {
+    to {
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+	background-color: #f38ba8;
+    color: #f38ba8;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+/** ********** CPU ********** **/
+#cpu {
+	background-color: #89dceb;
+}
+
+/** ********** Memory ********** **/
+#memory {
+	background-color: #eba0ac;
+}
+
+/** ********** Disk ********** **/
+#disk {
+	background-color: #b4befe;
+}
+
+/** ********** Tray ********** **/
+#tray {
+	background-color: #cdd6f4;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+#tray > .active {
+}
+
+/** ********** MPD ********** **/
+#mpd {
+	background-color: #94e2d5;
+}
+
+#mpd.disconnected {
+	background-color: #f38ba8;
+}
+
+#mpd.stopped {
+	background-color: #f5c2e7;
+}
+
+#mpd.playing {
+	background-color: #74c7ec;
+}
+
+#mpd.paused {
+}
+
+/** ********** Pulseaudio ********** **/
+
+/** ********** Network ********** **/
+
+
+
+/** ********** Custom ********** **/
+#custom-menu, #custom-power {
+	border-radius: 4px;
+	margin: 6px 0px;
+	padding: 2px 8px;
+}
+
+#custom-menu {
+	background-color: #f5c2e7;
+	margin-left: 6px;
+	padding: 2px 6px;
+	font-size: 16px;
+}
+
+#custom-power {
+	background-color: #f38ba8;
+	margin-right: 6px;
+	padding: 2px 8px;
+	font-size: 16px;
+}
+
+/** Common style **/
+#backlight, 
+#battery,
+#cpu,
+#disk,
+#mode,
+#memory,
+#mpd,
+#tray {
+	border-radius: 4px;
+	margin: 6px 0px;
+	padding: 2px 8px;
+}
