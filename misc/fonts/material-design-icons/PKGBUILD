@@ -1,7 +1,7 @@
 
-# Maintainer: deathemonic <deathemonic at domain dot tld>
+# Maintainer: deathemonic <deathemonic@gmail.com>
 
-pkgname=material-design-icons
+pkgname=material-symbols
 pkgver=4.0.0
 pkgrel=1
 pkgdesc="Material Design Icons by Google"
@@ -21,7 +21,6 @@ noextract=("MaterialIcons-Regular.ttf"
 	"MaterialIconsSharp-Regular.otf"
 	"MaterialIconsTwoTone-Regular.otf"
 	"LICENSE")
-sha256sums=('SKIP')
 
 package() {
 	install -Dm644 MaterialIcons-Regular.ttf "$pkgdir/usr/share/fonts/TTF/MaterialIcons-Regular.otf"

@@ -1,5 +1,5 @@
 #!/bin/sh
-# v5.7.0
+# v5.8.0
 
 # Why this looks bloated for a simple install script? 
 # Because this has a lot of cases and if statements because it constantly checking if the file exist or the program exist and etc.
@@ -8,7 +8,7 @@ config_dir="$HOME/.config"
 cache_dir="$HOME/.cache"
 tempdir=$(mktemp -d -p $HOME/.backups)
 
-packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww ffmpeg \
+packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-x11 ffmpeg \
    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
    bluez bluez-utils \
    mpd mpdris2-git \
@@ -140,9 +140,6 @@ updating_packages () {
 
     sudo pacman -Syu --needed xorg xorg-apps base-devel git curl bash zsh python moreutils perl cmake
     
-    cd $cache_dir/SweetDots/misc/fonts/material-design-icons
-    makepkg -si
-
     echo
     alert -s "Update Done!"
     echo
@@ -175,7 +172,7 @@ installing_aur () {
                 alert -s "AUR Done!"
                 echo
 
-                pick_wm
+                updating_fonts
             ;;
             2)
                 cd $cache_dir
@@ -188,7 +185,7 @@ installing_aur () {
                 alert -s "AUR Done!"
                 echo
 
-                pick_wm
+                updating_fonts
             ;;
             *)
                 alert -e "Invalid Choice. Aborting!"
@@ -203,7 +200,7 @@ installing_aur () {
             alert -s "AUR Done!"
             echo
 
-            pick_wm
+            updating_fonts
         elif command -v paru; then
             paru -S --needed $packages
 
@@ -211,11 +208,29 @@ installing_aur () {
             alert -s "AUR Done!"
             echo
 
-            pick_wm
+            updating_fonts
         else
             alert -e "AUR Helper has not installed yet please run the script again or install Yay or Paru"
+
+            exit 0
         fi
     fi
+}
+
+updating_fonts () {
+    alert "Updating Fonts"
+    sleep 2
+    
+    cd $cache_dir/SweetDots/misc/fonts/material-design-icons
+
+    makepkg -g >> PKGBUILD && makepkg -si
+    fc-cache -fv
+
+    echo
+    alert -s "Update Done!"
+    echo
+
+    pick_wm
 }
 
 pick_wm () {
