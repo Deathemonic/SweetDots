@@ -219,7 +219,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
 - [ ] Use modules more on widgets
 - [ ] Add a cconfiguration file to manage the configs easily
 - [ ] Add screenshots on README.md
-- [ ] Nix Support
+- [ ] Nix Support (Priority Low)
 
 **Done**
 - [x] Add top-panel to all window managers
