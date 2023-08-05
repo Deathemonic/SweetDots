@@ -14,21 +14,25 @@ Current problems
 
 - You also can't move the config file and it's required.
 
+- [PEP 0668](https://peps.python.org/pep-0668) states that you need to create a virtual environment first which I'm not a fan of because my dotfile relies on installing pip packages at global or local, because it breaks the system we can't do that now. I have to find a work around without using the break-system option and I don't think that --user will work.
+
 How do I solve it
 
 - I need to make a argument to the ``utils.py`` to accept the custom location of the config file and make a default config somewhere in the ``usr`` and make it the fallback config in case the config file is deleted
 
+- I might use python packages provided by the package manager but they some unmaintained or outdated, or I might use a virtualenv and use like a shebang but I fear it might lose performance, also other option is to abandon python entirely and use a different language like lua or rust.
+
 Configs
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/45)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/51)
 
 Scripts
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/24)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/25)
 
 Window Manager Configs
 
-![](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
+![](https://us-central1-progress-markdown.cloudfunctions.net/progress/25)
 
 EWW
 
