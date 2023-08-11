@@ -27,5 +27,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git && \
     makepkg -si --noconfirm && \
     cd .. && rm -rf paru-bin
 
+RUN paru -S python3 pypy3 python-virtualenv python-ruff python-black python-isort python-mypy python-pip --needed --noconfirm
 
 CMD ["/usr/bin/env dash"]
