@@ -3,6 +3,9 @@ FROM lopsided/archlinux-$ARCH
 
 ENV LANG=en_US.UTF-8
 
+RUN cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+RUN rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+
 RUN pacman -Syu bash zsh dash sed gzip pacman \
     archlinux-keyring git neovim base base-devel shadow \
     ttf-jetbrains-mono xdg-user-dirs neofetch bat ripgrep aria2 \
