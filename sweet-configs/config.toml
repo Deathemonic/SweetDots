@@ -1,0 +1,24 @@
+[terminal]
+  foot_config_file = '$HOME/.config/sweet-configs/terminals/foot/foot.ini'
+  alacritty_config_file = '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
+
+  force_use_alacritty = false
+
+[menu]
+  app = 'wofi'
+  
+  terminal = 'foot'
+  modi = 'run,ssh,drun,window,filebrowser'
+
+    [menu.screenshot]
+      directory = '$HOME/Pictures/Screenshots'
+      
+      config = '$HOME/.config/sweetconfigs/configs/menu/wofi/screenutils'
+      style = '$HOME/.config/sweetconfigs-wayland/wofi/menu.css'
+      colors = '$HOME/.config/sweetconfigs-wayland/wofi/colors'
+
+      [menu.screenshot.icons]
+        now = 'N'
+        win = 'W'
+        area = 'A'
+        timer = 'T'

@@ -1,55 +1,114 @@
-#!/usr/bin/env pypy3
-
+import logging
 import os
 import pathlib
+import subprocess
 import sys
-
 from argparse import ArgumentParser
-from subprocess import run
 
 sys.path.insert(1, f'{pathlib.Path(__file__).resolve().parent}/../system')
-from utils import config, path_expander
+from utils import config, path_expander  # noqa: E402
 
 
-def launch(action: str, session: str = '') -> None:    
+def launch(action: str, session: str = '') -> None:
     if session == 'tty':
         session = 'x11'
 
-    foot_conf: str = path_expander(config.terminal.foot_config_file)
-    alac_conf: str = path_expander(config.terminal.alacritty_config_file)
-
-
+    foot_conf: str = path_expander(
+        config.terminal.get('foot_config_file', '$HOME/.config/foot/foot.ini')
+    )
+    alac_conf: str = path_expander(
+        config.terminal.get(
+            'alacritty_config_file', '$HOME/.config/alacritty/alacritty.yml'
+        )
+    )
 
     command: dict = {
         'float': {
-            'wayland': ['foot', '--app-id=foot_floating', f'--config={foot_conf}'],
-            'x11': ['alacritty', '--class', 'alacritty_floating', '--config-file', alac_conf]
+            'wayland': [
+                'foot',
+                '--app-id=foot_floating',
+                f'--config={foot_conf}',
+            ],
+            'x11': [
+                'alacritty',
+                '--class',
+                'alacritty_floating',
+                '--config-file',
+                alac_conf,
+            ],
         },
         'full': {
-            'wayland': ['foot', '--fullscreen', '--app-id=foot_fullscreen', f'--config={foot_conf}'],
-            'x11': ['alacritty', '--class', 'alacritty_fullscreen', '--config-file', alac_conf]
+            'wayland': [
+                'foot',
+                '--fullscreen',
+                '--app-id=foot_fullscreen',
+                f'--config={foot_conf}',
+            ],
+            'x11': [
+                'alacritty',
+                '--class',
+                'alacritty_fullscreen',
+                '--config-file',
+                alac_conf,
+            ],
         },
         'area': {
-            'wayland': ['foot', '--app-id=foot_area', f'--config={foot_conf}'],
-            'x11': ['alacritty', '--class', 'alacritty_floating', '--config-file', alac_conf]
+            'wayland': [
+                'foot',
+                '--app-id=foot_area',
+                f'--config={foot_conf}',
+            ],
+            'x11': [
+                'alacritty',
+                '--class',
+                'alacritty_floating',
+                '--config-file',
+                alac_conf,
+            ],
         },
         'normal': {
-            'wayland': ['foot', f'--config={foot_conf}'],
-            'x11': ['alacritty', '--config-file', alac_conf]
-        }
+            'wayland': [
+                'foot',
+                f'--config={foot_conf}',
+            ],
+            'x11': [
+                'alacritty',
+                '--config-file',
+                alac_conf,
+            ],
+        },
     }
 
     if action == 'area' and session == 'wayland':
-        area = run(
-            ['slurp', '-b', '1B1F23AA', '-c', 'FFDEDEFF', '-s', '00000000', '-w', '2', '-f', '%wx%h'],
-            check=True,
-            text=True,
-            capture_output=True,
-        ).stdout
+        try:
+            area = subprocess.run(
+                [
+                    'slurp',
+                    '-b',
+                    '1B1F23AA',
+                    '-c',
+                    'FFDEDEFF',
+                    '-s',
+                    '00000000',
+                    '-w',
+                    '2',
+                    '-f',
+                    '%wx%h',
+                ],
+                check=True,
+                text=True,
+                capture_output=True,
+            ).stdout
+            command[action][session] += f'--window-size-pixels={area.rstrip()}'
+        except FileExistsError:
+            logging.error('slurp is not installed.')
+            exit(1)
 
-        command[action][session] += f'--window-size-pixels={area.rstrip()}'
-
-    run(command[action][session])
+    try:
+        subprocess.run(command[action][session])
+    except FileExistsError:
+        logging.error('Either foot or alacritty is not installed.')
+        exit(1)
 
 
 def arguments():
@@ -80,7 +139,7 @@ def arguments():
         '-x',
         '--alacritty',
         action='store_true',
-        help='will force to use alacritty in wayland'
+        help='will force to use alacritty in wayland',
     )
 
     return parser.parse_args()
@@ -88,22 +147,22 @@ def arguments():
 
 def main():
     args = arguments()
-    forced: bool = config.terminal.force_use_alacritty
-    session: str = os.environ['XDG_SESSION_TYPE']
+    forced = config.terminal.get('force_use_alacritty', False)
+    session = os.environ['XDG_SESSION_TYPE']
 
     if args.float:
-        action: str = 'float'
-    
+        action = 'float'
+
     elif args.full:
-        action: str = 'full'
-    
+        action = 'full'
+
     elif args.area:
-        action: str = 'area'
-    
+        action = 'area'
+
     else:
-        action: str = 'normal'
- 
-    if args.alacritty is True and forced is False:
+        action = 'normal'
+
+    if args.alacritty is True and not forced:
         session = 'x11'
 
     launch(action, session)
