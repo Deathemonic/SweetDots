@@ -27,6 +27,7 @@ class Capture:
             f'Screenshot_{datetime.now():%Y-%m-%d-%H-%M-%S}_'
             f'{str(uuid.uuid4())[:8]}.png'
         )
+        self.dir = pathlib.Path(self.path).joinpath(self.file)
 
     def execute(self, command: list) -> None:
         args = arguments()
@@ -42,13 +43,13 @@ class Capture:
             exit(1)
         
         if args.effects:
-            effects(self.path, self.file)
+            effects(self.dir)
 
-        clipboard(self.session, self.path, self.file)
-        open_image(self.path, self.file)
+        clipboard(self.session, self.dir)
+        open_image(self.dir)
 
     def now(self) -> None:
-        self.execute([f'{self.path}/{self.file}'])
+        self.execute([self.dir])
 
     def window(self) -> None:
         if utils.process_fetch('sway'):
@@ -75,7 +76,7 @@ class Capture:
                 logging.error('Failed to capture window, either jq is not installed.')
                 exit(1)
 
-            self.execute(['-g', position, f'{self.path}/{self.file}'])
+            self.execute(['-g', position, self.dir])
 
         elif utils.process_fetch('Hyprland') or utils.process_fetch('hyprland'):
             active_window = subprocess.run(
@@ -102,7 +103,7 @@ class Capture:
                 .strip()
             )
 
-            self.execute(['-g', f'{position} {location}', f'{self.path}/{self.file}'])
+            self.execute(['-g', f'{position} {location}', self.dir])
 
         elif self.session == 'x11':
             try:
@@ -118,7 +119,7 @@ class Capture:
                 )
                 exit(1)
 
-            self.execute(['-i', active_window, f'{self.path}/{self.file}'])
+            self.execute(['-i', active_window, self.dir])
 
         else:
             logging.error('Unable to capture active window.')
@@ -140,7 +141,7 @@ class Capture:
                     )
                     exit(1)
 
-                self.execute(['-g', area, f'{self.path}/{self.file}'])
+                self.execute(['-g', area, self.dir])
 
             case 'x11':
                 self.execute(
@@ -151,20 +152,20 @@ class Capture:
                         '-c',
                         '0.35,0.55,0.85,0.25',
                         '-l',
-                        f'{self.path}/{self.file}',
+                        self.dir,
                     ]
                 )
 
     def timer(self, time: int) -> None:
         countdown(time)
-        self.execute([f'{self.path}/{self.file}'])
+        self.execute([self.dir])
 
 
-def clipboard(session: str, path: str, file: str) -> None:
+def clipboard(session: str, dir: pathlib.Path) -> None:
     match session:
         case 'wayland':
             try:
-                with open(f'{path}/{file}', 'rb') as output:
+                with open(dir, 'rb') as output:
                     subprocess.run(['wl-copy', '-t', 'image/png'], stdin=output)
 
                 utils.notify(
@@ -188,7 +189,7 @@ def clipboard(session: str, path: str, file: str) -> None:
                         '-t',
                         'image/png',
                         '-i',
-                        f'{path}/{file}',
+                        dir,
                     ]
                 )
 
@@ -204,10 +205,10 @@ def clipboard(session: str, path: str, file: str) -> None:
                 pass
 
 
-def open_image(path: str, file: str) -> None:
+def open_image(dir: pathlib.Path) -> None:
     # sourcery skip: remove-redundant-pass
     try:
-        subprocess.run(['xdg-open', f'{path}/{file}'])
+        subprocess.run(['xdg-open', dir])
 
     except FileNotFoundError:
         logging.warning(
@@ -216,12 +217,12 @@ def open_image(path: str, file: str) -> None:
         )
         pass
 
-    if os.path.exists(f'{path}/{file}'):
+    if pathlib.Path(dir).exists():
         utils.notify(
             app='Screenshot',
             summary='Screenshot',
             body='Saved',
-            icon=f'{path}/{file}',
+            icon=dir,
             urgent=1,
         )
 
@@ -230,20 +231,24 @@ def open_image(path: str, file: str) -> None:
 
 
 # TODO: use pillow or wand if I know how to do it (Help Wanted)
-def effects(path: str, file: str) -> None:
+def effects(dir: pathlib.Path) -> None:
     try:
-        round_corner = f"convert {path}/{file} +antialias \
+        round_corner = f"""
+            convert {dir} +antialias \
             \( +clone -alpha extract \
             -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0' \
             \( +clone -flip \) -compose Multiply -composite \
             \( +clone -flop \) -compose Multiply -composite \
-            \) -alpha off -compose CopyOpacity -composite {path}/{file}"
+            \) -alpha off -compose CopyOpacity -composite {dir}
+        """
 
         subprocess.run(split(round_corner))
 
-        shadow = f"convert {path}/{file} \
+        shadow = f"""
+            convert {dir} \
             \( +clone -background black -shadow 69x20+0+10 \) \
-            +swap -background none -layers merge +repage {path}/{file}"
+            +swap -background none -layers merge +repage {dir}
+        """
 
         subprocess.run(split(shadow))
 
@@ -427,7 +432,7 @@ def main():
         logging.error('XDG_SESSION_TYPE is not set')
         exit(1)
 
-    pathlib.PosixPath(Capture().path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(Capture().path).mkdir(parents=True, exist_ok=True)
 
     if args.now:
         Capture(session).now()
