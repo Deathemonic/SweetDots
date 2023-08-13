@@ -10,6 +10,7 @@ from enum import Enum
 from shlex import split
 from time import sleep
 
+from pydub import AudioSegment, playback
 from yad import YAD
 
 sys.path.insert(1, f'{pathlib.Path(__file__).resolve().parent}/../system')
@@ -41,7 +42,13 @@ class Capture:
         except FileExistsError:
             logging.error(f'{cmd[self.session][0]} is not installed')
             exit(1)
-        
+
+        playback.play(
+            AudioSegment.from_ogg(
+                '/usr/share/sounds/freedesktop/stereo/screen-capture.oga'
+            )
+        )
+
         if args.effects:
             effects(self.dir)
 
@@ -108,9 +115,7 @@ class Capture:
         elif self.session == 'x11':
             try:
                 active_window = subprocess.run(
-                    ['xdotool', 'getactivewindow'],
-                    check=True,
-                    capture_output=True
+                    ['xdotool', 'getactivewindow'], check=True, capture_output=True
                 ).stdout
 
             except FileExistsError:
@@ -410,7 +415,7 @@ def arguments():
         '-e',
         '--effects',
         action='store_true',
-        help='adds effects to the image (experimental)'
+        help='adds effects to the image (experimental)',
     )
 
     parser.add_argument(
