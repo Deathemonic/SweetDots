@@ -29,6 +29,7 @@ class Capture:
         )
 
     def execute(self, command: list) -> None:
+        args = arguments()
         cmd = {'wayland': ['grim'], 'x11': ['maim', '-u', '-f', 'png']}
 
         if command:
@@ -39,6 +40,9 @@ class Capture:
         except FileExistsError:
             logging.error(f'{cmd[self.session][0]} is not installed')
             exit(1)
+        
+        if args.effects:
+            effects(self.path, self.file)
 
         clipboard(self.session, self.path, self.file)
         open_image(self.path, self.file)
@@ -105,8 +109,7 @@ class Capture:
                 active_window = subprocess.run(
                     ['xdotool', 'getactivewindow'],
                     check=True,
-                    capture_output=True,
-                    text=True,
+                    capture_output=True
                 ).stdout
 
             except FileExistsError:
@@ -226,8 +229,27 @@ def open_image(path: str, file: str) -> None:
         utils.notify(app='Screenshot', summary='Screenshot', body='Deleted', urgent=1)
 
 
-def effects():
-    pass
+# TODO: use pillow or wand if I know how to do it (Help Wanted)
+def effects(path: str, file: str) -> None:
+    try:
+        round_corner = f"convert {path}/{file} +antialias \
+            \( +clone -alpha extract \
+            -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0' \
+            \( +clone -flip \) -compose Multiply -composite \
+            \( +clone -flop \) -compose Multiply -composite \
+            \) -alpha off -compose CopyOpacity -composite {path}/{file}"
+
+        subprocess.run(split(round_corner))
+
+        shadow = f"convert {path}/{file} \
+            \( +clone -background black -shadow 69x20+0+10 \) \
+            +swap -background none -layers merge +repage {path}/{file}"
+
+        subprocess.run(split(shadow))
+
+    except FileNotFoundError:
+        logging.error('Unable to add effects, either imagemagick is not installed.')
+        exit(1)
 
 
 def countdown(count: int) -> None:
@@ -270,8 +292,8 @@ def menu(lines: int, cmd: list, app: str, **kwargs) -> list:
 
 def menu_passer(conf: str, cmd: list, app: str) -> None | list:
     if app == 'rofi' and conf.endswith('.rasi'):
-        return cmd.extend(['theme', conf])
-    return cmd.extend([])
+        return cmd + ['theme', conf]
+    return cmd + []
 
 
 def menu_selection(session: str) -> None:
@@ -377,6 +399,13 @@ def arguments():
         '--timer',
         action='store_true',
         help='set a timer to screenshot now',
+    )
+
+    parser.add_argument(
+        '-e',
+        '--effects',
+        action='store_true',
+        help='adds effects to the image (experimental)'
     )
 
     parser.add_argument(
