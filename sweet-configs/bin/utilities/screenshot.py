@@ -18,7 +18,7 @@ import utils  # noqa: E402
 
 
 class Capture:
-    def __init__(self, session: str = 'x11') -> None:
+    def __init__(self, session: str) -> None:
         self.session = 'x11' if session == 'tty' else session
         self.scrconf = utils.config.menu.screenshot
         self.path = utils.path_expander(
@@ -141,6 +141,7 @@ class Capture:
                         text=True,
                         capture_output=True,
                     ).stdout.strip()
+
                 except FileExistsError:
                     logging.error(
                         'Failed to capture area,' 'either slurp is not installed.'
@@ -308,7 +309,7 @@ def menu_passer(conf: str, cmd: list, app: str) -> None | list:
 
 
 def menu_selection(session: str) -> None:
-    scrconf = Capture().scrconf
+    scrconf = Capture(session).scrconf
     app = utils.path_expander(utils.config.menu.get('app', 'rofi'))
     cmd = split(app)
 
