@@ -39,6 +39,7 @@ class Capture:
 
         try:
             subprocess.run(cmd[self.session])
+
         except FileExistsError:
             logging.error(f'{cmd[self.session][0]} is not installed')
             exit(1)
@@ -96,7 +97,7 @@ class Capture:
                     input=active_window,
                     capture_output=True,
                 )
-                .stdout.decode("utf-8")
+                .stdout.decode('utf-8')
                 .strip()
             )
 
@@ -106,7 +107,7 @@ class Capture:
                     input=active_window,
                     capture_output=True,
                 )
-                .stdout.decode("utf-8")
+                .stdout.decode('utf-8')
                 .strip()
             )
 
