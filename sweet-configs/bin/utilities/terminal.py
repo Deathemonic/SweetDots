@@ -150,7 +150,13 @@ def arguments():
 def main():
     args = arguments()
     forced = config.terminal.get('force_use_alacritty', False)
-    session = os.environ['XDG_SESSION_TYPE']
+
+    try:
+        session = os.environ['XDG_SESSION_TYPE']
+    
+    except KeyValue:
+        logging.error('XDG_SESSION_TYPE is not set')
+        exit(1)
 
     if args.float:
         action = 'float'
