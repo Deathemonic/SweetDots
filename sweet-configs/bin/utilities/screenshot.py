@@ -40,7 +40,7 @@ class Capture:
         try:
             subprocess.run(cmd[self.session])
 
-        except FileExistsError:
+        except FileNotFoundError:
             logging.error(f'{cmd[self.session][0]} is not installed')
             exit(1)
 
@@ -80,7 +80,7 @@ class Capture:
                     .strip()
                 )
 
-            except FileExistsError:
+            except FileNotFoundError:
                 logging.error('Failed to capture window, either jq is not installed.')
                 exit(1)
 
@@ -119,7 +119,7 @@ class Capture:
                     ['xdotool', 'getactivewindow'], check=True, capture_output=True
                 ).stdout
 
-            except FileExistsError:
+            except FileNotFoundError:
                 logging.error(
                     'Failed to capture window,' 'either xdotool is not installed.'
                 )
@@ -142,7 +142,7 @@ class Capture:
                         capture_output=True,
                     ).stdout.strip()
 
-                except FileExistsError:
+                except FileNotFoundError:
                     logging.error(
                         'Failed to capture area,' 'either slurp is not installed.'
                     )
