@@ -9,7 +9,7 @@ sys.path.insert(1, f'{pathlib.Path(__file__).resolve().parent}/../system')
 from utils import config, path_expander  # noqa: E402
 
 
-def launch(action: str, session: str = '') -> None:
+def launch(action: str, session: str) -> None:
     if session == 'tty':
         session = 'x11'
 
@@ -100,14 +100,16 @@ def launch(action: str, session: str = '') -> None:
                 capture_output=True,
             ).stdout
             command[action][session] += f'--window-size-pixels={area.rstrip()}'
-        except FileExistsError:
+
+        except FileNotExistsError:
             logging.error('slurp is not installed.')
             exit(1)
 
     try:
         subprocess.run(command[action][session])
-    except FileExistsError:
-        logging.error('Either foot or alacritty is not installed.')
+
+    except FileNotExistsError:
+        logging.error(f'{command[action][session][0]} is not installed.')
         exit(1)
 
 
