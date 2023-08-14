@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import pathlib
@@ -8,7 +9,6 @@ from argparse import ArgumentParser
 from datetime import datetime
 from enum import Enum
 from shlex import split
-from time import sleep
 
 from pydub import AudioSegment, playback
 from yad import YAD
@@ -30,7 +30,7 @@ class Capture:
         )
         self.dir = pathlib.Path(self.path).joinpath(self.file)
 
-    def execute(self, command: list) -> None:
+    async def execute(self, command: list) -> None:
         args = arguments()
         cmd = {'wayland': ['grim'], 'x11': ['maim', '-u', '-f', 'png']}
 
@@ -56,10 +56,10 @@ class Capture:
         clipboard(self.session, self.dir)
         open_image(self.dir)
 
-    def now(self) -> None:
-        self.execute([self.dir])
+    async def now(self) -> None:
+        await self.execute([self.dir])
 
-    def window(self) -> None:
+    async def window(self) -> None:
         if utils.process_fetch('sway'):
             active_window = subprocess.run(
                 ['swaymsg', '-t', 'get_tree'], capture_output=True
@@ -84,7 +84,7 @@ class Capture:
                 logging.error('Failed to capture window, either jq is not installed.')
                 exit(1)
 
-            self.execute(['-g', position, self.dir])
+            await self.execute(['-g', position, self.dir])
 
         elif utils.process_fetch('Hyprland') or utils.process_fetch('hyprland'):
             active_window = subprocess.run(
@@ -111,7 +111,7 @@ class Capture:
                 .strip()
             )
 
-            self.execute(['-g', f'{position} {location}', self.dir])
+            await self.execute(['-g', f'{position} {location}', self.dir])
 
         elif self.session == 'x11':
             try:
@@ -125,13 +125,13 @@ class Capture:
                 )
                 exit(1)
 
-            self.execute(['-i', active_window, self.dir])
+            await self.execute(['-i', active_window, self.dir])
 
         else:
             logging.error('Unable to capture active window.')
             exit(1)
 
-    def area(self) -> None:
+    async def area(self) -> None:
         match self.session:
             case 'wayland':
                 try:
@@ -148,10 +148,10 @@ class Capture:
                     )
                     exit(1)
 
-                self.execute(['-g', area, self.dir])
+                await self.execute(['-g', area, self.dir])
 
             case 'x11':
-                self.execute(
+                await self.execute(
                     [
                         '-s',
                         '-b',
@@ -163,9 +163,10 @@ class Capture:
                     ]
                 )
 
-    def timer(self, time: int) -> None:
-        countdown(time)
-        self.execute([self.dir])
+    async def timer(self, time: int) -> None:
+        await countdown(time)
+        await asyncio.sleep(1)
+        await self.execute([self.dir])
 
 
 def clipboard(session: str, dir: pathlib.Path) -> None:
@@ -229,7 +230,7 @@ def open_image(dir: pathlib.Path) -> None:
             app='Screenshot',
             summary='Screenshot',
             body='Saved',
-            icon=dir,
+            icon=str(dir),
             urgent=1,
         )
 
@@ -241,19 +242,19 @@ def open_image(dir: pathlib.Path) -> None:
 def effects(dir: pathlib.Path) -> None:
     try:
         round_corner = f"""
-            convert {dir} +antialias \
-            \( +clone -alpha extract \
-            -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0' \
-            \( +clone -flip \) -compose Multiply -composite \
-            \( +clone -flop \) -compose Multiply -composite \
+            convert {dir} +antialias
+            \( +clone -alpha extract
+            -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0'
+            \( +clone -flip \) -compose Multiply -composite
+            \( +clone -flop \) -compose Multiply -composite 
             \) -alpha off -compose CopyOpacity -composite {dir}
         """
 
         subprocess.run(split(round_corner))
 
         shadow = f"""
-            convert {dir} \
-            \( +clone -background black -shadow 69x20+0+10 \) \
+            convert {dir} 
+            \( +clone -background black -shadow 69x20+0+10 \) 
             +swap -background none -layers merge +repage {dir}
         """
 
@@ -264,12 +265,12 @@ def effects(dir: pathlib.Path) -> None:
         exit(1)
 
 
-def countdown(count: int) -> None:
+async def countdown(count: int) -> None:
     for sec in range(count, 0, -1):
         utils.notify(
-            app='Screenshot', summary='Screenshot', body=f'Capturing in {sec}', urgent=1
+            app='Screenshot', summary='Screenshot', body=f'Capturing in {sec}', urgent=0
         )
-        sleep(1)
+        await asyncio.sleep(1)
 
 
 def menu(lines: int, cmd: list, app: str, **kwargs) -> list:
@@ -309,7 +310,7 @@ def menu_passer(conf: str, cmd: list, app: str) -> None | list:
 
 
 def menu_selection(session: str) -> None:
-    scrconf = Capture(session).scrconf
+    scrconf = Capture().scrconf
     app = utils.path_expander(utils.config.menu.get('app', 'rofi'))
     cmd = split(app)
 
@@ -362,13 +363,13 @@ def menu_selection(session: str) -> None:
 
     match chosen:
         case Choices.now.value:
-            Capture(session).now()
+            await Capture(session).now()
         case Choices.win.value:
-            Capture(session).window()
+            await Capture(session).window()
         case Choices.area.value:
-            Capture(session).area()
+            await Capture(session).area()
         case Choices.timer.value:
-            Capture(session).timer(
+            await Capture(session).timer(
                 YAD().Scale(
                     max=100,
                     center=True,
@@ -430,7 +431,7 @@ def arguments():
     return parser.parse_args()
 
 
-def main():
+async def main():
     args = arguments()
 
     try:
@@ -439,19 +440,19 @@ def main():
         logging.error('XDG_SESSION_TYPE is not set')
         exit(1)
 
-    pathlib.Path(Capture().path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(Capture(session).path).mkdir(parents=True, exist_ok=True)
 
     if args.now:
-        Capture(session).now()
+        await Capture(session).now()
 
     elif args.window:
-        Capture(session).window()
+        await Capture(session).window()
 
     elif args.area:
-        Capture(session).area()
+        await Capture(session).area()
 
     elif args.timer:
-        Capture(session).timer(
+        await Capture(session).timer(
             YAD().Scale(
                 max=100,
                 center=True,
@@ -464,8 +465,8 @@ def main():
         )
 
     elif args.menu:
-        menu_selection(session)
+        await menu_selection(session)
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
