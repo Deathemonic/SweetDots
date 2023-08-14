@@ -444,7 +444,7 @@ def main():
         logging.error('XDG_SESSION_TYPE is not set')
         exit(1)
 
-pathlib.Path(Capture(session).path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(Capture(session).path).mkdir(parents=True, exist_ok=True)
 
     if args.now:
         Capture(session).now()
