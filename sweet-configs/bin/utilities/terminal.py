@@ -101,14 +101,14 @@ def launch(action: str, session: str) -> None:
             ).stdout
             command[action][session] += f'--window-size-pixels={area.rstrip()}'
 
-        except FileNotExistsError:
+        except FileNotFoundError:
             logging.error('slurp is not installed.')
             exit(1)
 
     try:
         subprocess.run(command[action][session])
 
-    except FileNotExistsError:
+    except FileNotFoundError:
         logging.error(f'{command[action][session][0]} is not installed.')
         exit(1)
 
