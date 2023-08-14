@@ -309,8 +309,8 @@ def menu_passer(conf: str, cmd: list, app: str) -> None | list:
     return cmd + []
 
 
-def menu_selection(session: str) -> None:
-    scrconf = Capture().scrconf
+async def menu_selection(session: str) -> None:
+    scrconf = Capture(session).scrconf
     app = utils.path_expander(utils.config.menu.get('app', 'rofi'))
     cmd = split(app)
 
