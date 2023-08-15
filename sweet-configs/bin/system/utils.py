@@ -13,7 +13,7 @@ require_version('Notify', '0.7')
 from gi.repository import Notify  # noqa: E402
 
 config = Dynaconf(
-   envvar_prefix="SWEETCONF",
+    envvar_prefix="SWEETCONF",
     settings_files=[f'{pathlib.Path(__file__).resolve().parent}/../../config.toml']
 )
 
