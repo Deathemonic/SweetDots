@@ -93,7 +93,7 @@ class Capture:
 
             position = (
                 subprocess.run(
-                    ['awk', 'NR==2 {print $2}'],
+                    ['awk', 'NR==4 {print $2}'],
                     input=active_window,
                     capture_output=True,
                 )
@@ -103,7 +103,7 @@ class Capture:
 
             location = (
                 subprocess.run(
-                    ['awk', 'NR==3 {sub(/,/,"x"); print $2}'],
+                    ['awk', 'NR==5 {sub(/,/,"x"); print $2}'],
                     input=active_window,
                     capture_output=True,
                 )
