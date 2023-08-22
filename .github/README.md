@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://user-images.githubusercontent.com/65948476/184596703-fdac6419-ed4a-4fd8-b2d3-1f35854d563e.png" width="500px" alt="logo">
-  <h1>SweetBerry</h1>
+  <h1>SweetDots</h1>
   <p>A pastel themed rice 🍚</p>
   <h6>
     <a href="https://ko-fi.com/Deathemonic">Buy me a Coffee</a>
@@ -68,7 +68,10 @@ Copy and paste this command at your **Terminal**
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xorg/install)"
 ```
 
-> **Note**: You need ``curl``, ``bash`` and ``git`` installed in your system. Also if you are not using ``archlinux`` the installer won't install the dependencies automatically you have to manually install them. Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
+> [!NOTE] <br>
+> You need ``curl``, ``bash`` and ``git`` installed in your system.
+> Also if you are not using ``archlinux`` the installer won't install the dependencies automatically you have to manually install them.
+> Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
 
 </details>
 
@@ -76,7 +79,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Deathemonic/SweetDots/xo
 	<summary><b><samp>MANUAL INSTALL</samp></b></summary>
 <br>
 
-> **Note**: First up install the dependencies need if not the dotfiles doesn't work. Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
+> NOTE: <br>
+> First up install the dependencies need if not the dotfiles doesn't work.
+> Check out this [link](https://github.com/Deathemonic/SweetDots/wiki/Documentation#dependencies) for the list of dependencies
 
 1. Download or Clone the repo and go to that directory
 	
@@ -156,7 +161,7 @@ Finally just reboot or logout of your session and log back in
 
 ## :art: <samp>COLORSCHEME</samp>
 
-It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**SweetPastel**](https://github.com/SweetPastel) was born.
+It's the color scheme I made and improved by [**``siduck``**](https://github.com/siduck), I was originally just gonna use [``paradise``](https://github.com/paradise-theme/paradise) or [``gruvbox``](https://github.com/morhetz/gruvbox) because it didn't fit well so [**sweetpastel**](https://github.com/sweetpastel) was born.
 
 If you want to see the ports check it out at it's official [Github Page](https://github.com/SweetPastel)
 
