@@ -9,14 +9,14 @@ cache_dir="$HOME/.cache"
 tempdir=$(mktemp -d -p $HOME/.backups)
 
 packages="polybar-git rofi rofi-emoji rofi-greenclip alacritty picom-arian8j2-git dunst-git eww-x11 ffmpeg \
-   pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
-   bluez bluez-utils \
-   mpd mpdris2-git \
-   brightnessctl playerctl light lm_sensors wmctrl \
-   feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll-git neovim viewnior stalonetray redshift \
-   ttf-sarasa-gothic ttf-jetbrains-mono ttf-roboto nerd-fonts-jetbrains-mono \
-   gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme \
-   xdg-user-dirs xdg-utils"
+pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils pamixer \
+bluez bluez-utils \
+mpd mpdris2-git \
+brightnessctl playerctl light lm_sensors wmctrl \
+feh i3lock-color sddm yad xclip maim slop gpick xfce4-power-manager zscroll-git neovim viewnior stalonetray redshift \
+ttf-sarasa-gothic ttf-jetbrains-mono ttf-roboto nerd-fonts-jetbrains-mono \
+gtk3 gtk-engine-murrine gnome-themes-extra papirus-icon-theme \
+xdg-user-dirs xdg-utils"
 
 alert () {
     log_info="$(date +"%H:%M:%S") \e[0;34mINFO\e[0m"
