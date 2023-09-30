@@ -4,14 +4,15 @@ import pathlib
 import urllib.parse
 from typing import Optional
 
+from dynaconf import LazySettings
 from dynaconf.vendor.box import BoxKeyError
 
 sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent.parent.joinpath('core')))
 from utils import fetch_link, fetch_location, config, path_expander  # noqa: E402
 
 
-def format_api(option: Optional[dict]) -> Optional[str]:
-    api: str = f'https://api.openweathermap.org/data/2.5/weather?appid={config().tokens.openweathermap}'
+def format_api(option: Optional[dict], conf: LazySettings) -> Optional[str]:
+    api: str = f'https://api.openweathermap.org/data/2.5/weather?appid={conf.tokens.openweathermap}'
     params: dict = {}
 
     if option is None:
@@ -40,7 +41,7 @@ def format_api(option: Optional[dict]) -> Optional[str]:
         params['lang'] = option['language']
 
     if config().weather.units:
-        params['units'] = config().weather.units
+        params['units'] = conf.weather.units
 
     params_str: str = urllib.parse.urlencode(params)
 
@@ -55,19 +56,19 @@ def assign(icon_name: str, icons: dict) -> str:
         return path_expander(icons['default'])
 
 
-def cache(settings: dict, fallback: dict) -> Optional[dict]:
+def cache(settings: dict, fallback: dict, conf: LazySettings) -> Optional[dict]:
     location: Optional[dict] = (
-        fetch_location() if config().location.get('auto_locate', True) else settings
+        fetch_location() if conf.location.get('auto_locate', True) else settings
     )
-    api: str | None = format_api(location)
+    api: str | None = format_api(location, conf)
 
     def callback(data: dict) -> dict:
         for name in range(len(data['weather'])):
             data['weather'][name]['glyph'] = assign(
-                data['weather'][0]['icon'], config().weather.icons
+                data['weather'][0]['icon'], conf.weather.icons
             )
             data['weather'][name]['image'] = assign(
-                data['weather'][0]['icon'], config().weather.images
+                data['weather'][0]['icon'], conf.weather.images
             )
 
         return data
@@ -83,11 +84,12 @@ def cache(settings: dict, fallback: dict) -> Optional[dict]:
 
 
 def main() -> None:
+    conf: LazySettings = config()
     fallback: dict = {
         'weather': [{
             'main': 'NA',
-            'glyph': path_expander(config().weather.icons.default),
-            'image': path_expander(config().weather.images.default),
+            'glyph': path_expander(conf.weather.icons.default),
+            'image': path_expander(conf.weather.images.default),
             'icon': '01d',
         }],
         'main': {
@@ -102,7 +104,7 @@ def main() -> None:
         'name': 'NA',
     }
 
-    print(cache(config().location, fallback))
+    print(cache(conf.location, fallback, conf))
 
 
 if __name__ == '__main__':
