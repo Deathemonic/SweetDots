@@ -1,10 +1,11 @@
+import json
 import logging
 import sys
 import pathlib
 import urllib.parse
 from typing import Optional
-
 from dynaconf import LazySettings
+
 from dynaconf.vendor.box import BoxKeyError
 
 sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent.parent.joinpath('core')))
@@ -104,7 +105,7 @@ def main() -> None:
         'name': 'NA',
     }
 
-    print(cache(conf.location, fallback, conf))
+    print(json.dumps(cache(conf.location, fallback, conf)))
 
 
 if __name__ == '__main__':
