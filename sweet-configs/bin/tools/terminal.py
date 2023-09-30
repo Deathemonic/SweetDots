@@ -5,19 +5,18 @@ import subprocess
 import sys
 from argparse import ArgumentParser
 
-sys.path.insert(1, f'{pathlib.Path(__file__).resolve().parent}/../system')
+sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent.parent.joinpath('core')))
 from utils import config, path_expander  # noqa: E402
 
-
-def launch(action: str, session: str) -> None:
+def launch(action: str, session: str, extra_args: list) -> None:
     if session == 'tty':
         session = 'x11'
 
     foot_conf: str = path_expander(
-        config.terminal.get('foot_config_file', '$HOME/.config/foot/foot.ini')
+        config().terminal.get('foot_config_file', '$HOME/.config/foot/foot.ini')
     )
     alac_conf: str = path_expander(
-        config.terminal.get(
+        config().terminal.get(
             'alacritty_config_file', '$HOME/.config/alacritty/alacritty.yml'
         )
     )
@@ -48,20 +47,6 @@ def launch(action: str, session: str) -> None:
                 'alacritty',
                 '--class',
                 'alacritty_fullscreen',
-                '--config-file',
-                alac_conf,
-            ],
-        },
-        'area': {
-            'wayland': [
-                'foot',
-                '--app-id=foot_area',
-                f'--config={foot_conf}',
-            ],
-            'x11': [
-                'alacritty',
-                '--class',
-                'alacritty_floating',
                 '--config-file',
                 alac_conf,
             ],
@@ -99,19 +84,18 @@ def launch(action: str, session: str) -> None:
                 text=True,
                 capture_output=True,
             ).stdout
-            command[action][session] += f'--window-size-pixels={area.rstrip()}'
+            command['float'][session] += f'--window-size-pixels={area.rstrip()}'
 
         except FileNotFoundError:
             logging.error('slurp is not installed.')
             exit(1)
 
     try:
-        subprocess.run(command[action][session])
+        subprocess.Popen(command[action][session])
 
     except FileNotFoundError:
         logging.error(f'{command[action][session][0]} is not installed.')
         exit(1)
-
 
 def arguments():
     parser = ArgumentParser(description='a simple terminal script')
@@ -144,17 +128,23 @@ def arguments():
         help='will force to use alacritty in wayland',
     )
 
+    parser.add_argument(
+        '-e',
+        '--extra',
+        nargs='*',
+        help='pipe extra arguments to the terminal',
+    )
+
     return parser.parse_args()
 
-
-def main():
+def main() -> None:
     args = arguments()
-    forced = config.terminal.get('force_use_alacritty', False)
+    forced: bool = config().terminal.get('force_use_alacritty', False)
 
     try:
         session = os.environ['XDG_SESSION_TYPE']
-    
-    except KeyValue:
+
+    except KeyError:
         logging.error('XDG_SESSION_TYPE is not set')
         exit(1)
 
@@ -173,8 +163,8 @@ def main():
     if args.alacritty is True and not forced:
         session = 'x11'
 
-    launch(action, session)
-
+    print(args.extra)
+    launch(action, session, args.extra)
 
 if __name__ == '__main__':
     main()
