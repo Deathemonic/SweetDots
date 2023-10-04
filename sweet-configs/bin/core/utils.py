@@ -97,13 +97,17 @@ def fetch_location() -> Optional[dict]:
         response: Any = session.get('https://api64.ipify.org?format=json').json()
         ip_address: Any = response['ip']
         response = session.get(f'https://ipapi.co/{ip_address}/json/').json()
+        data = response.json()
 
+        if response.status_code == 429:
+            return None
+            
         return {
-            'latitude': response.get('latitude'),
-            'longitude': response.get('longitude'),
-            'city': response.get('city'),
-            'country': response.get('country_name'),
-            'language': response.get('languages').split(',')[0],
+            'latitude': data.get('latitude'),
+            'longitude': data.get('longitude'),
+            'city': data.get('city'),
+            'country': data.get('country_name'),
+            'language': data.get('languages').split(',')[0],
         }
 
     except requests.exceptions.ConnectionError:
