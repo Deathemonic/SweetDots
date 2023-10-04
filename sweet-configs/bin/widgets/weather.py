@@ -61,7 +61,7 @@ def cache(settings: dict, fallback: dict, conf: LazySettings) -> Optional[dict]:
     location: Optional[dict] = (
         fetch_location() if conf.location.get('auto_locate', True) else settings
     )
-    api: str | None = format_api(location, conf)
+    api: Optional[str] = format_api(location, conf)
 
     def callback(data: dict) -> dict:
         for name in range(len(data['weather'])):
@@ -74,11 +74,7 @@ def cache(settings: dict, fallback: dict, conf: LazySettings) -> Optional[dict]:
 
         return data
 
-    if api is None:
-        logging.error('Unable to fetch api.')
-        exit(1)
-
-    if fetch_location() is None:
+    if fetch_location() is None or api is None:
         return fallback
 
     return fetch_link(api, 'weather', 1, callback)
