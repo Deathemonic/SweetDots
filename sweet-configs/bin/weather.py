@@ -1,15 +1,13 @@
+from datetime import timedelta
 import json
-import logging
-import sys
-import pathlib
 import urllib.parse
 from typing import Optional
 from dynaconf import LazySettings
 
 from dynaconf.vendor.box import BoxKeyError
 
-sys.path.insert(1, str(pathlib.Path(__file__).resolve().parent.parent.joinpath('core')))
-from utils import fetch_link, fetch_location, config, path_expander  # noqa: E402
+from utilities.utils import config, path_expander
+from utilities.request import fetch_link, fetch_location
 
 
 def format_api(option: Optional[dict], conf: LazySettings) -> Optional[str]:
@@ -57,9 +55,13 @@ def assign(icon_name: str, icons: dict) -> str:
         return path_expander(icons['default'])
 
 
-def cache(settings: dict, fallback: dict, conf: LazySettings) -> Optional[dict]:
+def cache(
+    settings: dict, fallback: dict, conf: LazySettings
+) -> Optional[dict]:
     location: Optional[dict] = (
-        fetch_location() if conf.location.get('auto_locate', True) else settings
+        fetch_location()
+        if conf.location.get('auto_locate', True)
+        else settings
     )
     api: Optional[str] = format_api(location, conf)
 
@@ -77,28 +79,30 @@ def cache(settings: dict, fallback: dict, conf: LazySettings) -> Optional[dict]:
     if fetch_location() is None or api is None:
         return fallback
 
-    return fetch_link(api, 'weather', 1, callback)
+    return fetch_link(api, 'weather', timedelta(hours=1), callback)
 
 
 def main() -> None:
     conf: LazySettings = config()
     fallback: dict = {
-        'weather': [{
-            'main': 'NA',
-            'glyph': path_expander(conf.weather.icons.default),
-            'image': path_expander(conf.weather.images.default),
-            'icon': '01d',
-        }],
+        'weather': [
+            {
+                'main': 'N/A',
+                'glyph': path_expander(conf.weather.icons.default),
+                'image': path_expander(conf.weather.images.default),
+                'icon': '01d',
+            }
+        ],
         'main': {
-            'temp': 'NA',
-            'feels_like': 'NA',
-            'temp_min': 'NA',
-            'temp_max': 'NA',
-            'pressure': 'NA',
-            'humidity': 'NA',
+            'temp': 'N/A',
+            'feels_like': 'N/A',
+            'temp_min': 'N/A',
+            'temp_max': 'N/A',
+            'pressure': 'N/A',
+            'humidity': 'N/A',
         },
-        'sys': {'country': 'NA'},
-        'name': 'NA',
+        'sys': {'country': 'N/A'},
+        'name': 'N/A',
     }
 
     print(json.dumps(cache(conf.location, fallback, conf)))

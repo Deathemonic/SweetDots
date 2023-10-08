@@ -3,13 +3,10 @@ import logging
 import os
 import pathlib
 import sys
-from datetime import timedelta
 from shutil import which
-from typing import Any, Callable, Optional
+from typing import Any
 
 import psutil
-import requests
-from requests_cache import CachedSession
 from dbus_next.aio.message_bus import MessageBus
 from dynaconf import Dynaconf, LazySettings
 from gi import require_version
@@ -19,7 +16,9 @@ from gi.repository import Notify  # type: ignore # noqa: E402
 
 
 def config() -> LazySettings:
-    root: pathlib.PosixPath = pathlib.PosixPath(__file__).resolve().parent.parent.parent
+    root: pathlib.PosixPath = (
+        pathlib.PosixPath(__file__).resolve().parent.parent.parent
+    )
     file_names: tuple = (
         'config.toml',
         'config.yml',
@@ -27,10 +26,6 @@ def config() -> LazySettings:
         'config.ini',
         'config.json',
         '.secrets.toml',
-        '.secrets.yml',
-        '.secrets.yaml',
-        '.secrets.ini',
-        '.secrets.json',
     )
     config_files: set[pathlib.PosixPath] = {
         root / file_name
@@ -51,7 +46,9 @@ async def notify(urgent: int = 0, **kwargs) -> None:
     bus: MessageBus = await MessageBus().connect()
     try:
         introspect = await bus.introspect(
-            'org.freedesktop.Notifications', '/org/freedesktop/Notifications', timeout=3
+            'org.freedesktop.Notifications',
+            '/org/freedesktop/Notifications',
+            timeout=3,
         )
         bus.get_proxy_object(
             'org.freedesktop.Notifications',
@@ -63,7 +60,7 @@ async def notify(urgent: int = 0, **kwargs) -> None:
         raise Exception('No notification daemon found') from e
 
     Notify.init(kwargs.get('app', 'Application'))
-    notice = Notify.Notification.new(
+    notice: Any = Notify.Notification.new(
         kwargs.get('summary', 'Unknown'),
         kwargs.get('body', ''),
         kwargs.get(
@@ -83,60 +80,6 @@ def process_fetch(name: str, pid: bool = False) -> bool | int:
             if name.lower() in proc.name().lower():
                 return proc.pid if pid else True
     return False
-
-
-def fetch_location() -> Optional[dict]:
-    try:
-        session = CachedSession(
-            'location',
-            use_cache_dir=True,
-            stale_if_error=True,
-            stale_while_revalidate=True,
-        )
-
-        response: Any = session.get('https://api64.ipify.org?format=json').json()
-        ip_address: Any = response['ip']
-        response = session.get(f'https://ipapi.co/{ip_address}/json/').json()
-        data = response.json()
-
-        if response.status_code == 429:
-            return None
-            
-        return {
-            'latitude': data.get('latitude'),
-            'longitude': data.get('longitude'),
-            'city': data.get('city'),
-            'country': data.get('country_name'),
-            'language': data.get('languages').split(',')[0],
-        }
-
-    except requests.exceptions.ConnectionError:
-        return None
-
-
-def fetch_link(
-    link: str, filename: str, timeout: int, callback: Callable | None = None
-) -> Optional[Any]:
-    try:
-        session = CachedSession(
-            filename,
-            use_cache_dir=True,
-            stale_if_error=True,
-            stale_while_revalidate=True,
-            expire_after=timedelta(hours=timeout),
-        )
-        data: Any = session.get(link)
-
-        if data.status_code == 200:
-            metadata: Any = data.json()
-
-            if callback:
-                metadata = callback(metadata)
-
-            return metadata
-
-    except requests.exceptions.ConnectionError:
-        return None
 
 
 def setup_logging() -> None:
