@@ -5,9 +5,8 @@ from typing import Any, Optional
 
 from dynaconf import LazySettings
 from dynaconf.vendor.box import BoxKeyError
-
-from utilities.utils import config
 from utilities.request import fetch_link, fetch_location
+from utilities.utils import config
 
 
 def format_api(option: Optional[dict], conf: LazySettings) -> Optional[str]:

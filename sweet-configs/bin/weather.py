@@ -1,13 +1,12 @@
-from datetime import timedelta
 import json
 import urllib.parse
+from datetime import timedelta
 from typing import Optional
+
 from dynaconf import LazySettings
-
 from dynaconf.vendor.box import BoxKeyError
-
-from utilities.utils import config, path_expander
 from utilities.request import fetch_link, fetch_location
+from utilities.utils import config, path_expander
 
 
 def format_api(option: Optional[dict], conf: LazySettings) -> Optional[str]:

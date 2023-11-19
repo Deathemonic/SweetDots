@@ -51,13 +51,20 @@
         timer = 'T'
 
 [location]
-  auto_locate = false
+  auto_locate = true
   latitude = '35.6854'
   longitude = '139.7531'
   country = 'Japan'
   city = 'Tokyo'
   zip_code = '1638001'
   language = 'jp'
+
+[pollution.icons]
+  good = '<U+F58E>'
+  fair = '<U+F590>'
+  moderate = '<U+F591>'
+  poor = '<U+F592>'
+  very_poor = '<U+F595>'
 
 [weather]
   units = 'standard'
