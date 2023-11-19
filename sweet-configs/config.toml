@@ -1,31 +1,35 @@
+[notifications]
+  icon_path = '$HOME/.config/dunst/icons'
+
+
 [terminal]
   foot_config_file = '$HOME/.config/sweet-configs/terminals/foot/foot.ini'
   alacritty_config_file = '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
 
   force_use_alacritty = false
 
-  [terminal.custom]
-    enable = true
+  # [terminal.custom]
+  #   enable = true
 
-    enable_x11 = false
-    enable_wayland = true
+  #   enable_x11 = false
+  #   enable_wayland = true
 
-    [terminal.custom.wayland]
-      terminal = 'foot'
-      config = '$HOME/.config/sweet-configs/terminals/foot/foot.ini'
+  #   [terminal.custom.wayland]
+  #     terminal = 'foot'
+  #     config = '$HOME/.config/sweet-configs/terminals/foot/foot.ini'
       
-      args = ['--title', 'SweetTerminal', '--config']
-      float_args = ['--app_id', 'foot-floating']
-      full_args = ['--app_id', 'foot-fullscreen', '--fullscreen']
-      selector_args = ['-b', '1B1F23AA', '-c', 'FFDEDEFF', '-s', '00000000', '-w', '2', '-f', '%wx%h']
+  #     args = ['--title', 'SweetTerminal', '--config']
+  #     float_args = ['--app_id', 'foot-floating']
+  #     full_args = ['--app_id', 'foot-fullscreen', '--fullscreen']
+  #     selector_args = ['-b', '1B1F23AA', '-c', 'FFDEDEFF', '-s', '00000000', '-w', '2', '-f', '%wx%h']
 
-    [terminal.custom.x11]
-      terminal = 'alacritty'
-      config = '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
+  #   [terminal.custom.x11]
+  #     terminal = 'alacritty'
+  #     config = '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
       
-      args = ['--title', 'SweetTerminal', '--config-file']
-      float_args = ['--class', 'alacritty-floating']
-      full_args = ['--class', 'alacritty-fullscreen']
+  #     args = ['--title', 'SweetTerminal', '--config-file']
+  #     float_args = ['--class', 'alacritty-floating']
+  #     full_args = ['--class', 'alacritty-fullscreen']
 
 [menu]
   app = 'wofi'

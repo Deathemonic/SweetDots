@@ -107,7 +107,7 @@ def launch(action: str, session: str, conf: LazySettings, extra: list) -> None:
 
 
 def arguments() -> Namespace:
-    parser = ArgumentParser(description='a simple terminal script')
+    parser = ArgumentParser(description='a simple terminal runners')
 
     parser.add_argument(
         '-f',
