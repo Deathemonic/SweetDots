@@ -56,7 +56,7 @@ async def controller(**icon) -> None:
 
 
 def arguments() -> Namespace:
-    parser = ArgumentParser(description='a simple volume runner')
+    parser = ArgumentParser(description='a simple volume changer')
 
     parser.add_argument(
         '-u',
@@ -83,7 +83,7 @@ def arguments() -> Namespace:
         '-a',
         '--allow-boost',
         action='store_true',
-        help='allow volume to go above 100%',
+        help='allow volume to go above 100',
     )
 
     parser.add_argument(
