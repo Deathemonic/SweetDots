@@ -15,8 +15,10 @@ async def pick_color(session: str) -> str:
     match session:
         case 'wayland':
             command: list[str] = ['hyprpicker', '--no-fancy']
+
         case 'x11':
             command: list[str] = ['gpick', '-pso', '--no-newline']
+
         case _:
             logging.debug('Session is unknown. Exiting...')
             exit(1)
@@ -39,14 +41,17 @@ async def copy_to_clipboard(session: str, color: str) -> None:
     match session:
         case 'wayland':
             command: list[str] = ['wl-copy', color]
+            data = None
+
         case 'x11':
-            command: list[str] = ['xclip', '-selection', 'clipboard', color]
+            command: list[str] = ['xclip', '-selection', 'clipboard']
+            data: bytes | None = color.encode() if color else None
         case _:
             logging.debug('Session is unknown. Exiting...')
             exit(1)
 
     try:
-        subprocess.run(command)
+        subprocess.run(command, input=data)
 
     except FileNotFoundError:
         logging.warning(f'{command[0]} is not installed.')
@@ -68,7 +73,7 @@ async def main() -> None:
         app='Color Picker',
         summary=color,
         body='Saved in clipboard',
-        icon=location,
+        icon=str(location),
     )
 
 

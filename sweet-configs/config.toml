@@ -1,5 +1,21 @@
 [notifications]
+  cache_text = '$HOME/.cache/notifications/notifications.txt'
   icon_path = '$HOME/.config/dunst/icons'
+
+  history_limit = 50
+  interval = 0.5
+  fallback_message = 'No Notifications'
+  timestamp = '%H:%M'
+  excludes = ['telegram', 'brave', 'discord']
+
+  [notifications.formats]
+  # Useful if you want to customize how that notification will look in eww
+  # It will only accept strings as yuck literals and it must be full
+  # If you have unsure what value you put just add {} with the name of the argument to set the default value
+  # eg. :identity "{identity}" :icon "{icon}" :summary "some summary"
+
+  # Note that doing this has some limitations, to bypass the limitations you need to edit the logger.py and formater.py
+    github = '(image :identity "{identity}" :close_action "{close}" :limit_body "{limit_body}" :limit_summary "{limit_summary}" :summary "Another One" :body "{body}" :close_icon "X" :image_height 100 :image_width 100 :image "~/.config/github.png" :appname "Github" :icon "~/.config/funny.png" :icon_height 32 :icon_width 32 :timestamp "{timestamp}" :urgency "LOW")'
 
 
 [terminal]
@@ -7,6 +23,8 @@
   alacritty_config_file = '$HOME/.config/sweet-configs/terminals/alacritty/alacritty.yml'
 
   force_use_alacritty = false
+
+  # Experimental custom terminals (WIP)
 
   # [terminal.custom]
   #   enable = true
@@ -128,3 +146,4 @@
     13d = '$HOME/.config/eww/assets/01.jpg'
     40d = '$HOME/.config/eww/assets/01.jpg'
     50d = '$HOME/.config/eww/assets/01.jpg'
+

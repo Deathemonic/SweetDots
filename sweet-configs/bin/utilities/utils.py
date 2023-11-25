@@ -8,6 +8,7 @@ from typing import Any
 
 import psutil
 from dbus_next.aio.message_bus import MessageBus
+from dbus_next.introspection import Node
 from dynaconf import Dynaconf, LazySettings
 from gi import require_version
 
@@ -45,7 +46,7 @@ def config() -> LazySettings:
 async def notify(urgent: int = 0, **kwargs) -> None:
     bus: MessageBus = await MessageBus().connect()
     try:
-        introspect = await bus.introspect(
+        introspect: Node = await bus.introspect(
             'org.freedesktop.Notifications',
             '/org/freedesktop/Notifications',
             timeout=3,
@@ -56,8 +57,8 @@ async def notify(urgent: int = 0, **kwargs) -> None:
             introspect,
         )
 
-    except Exception as e:
-        raise Exception('No notification daemon found') from e
+    except Exception:
+        logging.error('No Notification daemon found.')
 
     Notify.init(kwargs.get('app', 'Application'))
     notice: Any = Notify.Notification.new(
