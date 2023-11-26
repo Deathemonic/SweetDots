@@ -1,4 +1,3 @@
-import asyncio
 import pathlib
 from datetime import datetime
 from enum import Enum
@@ -13,9 +12,6 @@ class Urgency(Enum):
     LOW = b'\x00'
     NORMAL = b'\x01'
     CRITICAL = b'\x02'
-
-
-loop = asyncio.get_event_loop()
 
 
 class Eavesdropper:
@@ -33,21 +29,22 @@ class Eavesdropper:
             return
 
         notify_data: list[Any] = message.body
-        details: dict[str, Any] = {
+        details = {
             'appname': notify_data[0] or 'Unknown',
             'summary': notify_data[3] or 'Summary Unavailable.',
             'body': notify_data[4] or 'Body Unavailable.',
             'id': datetime.now().strftime('%s'),
-            'urgency': 'low',
+            'urgency': 0,
         }
 
         if 'urgency' in notify_data[6]:
-            details['urgency'] = notify_data[6]['urgency']
+            details['urgency'] = notify_data[6]['urgency'].value
 
         # TODO: set a fallback at utils that get the gtk icon path
         if notify_data[2]:
             if '/' in notify_data[2] or '.' in notify_data[2]:
                 details['iconpath'] = notify_data[2]
+
         #   else:
         #         # and if the iconpath is just a string that has no extensions or,
         #         # a pathlike structure like: 'bell' or 'custom-folder-bookmark'
@@ -62,6 +59,7 @@ class Eavesdropper:
         #     )
 
         # TODO: add a raw image cacher
+
         # if 'image-data' in args_list[6]:
         #     # capture the raw image bytes and save them to the cache_dir/x.png path
         #     details[
@@ -100,17 +98,3 @@ class Eavesdropper:
             body=[match_rule],
         )
         await bus.call(msg)
-
-        # await asyncio.sleep(timeout if isinstance(timeout, int) else 0)
-        # timeout_callback()
-        # await asyncio.Future()
-
-
-async def main() -> None:
-    await Eavesdropper(
-        cache_dir='/home/zinth/Documents/SweetDots/sweet-configs'
-    ).eavesdrop()
-    await loop.create_future()
-
-
-loop.run_until_complete(main())
