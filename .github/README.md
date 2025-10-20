@@ -169,10 +169,10 @@ If you want to see the ports check it out at it's official [Github Page](https:/
 	<img src="https://user-images.githubusercontent.com/65948476/184591339-beba74a0-ddee-450b-a53d-e494857ad4dc.png" />
 </div>
 
-## :coffee: <samp>TIP JAR</samp> <kbd>OPTIONAL</kbd>
+## :coffee: <samp>SUPPORT</samp> <kbd>OPTIONAL</kbd>
 If you like my rice feel free to buy me a coffee it will help me a lot
 
-<a href='https://ko-fi.com/K3K8C2M9Y' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+[![LiberaPay](https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black)](https://liberapay.com/Zinth)
 
 ## :bulb: <samp>ACKNOWLEDGEMENTS</samp>
 
@@ -211,31 +211,7 @@ If you like my rice feel free to buy me a coffee it will help me a lot
             <img src="https://contrib.rocks/image?repo=Deathemonic/SweetDots"/>
        	</a>
 	
-## :memo: <samp>TODO</samp>
-
-**Focusing**
-- [ ] ~~Wayland Version~~ Merging everything to one branch (Wayland and Xorg)
-- [ ] Port all the scripts to python
-
-**Planning**
-- [ ] Better Padding for Widgets
-- [ ] Improve the widget layout
-- [ ] Use a better text scroller (Might create my own in rust)
-- [ ] Use modules more on widgets
-- [ ] Add a cconfiguration file to manage the configs easily
-- [ ] Add screenshots on README.md
-- [ ] Nix Support (Priority Low)
-
-**Done**
-- [x] Add top-panel to all window managers
-
-**Removed**
-- ~~Use pijulius's fork of picom~~
-- ~~Use [xborders](https://github.com/deter0/xborder) for fixing the border bugs~~
-- ~~Add more options for window manager forks~~ - Will heavily focus on just the configs
-
-	
-## :scroll: <samp>COPYING</samp>
+## :scroll: <samp>LICENSE</samp>
 
 **SweetDots** is license under [MIT License](https://github.com/Deathemonic/SweetDots/blob/xorg/LICENSE)
 
